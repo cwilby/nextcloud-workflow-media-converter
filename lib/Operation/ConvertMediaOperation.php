@@ -2,40 +2,47 @@
 
 namespace OCA\WorkflowMediaConverter\Operation;
 
-use MicrosoftAzure\Storage\Common\Logger;
 use OCA\WorkflowMediaConverter\Support\Util;
 use OCP\BackgroundJob\IJobList;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\GenericEvent;
+use OCA\WorkflowEngine\Entity\File;
 use OCP\Files\Folder;
-use OCP\Files\NotFoundException;
+use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\WorkflowEngine\IManager;
 use OCP\WorkflowEngine\IRuleMatcher;
 use OCP\WorkflowEngine\ISpecificOperation;
 use Psr\Log\LoggerInterface;
+use UnexpectedValueException;
 
 class ConvertMediaOperation implements ISpecificOperation
 {
     private IJobList $jobList;
     private IURLGenerator $urlGenerator;
     private LoggerInterface $logger;
+    private IL10N $l;
 
-    public function __construct(IJobList $jobList, IURLGenerator $urlGenerator, LoggerInterface $logger)
+    public function __construct(IJobList $jobList, IURLGenerator $urlGenerator, LoggerInterface $logger, IL10N $l)
     {
         $this->jobList = $jobList;
         $this->urlGenerator = $urlGenerator;
         $this->logger = $logger;
+        $this->l = $l;
     }
 
-    public function validateOperation(string $name, array $checks, string $operation): void
-    {
-        // i think we check if the file extension matches the rules here.
-    }
+    public function validateOperation(string $name, array $checks, string $operation): void {
+		//
+	}
 
     public function getDisplayName(): string
     {
         return $this->l->t('Media Conversion');
+    }
+
+    public function getEntityId(): string
+    {
+        return File::class;
     }
 
     public function getDescription(): string
