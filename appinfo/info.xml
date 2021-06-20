@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>workflow_media_converter</id>
+    <name>Automated Media Conversion</name>
+    <summary>Rule based conversion of Video/Audio files via FFmpeg</summary>
+    <description>An app to trigger automatic conversion of media using FFmpeg.  Based on user defined rules, media conversion jobs will be dispatched in the background.  A common use case is for converting videos uploaded from iPhones in Apple Quicktime format to MP4 so that those videos can be played in non-Apple browsers.</description>
+    <version>1.0.0</version>
+    <licence>agpl</licence>
+    <author mail="cameron@wilby.com" homepage="https://github.com/cwilby">Cameron Wilby</author>
+    <namespace>WorkflowMediaConverter</namespace>
+    <documentation>
+        <developer>https://github.com/cwilby/nextcloud-workflow-media-converter</developer>
+    </documentation>
+    <category>files</category>
+    <category>tools</category>
+    <category>organization</category>
+    <category>multimedia</category>
+    <category>workflow</category>
+    <website>https://github.com/cwilby/nextcloud-workflow-media-converter</website>
+    <bugs>https://github.com/cwilby/nextcloud-workflow-media-converter/issues</bugs>
+    <repository type="git">https://github.com/cwilby/nextcloud-workflow-media-converter.git</repository>
+    <screenshot></screenshot>
+    <screenshot small-thumbnail=""></screenshot>
+    <dependencies>
+        <nextcloud min-version="22" max-version="22"/>
+    </dependencies>
+</info>
