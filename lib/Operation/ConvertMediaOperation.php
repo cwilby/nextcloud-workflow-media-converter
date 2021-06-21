@@ -54,7 +54,7 @@ class ConvertMediaOperation implements ISpecificOperation
 
     public function getIcon(): string
     {
-        return $this->urlGenerator->imagePath(Application::APP_ID, 'app.svg');
+        return $this->urlGenerator->imagePath(Application::APP_ID, 'icon.svg');
     }
 
     public function isAvailableForScope(int $scope): bool
@@ -65,7 +65,6 @@ class ConvertMediaOperation implements ISpecificOperation
     public function onEvent(string $eventName, Event $event, IRuleMatcher $ruleMatcher): void
     {
         try {
-            $this->logger->info('Received event');
             $this->handleEvent($eventName, $event, $ruleMatcher);
         } catch (\Throwable $e) {
             $this->logger->error("({$e->getCode()}) :: $e->getMessage()", ['eventName' => $eventName]);
@@ -81,7 +80,7 @@ class ConvertMediaOperation implements ISpecificOperation
         }
 
         $path = $node->getPath();
-        $ncFolder = Util::getNextcloudFolderName($path);
+        $ncFolder = explode('/', $path, 4)[2];
 
         if ($ncFolder !== 'files' || $node instanceof Folder) {
             return;

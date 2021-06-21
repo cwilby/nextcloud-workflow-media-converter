@@ -1,12 +1,12 @@
 <template>
 	<div class="wmc-rules">
-		<p>Convert to format</p>
+		<p>{{ t('workflow_media_converter', 'Convert to format') }}</p>
 		<select v-model="outputExtension">
 			<option v-for="format in formats" :key="format.extension" :value="format.extension">
 				(.{{ format.extension }}) {{ format.label }}
 			</option>
 		</select>
-		<p>Then</p>
+		<p>{{ t('workflow_media_converter', 'Then after conversion') }}</p>
 		<select v-model="postConversionSourceRule">
 			<option v-for="option in postConversionSourceRules" :key="option.id" :value="option.id">
 				{{ option.label }}
@@ -14,11 +14,11 @@
 		</select>
 		<div v-if="postConversionSourceRule === 'move'">
 			<button @click="openFilePicker('postConversionSourceRuleMoveFolder')">
-				Choose Folder
+				{{ t('workflow_media_converter', 'Choose Folder') }}
 			</button>
 			<span>{{ postConversionSourceRuleMoveFolder }}</span>
 		</div>
-		<p>Once converted</p>
+		<p>{{ t('workflow_media_converter', 'And') }}</p>
 		<select v-model="postConversionOutputRule">
 			<option v-for="option in postConversionOutputRules" :key="option.id" :value="option.id">
 				{{ option.label }}
@@ -26,11 +26,11 @@
 		</select>
 		<div v-if="postConversionOutputRule === 'move'">
 			<button @click="openFilePicker('postConversionOutputRuleMoveFolder')">
-				Choose Folder
+				{{ t('workflow_media_converter', 'Choose Folder') }}
 			</button>
 			<span>{{ postConversionOutputRuleMoveFolder }}</span>
 		</div>
-		<p>If there are conflicts,</p>
+		<p>If the output file exists,</p>
 		<select v-model="postConversionOutputConflictRule">
 			<option v-for="option in postConversionOutputConflictRules" :key="option.id" :value="option.id">
 				{{ option.label }}
@@ -38,7 +38,7 @@
 		</select>
 		<div v-if="postConversionOutputConflictRule === 'move'">
 			<button @click="openFilePicker('postConversionOutputConflictRuleMoveFolder')">
-				Choose Folder
+				{{ t('workflow_media_converter', 'Choose Folder') }}
 			</button>
 			<span>{{ postConversionOutputConflictRuleMoveFolder }}</span>
 		</div>
@@ -47,7 +47,7 @@
 
 <script>
 import { FilePicker } from '@nextcloud/dialogs'
-import formats from '../../formats.js'
+import formats from './formats.js'
 
 const defaultState = {
 	outputExtension: null,
@@ -72,18 +72,18 @@ export default {
 	data: () => ({
 		formats,
 		postConversionSourceRules: [
-			{ id: 'keep', label: 'Keep the source file' },
-			{ id: 'delete', label: 'Delete the source file' },
-			{ id: 'move', label: 'Move the source file to this folder' },
+			{ id: 'keep', label: t('workflow_media_converter', 'Keep the source file') },
+			{ id: 'delete', label: t('workflow_media_converter', 'Delete the source file') },
+			{ id: 'move', label: t('workflow_media_converter', 'Move the source file to this folder') },
 		],
 		postConversionOutputRules: [
-			{ id: 'keep', label: 'Keep the output in the folder the source file was added to' },
-			{ id: 'move', label: 'Move the output to a specific folder' },
+			{ id: 'keep', label: t('workflow_media_converter', 'Keep the output in the folder the source file was added to') },
+			{ id: 'move', label: t('workflow_media_converter', 'Move the output to a specific folder') },
 		],
 		postConversionOutputConflictRules: [
-			{ id: 'preserve', label: 'Preserve the existing file and create a duplicate file' },
-			{ id: 'overwrite', label: 'Overwrite the existing file' },
-			{ id: 'move', label: 'Move the existing file to' },
+			{ id: 'preserve', label: t('workflow_media_converter', 'Preserve the existing file and create a duplicate file') },
+			{ id: 'overwrite', label: t('workflow_media_converter', 'Overwrite the existing file') },
+			{ id: 'move', label: t('workflow_media_converter', 'Move the existing file to') },
 		],
 	}),
 
