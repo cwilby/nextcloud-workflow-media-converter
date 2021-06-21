@@ -69,7 +69,7 @@ class ConvertMediaJob extends QueuedJob
         $this->outputFileName = basename($this->outputPath);
 
         $this->outputFolder = $this->postConversionOutputRule === 'move'
-            ? $this->rootFolder->get($this->postConversionOutputRuleMoveFolder)
+            ? $this->rootFolder->get($this->folder . '/' . $this->postConversionOutputRuleMoveFolder)
             : $this->sourceFile->getParent();
 
         return $this;
@@ -97,10 +97,11 @@ class ConvertMediaJob extends QueuedJob
         if ($this->outputFolder->nodeExists($this->outputFileName)) {
             if ($conflictRule === 'move') {
                 $this->writeFileSafe(
-                    $this->rootFolder->get($this->postConversionOutputConflictRuleMoveFolder),
+                    $this->rootFolder->get($this->folder . '/' . $this->postConversionOutputConflictRuleMoveFolder),
                     $this->outputPath,
                     $this->outputFileName
                 );
+                $this->rootFolder->get($this->outputPath)->delete();
             } else if ($conflictRule === 'preserve') {
                 $method = 'writeFileSafe';
             }
@@ -116,7 +117,7 @@ class ConvertMediaJob extends QueuedJob
                 $this->sourceFile->delete();
                 break;
             case 'move':
-                $this->sourceFile->move($this->postConversionSourceRuleMoveFolder);
+                $this->sourceFile->move($this->folder . '/' . $this->postConversionSourceRuleMoveFolder . '/' . $this->filename);
                 break;
         }
 
@@ -141,10 +142,5 @@ class ConvertMediaJob extends QueuedJob
         }
 
         $this->writeFile($folder, $tempFile, $newFileName);
-    }
-
-    private function sendNotifications()
-    {
-        
     }
 }

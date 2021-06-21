@@ -96,7 +96,11 @@ class ConvertMediaOperation implements ISpecificOperation
 
             $outputExtension = $config['outputExtension'];
             $postConversionSourceRule = $config['postConversionSourceRule'];
+            $postConversionSourceRuleMoveFolder = $config['postConversionSourceRuleMoveFolder'];
             $postConversionOutputRule = $config['postConversionOutputRule'];
+            $postConversionOutputRuleMoveFolder = $config['postConversionOutputRuleMoveFolder'];
+            $postConversionOutputConflictRule = $config['postConversionOutputConflictRule'];
+            $postConversionOutputConflictRuleMoveFolder = $config['postConversionOutputConflictRuleMoveFolder'];
 
             if ($originalFileMode === 'keep' && $targetFileMode === 'preserve') {
                 break;
@@ -110,7 +114,11 @@ class ConvertMediaOperation implements ISpecificOperation
                 'path' => $path,
                 'outputExtension' => $outputExtension,
                 'postConversionSourceRule' => $postConversionSourceRule,
-                'postConversionOutputRule' => $postConversionOutputRule
+                'postConversionSourceRuleMoveFolder' => $postConversionSourceRuleMoveFolder,
+                'postConversionOutputRule' => $postConversionOutputRule,
+                'postConversionOutputRuleMoveFolder' => $postConversionOutputRuleMoveFolder,
+                'postConversionOutputConflictRule' => $postConversionOutputConflictRule,
+                'postConversionOutputConflictRuleMoveFolder' => $postConversionOutputConflictRuleMoveFolder,
             ]);
         }
     }
