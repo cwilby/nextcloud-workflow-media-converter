@@ -25,14 +25,16 @@ class ConvertMediaJob extends QueuedJob
 
     protected function run($arguments)
     {
+        $this->logger->info(ConvertMedia::class . ' started');
         try {
             $this
                 ->parseArguments($arguments)
                 ->convertMedia()
-                ->handlePostConversion()
-                ->sendNotifications();
+                ->handlePostConversion();
         } catch (\Throwable $e) {
             $this->logger->error("({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
+        } finally {
+            $this->logger->info(ConvertMedia::class . ' finished');
         }
     }
 
