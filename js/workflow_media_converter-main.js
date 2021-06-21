@@ -96,6 +96,12 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _formats_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../formats.js */ "./src/formats.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -120,6 +126,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+var defaultState = {
+  outputExtension: null,
+  postConversionSourceRule: null,
+  postConversionOutputRule: null
+};
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ConvertMediaOperation',
   props: {
@@ -131,14 +142,14 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       formats: _formats_js__WEBPACK_IMPORTED_MODULE_0__["default"],
-      sourceOptions: [{
+      postConversionSourceRules: [{
         id: 'keep',
         label: 'Keep source file'
       }, {
         id: 'delete',
         label: 'Delete source file'
       }],
-      outputOptions: [{
+      postConversionOutputRules: [{
         id: 'preserve',
         label: 'Preserve existing output'
       }, {
@@ -150,10 +161,40 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     config: {
       get: function get() {
-        return JSON.parse(this.value);
+        return JSON.parse(this.value || JSON.stringify(defaultState));
       },
       set: function set(value) {
-        this.$emit('input', JSON.stringify(value));
+        this.$emit('input', JSON.stringify(value || {}));
+      }
+    },
+    outputExtension: {
+      get: function get() {
+        return this.config.outputExtension;
+      },
+      set: function set(outputExtension) {
+        this.config = _objectSpread(_objectSpread({}, this.config), {}, {
+          outputExtension: outputExtension
+        });
+      }
+    },
+    postConversionSourceRule: {
+      get: function get() {
+        return this.config.postConversionSourceRule;
+      },
+      set: function set(postConversionSourceRule) {
+        this.config = _objectSpread(_objectSpread({}, this.config), {}, {
+          postConversionSourceRule: postConversionSourceRule
+        });
+      }
+    },
+    postConversionOutputRule: {
+      get: function get() {
+        return this.config.postConversionOutputRule;
+      },
+      set: function set(postConversionOutputRule) {
+        this.config = _objectSpread(_objectSpread({}, this.config), {}, {
+          postConversionOutputRule: postConversionOutputRule
+        });
       }
     }
   }
@@ -588,7 +629,31 @@ var render = function() {
     _vm._v(" "),
     _c(
       "select",
-      { attrs: { id: "wmc-rules-output-formats" } },
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.outputExtension,
+            expression: "outputExtension"
+          }
+        ],
+        on: {
+          change: function($event) {
+            var $$selectedVal = Array.prototype.filter
+              .call($event.target.options, function(o) {
+                return o.selected
+              })
+              .map(function(o) {
+                var val = "_value" in o ? o._value : o.value
+                return val
+              })
+            _vm.outputExtension = $event.target.multiple
+              ? $$selectedVal
+              : $$selectedVal[0]
+          }
+        }
+      },
       _vm._l(_vm.formats, function(format) {
         return _c(
           "option",
@@ -611,8 +676,32 @@ var render = function() {
     _vm._v(" "),
     _c(
       "select",
-      { attrs: { id: "wmc-rules-post-source" } },
-      _vm._l(_vm.sourceOptions, function(option) {
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.postConversionSourceRule,
+            expression: "postConversionSourceRule"
+          }
+        ],
+        on: {
+          change: function($event) {
+            var $$selectedVal = Array.prototype.filter
+              .call($event.target.options, function(o) {
+                return o.selected
+              })
+              .map(function(o) {
+                var val = "_value" in o ? o._value : o.value
+                return val
+              })
+            _vm.postConversionSourceRule = $event.target.multiple
+              ? $$selectedVal
+              : $$selectedVal[0]
+          }
+        }
+      },
+      _vm._l(_vm.postConversionSourceRules, function(option) {
         return _c(
           "option",
           { key: option.id, domProps: { value: option.id } },
@@ -626,8 +715,32 @@ var render = function() {
     _vm._v(" "),
     _c(
       "select",
-      { attrs: { id: "wmc-rules-post-source" } },
-      _vm._l(_vm.outputOptions, function(option) {
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.postConversionOutputRule,
+            expression: "postConversionOutputRule"
+          }
+        ],
+        on: {
+          change: function($event) {
+            var $$selectedVal = Array.prototype.filter
+              .call($event.target.options, function(o) {
+                return o.selected
+              })
+              .map(function(o) {
+                var val = "_value" in o ? o._value : o.value
+                return val
+              })
+            _vm.postConversionOutputRule = $event.target.multiple
+              ? $$selectedVal
+              : $$selectedVal[0]
+          }
+        }
+      },
+      _vm._l(_vm.postConversionOutputRules, function(option) {
         return _c(
           "option",
           { key: option.id, domProps: { value: option.id } },
@@ -1060,4 +1173,4 @@ OCA.WorkflowEngine.registerCheck({
 /***/ })
 
 /******/ });
-//# sourceMappingURL=workflow_media_converter-main.js.map?v=bed0f81dc229aa8c81f5
+//# sourceMappingURL=workflow_media_converter-main.js.map?v=08309bf14d4fc098eb9d

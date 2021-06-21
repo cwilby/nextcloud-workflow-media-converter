@@ -7,6 +7,8 @@ use OCP\BackgroundJob\IJobList;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\GenericEvent;
 use OCA\WorkflowEngine\Entity\File;
+use OCA\WorkflowMediaConverter\AppInfo\Application;
+use OCA\WorkflowMediaConverter\BackgroundJobs\ConvertMediaJob;
 use OCP\Files\Folder;
 use OCP\IL10N;
 use OCP\IURLGenerator;
@@ -14,7 +16,6 @@ use OCP\WorkflowEngine\IManager;
 use OCP\WorkflowEngine\IRuleMatcher;
 use OCP\WorkflowEngine\ISpecificOperation;
 use Psr\Log\LoggerInterface;
-use UnexpectedValueException;
 
 class ConvertMediaOperation implements ISpecificOperation
 {
@@ -31,9 +32,10 @@ class ConvertMediaOperation implements ISpecificOperation
         $this->l = $l;
     }
 
-    public function validateOperation(string $name, array $checks, string $operation): void {
-		//
-	}
+    public function validateOperation(string $name, array $checks, string $operation): void
+    {
+        //
+    }
 
     public function getDisplayName(): string
     {
@@ -52,7 +54,7 @@ class ConvertMediaOperation implements ISpecificOperation
 
     public function getIcon(): string
     {
-        return $this->urlGenerator->imagePath('workflow_media_converter', 'app.svg');
+        return $this->urlGenerator->imagePath(Application::APP_ID, 'app.svg');
     }
 
     public function isAvailableForScope(int $scope): bool
@@ -63,6 +65,7 @@ class ConvertMediaOperation implements ISpecificOperation
     public function onEvent(string $eventName, Event $event, IRuleMatcher $ruleMatcher): void
     {
         try {
+            $this->logger->info('Received event');
             $this->handleEvent($eventName, $event, $ruleMatcher);
         } catch (\Throwable $e) {
             $this->logger->error("({$e->getCode()}) :: $e->getMessage()", ['eventName' => $eventName]);
@@ -84,29 +87,31 @@ class ConvertMediaOperation implements ISpecificOperation
             return;
         }
 
-        $matches = $ruleMatcher->getFlows(false);
+        $flows = $ruleMatcher->getFlows(false);
 
         $originalFileMode = $targetFileMode = null;
 
-        foreach ($matches as $match) {
-            $fileModes = explode(';', $match['operation']);
+        foreach ($flows as $flow) {
+            $config = json_decode($flow['operation'], true);
 
-            $originalFileMode = $originalFileMode === 'keep' ?: $fileModes[0];
-            $targetFileMode = $targetFileMode === 'preserve' ?: $fileModes[1];
+            $outputExtension = $config['outputExtension'];
+            $postConversionSourceRule = $config['postConversionSourceRule'];
+            $postConversionOutputRule = $config['postConversionOutputRule'];
 
             if ($originalFileMode === 'keep' && $targetFileMode === 'preserve') {
                 break;
             }
-        }
 
-        if (empty($originalFileMode) || empty($targetFileMode)) {
-            return;
-        }
+            if (empty($outputExtension) || empty($postConversionSourceRule) || empty($postConversionOutputRule)) {
+                return;
+            }
 
-        $this->jobList->add(ConvertMediaJob::class, [
-            'path' => $path,
-            'originalFileMode' => $originalFileMode,
-            'targetFileMode' => $targetFileMode
-        ]);
+            $this->jobList->add(ConvertMediaJob::class, [
+                'path' => $path,
+                'outputExtension' => $outputExtension,
+                'postConversionSourceRule' => $postConversionSourceRule,
+                'postConversionOutputRule' => $postConversionOutputRule
+            ]);
+        }
     }
 }

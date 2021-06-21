@@ -1,13 +1,13 @@
 <?php
 
-namespace OCA\WorkflowMediaConverter\BackgroundJob;
+namespace OCA\WorkflowMediaConverter\BackgroundJobs;
 
 use OC\Files\Filesystem;
 use OC\Files\View;
+use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\QueuedJob;
 use OCP\Files\IRootFolder;
 use OCP\Files\Node;
-use OCP\IConfig;
 use OCP\ITempManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Process\Exception\ProcessFailedException;
@@ -15,20 +15,18 @@ use Symfony\Component\Process\Process;
 
 class ConvertMediaJob extends QueuedJob
 {
-    private IConfig $config;
     private ITempManager $tempManager;
     private LoggerInterface $logger;
     private IRootFolder $rootFolder;
 
-    private string $originalFileMode;
-    private string $targetFileMode;
+    private string $postConversionSourceRule;
+    private string $postConversionOutputRule;
     private string $path;
     private string $sourceExtension;
     private string $outputExtension;
     private Node $sourceFile;
     private string $directory;
     private string $filename;
-    private array $pathSegments;
     private string $userFolder;
     private View $directoryView;
     private string $sourcePath;
@@ -38,9 +36,9 @@ class ConvertMediaJob extends QueuedJob
     private string $outputTempPath;
 
 
-    public function __construct(IConfig $config, ITempManager $tempManager, LoggerInterface $logger, IRootFolder $rootFolder)
+    public function __construct(ITimeFactory $time, ITempManager $tempManager, LoggerInterface $logger, IRootFolder $rootFolder)
     {
-        $this->config = $config;
+        parent::__construct($time);
         $this->tempManager = $tempManager;
         $this->rootFolder = $rootFolder;
         $this->logger = $logger;
@@ -49,35 +47,35 @@ class ConvertMediaJob extends QueuedJob
     protected function run($arguments)
     {
         try {
+            $this->logger->info("ConvertMediaJob started");
             $this
                 ->parseArguments($arguments)
                 ->convertMedia()
                 ->handlePostConversion();
+            $this->logger->info("ConvertMediaJob finished");
         } catch (\Throwable $e) {
-            $this->logger->error("({$e->getCode()}) :: $e->getMessage()", ['arguments' => $arguments]);
+            $this->logger->error("({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
         }
     }
 
     private function parseArguments($arguments)
     {
-        $this->originalFileMode = (string)$arguments['originalFileMode'];
-        $this->targetFileMode = (string)$arguments['targetFileMode'];
         $this->path = (string)$arguments['path'];
-        $this->sourceExtension = 'mov';
-        $this->outputExtension = 'mp4';
+        $this->outputExtension = (string)$arguments['outputExtension'];
+        $this->postConversionSourceRule = (string)$arguments['postConversionSourceRule'];
+        $this->postConversionOutputRule = (string)$arguments['postConversionOutputRule'];
 
-        $this->sourceFile = $this->rootFolder->get($this->path);
-
+        $pathSegments = explode('/', $this->path, 4);
+        $this->userFolder = $pathSegments[1];
+        $this->sourceExtension = pathinfo($this->path, PATHINFO_EXTENSION);
         $this->directory = dirname($this->path);
         $this->filename = basename($this->path);
-        $this->pathSegments = explode('/', $this->path, 4);;
-
-        $this->userFolder = $this->pathSegments[1];
 
         Filesystem::init($this->userFolder, "/{$this->userFolder}/files");
-
+        $this->sourceFile = $this->rootFolder->get($this->path);
         $this->directoryView = new View($this->directory);
-        $this->sourcePath = $this->tempManager->getTempBaseDir();
+        $this->sourcePath = $this->directoryView->toTmpFile($this->filename);
+
         $this->outputPath = str_replace($this->sourcePath, ".{$this->sourceExtension}", ".{$this->outputExtension}");
         $this->outputFileName = pathinfo($this->outputPath, PATHINFO_FILENAME);
 
@@ -89,9 +87,13 @@ class ConvertMediaJob extends QueuedJob
 
     private function convertMedia()
     {
+        $this->logger->info('Calling ffmpeg', [
+            'command' => "ffmpeg -i $this->sourcePath $this->outputPath",
+        ]);
+
         $process = new Process(
-            "ffmpeg -i $this->sourcePath -c $this->outputPath",
-            $this->tempPath,
+            "ffmpeg -i $this->sourcePath $this->outputPath",
+            null,
             [],
             null,
             null
@@ -107,7 +109,7 @@ class ConvertMediaJob extends QueuedJob
 
         $newFileName = $this->outputFileName;
 
-        if ($this->targetFileMode === 'preserve') {
+        if ($this->postConversionOutputRule === 'preserve') {
             $index = 0;
             while ($folder->nodeExists($this->outputFileName)) {
                 $newFileName = "$this->outputFileName ($index).$this->outputExtension";
@@ -121,8 +123,7 @@ class ConvertMediaJob extends QueuedJob
 
     private function handlePostConversion()
     {
-
-        if ($this->originalFileMode === 'delete') {
+        if ($this->postConversionSourceRule === 'delete') {
             // FIXME: sometimes causes "unable to rename, destination directory is not writable" because the trashbin url
             // looses the user part in \OC\Files\Storage\Local::moveFromStorage() line 460
             // return $rootStorage->rename($sourceStorage->getSourcePath($sourceInternalPath), $this->getSourcePath($targetInternalPath));
