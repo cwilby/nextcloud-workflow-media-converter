@@ -15,6 +15,7 @@
 		"stylelint:fix": "stylelint src --fix"
 	},
 	"dependencies": {
+		"@nextcloud/dialogs": "^3.1.2",
 		"@nextcloud/vue": "^4.0.2",
 		"vue": "^2.6.14"
 	},

@@ -39,7 +39,7 @@ class ConvertMediaOperation implements ISpecificOperation
 
     public function getDisplayName(): string
     {
-        return $this->l->t('Media Conversion');
+        return $this->l->t('Convert media');
     }
 
     public function getEntityId(): string
@@ -49,7 +49,7 @@ class ConvertMediaOperation implements ISpecificOperation
 
     public function getDescription(): string
     {
-        return $this->l->t('Convert video/audio media via FFmpeg on upload and write.');
+        return $this->l->t('Convert video/audio files using FFmpeg.');
     }
 
     public function getIcon(): string
