@@ -47,7 +47,7 @@
 
 <script>
 import { FilePicker } from '@nextcloud/dialogs'
-import formats from './formats.js'
+import formats from '../constants/formats.js'
 
 const defaultState = {
 	outputExtension: null,

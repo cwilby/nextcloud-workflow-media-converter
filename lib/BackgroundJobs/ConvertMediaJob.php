@@ -4,6 +4,7 @@ namespace OCA\WorkflowMediaConverter\BackgroundJobs;
 
 use OC\Files\Filesystem;
 use OC\Files\View;
+use OCA\WorkflowMediaConverter\Service\ConfigService;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\QueuedJob;
 use OCP\Files\IRootFolder;
@@ -15,12 +16,14 @@ class ConvertMediaJob extends QueuedJob
 {
     private LoggerInterface $logger;
     private IRootFolder $rootFolder;
+    private ConfigService $configService;
 
-    public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder)
+    public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, ConfigService $configService)
     {
         parent::__construct($time);
         $this->rootFolder = $rootFolder;
         $this->logger = $logger;
+        $this->configService = $configService;
     }
 
     protected function run($arguments)
@@ -77,7 +80,9 @@ class ConvertMediaJob extends QueuedJob
 
     private function convertMedia()
     {
-        $command = "ffmpeg -i {$this->tempSourcePath} {$this->tempOutputPath}";
+        $threads = $this->configService->getAppConfigValue('threadLimit', 0);
+
+        $command = "ffmpeg --threads $threads -i {$this->tempSourcePath} {$this->tempOutputPath}";
 
         $process = new Process($command, null, [], null, null);
 
