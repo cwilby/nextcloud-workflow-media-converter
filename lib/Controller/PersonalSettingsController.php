@@ -30,10 +30,8 @@ class PersonalSettingsController extends Controller
      */
     public function updateSettings(array $values): DataResponse
     {
-        if (isset($values['rules'])) {
-            $this->configService->setConfigValueJson('rules', $values['rules']);
-        }
+        $this->configService->setConfig($values);
 
-        return new DataResponse($this->configService->getCurrentUserConfig());
+        return new DataResponse($this->configService->getAdminConfig());
     }
 }

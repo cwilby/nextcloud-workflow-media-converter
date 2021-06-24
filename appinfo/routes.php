@@ -4,23 +4,23 @@ return [
     'routes' => [
         [
             'verb' => 'GET',
-            'url' => '/batch-conversions',
-            'name' => 'batchConversions#index',
+            'url' => '/conversion-batches',
+            'name' => 'conversionBatches#index',
         ],
         [
             'verb' => 'GET',
-            'url' => '/batch-conversions/{id}',
-            'name' => 'batchConversions#show',
+            'url' => '/conversion-batches/{id}',
+            'name' => 'conversionBatches#show',
         ],
         [
             'verb' => 'POST',
-            'url' => '/batch-conversions',
-            'name' => 'batchConversions#create',
+            'url' => '/conversion-batches',
+            'name' => 'conversionBatches#create',
         ],
         [
             'verb' => 'DELETE',
-            'url' => '/batch-conversions/{id}',
-            'name' => 'batchConversions#delete'
+            'url' => '/conversion-batches/{id}',
+            'name' => 'conversionBatches#delete'
         ],
         [
             'verb' => 'GET',

@@ -23,7 +23,7 @@ class PersonalSettings implements ISettings
 
     public function getForm(): TemplateResponse
     {
-        $this->initialStateService->provideInitialState($this->appName, 'user-config', $this->configService->getCurrentUserConfig());
+        $this->initialStateService->provideInitialState('personal-config', $this->configService->getCurrentUserConfig());
 
         return new TemplateResponse(Application::APP_ID, 'personalSettings');
     }

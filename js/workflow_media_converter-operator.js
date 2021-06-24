@@ -8709,6 +8709,7 @@ module.exports = function availableTypedArrays() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nextcloud_dialogs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @nextcloud/dialogs */ "./node_modules/@nextcloud/dialogs/dist/index.es.js");
 /* harmony import */ var _constants_formats_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/formats.js */ "./src/constants/formats.js");
+/* harmony import */ var _mixins_postConversionRules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../mixins/postConversionRules */ "./src/mixins/postConversionRules.js");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -8768,6 +8769,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 
+
 var defaultState = {
   outputExtension: null,
   postConversionSourceRule: 'keep',
@@ -8779,6 +8781,7 @@ var defaultState = {
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ConvertMediaOperation',
+  mixins: [_mixins_postConversionRules__WEBPACK_IMPORTED_MODULE_2__.default],
   props: {
     value: {
       default: null,
@@ -8787,34 +8790,7 @@ var defaultState = {
   },
   data: function data() {
     return {
-      formats: _constants_formats_js__WEBPACK_IMPORTED_MODULE_1__.default,
-      postConversionSourceRules: [{
-        id: 'keep',
-        label: t('workflow_media_converter', 'Keep the source file')
-      }, {
-        id: 'delete',
-        label: t('workflow_media_converter', 'Delete the source file')
-      }, {
-        id: 'move',
-        label: t('workflow_media_converter', 'Move the source file to this folder')
-      }],
-      postConversionOutputRules: [{
-        id: 'keep',
-        label: t('workflow_media_converter', 'Keep the output in the folder the source file was added to')
-      }, {
-        id: 'move',
-        label: t('workflow_media_converter', 'Move the output to a specific folder')
-      }],
-      postConversionOutputConflictRules: [{
-        id: 'preserve',
-        label: t('workflow_media_converter', 'Preserve the existing file and create a duplicate file')
-      }, {
-        id: 'overwrite',
-        label: t('workflow_media_converter', 'Overwrite the existing file')
-      }, {
-        id: 'move',
-        label: t('workflow_media_converter', 'Move the existing file to')
-      }]
+      formats: _constants_formats_js__WEBPACK_IMPORTED_MODULE_1__.default
     };
   },
   computed: {
@@ -9035,6 +9011,50 @@ __webpack_require__.r(__webpack_exports__);
   encode: true,
   label: 'WebM'
 }]);
+
+/***/ }),
+
+/***/ "./src/mixins/postConversionRules.js":
+/*!*******************************************!*\
+  !*** ./src/mixins/postConversionRules.js ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      postConversionSourceRules: [{
+        id: 'keep',
+        label: t('workflow_media_converter', 'Keep the source file')
+      }, {
+        id: 'delete',
+        label: t('workflow_media_converter', 'Delete the source file')
+      }, {
+        id: 'move',
+        label: t('workflow_media_converter', 'Move the source file to this folder')
+      }],
+      postConversionOutputRules: [{
+        id: 'keep',
+        label: t('workflow_media_converter', 'Keep the output in the folder the source file was added to')
+      }, {
+        id: 'move',
+        label: t('workflow_media_converter', 'Move the output to a specific folder')
+      }],
+      postConversionOutputConflictRules: [{
+        id: 'preserve',
+        label: t('workflow_media_converter', 'Preserve the existing file and create a duplicate file')
+      }, {
+        id: 'overwrite',
+        label: t('workflow_media_converter', 'Overwrite the existing file')
+      }, {
+        id: 'move',
+        label: t('workflow_media_converter', 'Move the existing file to')
+      }]
+    };
+  }
+});
 
 /***/ }),
 

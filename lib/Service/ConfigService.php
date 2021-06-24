@@ -8,22 +8,26 @@ use Psr\Log\LoggerInterface;
 
 class ConfigService
 {
-    private string $userId;
+    private $userId;
     private IConfig $config;
     private LoggerInterface $logger;
 
-    public function __construct(string $userId, IConfig $config, LoggerInterface $logger)
+    public function __construct($userId, IConfig $config, LoggerInterface $logger)
     {
         $this->userId = $userId;
         $this->config = $config;
         $this->logger = $logger;
     }
 
+    public function setUserId($id)
+    {
+        $this->userId = $id;
+    }
+
     public function getCurrentUserConfig()
     {
         return [
-            'rules' => $this->getConfigValueJson('rules', '[]'),
-            'statistics' => $this->getCurrentUserStatistics()
+            'conversionBatches' => $this->getConfigValueJson('conversionBatches', '[]')
         ];
     }
 
@@ -48,6 +52,11 @@ class ConfigService
     public function getConfigValueJson($key, $default = '[]')
     {
         return json_decode($this->getConfigValue($key, $default), true);
+    }
+
+    public function setConfig($values)
+    {
+        $this->setConfigValueJson('conversionBatches', $values['conversionBatches']);
     }
 
     public function setConfigValue($key, $value)
@@ -104,6 +113,35 @@ class ConfigService
     public function getConversionRules()
     {
         return json_decode($this->getConfigValue("video_conversion_rules", '[]'), true);
+    }
+
+    public function getBatch($id)
+    {
+        $batches = $this->getConfigValueJson('batchConversions');
+
+        $index = array_search($id, array_column($batches, 'id'));
+
+        if (isset($batches[$index])) {
+            return $batches[$index];
+        }
+
+        return null;
+    }
+
+    public function updateBatch($id, $changes)
+    {
+        $batches = $this->getConfigValueJson('batchConversions');
+
+        $index = array_search($id, array_column($batches, 'id'));
+
+        if (isset($batches[$index])) {
+            $batch = $batches[$index];
+            foreach ($changes as $key => $value) {
+                $batch[$key] = $value;
+            }
+        }
+
+        $this->configService->setConfigValueJson('batchConversions', $batches);
     }
 
     public function getQueueCount($queueName)

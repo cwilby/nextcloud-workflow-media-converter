@@ -33,8 +33,10 @@ class ConvertMediaJob extends QueuedJob
             $this
                 ->parseArguments($arguments)
                 ->convertMedia()
-                ->handlePostConversion();
+                ->handlePostConversion()
+                ->notifyBatchSuccess();
         } catch (\Throwable $e) {
+            $this->notifyBatchFail($e);
             $this->logger->error("({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
         } finally {
             $this->logger->info(ConvertMedia::class . ' finished');
@@ -43,6 +45,8 @@ class ConvertMediaJob extends QueuedJob
 
     private function parseArguments($arguments)
     {
+        $this->configService->setUserId((string)$arguments['user_id']);
+        $this->batchId = (string)$arguments['batch_id'];
         $this->path = (string)$arguments['path'];
         $this->postConversionSourceRule = (string)$arguments['postConversionSourceRule'];
         $this->postConversionSourceRuleMoveFolder = (string)$arguments['postConversionSourceRuleMoveFolder'];
@@ -127,6 +131,27 @@ class ConvertMediaJob extends QueuedJob
         }
 
         return $this;
+    }
+
+    private function notifyBatchSuccess()
+    {
+        $batch = $this->configService->getBatch($this->batchId);
+
+        $this->configService->updateBatch($this->batchId, [
+            'converted' => ($batch['converted'] ?? 0) + 1,
+            'status' => ($batch['converted'] + 1) === $batch['unconverted'] ? 'finished' : 'converting'
+        ]);
+    }
+
+    private function notifyBatchFail(\Throwable $e)
+    {
+        $batch = $this->configService->getBatch($this->batchId);
+
+        $this->configService->updateBatch($this->batchId, [
+            'status' => 'has-failures',
+            'failed' => ($batch['failed'] ?? 0) + 1,
+            'errors' => array_merge(($batch['errors'] ?? []), ["{$e->getMessage()} -- Error code {$e->getCode()}"])
+        ]);
     }
 
     private function writeFile($folder, $tempFileSource, $filename)
