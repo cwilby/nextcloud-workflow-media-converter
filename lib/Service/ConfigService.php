@@ -141,7 +141,7 @@ class ConfigService
             }
         }
 
-        $this->configService->setConfigValueJson('batchConversions', $batches);
+        $this->setConfigValueJson('batchConversions', $batches);
     }
 
     public function getQueueCount($queueName)
