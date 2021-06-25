@@ -24,4 +24,10 @@
     <dependencies>
         <nextcloud min-version="21" max-version="22"/>
     </dependencies>
+    <settings>
+        <admin>OCA\WorkflowMediaConverter\Settings\AdminSettings</admin>
+        <admin-section>OCA\WorkflowMediaConverter\Settings\AdminSection</admin-section>
+        <personal>OCA\WorkflowMediaConverter\Settings\PersonalSettings</personal>
+        <personal-section>OCA\WorkflowMediaConverter\Settings\PersonalSection</personal-section>
+    </settings>
 </info>

@@ -27,6 +27,6 @@ class RegisterFlowOperationsListener implements IEventListener
         
         $event->registerOperation($this->container->get(ConvertMediaOperation::class));
 
-        Util::addScript(Application::APP_ID, Application::APP_ID . '-main');
+        Util::addScript(Application::APP_ID, Application::APP_ID . '-operator');
     }
 }
