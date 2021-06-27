@@ -100,18 +100,19 @@ class ConvertMediaJob extends QueuedJob
 
         if ($this->outputFolder->nodeExists($this->outputFileName)) {
             if ($conflictRule === 'move') {
-                $this->writeFileSafe(
-                    $this->rootFolder->get($this->sourceFolder . '/' . $this->postConversionOutputConflictRuleMoveFolder),
-                    $this->outputPath,
-                    $this->outputFileName
-                );
+                $conflictsFolder = $this->rootFolder->get($this->sourceFolder . '/' . $this->postConversionOutputConflictRuleMoveFolder);
+                $this->writeFileSafe($conflictsFolder, $this->outputPath, $this->outputFileName);
                 $this->rootFolder->get($this->outputPath)->delete();
-            } else if ($conflictRule === 'preserve') {
-                $method = 'writeFileSafe';
+                $this->writeFile($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
+            } 
+            if ($conflictRule === 'preserve') {
+                $this->writeFileSafe($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
             }
         }
-
-        $this->{$method ?? 'writeFile'}($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
+        else
+        {
+            $this->writeFile($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
+        }
 
         switch ($this->postConversionSourceRule) {
             case 'delete':
