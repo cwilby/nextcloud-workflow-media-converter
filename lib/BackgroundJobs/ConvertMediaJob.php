@@ -70,9 +70,12 @@ class ConvertMediaJob extends QueuedJob
         $this->tempOutputFilename = basename($this->tempOutputPath);
         $this->outputPath = str_replace(".{$this->sourceExtension}", ".{$this->outputExtension}", $this->path);
         $this->outputFileName = basename($this->outputPath);
-        $this->outputFolder = $this->postConversionOutputRule === 'move'
-            ? $this->rootFolder->get($this->sourceFolder . '/' . $this->postConversionOutputRuleMoveFolder)
-            : $this->sourceFile->getParent();
+        
+        if ($this->postConversionOutputRule === 'move') {
+            $this->outputFolder = $this->rootFolder->get("{$this->sourceFolder}/{$this->postConversionOutputRuleMoveFolder}");
+        } else {
+            $this->outputFolder = $this->sourceFile->getParent();
+        }
 
         return $this;
     }
@@ -96,13 +99,13 @@ class ConvertMediaJob extends QueuedJob
 
     public function handlePostConversion()
     {        
-        $this->handlePostConversionExistingFile();
+        $this->writePostConversionOutputFile();
         $this->handlePostConversionSourceFile();
 
         return $this;
     }
     
-    public function handlePostConversionExistingFile()
+    public function writePostConversionOutputFile()
     {
         if (!$this->outputFolder->nodeExists($this->outputFileName)) {
             $this->writeFile($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
@@ -120,6 +123,9 @@ class ConvertMediaJob extends QueuedJob
             case 'overwrite':
                 $this->rootFolder->get($this->outputPath)->delete();
                 $this->writeFile($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
+                break;
+            default:
+                break;
         }
     }
     
