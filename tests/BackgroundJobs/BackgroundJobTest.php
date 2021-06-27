@@ -16,54 +16,35 @@ abstract class BackgroundJobTest extends TestCase
 {
     protected function setUp(): void
     {
-        $this->time = m::spy(ITimeFactory::class);
+        $this->time = m::mock(ITimeFactory::class);
         $this->logger = m::spy(LoggerInterface::class);
-        $this->rootFolder = m::spy(IRootFolder::class);
-        $this->jobList = m::spy(IJobList::class);
+        $this->rootFolder = m::mock(IRootFolder::class);
+        $this->jobList = m::mock(IJobList::class);
         $this->configService = m::mock(ConfigService::class);
 
-        $this->videoFolder = $this->createTestFolder();
-        $this->videoSubfolder = $this->createTestSubFolder($this->videoFolder);
+        $this->videoFolder = $this->createTestFolder('/files/admin/camera-uploads');
+        $this->videoSubfolder = $this->createTestSubFolder($this->videoFolder, '/files/admin/camera-uploads/2020');
         $this->videoSubfolderNodes = [
-            $this->createFile($this->videoFolder, 'test-1.mov'),
-            $this->createFile($this->videoFolder, 'test-2.mov'),
-            $this->createFile($this->videoFolder, 'test-2.avi'),
-            $this->createFile($this->videoFolder, 'test-3.mov'),
-            $this->createFile($this->videoFolder, 'test-3.mp4'),
+            $this->createFile($this->videoFolder, 'test-1.mov', '/files/admin/camera-uploads'),
+            $this->createFile($this->videoFolder, 'test-2.mov', '/files/admin/camera-uploads'),
+            $this->createFile($this->videoFolder, 'test-2.avi', '/files/admin/camera-uploads'),
+            $this->createFile($this->videoFolder, 'test-3.mov', '/files/admin/camera-uploads'),
+            $this->createFile($this->videoFolder, 'test-3.mp4', '/files/admin/camera-uploads'),
         ];
-        $this->videoSubfolder->shouldReceive('getDirectoryListing')->andReturn($this->videoSubfolderNodes);
+        $this->videoSubfolder->allows()->getDirectoryListing()->andReturns($this->videoSubfolderNodes);
         $this->videoFolderNodes = [
             $this->videoSubfolder,
-            $this->createFile($this->videoFolder, 'test-1.mov'),
-            $this->createFile($this->videoFolder, 'test-2.mov'),
-            $this->createFile($this->videoFolder, 'test-2.avi'),
-            $this->createFile($this->videoFolder, 'test-3.mov'),
-            $this->createFile($this->videoFolder, 'test-3.mp4'),
+            $this->createFile($this->videoFolder, 'test-1.mov', '/files/admin/camera-uploads/2020'),
+            $this->createFile($this->videoFolder, 'test-2.mov', '/files/admin/camera-uploads/2020'),
+            $this->createFile($this->videoFolder, 'test-2.avi', '/files/admin/camera-uploads/2020'),
+            $this->createFile($this->videoFolder, 'test-3.mov', '/files/admin/camera-uploads/2020'),
+            $this->createFile($this->videoFolder, 'test-3.mp4', '/files/admin/camera-uploads/2020'),
         ];
-        $this->videoFolder->shouldReceive('getDirectoryListing')->andReturn($this->videoFolderNodes);
+        $this->videoFolder->allows()->getDirectoryListing()->andReturns($this->videoFolderNodes);
 
-        $this->audioFolder = $this->createTestFolder();
-        $this->audioSubfolder = $this->createTestSubfolder($this->audioFolder);
-        $this->audioSubfolderNodes = [
-            $this->createFile($this->videoFolder, 'test-1.mov'),
-            $this->createFile($this->videoFolder, 'test-2.mov'),
-            $this->createFile($this->videoFolder, 'test-2.avi'),
-            $this->createFile($this->videoFolder, 'test-3.mov'),
-            $this->createFile($this->videoFolder, 'test-3.mp4'),
-        ];
-        $this->audioSubfolder->shouldReceive('getDirectoryListing')->andReturn($this->audioSubfolderNodes);
-        $this->audioFiles = [
-            $this->audioSubfolder,
-            $this->createFile($this->audioFolder, 'test-1.wav'),
-            $this->createFile($this->audioFolder, 'test-2.wav'),
-            $this->createFile($this->audioFolder, 'test-2.m4a'),
-            $this->createFile($this->audioFolder, 'test-3.wav'),
-            $this->createFile($this->audioFolder, 'test-3.mp3'),
-        ];
-        $this->audioFolder->shouldReceive('createTestFolder')->andReturn($this->audioFiles);
-        $this->sourceMoveFolder = $this->createTestFolder();
-        $this->outputMoveFolder = $this->createTestFolder();
-        $this->conflictMoveFolder = $this->createTestFolder();
+        $this->sourceMoveFolder = $this->createTestFolder('/files/admin/converted/source');
+        $this->outputMoveFolder = $this->createTestFolder('/files/admin/converted/output');
+        $this->conflictMoveFolder = $this->createTestFolder('/files/admin/converted/conflicts');
     }
 
     /**
@@ -77,11 +58,12 @@ abstract class BackgroundJobTest extends TestCase
         /** @var MockInterface|File $file */
         $file = m::mock(File::class);
 
-        $file->shouldReceive('getName')->andReturn($filename);
-        $file->shouldReceive('getPath')->andReturn("$folderPath/$filename");
+        $file->allows()->getName()->andReturns($filename);
+        $file->allows()->getPath()->andReturns("$folderPath/$filename");
+        $file->allows()->getParent()->andReturns($folder);
 
         if (!empty($convertedFilename)) {
-            $folder->shouldReceive('nodeExists')->with($convertedFilename)->andReturn(false);
+            $folder->allows()->nodeExists($convertedFilename)->andReturns(false);
         }
 
         return $file;
@@ -91,28 +73,33 @@ abstract class BackgroundJobTest extends TestCase
      * 
      * @return MockInterface|Folder
      */
-    protected function createTestFolder()
+    protected function createTestFolder($path)
     {
-        return m::mock(Folder::class);
+        $folder = m::mock(Folder::class);
+
+        $this->rootFolder->allows()->get($path)->andReturns($folder);
+
+        return $folder;
     }
 
-    protected function createTestSubfolder($parentFolder)
+    protected function createTestSubfolder($parentFolder, $path)
     {
-        $subfolder = $this->createTestFolder();
+        $subfolder = $this->createTestFolder($path);
 
-        $subfolder->shouldReceive('getParent')->andReturn($parentFolder);
+        $subfolder->allows()->getParent()->andReturns($parentFolder);
 
         return $subfolder;
     }
 
-    protected abstract function createTestArguments($overrides = []);
+    protected abstract function createJobArguments($overrides = []);
 
     protected function setJobArguments($overrides = [])
     {
-        $arguments = $this->createTestArguments($overrides);
+        $arguments = $this->createJobArguments($overrides);
 
-        $this->configService->shouldReceive('setUserId')->with($arguments['user_id'])->times(1);
-
+        $this->configService->expects()->setUserId($arguments['user_id'])->once();
+        $this->rootFolder->expects()->get($arguments['sourceFolder'])->once();
+        
         $this->job->parseArguments($arguments);
 
         return $arguments;

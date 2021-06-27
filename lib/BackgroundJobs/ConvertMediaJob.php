@@ -4,6 +4,7 @@ namespace OCA\WorkflowMediaConverter\BackgroundJobs;
 
 use OC\Files\Filesystem;
 use OC\Files\View;
+use OCA\WorkflowMediaConverter\Factory\ProcessFactory;
 use OCA\WorkflowMediaConverter\Factory\ViewFactory;
 use OCA\WorkflowMediaConverter\Service\ConfigService;
 use OCP\AppFramework\Utility\ITimeFactory;
@@ -19,14 +20,16 @@ class ConvertMediaJob extends QueuedJob
     private IRootFolder $rootFolder;
     private ConfigService $configService;
     private ViewFactory $viewFactory;
+    private ProcessFactory $processFactory;
 
-    public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, ConfigService $configService, ViewFactory $viewFactory)
+    public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, ConfigService $configService, ViewFactory $viewFactory, ProcessFactory $processFactory)
     {
         parent::__construct($time);
         $this->rootFolder = $rootFolder;
         $this->logger = $logger;
         $this->configService = $configService;
         $this->viewFactory = $viewFactory;
+        $this->processFactory = $processFactory;
     }
 
     protected function run($arguments)
@@ -71,7 +74,7 @@ class ConvertMediaJob extends QueuedJob
         $this->outputPath = str_replace(".{$this->sourceExtension}", ".{$this->outputExtension}", $this->path);
         $this->outputFileName = basename($this->outputPath);
         $this->outputFolder = $this->postConversionOutputRule === 'move'
-            ? $this->rootFolder->get($this->sourceFolder . '/' . $this->postConversionOutputRuleMoveFolder)
+            ? $this->rootFolder->get($this->postConversionOutputRuleMoveFolder)
             : $this->sourceFile->getParent();
 
         return $this;
@@ -83,7 +86,7 @@ class ConvertMediaJob extends QueuedJob
 
         $command = "ffmpeg --threads $threads -i {$this->tempSourcePath} {$this->tempOutputPath}";
 
-        $process = new Process($command, null, [], null, null);
+        $process = $this->processFactory->create($command);
 
         $process->run();
 

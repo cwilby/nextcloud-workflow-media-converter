@@ -41,7 +41,7 @@ class BatchConvertMediaJob extends QueuedJob
 
             $this->configService->setBatchStatus($this->batchId, 'converting');
         } catch (\Throwable $e) {
-            var_dump($e->getTraceAsString());
+            var_dump($e->getMessage() . ' ------ ' . $e->getTraceAsString());
             $this->configService->setBatchStatus($this->batchId, 'failed');
             $this->logger->error("({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
         } finally {

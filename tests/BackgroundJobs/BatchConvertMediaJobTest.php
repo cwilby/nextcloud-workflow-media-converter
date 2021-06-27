@@ -27,20 +27,18 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
 
     public function test_ParseArguments()
     {
-        $arguments = $this->createTestArguments([
+        $arguments = $this->createJobArguments([
             'postConversionSourceRuleMoveFolder' => 'test',
             'postConversionOutputRuleMoveFolder' => 'test',
             'postConversionOutputConflictRuleMoveFolder' => 'test',
         ]);
 
-        $this->configService->allows()->setUserId($arguments['user_id']);
+        $this->configService->expects()->setUserId($arguments['user_id']);
+        $this->rootFolder->expects()->get($arguments['sourceFolder']);
 
         $result = $this->job->parseArguments($arguments);
 
-        $this->rootFolder->shouldHaveReceived()->get($arguments['sourceFolder']);
-
         $this->assertEquals($arguments['user_id'], $this->job->userId);
-
         $this->assertEquals($this->job, $result);
     }
 
@@ -86,7 +84,7 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
     {
         $arguments = $this->setJobArguments();
 
-        $folder = $this->createTestFolder();
+        $folder = $this->createTestFolder('/files/admin/source-folder');
 
         $unconvertedMedia = [
             ['path' => '/files/admin/source-folder/test-1.mov', 'node' => $this->createFile($folder, 'test-1.mov', '/files/admin/source-folder')],
@@ -97,12 +95,10 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
             return $x['node'];
         }, $unconvertedMedia);
 
-        $this->configService->allows()->updateBatch($this->job->batchId, ['unconverted' => 2]);
-
-        $result = $this->job->queueUnconvertedMediaForConversion();
+        $this->configService->expects()->updateBatch($this->job->batchId, ['unconverted' => 2]);
 
         foreach ($unconvertedMedia as $media) {
-            $this->jobList->shouldHaveReceived('add')->with(ConvertMediaJob::class, [
+            $this->jobList->expects('add')->with(ConvertMediaJob::class, [
                 'user_id'                                    => $arguments['user_id'],
                 'batch_id'                                   => $arguments['id'],
                 'path'                                       => $media['path'],
@@ -116,12 +112,14 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
             ]);
         }
 
+        $result = $this->job->queueUnconvertedMediaForConversion();
+
         $this->assertEquals($this->job, $result);
     }
 
     public function test_Run_ShouldBatchConvertMedia()
     {
-        $arguments = $this->createTestArguments();
+        $arguments = $this->createJobArguments();
 
         $this->configService->allows()->setUserId($arguments['user_id']);
 
@@ -138,18 +136,20 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
             'unconverted' => 4
         ]);
 
+        $this->jobList->expects()->add(ConvertMediaJob::class, \Mockery::any())->twice();
+
         $this->job->run($arguments);
 
         $this->assertTrue(true);
     }
 
-    protected function createTestArguments($overrides = [])
+    protected function createJobArguments($overrides = [])
     {
         return array_merge([
             'user_id' => 'admin',
             'id' => 'rjmoalgbvoekv4yy11ijegpjpnk90gmv',
             'status' => 'queued',
-            'sourceFolderPath' => '/files/admin/source-folder',
+            'sourceFolder' => '/files/admin/source-folder',
             'convertMediaInSubFolders' => true,
             'sourceExtension' => 'mov',
             'outputExtension' => 'mp4',
