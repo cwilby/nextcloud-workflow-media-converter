@@ -73,9 +73,12 @@ class ConvertMediaJob extends QueuedJob
         $this->tempOutputFilename = basename($this->tempOutputPath);
         $this->outputPath = str_replace(".{$this->sourceExtension}", ".{$this->outputExtension}", $this->path);
         $this->outputFileName = basename($this->outputPath);
-        $this->outputFolder = $this->postConversionOutputRule === 'move'
-            ? $this->rootFolder->get($this->postConversionOutputRuleMoveFolder)
-            : $this->sourceFile->getParent();
+        
+        if ($this->postConversionOutputRule === 'move') {
+            $this->outputFolder = $this->rootFolder->get($this->postConversionOutputRuleMoveFolder);
+        } else {
+            $this->outputFolder = $this->sourceFile->getParent();
+        }
 
         return $this;
     }
@@ -98,24 +101,39 @@ class ConvertMediaJob extends QueuedJob
     }
 
     public function handlePostConversion()
+    {        
+        $this->writePostConversionOutputFile();
+        $this->handlePostConversionSourceFile();
+
+        return $this;
+    }
+    
+    public function writePostConversionOutputFile()
     {
-        $conflictRule = $this->postConversionOutputConflictRule;
-
-        if ($this->outputFolder->nodeExists($this->outputFileName)) {
-            if ($conflictRule === 'move') {
-                $this->writeFileSafe(
-                    $this->rootFolder->get($this->sourceFolder . '/' . $this->postConversionOutputConflictRuleMoveFolder),
-                    $this->outputPath,
-                    $this->outputFileName
-                );
-                $this->rootFolder->get($this->outputPath)->delete();
-            } else if ($conflictRule === 'preserve') {
-                $method = 'writeFileSafe';
-            }
+        if (!$this->outputFolder->nodeExists($this->outputFileName)) {
+            $this->writeFile($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
         }
-
-        $this->{$method ?? 'writeFile'}($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
-
+        
+        switch ($this->postConversionOutputConflictRule) {
+            case 'move':
+                $conflictsFolder = $this->rootFolder->get($this->sourceFolder . '/' . $this->postConversionOutputConflictRuleMoveFolder);
+                $this->writeFileSafe($conflictsFolder, $this->outputPath, $this->outputFileName);
+                $this->rootFolder->get($this->outputPath)->delete();
+                break;
+            case 'preserve':
+                $this->writeFileSafe($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
+                break;
+            case 'overwrite':
+                $this->rootFolder->get($this->outputPath)->delete();
+                $this->writeFile($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
+                break;
+            default:
+                break;
+        }
+    }
+    
+    public function handlePostConversionSourceFile()
+    {
         switch ($this->postConversionSourceRule) {
             case 'delete':
                 $this->sourceFile->delete();
@@ -126,8 +144,6 @@ class ConvertMediaJob extends QueuedJob
             default:
                 break;
         }
-
-        return $this;
     }
 
     public function notifyBatchSuccess()
