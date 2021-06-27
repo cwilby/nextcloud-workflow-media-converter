@@ -33,31 +33,31 @@ export default {
 
 <style lang="scss">
 .wmc-status-badge {
-    display: flex;
-    width: 8em;
-    align-items: center;
-    justify-content: center;
-    padding: .25em;
-    border-radius: .25em;
-    text-transform: capitalize;
-    color: white;
+	display: flex;
+	width: 8em;
+	align-items: center;
+	justify-content: center;
+	padding: .25em;
+	border-radius: .25em;
+	text-transform: capitalize;
+	color: white;
 }
 
 .pulse {
-    animation-name: color;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
+	animation-name: color;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
 }
 
 @keyframes color {
-    0% {
-        opacity: .75
-    }
-    50% {
-        opacity: 1
-    }
-    100% {
-        opacity: .75
-    }
+	0% {
+		opacity: .75
+	}
+	50% {
+		opacity: 1
+	}
+	100% {
+		opacity: .75
+	}
 }
 </style>

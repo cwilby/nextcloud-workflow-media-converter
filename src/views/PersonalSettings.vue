@@ -74,7 +74,7 @@ export default {
 				id: null,
 				status: 'queued',
 				convertMediaInSubFolders: false,
-				sourceFolderPath: null,
+				sourceFolder: null,
 				sourceExtension: null,
 				outputExtension: null,
 				postConversionSourceRule: 'keep',
@@ -119,7 +119,7 @@ export default {
 
 		validateSaveConversionBatch() {
 			if (!this.newConversionBatch.outputExtension
-			|| !this.newConversionBatch.sourceFolderPath
+			|| !this.newConversionBatch.sourceFolder
 			|| !this.newConversionBatch.sourceExtension
 			|| !this.newConversionBatch.postConversionSourceRule
 			|| (this.newConversionBatch.postConversionSourceRule === 'move' && !this.newConversionBatch.postConversionSourceRuleMoveFolder)

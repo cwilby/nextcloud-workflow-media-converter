@@ -190,4 +190,19 @@ class ConfigService
             }
         }
     }
+
+    public function setBatchStatus($batchId, $status)
+    {
+        $batches = $this->getConfigValueJson('batches');
+
+        $index = array_search($batchId, array_column($batches, 'id'));
+
+        if (isset($batches[$index])) {
+            $batches[$index]['status'] = $status;
+        }
+
+        $this->setConfigValueJson('batches', $batches);
+
+        return $this;
+    }
 }

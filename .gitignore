@@ -2,3 +2,5 @@ node_modules/
 build/
 vendor/
 .php_cs.cache
+.phpunit.cache
+coverage

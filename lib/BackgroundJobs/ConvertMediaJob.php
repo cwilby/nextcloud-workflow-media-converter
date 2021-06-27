@@ -4,6 +4,7 @@ namespace OCA\WorkflowMediaConverter\BackgroundJobs;
 
 use OC\Files\Filesystem;
 use OC\Files\View;
+use OCA\WorkflowMediaConverter\Factory\ViewFactory;
 use OCA\WorkflowMediaConverter\Service\ConfigService;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\QueuedJob;
@@ -17,13 +18,15 @@ class ConvertMediaJob extends QueuedJob
     private LoggerInterface $logger;
     private IRootFolder $rootFolder;
     private ConfigService $configService;
+    private ViewFactory $viewFactory;
 
-    public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, ConfigService $configService)
+    public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, ConfigService $configService, ViewFactory $viewFactory)
     {
         parent::__construct($time);
         $this->rootFolder = $rootFolder;
         $this->logger = $logger;
         $this->configService = $configService;
+        $this->viewFactory = $viewFactory;
     }
 
     protected function run($arguments)
@@ -43,7 +46,7 @@ class ConvertMediaJob extends QueuedJob
         }
     }
 
-    private function parseArguments($arguments)
+    public function parseArguments($arguments)
     {
         $this->configService->setUserId((string)$arguments['user_id']);
         $this->batchId = (string)$arguments['batch_id'];
@@ -56,33 +59,25 @@ class ConvertMediaJob extends QueuedJob
         $this->postConversionOutputConflictRuleMoveFolder = (string)$arguments['postConversionOutputConflictRuleMoveFolder'];
         $this->outputExtension = (string)$arguments['outputExtension'];
 
-        $this->folder = dirname($this->path);
-        $this->filename = basename($this->path);
-        $this->sourceExtension = pathinfo($this->filename, PATHINFO_EXTENSION);
-
-        $username = explode('/', $this->path, 4)[1];
-        Filesystem::init($username, $this->folder);
-
         $this->sourceFile = $this->rootFolder->get($this->path);
-        $this->folderView = new View($this->folder);
-
-        $this->tempSourcePath = $this->folderView->toTmpFile($this->filename);
+        $this->sourceFolder = dirname($this->path);
+        $this->sourceFolderView = $this->viewFactory->create($this->sourceFolder);
+        $this->sourceFilename = basename($this->path);
+        $this->sourceExtension = pathinfo($this->sourceFilename, PATHINFO_EXTENSION);
+        $this->tempSourcePath = $this->sourceFolderView->toTmpFile($this->sourceFilename);
         $this->tempSourceFilename = basename($this->tempSourcePath);
-
         $this->tempOutputPath = str_replace(".{$this->sourceExtension}", ".{$this->outputExtension}", $this->tempSourcePath);
         $this->tempOutputFilename = basename($this->tempOutputPath);
-
         $this->outputPath = str_replace(".{$this->sourceExtension}", ".{$this->outputExtension}", $this->path);
         $this->outputFileName = basename($this->outputPath);
-
         $this->outputFolder = $this->postConversionOutputRule === 'move'
-            ? $this->rootFolder->get($this->folder . '/' . $this->postConversionOutputRuleMoveFolder)
+            ? $this->rootFolder->get($this->sourceFolder . '/' . $this->postConversionOutputRuleMoveFolder)
             : $this->sourceFile->getParent();
 
         return $this;
     }
 
-    private function convertMedia()
+    public function convertMedia()
     {
         $threads = $this->configService->getAppConfigValue('threadLimit', 0);
 
@@ -99,14 +94,14 @@ class ConvertMediaJob extends QueuedJob
         return $this;
     }
 
-    private function handlePostConversion()
+    public function handlePostConversion()
     {
         $conflictRule = $this->postConversionOutputConflictRule;
 
         if ($this->outputFolder->nodeExists($this->outputFileName)) {
             if ($conflictRule === 'move') {
                 $this->writeFileSafe(
-                    $this->rootFolder->get($this->folder . '/' . $this->postConversionOutputConflictRuleMoveFolder),
+                    $this->rootFolder->get($this->sourceFolder . '/' . $this->postConversionOutputConflictRuleMoveFolder),
                     $this->outputPath,
                     $this->outputFileName
                 );
@@ -119,21 +114,20 @@ class ConvertMediaJob extends QueuedJob
         $this->{$method ?? 'writeFile'}($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
 
         switch ($this->postConversionSourceRule) {
-            case 'keep':
-                // do nothing
-                break;
             case 'delete':
                 $this->sourceFile->delete();
                 break;
             case 'move':
-                $this->sourceFile->move($this->folder . '/' . $this->postConversionSourceRuleMoveFolder . '/' . $this->filename);
+                $this->sourceFile->move($this->sourceFolder . '/' . $this->postConversionSourceRuleMoveFolder . '/' . $this->sourceFilename);
+                break;
+            default:
                 break;
         }
 
         return $this;
     }
 
-    private function notifyBatchSuccess()
+    public function notifyBatchSuccess()
     {
         $batch = $this->configService->getBatch($this->batchId);
 
@@ -143,7 +137,7 @@ class ConvertMediaJob extends QueuedJob
         ]);
     }
 
-    private function notifyBatchFail(\Throwable $e)
+    public function notifyBatchFail(\Throwable $e)
     {
         $batch = $this->configService->getBatch($this->batchId);
 
@@ -154,12 +148,12 @@ class ConvertMediaJob extends QueuedJob
         ]);
     }
 
-    private function writeFile($folder, $tempFileSource, $filename)
+    public function writeFile($folder, $tempFileSource, $filename)
     {
         (new View($folder->getPath()))->fromTmpFile($tempFileSource, $filename);
     }
 
-    private function writeFileSafe($folder, $tempFile, $filename)
+    public function writeFileSafe($folder, $tempFile, $filename)
     {
         $fileNameNoExtension = str_replace(".{$this->outputExtension}", '', $this->outputFileName);
 

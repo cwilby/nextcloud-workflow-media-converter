@@ -19,7 +19,8 @@ class BatchConvertMediaJob extends QueuedJob
     private IJobList $jobList;
     private ConfigService $configService;
 
-    /** @var Node[] */ private array $unconvertedMedia = [];
+    /** @var Node[] */
+    public array $unconvertedMedia = [];
 
     public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, IJobList $jobList, ConfigService $configService)
     {
@@ -30,40 +31,28 @@ class BatchConvertMediaJob extends QueuedJob
         $this->configService = $configService;
     }
 
-    protected function run($arguments)
+    public function run($arguments)
     {
         try {
             $this
                 ->parseArguments($arguments)
-                ->setStatus('seeking')
-                ->findUnconvertedMedia()
-                ->queueUnconvertedMediaForConversion()
-                ->setStatus('converting');
+                ->findUnconvertedMediaInFolder($this->sourceFolder)
+                ->queueUnconvertedMediaForConversion();
+
+            $this->configService->setBatchStatus($this->batchId, 'converting');
         } catch (\Throwable $e) {
+            var_dump($e->getTraceAsString());
+            $this->configService->setBatchStatus($this->batchId, 'failed');
             $this->logger->error("({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
         } finally {
             $this->logger->info(ConvertMedia::class . ' finished');
         }
     }
 
-    private function setStatus($status)
-    {
-        $batches = $this->configService->getConfigValueJson('batches');
-
-        $index = array_search($this->batchId, array_column($batches, 'id'));
-
-        if (isset($batches[$index])) {
-            $batches[$index]['status'] = $status;
-        }
-
-        $this->configService->setAppConfigValueJson('batches', $batches);
-
-        return $this;
-    }
-
-    private function parseArguments($arguments)
+    public function parseArguments($arguments)
     {
         $this->configService->setUserId($arguments['user_id']);
+        $this->userId = $arguments['user_id'];
         $this->batchId = $arguments['id'];
         $this->status = $arguments['status'];
         $this->sourceFolderPath = $arguments['sourceFolder'];
@@ -79,17 +68,12 @@ class BatchConvertMediaJob extends QueuedJob
 
         $this->sourceFolder = $this->rootFolder->get($this->sourceFolderPath);
 
-        return $this;
-    }
-
-    private function findUnconvertedMedia()
-    {
-        $this->findUnconvertedMediaInFolder($this->sourceFolder);
+        $this->configService->setBatchStatus($this->batchId, 'seeking');
 
         return $this;
     }
 
-    private function findUnconvertedMediaInFolder(Folder $folder)
+    public function findUnconvertedMediaInFolder(Folder $folder)
     {
         foreach ($folder->getDirectoryListing() as $node) {
             if ($this->convertMediaInSubFolders && $node instanceof Folder) {
@@ -118,7 +102,7 @@ class BatchConvertMediaJob extends QueuedJob
         return $this;
     }
 
-    private function queueUnconvertedMediaForConversion()
+    public function queueUnconvertedMediaForConversion()
     {
         $this->configService->updateBatch($this->batchId, [
             'unconverted' => count($this->unconvertedMedia)

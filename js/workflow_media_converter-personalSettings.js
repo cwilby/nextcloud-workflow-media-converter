@@ -15276,6 +15276,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -15301,13 +15309,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: {
-    sourceFolderPath: {
+    sourceFolder: {
       get: function get() {
-        return this.conversionBatch.sourceFolderPath;
+        return this.conversionBatch.sourceFolder;
       },
-      set: function set(sourceFolderPath) {
+      set: function set(sourceFolder) {
         this.emitChange({
-          sourceFolderPath: sourceFolderPath
+          sourceFolder: sourceFolder
         });
       }
     },
@@ -15699,7 +15707,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   id: null,
                   status: 'queued',
                   convertMediaInSubFolders: false,
-                  sourceFolderPath: null,
+                  sourceFolder: null,
                   sourceExtension: null,
                   outputExtension: null,
                   postConversionSourceRule: 'keep',
@@ -15750,7 +15758,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, true);
     },
     validateSaveConversionBatch: function validateSaveConversionBatch() {
-      if (!this.newConversionBatch.outputExtension || !this.newConversionBatch.sourceFolderPath || !this.newConversionBatch.sourceExtension || !this.newConversionBatch.postConversionSourceRule || this.newConversionBatch.postConversionSourceRule === 'move' && !this.newConversionBatch.postConversionSourceRuleMoveFolder || !this.newConversionBatch.postConversionOutputRule || this.newConversionBatch.postConversionOutputRule === 'move' && !this.newConversionBatch.postConversionOutputRuleMoveFolder || !this.newConversionBatch.postConversionOutputConflictRule || this.newConversionBatch.postConversionOutputConflictRule === 'move' && !this.newConversionBatch.postConversionOutputConflictRuleMoveFolder) {
+      if (!this.newConversionBatch.outputExtension || !this.newConversionBatch.sourceFolder || !this.newConversionBatch.sourceExtension || !this.newConversionBatch.postConversionSourceRule || this.newConversionBatch.postConversionSourceRule === 'move' && !this.newConversionBatch.postConversionSourceRuleMoveFolder || !this.newConversionBatch.postConversionOutputRule || this.newConversionBatch.postConversionOutputRule === 'move' && !this.newConversionBatch.postConversionOutputRuleMoveFolder || !this.newConversionBatch.postConversionOutputConflictRule || this.newConversionBatch.postConversionOutputConflictRule === 'move' && !this.newConversionBatch.postConversionOutputConflictRuleMoveFolder) {
         return false;
       }
 
@@ -18726,6 +18734,27 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, ".wmc-conversion-batch {\n  position: relative;\n  padding: 2em;\n  border: 1px solid #ededed;\n  border-radius: .5em;\n  margin-bottom: 1em;\n}\n.wmc-conversion-batch label {\n    display: block;\n}\n.wmc-conversion-batch small {\n    display: block;\n}\n.wmc-conversion-batch small a {\n      font-weight: 500;\n}\n.wmc-conversion-batch select, .wmc-conversion-batch input {\n    width: 100%;\n    margin-bottom: 2em;\n}\n.wmc-conversion-batch__delete-button {\n    position: absolute;\n    top: .5em;\n    right: 1em;\n}\n.wmc-conversion-batch__source-directory {\n    width: 100%;\n    margin-bottom: 2em;\n}\n.wmc-conversion-batch__source-directory div button {\n      height: 2em;\n      width: 12em;\n}\n.wmc-conversion-batch__formats {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    grid-template-rows: 1fr;\n    gap: 0 1em;\n}\n.wmc-conversion-batch__encoder-settings-body {\n    padding: 1em;\n    background-color: #fdfdff;\n    border: 1px dashed #ededed;\n    margin-bottom: 2em;\n}\n.wmc-conversion-batch__post-encode-rule label {\n    display: block;\n}\n.wmc-conversion-batch__post-encode-rule--move {\n    width: 100%;\n}\n.wmc-conversion-batch__post-encode-rule--move div button {\n      height: 2em;\n      width: 12em;\n}\n", ""]);
+// Exports
+/* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/CreateConversionBatch.vue?vue&type=style&index=0&lang=scss&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/CreateConversionBatch.vue?vue&type=style&index=0&lang=scss& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".wmc-conversion-batch .grid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -31056,6 +31085,33 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/CreateConversionBatch.vue?vue&type=style&index=0&lang=scss&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/CreateConversionBatch.vue?vue&type=style&index=0&lang=scss& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateConversionBatch_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/sass-loader/dist/cjs.js!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreateConversionBatch.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/CreateConversionBatch.vue?vue&type=style&index=0&lang=scss&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateConversionBatch_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateConversionBatch_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/DisplayConversionBatch.vue?vue&type=style&index=0&lang=scss&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/DisplayConversionBatch.vue?vue&type=style&index=0&lang=scss& ***!
@@ -35670,15 +35726,17 @@ component.options.__file = "src/components/ConversionBatchList.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CreateConversionBatch_vue_vue_type_template_id_6fee2728___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateConversionBatch.vue?vue&type=template&id=6fee2728& */ "./src/components/CreateConversionBatch.vue?vue&type=template&id=6fee2728&");
 /* harmony import */ var _CreateConversionBatch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateConversionBatch.vue?vue&type=script&lang=js& */ "./src/components/CreateConversionBatch.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _CreateConversionBatch_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CreateConversionBatch.vue?vue&type=style&index=0&lang=scss& */ "./src/components/CreateConversionBatch.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _CreateConversionBatch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _CreateConversionBatch_vue_vue_type_template_id_6fee2728___WEBPACK_IMPORTED_MODULE_0__.render,
   _CreateConversionBatch_vue_vue_type_template_id_6fee2728___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -35897,6 +35955,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ConversionBatch_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/style-loader/dist/cjs.js!../../node_modules/css-loader/dist/cjs.js!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/sass-loader/dist/cjs.js!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ConversionBatch.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/ConversionBatch.vue?vue&type=style&index=0&lang=scss&");
+
+
+/***/ }),
+
+/***/ "./src/components/CreateConversionBatch.vue?vue&type=style&index=0&lang=scss&":
+/*!************************************************************************************!*\
+  !*** ./src/components/CreateConversionBatch.vue?vue&type=style&index=0&lang=scss& ***!
+  \************************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateConversionBatch_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/style-loader/dist/cjs.js!../../node_modules/css-loader/dist/cjs.js!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/sass-loader/dist/cjs.js!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreateConversionBatch.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/CreateConversionBatch.vue?vue&type=style&index=0&lang=scss&");
 
 
 /***/ }),
@@ -37049,400 +37120,421 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "wmc-conversion-batch__source-directory" },
-      [
-        _c("span", [
-          _vm._v(
-            _vm._s(
-              _vm.t(
-                "workflow_media_converter",
-                "Convert all files in this folder"
-              )
-            )
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _c(
-            "button",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.openFilePicker("sourceFolderPath")
-                }
-              }
-            },
-            [_vm._v("\n\t\t\t\tChoose Folder\n\t\t\t")]
-          ),
-          _vm._v(" "),
-          _c("span", [_vm._v(_vm._s(_vm.sourceFolderPath))])
-        ]),
-        _vm._v(" "),
+    _c("div", { staticClass: "grid" }, [
+      _c("div", { staticClass: "column" }, [
         _c(
-          "CheckboxRadioSwitch",
-          {
-            attrs: { checked: _vm.convertMediaInSubFolders },
-            on: {
-              "update:checked": function($event) {
-                _vm.convertMediaInSubFolders = $event
-              }
-            }
-          },
+          "div",
+          { staticClass: "wmc-conversion-batch__source-directory" },
           [
-            _vm._v(
-              "\n\t\t\t" +
+            _c("span", [
+              _vm._v(
                 _vm._s(
                   _vm.t(
                     "workflow_media_converter",
-                    "Convert media in sub-folders?"
+                    "Convert all files in this folder"
                   )
-                ) +
-                "\n\t\t"
-            )
-          ]
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "wmc-conversion-batch__from-format" }, [
-      _c("label", [_vm._v("With this file extension/format")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.sourceExtension,
-              expression: "sourceExtension"
-            }
-          ],
-          staticClass: "wmc-conversion-batch__from-format-picker",
-          on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.sourceExtension = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            }
-          }
-        },
-        [
-          _c("option", { attrs: { value: "" } }),
-          _vm._v(" "),
-          _vm._l(_vm.formats, function(format, index) {
-            return _c(
-              "option",
+                )
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.openFilePicker("sourceFolder")
+                    }
+                  }
+                },
+                [_vm._v("\n\t\t\t\t\t\tChoose Folder\n\t\t\t\t\t")]
+              ),
+              _vm._v(" "),
+              _c("span", [_vm._v(_vm._s(_vm.sourceFolder))])
+            ]),
+            _vm._v(" "),
+            _c(
+              "CheckboxRadioSwitch",
               {
-                key: "format-from-" + index,
-                domProps: { value: format.extension }
+                attrs: { checked: _vm.convertMediaInSubFolders },
+                on: {
+                  "update:checked": function($event) {
+                    _vm.convertMediaInSubFolders = $event
+                  }
+                }
               },
               [
-                _c("span", [
-                  _vm._v(
-                    "." +
-                      _vm._s(format.extension) +
-                      " (" +
-                      _vm._s(format.label) +
-                      ")"
-                  )
-                ])
+                _vm._v(
+                  "\n\t\t\t\t\t" +
+                    _vm._s(
+                      _vm.t(
+                        "workflow_media_converter",
+                        "Convert media in sub-folders?"
+                      )
+                    ) +
+                    "\n\t\t\t\t"
+                )
               ]
             )
-          })
-        ],
-        2
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "wmc-conversion-batch__to-format" }, [
-      _c("label", [_vm._v("Convert them into this format")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.outputExtension,
-              expression: "outputExtension"
-            }
           ],
-          staticClass: "wmc-conversion-batch__to-format-picker",
-          on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.outputExtension = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            }
-          }
-        },
-        [
-          _c("option", { attrs: { value: "" } }),
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "wmc-conversion-batch__from-format" }, [
+          _c("label", [_vm._v("With this file extension/format")]),
           _vm._v(" "),
-          _vm._l(_vm.formats, function(format, index) {
-            return _c(
-              "option",
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.sourceExtension,
+                  expression: "sourceExtension"
+                }
+              ],
+              staticClass: "wmc-conversion-batch__from-format-picker",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.sourceExtension = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "" } }),
+              _vm._v(" "),
+              _vm._l(_vm.formats, function(format, index) {
+                return _c(
+                  "option",
+                  {
+                    key: "format-from-" + index,
+                    domProps: { value: format.extension }
+                  },
+                  [
+                    _c("span", [
+                      _vm._v(
+                        "." +
+                          _vm._s(format.extension) +
+                          " (" +
+                          _vm._s(format.label) +
+                          ")"
+                      )
+                    ])
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "column" }, [
+        _c("div", { staticClass: "wmc-conversion-batch__to-format" }, [
+          _c("label", [_vm._v("Convert them into this format")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.outputExtension,
+                  expression: "outputExtension"
+                }
+              ],
+              staticClass: "wmc-conversion-batch__to-format-picker",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.outputExtension = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "" } }),
+              _vm._v(" "),
+              _vm._l(_vm.formats, function(format, index) {
+                return _c(
+                  "option",
+                  {
+                    key: "format-to-" + index,
+                    domProps: { value: format.extension }
+                  },
+                  [
+                    _c("span", [
+                      _vm._v(
+                        "." +
+                          _vm._s(format.extension) +
+                          " (" +
+                          _vm._s(format.label) +
+                          ")"
+                      )
+                    ])
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            _vm._s(_vm.t("workflow_media_converter", "Then after conversion"))
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
               {
-                key: "format-to-" + index,
-                domProps: { value: format.extension }
-              },
-              [
-                _c("span", [
-                  _vm._v(
-                    "." +
-                      _vm._s(format.extension) +
-                      " (" +
-                      _vm._s(format.label) +
-                      ")"
-                  )
-                ])
-              ]
-            )
-          })
-        ],
-        2
-      )
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v(_vm._s(_vm.t("workflow_media_converter", "Then after conversion")))
-    ]),
-    _vm._v(" "),
-    _c(
-      "select",
-      {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.postConversionSourceRule,
-            expression: "postConversionSourceRule"
-          }
-        ],
-        on: {
-          change: function($event) {
-            var $$selectedVal = Array.prototype.filter
-              .call($event.target.options, function(o) {
-                return o.selected
-              })
-              .map(function(o) {
-                var val = "_value" in o ? o._value : o.value
-                return val
-              })
-            _vm.postConversionSourceRule = $event.target.multiple
-              ? $$selectedVal
-              : $$selectedVal[0]
-          }
-        }
-      },
-      _vm._l(_vm.postConversionSourceRules, function(option) {
-        return _c(
-          "option",
-          { key: option.id, domProps: { value: option.id } },
-          [_vm._v("\n\t\t\t" + _vm._s(option.label) + "\n\t\t")]
-        )
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _vm.postConversionSourceRule === "move"
-      ? _c("div", [
-          _c(
-            "button",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.openFilePicker(
-                    "postConversionSourceRuleMoveFolder"
-                  )
-                }
+                name: "model",
+                rawName: "v-model",
+                value: _vm.postConversionSourceRule,
+                expression: "postConversionSourceRule"
               }
-            },
-            [
-              _vm._v(
-                "\n\t\t\t" +
-                  _vm._s(_vm.t("workflow_media_converter", "Choose Folder")) +
-                  "\n\t\t"
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("span", [_vm._v(_vm._s(_vm.postConversionSourceRuleMoveFolder))])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.t("workflow_media_converter", "And")))]),
-    _vm._v(" "),
-    _c(
-      "select",
-      {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.postConversionOutputRule,
-            expression: "postConversionOutputRule"
-          }
-        ],
-        on: {
-          change: function($event) {
-            var $$selectedVal = Array.prototype.filter
-              .call($event.target.options, function(o) {
-                return o.selected
-              })
-              .map(function(o) {
-                var val = "_value" in o ? o._value : o.value
-                return val
-              })
-            _vm.postConversionOutputRule = $event.target.multiple
-              ? $$selectedVal
-              : $$selectedVal[0]
-          }
-        }
-      },
-      _vm._l(_vm.postConversionOutputRules, function(option) {
-        return _c(
-          "option",
-          { key: option.id, domProps: { value: option.id } },
-          [_vm._v("\n\t\t\t" + _vm._s(option.label) + "\n\t\t")]
-        )
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _vm.postConversionOutputRule === "move"
-      ? _c("div", [
-          _c(
-            "button",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.openFilePicker(
-                    "postConversionOutputRuleMoveFolder"
-                  )
-                }
-              }
-            },
-            [
-              _vm._v(
-                "\n\t\t\t" +
-                  _vm._s(_vm.t("workflow_media_converter", "Choose Folder")) +
-                  "\n\t\t"
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("span", [_vm._v(_vm._s(_vm.postConversionOutputRuleMoveFolder))])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("p", [_vm._v("If the output file exists,")]),
-    _vm._v(" "),
-    _c(
-      "select",
-      {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.postConversionOutputConflictRule,
-            expression: "postConversionOutputConflictRule"
-          }
-        ],
-        on: {
-          change: function($event) {
-            var $$selectedVal = Array.prototype.filter
-              .call($event.target.options, function(o) {
-                return o.selected
-              })
-              .map(function(o) {
-                var val = "_value" in o ? o._value : o.value
-                return val
-              })
-            _vm.postConversionOutputConflictRule = $event.target.multiple
-              ? $$selectedVal
-              : $$selectedVal[0]
-          }
-        }
-      },
-      _vm._l(_vm.postConversionOutputConflictRules, function(option) {
-        return _c(
-          "option",
-          { key: option.id, domProps: { value: option.id } },
-          [_vm._v("\n\t\t\t" + _vm._s(option.label) + "\n\t\t")]
-        )
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _vm.postConversionOutputConflictRule === "move"
-      ? _c("div", [
-          _c(
-            "button",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.openFilePicker(
-                    "postConversionOutputConflictRuleMoveFolder"
-                  )
-                }
-              }
-            },
-            [
-              _vm._v(
-                "\n\t\t\t" +
-                  _vm._s(_vm.t("workflow_media_converter", "Choose Folder")) +
-                  "\n\t\t"
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("span", [
-            _vm._v(_vm._s(_vm.postConversionOutputConflictRuleMoveFolder))
-          ])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    !_vm.conversionBatch.id
-      ? _c(
-          "button",
-          {
+            ],
             on: {
-              click: function($event) {
-                return _vm.$emit("save")
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.postConversionSourceRule = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
               }
             }
           },
-          [
-            _vm._v(
-              "\n\t\t" +
-                _vm._s(_vm.t("workflow_media_converter", "Save")) +
-                "\n\t"
+          _vm._l(_vm.postConversionSourceRules, function(option) {
+            return _c(
+              "option",
+              { key: option.id, domProps: { value: option.id } },
+              [_vm._v("\n\t\t\t\t\t" + _vm._s(option.label) + "\n\t\t\t\t")]
             )
-          ]
-        )
-      : _vm._e()
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _vm.postConversionSourceRule === "move"
+          ? _c("div", [
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.openFilePicker(
+                        "postConversionSourceRuleMoveFolder"
+                      )
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n\t\t\t\t\t" +
+                      _vm._s(
+                        _vm.t("workflow_media_converter", "Choose Folder")
+                      ) +
+                      "\n\t\t\t\t"
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v(_vm._s(_vm.postConversionSourceRuleMoveFolder))
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("p", [_vm._v(_vm._s(_vm.t("workflow_media_converter", "And")))]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.postConversionOutputRule,
+                expression: "postConversionOutputRule"
+              }
+            ],
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.postConversionOutputRule = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          _vm._l(_vm.postConversionOutputRules, function(option) {
+            return _c(
+              "option",
+              { key: option.id, domProps: { value: option.id } },
+              [_vm._v("\n\t\t\t\t\t" + _vm._s(option.label) + "\n\t\t\t\t")]
+            )
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _vm.postConversionOutputRule === "move"
+          ? _c("div", [
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.openFilePicker(
+                        "postConversionOutputRuleMoveFolder"
+                      )
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n\t\t\t\t\t" +
+                      _vm._s(
+                        _vm.t("workflow_media_converter", "Choose Folder")
+                      ) +
+                      "\n\t\t\t\t"
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v(_vm._s(_vm.postConversionOutputRuleMoveFolder))
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("p", [_vm._v("If the output file exists,")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.postConversionOutputConflictRule,
+                expression: "postConversionOutputConflictRule"
+              }
+            ],
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.postConversionOutputConflictRule = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          _vm._l(_vm.postConversionOutputConflictRules, function(option) {
+            return _c(
+              "option",
+              { key: option.id, domProps: { value: option.id } },
+              [_vm._v("\n\t\t\t\t\t" + _vm._s(option.label) + "\n\t\t\t\t")]
+            )
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _vm.postConversionOutputConflictRule === "move"
+          ? _c("div", [
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.openFilePicker(
+                        "postConversionOutputConflictRuleMoveFolder"
+                      )
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n\t\t\t\t\t" +
+                      _vm._s(
+                        _vm.t("workflow_media_converter", "Choose Folder")
+                      ) +
+                      "\n\t\t\t\t"
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v(_vm._s(_vm.postConversionOutputConflictRuleMoveFolder))
+              ])
+            ])
+          : _vm._e()
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "wmc-conversion-batch__actions" }, [
+      !_vm.conversionBatch.id
+        ? _c(
+            "button",
+            {
+              staticClass: "save",
+              on: {
+                click: function($event) {
+                  return _vm.$emit("save")
+                }
+              }
+            },
+            [
+              _vm._v(
+                "\n\t\t\t" +
+                  _vm._s(_vm.t("workflow_media_converter", "Save")) +
+                  "\n\t\t"
+              )
+            ]
+          )
+        : _vm._e()
+    ])
   ])
 }
 var staticRenderFns = []

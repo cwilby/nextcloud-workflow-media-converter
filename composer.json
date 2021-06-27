@@ -1,1 +1,14 @@
-{}
+{
+    "autoload-dev": {
+        "psr-4": {
+            "OCP\\": "vendor/christophwurst/nextcloud/OCP",
+            "OCA\\WorkflowMediaConverter\\": "lib/"
+        }
+    },
+    "require-dev": {
+        "nextcloud/coding-standard": "^0.4.0",
+        "phpunit/phpunit": "^9.5",
+        "christophwurst/nextcloud": "dev-master@dev",
+        "mockery/mockery": "^1.4"
+    }
+}
