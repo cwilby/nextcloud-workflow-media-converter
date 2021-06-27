@@ -95,25 +95,36 @@ class ConvertMediaJob extends QueuedJob
     }
 
     public function handlePostConversion()
-    {
-        $conflictRule = $this->postConversionOutputConflictRule;
+    {        
+        $this->handlePostConversionExistingFile();
+        $this->handlePostConversionSourceFile();
 
-        if ($this->outputFolder->nodeExists($this->outputFileName)) {
-            if ($conflictRule === 'move') {
+        return $this;
+    }
+    
+    public function handlePostConversionExistingFile()
+    {
+        if (!$this->outputFolder->nodeExists($this->outputFileName)) {
+            $this->writeFile($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
+        }
+        
+        switch ($this->postConversionOutputConflictRule) {
+            case 'move':
                 $conflictsFolder = $this->rootFolder->get($this->sourceFolder . '/' . $this->postConversionOutputConflictRuleMoveFolder);
                 $this->writeFileSafe($conflictsFolder, $this->outputPath, $this->outputFileName);
                 $this->rootFolder->get($this->outputPath)->delete();
-                $this->writeFile($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
-            } 
-            if ($conflictRule === 'preserve') {
+                break;
+            case 'preserve':
                 $this->writeFileSafe($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
-            }
+                break;
+            case 'overwrite':
+                $this->rootFolder->get($this->outputPath)->delete();
+                $this->writeFile($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
         }
-        else
-        {
-            $this->writeFile($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
-        }
-
+    }
+    
+    public function handlePostConversionSourceFile()
+    {
         switch ($this->postConversionSourceRule) {
             case 'delete':
                 $this->sourceFile->delete();
@@ -124,8 +135,6 @@ class ConvertMediaJob extends QueuedJob
             default:
                 break;
         }
-
-        return $this;
     }
 
     public function notifyBatchSuccess()
