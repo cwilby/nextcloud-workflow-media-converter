@@ -54,6 +54,7 @@ class ConvertMediaJob extends QueuedJob
         $this->configService->setUserId((string)$arguments['user_id']);
         $this->batchId = (string)$arguments['batch_id'];
         $this->path = (string)$arguments['path'];
+        $this->userPath = implode('/', array_slice(explode('/', $this->path, 4), 0, 3));
         $this->postConversionSourceRule = (string)$arguments['postConversionSourceRule'];
         $this->postConversionSourceRuleMoveFolder = (string)$arguments['postConversionSourceRuleMoveFolder'];
         $this->postConversionOutputRule = (string)$arguments['postConversionOutputRule'];
@@ -71,9 +72,9 @@ class ConvertMediaJob extends QueuedJob
         $this->tempSourceFilename = basename($this->tempSourcePath);
         $this->tempOutputPath = str_replace(".{$this->sourceExtension}", ".{$this->outputExtension}", $this->tempSourcePath);
         $this->tempOutputFilename = basename($this->tempOutputPath);
-        $this->outputPath = str_replace(".{$this->sourceExtension}", ".{$this->outputExtension}", $this->path);
-        $this->outputFileName = basename($this->outputPath);
-        
+        $this->outputFilePath = str_replace(".{$this->sourceExtension}", ".{$this->outputExtension}", $this->path);
+        $this->outputFileName = basename($this->outputFilePath);
+
         if ($this->postConversionOutputRule === 'move') {
             $this->outputFolder = $this->rootFolder->get($this->postConversionOutputRuleMoveFolder);
         } else {
@@ -101,37 +102,31 @@ class ConvertMediaJob extends QueuedJob
     }
 
     public function handlePostConversion()
-    {        
+    {
         $this->writePostConversionOutputFile();
         $this->handlePostConversionSourceFile();
 
         return $this;
     }
-    
+
     public function writePostConversionOutputFile()
     {
-        if (!$this->outputFolder->nodeExists($this->outputFileName)) {
-            $this->writeFile($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
+        if ($this->outputFolder->nodeExists($this->outputFileName)) {
+            $existingFile = $this->rootFolder->get($this->outputFilePath);
+
+            switch ($this->postConversionOutputConflictRule) {
+                case 'move':
+                    $existingFile->move($this->toUserFolder($this->postConversionOutputConflictRuleMoveFolder) . '/' . $this->outputFileName);
+                    break;
+                case 'overwrite':
+                    $existingFile->delete();
+                    break;
+            }
         }
-        
-        switch ($this->postConversionOutputConflictRule) {
-            case 'move':
-                $conflictsFolder = $this->rootFolder->get($this->sourceFolder . '/' . $this->postConversionOutputConflictRuleMoveFolder);
-                $this->writeFileSafe($conflictsFolder, $this->outputPath, $this->outputFileName);
-                $this->rootFolder->get($this->outputPath)->delete();
-                break;
-            case 'preserve':
-                $this->writeFileSafe($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
-                break;
-            case 'overwrite':
-                $this->rootFolder->get($this->outputPath)->delete();
-                $this->writeFile($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
-                break;
-            default:
-                break;
-        }
+
+        return $this->writeFileSafe($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
     }
-    
+
     public function handlePostConversionSourceFile()
     {
         switch ($this->postConversionSourceRule) {
@@ -139,7 +134,7 @@ class ConvertMediaJob extends QueuedJob
                 $this->sourceFile->delete();
                 break;
             case 'move':
-                $this->sourceFile->move($this->sourceFolder . '/' . $this->postConversionSourceRuleMoveFolder . '/' . $this->sourceFilename);
+                $this->sourceFile->move($this->toUserFolder($this->postConversionSourceRuleMoveFolder) . '/' . $this->sourceFilename);
                 break;
             default:
                 break;
@@ -167,16 +162,11 @@ class ConvertMediaJob extends QueuedJob
         ]);
     }
 
-    public function writeFile($folder, $tempFileSource, $filename)
-    {
-        (new View($folder->getPath()))->fromTmpFile($tempFileSource, $filename);
-    }
-
     public function writeFileSafe($folder, $tempFile, $filename)
     {
         $fileNameNoExtension = str_replace(".{$this->outputExtension}", '', $this->outputFileName);
 
-        $index = 0;
+        $index = 1;
 
         $newFileName = $filename;
 
@@ -184,6 +174,15 @@ class ConvertMediaJob extends QueuedJob
             $newFileName = "{$fileNameNoExtension} ({$index}).{$this->outputExtension}";
         }
 
-        $this->writeFile($folder, $tempFile, $newFileName);
+        $view = $this->viewFactory->create($folder->getPath());
+
+        $view->fromTmpFile($tempFile, $newFileName);
+
+        return $this;
+    }
+
+    protected function toUserFolder($path)
+    {
+        return preg_replace('#/+#', '/', $this->userPath . '/' . $path);
     }
 }

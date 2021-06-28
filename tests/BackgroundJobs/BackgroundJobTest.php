@@ -22,29 +22,29 @@ abstract class BackgroundJobTest extends TestCase
         $this->jobList = m::mock(IJobList::class);
         $this->configService = m::mock(ConfigService::class);
 
-        $this->videoFolder = $this->createTestFolder('/files/admin/camera-uploads');
-        $this->videoSubfolder = $this->createTestSubFolder($this->videoFolder, '/files/admin/camera-uploads/2020');
+        $this->videoFolder = $this->createTestFolder('/admin/files/camera-uploads');
+        $this->videoSubfolder = $this->createTestSubFolder($this->videoFolder, '/admin/files/camera-uploads/2020');
         $this->videoSubfolderNodes = [
-            $this->createFile($this->videoFolder, 'test-1.mov', '/files/admin/camera-uploads'),
-            $this->createFile($this->videoFolder, 'test-2.mov', '/files/admin/camera-uploads'),
-            $this->createFile($this->videoFolder, 'test-2.avi', '/files/admin/camera-uploads'),
-            $this->createFile($this->videoFolder, 'test-3.mov', '/files/admin/camera-uploads'),
-            $this->createFile($this->videoFolder, 'test-3.mp4', '/files/admin/camera-uploads'),
+            $this->createFile($this->videoFolder, 'test-1.mov', '/admin/files/camera-uploads'),
+            $this->createFile($this->videoFolder, 'test-2.mov', '/admin/files/camera-uploads'),
+            $this->createFile($this->videoFolder, 'test-2.avi', '/admin/files/camera-uploads'),
+            $this->createFile($this->videoFolder, 'test-3.mov', '/admin/files/camera-uploads'),
+            $this->createFile($this->videoFolder, 'test-3.mp4', '/admin/files/camera-uploads'),
         ];
         $this->videoSubfolder->allows()->getDirectoryListing()->andReturns($this->videoSubfolderNodes);
         $this->videoFolderNodes = [
             $this->videoSubfolder,
-            $this->createFile($this->videoFolder, 'test-1.mov', '/files/admin/camera-uploads/2020'),
-            $this->createFile($this->videoFolder, 'test-2.mov', '/files/admin/camera-uploads/2020'),
-            $this->createFile($this->videoFolder, 'test-2.avi', '/files/admin/camera-uploads/2020'),
-            $this->createFile($this->videoFolder, 'test-3.mov', '/files/admin/camera-uploads/2020'),
-            $this->createFile($this->videoFolder, 'test-3.mp4', '/files/admin/camera-uploads/2020'),
+            $this->createFile($this->videoFolder, 'test-1.mov', '/admin/files/camera-uploads/2020'),
+            $this->createFile($this->videoFolder, 'test-2.mov', '/admin/files/camera-uploads/2020'),
+            $this->createFile($this->videoFolder, 'test-2.avi', '/admin/files/camera-uploads/2020'),
+            $this->createFile($this->videoFolder, 'test-3.mov', '/admin/files/camera-uploads/2020'),
+            $this->createFile($this->videoFolder, 'test-3.mp4', '/admin/files/camera-uploads/2020'),
         ];
         $this->videoFolder->allows()->getDirectoryListing()->andReturns($this->videoFolderNodes);
 
-        $this->sourceMoveFolder = $this->createTestFolder('/files/admin/converted/source');
-        $this->outputMoveFolder = $this->createTestFolder('/files/admin/converted/output');
-        $this->conflictMoveFolder = $this->createTestFolder('/files/admin/converted/conflicts');
+        $this->sourceMoveFolder = $this->createTestFolder('/admin/files/converted/source');
+        $this->outputMoveFolder = $this->createTestFolder('/admin/files/converted/output');
+        $this->conflictMoveFolder = $this->createTestFolder('/admin/files/converted/conflicts');
     }
 
     /**
@@ -76,6 +76,7 @@ abstract class BackgroundJobTest extends TestCase
     protected function createTestFolder($path)
     {
         $folder = m::mock(Folder::class);
+        $folder->allows()->getPath()->andReturns($path);
 
         $this->rootFolder->allows()->get($path)->andReturns($folder);
 
@@ -98,8 +99,7 @@ abstract class BackgroundJobTest extends TestCase
         $arguments = $this->createJobArguments($overrides);
 
         $this->configService->expects()->setUserId($arguments['user_id'])->once();
-        $this->rootFolder->expects()->get($arguments['sourceFolder'])->once();
-        
+
         $this->job->parseArguments($arguments);
 
         return $arguments;

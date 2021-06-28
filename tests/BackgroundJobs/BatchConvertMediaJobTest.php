@@ -84,11 +84,11 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
     {
         $arguments = $this->setJobArguments();
 
-        $folder = $this->createTestFolder('/files/admin/source-folder');
+        $folder = $this->createTestFolder('/admin/files spot /source-folder');
 
         $unconvertedMedia = [
-            ['path' => '/files/admin/source-folder/test-1.mov', 'node' => $this->createFile($folder, 'test-1.mov', '/files/admin/source-folder')],
-            ['path' => '/files/admin/source-folder/test-2.mov', 'node' => $this->createFile($folder, 'test-2.mov', '/files/admin/source-folder')],
+            ['path' => '/admin/files spot /source-folder/test-1.mov', 'node' => $this->createFile($folder, 'test-1.mov', '/admin/files spot /source-folder')],
+            ['path' => '/admin/files spot /source-folder/test-2.mov', 'node' => $this->createFile($folder, 'test-2.mov', '/admin/files spot /source-folder')],
         ];
 
         $this->job->unconvertedMedia = array_map(function ($x) {
@@ -149,7 +149,7 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
             'user_id' => 'admin',
             'id' => 'rjmoalgbvoekv4yy11ijegpjpnk90gmv',
             'status' => 'queued',
-            'sourceFolder' => '/files/admin/source-folder',
+            'sourceFolder' => '/admin/files/source-folder',
             'convertMediaInSubFolders' => true,
             'sourceExtension' => 'mov',
             'outputExtension' => 'mp4',
@@ -160,5 +160,14 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
             'postConversionOutputConflictRule' => 'preserve',
             'postConversionOutputConflictRuleMoveFolder' => null
         ], $overrides);
+    }
+
+    protected function setJobArguments($overrides = [])
+    {
+        $arguments = parent::setJobArguments($overrides);
+
+        $this->rootFolder->expects()->get($arguments['sourceFolder'])->once();
+
+        return $arguments;
     }
 }
