@@ -41,12 +41,19 @@ class BatchConvertMediaJob extends QueuedJob
 
             $this->configService->setBatchStatus($this->batchId, 'converting');
         } catch (\Throwable $e) {
-            var_dump($e->getMessage() . ' ------ ' . $e->getTraceAsString());
+            $eType = get_class($e);
             $this->configService->setBatchStatus($this->batchId, 'failed');
-            $this->logger->error("({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
+            $this->logger->error("[{$eType}] :: ({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
         } finally {
             $this->logger->info(ConvertMedia::class . ' finished');
         }
+    }
+
+    private function prependUserFolder($path)
+    {
+        if (empty($path)) return null;
+
+        return $this->userPath . '/' . ltrim($path, '/');
     }
 
     public function parseArguments($arguments)
@@ -55,16 +62,17 @@ class BatchConvertMediaJob extends QueuedJob
         $this->userId = $arguments['user_id'];
         $this->batchId = $arguments['id'];
         $this->status = $arguments['status'];
-        $this->sourceFolderPath = $arguments['sourceFolder'];
+        $this->userPath = "/{$this->userId}/files";
+        $this->sourceFolderPath = $this->prependUserFolder($arguments['sourceFolder']);
         $this->convertMediaInSubFolders = $arguments['convertMediaInSubFolders'];
         $this->sourceExtension = $arguments['sourceExtension'];
         $this->outputExtension = $arguments['outputExtension'];
         $this->postConversionSourceRule = $arguments['postConversionSourceRule'];
-        $this->postConversionSourceRuleMoveFolder = $arguments['postConversionSourceRuleMoveFolder'];
+        $this->postConversionSourceRuleMoveFolder = $this->prependUserFolder($arguments['postConversionSourceRuleMoveFolder']);
         $this->postConversionOutputRule = $arguments['postConversionOutputRule'];
-        $this->postConversionOutputRuleMoveFolder = $arguments['postConversionOutputRuleMoveFolder'];
+        $this->postConversionOutputRuleMoveFolder = $this->prependUserFolder($arguments['postConversionOutputRuleMoveFolder']);
         $this->postConversionOutputConflictRule = $arguments['postConversionOutputConflictRule'];
-        $this->postConversionOutputConflictRuleMoveFolder = $arguments['postConversionOutputConflictRuleMoveFolder'];
+        $this->postConversionOutputConflictRuleMoveFolder = $this->prependUserFolder($arguments['postConversionOutputConflictRuleMoveFolder']);
 
         $this->sourceFolder = $this->rootFolder->get($this->sourceFolderPath);
 

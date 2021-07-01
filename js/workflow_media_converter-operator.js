@@ -8767,6 +8767,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -9033,7 +9041,7 @@ __webpack_require__.r(__webpack_exports__);
         label: t('workflow_media_converter', 'Delete the source file')
       }, {
         id: 'move',
-        label: t('workflow_media_converter', 'Move the source file to this folder')
+        label: t('workflow_media_converter', 'Move the source file to a specific folder')
       }],
       postConversionOutputRules: [{
         id: 'keep',
@@ -9050,7 +9058,7 @@ __webpack_require__.r(__webpack_exports__);
         label: t('workflow_media_converter', 'Overwrite the existing file')
       }, {
         id: 'move',
-        label: t('workflow_media_converter', 'Move the existing file to')
+        label: t('workflow_media_converter', 'Move the existing file to a specific folder')
       }]
     };
   }
@@ -9253,7 +9261,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.multiselect[data-v-43268b76] {\n\twidth: 100%;\n\tmargin: auto;\n\ttext-align: center;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.multiselect[data-v-43268b76] {\n\twidth: 100%;\n\tmargin: auto;\n\ttext-align: center;\n}\nselect[data-v-43268b76] {\n\twidth: 100%;\n}\n.mb[data-v-43268b76] {\n\tmargin-bottom: 1.5em;\n}\n", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -12323,253 +12331,283 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "wmc-rules" }, [
-    _c("p", [
-      _vm._v(_vm._s(_vm.t("workflow_media_converter", "Convert to format")))
+    _c("div", { staticClass: "mb" }, [
+      _c("p", [
+        _vm._v(_vm._s(_vm.t("workflow_media_converter", "Convert to format")))
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.outputExtension,
+              expression: "outputExtension"
+            }
+          ],
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.outputExtension = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        _vm._l(_vm.formats, function(format) {
+          return _c(
+            "option",
+            { key: format.extension, domProps: { value: format.extension } },
+            [
+              _vm._v(
+                "\n\t\t\t\t(." +
+                  _vm._s(format.extension) +
+                  ") " +
+                  _vm._s(format.label) +
+                  "\n\t\t\t"
+              )
+            ]
+          )
+        }),
+        0
+      )
     ]),
     _vm._v(" "),
-    _c(
-      "select",
-      {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.outputExtension,
-            expression: "outputExtension"
-          }
-        ],
-        on: {
-          change: function($event) {
-            var $$selectedVal = Array.prototype.filter
-              .call($event.target.options, function(o) {
-                return o.selected
-              })
-              .map(function(o) {
-                var val = "_value" in o ? o._value : o.value
-                return val
-              })
-            _vm.outputExtension = $event.target.multiple
-              ? $$selectedVal
-              : $$selectedVal[0]
-          }
-        }
-      },
-      _vm._l(_vm.formats, function(format) {
-        return _c(
-          "option",
-          { key: format.extension, domProps: { value: format.extension } },
-          [
-            _vm._v(
-              "\n\t\t\t(." +
-                _vm._s(format.extension) +
-                ") " +
-                _vm._s(format.label) +
-                "\n\t\t"
+    _c("div", { staticClass: "mb" }, [
+      _c("p", [
+        _vm._v(
+          _vm._s(
+            _vm.t(
+              "workflow_media_converter",
+              "After the source file has been converted:"
             )
-          ]
+          )
         )
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v(_vm._s(_vm.t("workflow_media_converter", "Then after conversion")))
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.postConversionSourceRule,
+              expression: "postConversionSourceRule"
+            }
+          ],
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.postConversionSourceRule = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        _vm._l(_vm.postConversionSourceRules, function(option) {
+          return _c(
+            "option",
+            { key: option.id, domProps: { value: option.id } },
+            [_vm._v("\n\t\t\t\t" + _vm._s(option.label) + "\n\t\t\t")]
+          )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _vm.postConversionSourceRule === "move"
+        ? _c("div", [
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.openFilePicker(
+                      "postConversionSourceRuleMoveFolder"
+                    )
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n\t\t\t\t" +
+                    _vm._s(_vm.t("workflow_media_converter", "Choose Folder")) +
+                    "\n\t\t\t"
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(_vm.postConversionSourceRuleMoveFolder))])
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _c(
-      "select",
-      {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.postConversionSourceRule,
-            expression: "postConversionSourceRule"
-          }
-        ],
-        on: {
-          change: function($event) {
-            var $$selectedVal = Array.prototype.filter
-              .call($event.target.options, function(o) {
-                return o.selected
-              })
-              .map(function(o) {
-                var val = "_value" in o ? o._value : o.value
-                return val
-              })
-            _vm.postConversionSourceRule = $event.target.multiple
-              ? $$selectedVal
-              : $$selectedVal[0]
-          }
-        }
-      },
-      _vm._l(_vm.postConversionSourceRules, function(option) {
-        return _c(
-          "option",
-          { key: option.id, domProps: { value: option.id } },
-          [_vm._v("\n\t\t\t" + _vm._s(option.label) + "\n\t\t")]
+    _c("div", { staticClass: "mb" }, [
+      _c("p", [
+        _vm._v(
+          _vm._s(
+            _vm.t(
+              "workflow_media_converter",
+              "After the new output is created:"
+            )
+          )
         )
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _vm.postConversionSourceRule === "move"
-      ? _c("div", [
-          _c(
-            "button",
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
             {
-              on: {
-                click: function($event) {
-                  return _vm.openFilePicker(
-                    "postConversionSourceRuleMoveFolder"
-                  )
+              name: "model",
+              rawName: "v-model",
+              value: _vm.postConversionOutputRule,
+              expression: "postConversionOutputRule"
+            }
+          ],
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.postConversionOutputRule = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        _vm._l(_vm.postConversionOutputRules, function(option) {
+          return _c(
+            "option",
+            { key: option.id, domProps: { value: option.id } },
+            [_vm._v("\n\t\t\t\t" + _vm._s(option.label) + "\n\t\t\t")]
+          )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _vm.postConversionOutputRule === "move"
+        ? _c("div", { staticClass: "mb-2" }, [
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.openFilePicker(
+                      "postConversionOutputRuleMoveFolder"
+                    )
+                  }
                 }
-              }
-            },
-            [
-              _vm._v(
-                "\n\t\t\t" +
-                  _vm._s(_vm.t("workflow_media_converter", "Choose Folder")) +
-                  "\n\t\t"
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("span", [_vm._v(_vm._s(_vm.postConversionSourceRuleMoveFolder))])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.t("workflow_media_converter", "And")))]),
-    _vm._v(" "),
-    _c(
-      "select",
-      {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.postConversionOutputRule,
-            expression: "postConversionOutputRule"
-          }
-        ],
-        on: {
-          change: function($event) {
-            var $$selectedVal = Array.prototype.filter
-              .call($event.target.options, function(o) {
-                return o.selected
-              })
-              .map(function(o) {
-                var val = "_value" in o ? o._value : o.value
-                return val
-              })
-            _vm.postConversionOutputRule = $event.target.multiple
-              ? $$selectedVal
-              : $$selectedVal[0]
-          }
-        }
-      },
-      _vm._l(_vm.postConversionOutputRules, function(option) {
-        return _c(
-          "option",
-          { key: option.id, domProps: { value: option.id } },
-          [_vm._v("\n\t\t\t" + _vm._s(option.label) + "\n\t\t")]
-        )
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _vm.postConversionOutputRule === "move"
-      ? _c("div", [
-          _c(
-            "button",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.openFilePicker(
-                    "postConversionOutputRuleMoveFolder"
-                  )
-                }
-              }
-            },
-            [
-              _vm._v(
-                "\n\t\t\t" +
-                  _vm._s(_vm.t("workflow_media_converter", "Choose Folder")) +
-                  "\n\t\t"
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("span", [_vm._v(_vm._s(_vm.postConversionOutputRuleMoveFolder))])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("p", [_vm._v("If the output file exists,")]),
-    _vm._v(" "),
-    _c(
-      "select",
-      {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.postConversionOutputConflictRule,
-            expression: "postConversionOutputConflictRule"
-          }
-        ],
-        on: {
-          change: function($event) {
-            var $$selectedVal = Array.prototype.filter
-              .call($event.target.options, function(o) {
-                return o.selected
-              })
-              .map(function(o) {
-                var val = "_value" in o ? o._value : o.value
-                return val
-              })
-            _vm.postConversionOutputConflictRule = $event.target.multiple
-              ? $$selectedVal
-              : $$selectedVal[0]
-          }
-        }
-      },
-      _vm._l(_vm.postConversionOutputConflictRules, function(option) {
-        return _c(
-          "option",
-          { key: option.id, domProps: { value: option.id } },
-          [_vm._v("\n\t\t\t" + _vm._s(option.label) + "\n\t\t")]
-        )
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _vm.postConversionOutputConflictRule === "move"
-      ? _c("div", [
-          _c(
-            "button",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.openFilePicker(
-                    "postConversionOutputConflictRuleMoveFolder"
-                  )
-                }
-              }
-            },
-            [
-              _vm._v(
-                "\n\t\t\t" +
-                  _vm._s(_vm.t("workflow_media_converter", "Choose Folder")) +
-                  "\n\t\t"
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("span", [
-            _vm._v(_vm._s(_vm.postConversionOutputConflictRuleMoveFolder))
+              },
+              [
+                _vm._v(
+                  "\n\t\t\t\t" +
+                    _vm._s(_vm.t("workflow_media_converter", "Choose Folder")) +
+                    "\n\t\t\t"
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(_vm.postConversionOutputRuleMoveFolder))])
           ])
-        ])
-      : _vm._e()
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "mb" }, [
+      _c("p", [
+        _vm._v(
+          _vm._s(
+            _vm.t("workflow_media_converter", "If the output file exists:")
+          )
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.postConversionOutputConflictRule,
+              expression: "postConversionOutputConflictRule"
+            }
+          ],
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.postConversionOutputConflictRule = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        _vm._l(_vm.postConversionOutputConflictRules, function(option) {
+          return _c(
+            "option",
+            { key: option.id, domProps: { value: option.id } },
+            [_vm._v("\n\t\t\t\t" + _vm._s(option.label) + "\n\t\t\t")]
+          )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _vm.postConversionOutputConflictRule === "move"
+        ? _c("div", { staticClass: "mb-2" }, [
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.openFilePicker(
+                      "postConversionOutputConflictRuleMoveFolder"
+                    )
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n\t\t\t\t" +
+                    _vm._s(_vm.t("workflow_media_converter", "Choose Folder")) +
+                    "\n\t\t\t"
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("span", [
+              _vm._v(_vm._s(_vm.postConversionOutputConflictRuleMoveFolder))
+            ])
+          ])
+        : _vm._e()
+    ])
   ])
 }
 var staticRenderFns = []

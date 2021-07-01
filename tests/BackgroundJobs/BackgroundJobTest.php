@@ -2,8 +2,8 @@
 
 namespace OCA\WorkflowMediaConverter\Tests\BackgroundJobs;
 
-use PHPUnit\Framework\TestCase;
 use Mockery as m;
+use Mockery\Adapter\Phpunit\MockeryTestCase;
 use OCA\WorkflowMediaConverter\Service\ConfigService;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\IJobList;
@@ -12,7 +12,7 @@ use OCP\Files\Folder;
 use OCP\Files\IRootFolder;
 use Psr\Log\LoggerInterface;
 
-abstract class BackgroundJobTest extends TestCase
+abstract class BackgroundJobTest extends MockeryTestCase
 {
     protected function setUp(): void
     {
@@ -88,6 +88,7 @@ abstract class BackgroundJobTest extends TestCase
         $subfolder = $this->createTestFolder($path);
 
         $subfolder->allows()->getParent()->andReturns($parentFolder);
+        $this->rootFolder->allows()->get($path)->andReturns($subfolder);
 
         return $subfolder;
     }

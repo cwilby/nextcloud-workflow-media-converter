@@ -15,10 +15,10 @@
 						</button>
 						<span>{{ sourceFolder }}</span>
 					</div>
-					<CheckboxRadioSwitch :checked.sync="convertMediaInSubFolders">
-						{{ t('workflow_media_converter', 'Convert media in sub-folders?') }}
-					</CheckboxRadioSwitch>
 				</div>
+				<CheckboxRadioSwitch :checked.sync="convertMediaInSubFolders">
+					{{ t('workflow_media_converter', 'Convert media in sub-folders?') }}
+				</CheckboxRadioSwitch>
 				<div class="wmc-conversion-batch__from-format">
 					<label>With this file extension/format</label>
 					<select v-model="sourceExtension" class="wmc-conversion-batch__from-format-picker">
@@ -31,10 +31,8 @@
 						</option>
 					</select>
 				</div>
-			</div>
-			<div class="column">
 				<div class="wmc-conversion-batch__to-format">
-					<label>Convert them into this format</label>
+					<label>Into this file extension/format</label>
 					<select v-model="outputExtension" class="wmc-conversion-batch__to-format-picker">
 						<option value="" />
 						<option
@@ -45,41 +43,51 @@
 						</option>
 					</select>
 				</div>
-				<p>{{ t('workflow_media_converter', 'Then after conversion') }}</p>
-				<select v-model="postConversionSourceRule">
-					<option v-for="option in postConversionSourceRules" :key="option.id" :value="option.id">
-						{{ option.label }}
-					</option>
-				</select>
-				<div v-if="postConversionSourceRule === 'move'">
-					<button @click="openFilePicker('postConversionSourceRuleMoveFolder')">
-						{{ t('workflow_media_converter', 'Choose Folder') }}
-					</button>
-					<span>{{ postConversionSourceRuleMoveFolder }}</span>
+			</div>
+			<div class="column">
+				<div class="mb">
+					<p>{{ t('workflow_media_converter', 'After the source file has been converted:') }}</p>
+					<select v-model="postConversionSourceRule">
+						<option v-for="option in postConversionSourceRules" :key="option.id" :value="option.id">
+							{{ option.label }}
+						</option>
+					</select>
+					<div v-if="postConversionSourceRule === 'move'">
+						<button @click="openFilePicker('postConversionSourceRuleMoveFolder')">
+							{{ t('workflow_media_converter', 'Choose Folder') }}
+						</button>
+						<span>{{ postConversionSourceRuleMoveFolder }}</span>
+					</div>
 				</div>
-				<p>{{ t('workflow_media_converter', 'And') }}</p>
-				<select v-model="postConversionOutputRule">
-					<option v-for="option in postConversionOutputRules" :key="option.id" :value="option.id">
-						{{ option.label }}
-					</option>
-				</select>
-				<div v-if="postConversionOutputRule === 'move'">
-					<button @click="openFilePicker('postConversionOutputRuleMoveFolder')">
-						{{ t('workflow_media_converter', 'Choose Folder') }}
-					</button>
-					<span>{{ postConversionOutputRuleMoveFolder }}</span>
+
+				<div class="mb">
+					<p>{{ t('workflow_media_converter', 'After the new output is created:') }}</p>
+					<select v-model="postConversionOutputRule">
+						<option v-for="option in postConversionOutputRules" :key="option.id" :value="option.id">
+							{{ option.label }}
+						</option>
+					</select>
+					<div v-if="postConversionOutputRule === 'move'">
+						<button @click="openFilePicker('postConversionOutputRuleMoveFolder')">
+							{{ t('workflow_media_converter', 'Choose Folder') }}
+						</button>
+						<span>{{ postConversionOutputRuleMoveFolder }}</span>
+					</div>
 				</div>
-				<p>If the output file exists,</p>
-				<select v-model="postConversionOutputConflictRule">
-					<option v-for="option in postConversionOutputConflictRules" :key="option.id" :value="option.id">
-						{{ option.label }}
-					</option>
-				</select>
-				<div v-if="postConversionOutputConflictRule === 'move'">
-					<button @click="openFilePicker('postConversionOutputConflictRuleMoveFolder')">
-						{{ t('workflow_media_converter', 'Choose Folder') }}
-					</button>
-					<span>{{ postConversionOutputConflictRuleMoveFolder }}</span>
+
+				<div class="mb">
+					<p>{{ t('workflow_media_converter', 'If there is a file with the same name as the new output:') }}</p>
+					<select v-model="postConversionOutputConflictRule">
+						<option v-for="option in postConversionOutputConflictRules" :key="option.id" :value="option.id">
+							{{ option.label }}
+						</option>
+					</select>
+					<div v-if="postConversionOutputConflictRule === 'move'">
+						<button @click="openFilePicker('postConversionOutputConflictRuleMoveFolder')">
+							{{ t('workflow_media_converter', 'Choose Folder') }}
+						</button>
+						<span>{{ postConversionOutputConflictRuleMoveFolder }}</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -228,6 +236,21 @@ export default {
 	.grid {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
+		grid-gap: 4em;
+	}
+
+	&__from-format {
+		margin-top: 2em;
+	}
+
+	.mb {
+		margin-bottom: 1.5em !important;
+	}
+
+	.mb-1 {
+		display: inline-block;
+		margin-bottom: 1em !important;
 	}
 }
+
 </style>

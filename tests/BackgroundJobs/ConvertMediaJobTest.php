@@ -7,12 +7,21 @@ use Mockery as m;
 use OC\Files\View;
 use OCA\WorkflowMediaConverter\Factory\ProcessFactory;
 use OCA\WorkflowMediaConverter\Factory\ViewFactory;
+use ReflectionClass;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 class ConvertMediaJobTest extends BackgroundJobTest
 {
     protected ConvertMediaJob $job;
+
+    protected static function getMethod($name)
+    {
+        $class = new ReflectionClass(ConvertMediaJob::class);
+        $method = $class->getMethod($name);
+        $method->setAccessible(true);
+        return $method;
+    }
 
     protected function setUp(): void
     {
@@ -34,21 +43,25 @@ class ConvertMediaJobTest extends BackgroundJobTest
         );
     }
 
-    protected function tearDown(): void
-    {
-        \Mockery::close();
-    }
-
     public function test_ParseArguments()
     {
         $arguments = $this->createJobArguments();
 
-        $this->viewFactory->allows()->create(dirname($arguments['path']))->andReturns($this->view);
-        $this->view->allows()->toTmpFile(basename($arguments['path']))->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->viewFactory->allows()
+            ->create('/admin/files/camera-uploads')
+            ->andReturns($this->view);
 
-        $this->rootFolder->expects()->get($arguments['path'])->andReturns($this->videoFolderNodes[0]);
+        $this->view->allows()
+            ->toTmpFile(basename($arguments['path']))
+            ->andReturns('/tmp/random-filename-for-test-1.mov');
 
-        $this->configService->allows()->setUserId($arguments['user_id']);
+        $this->rootFolder->expects()
+            ->get('/admin/files/camera-uploads/test-1.mov')
+            ->andReturns($this->videoFolderNodes[1]);
+
+        $this->configService
+            ->allows()
+            ->setUserId($arguments['user_id']);
 
         $result = $this->job->parseArguments($arguments);
 
@@ -108,11 +121,11 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
         $this->processFactory->expects()->create("ffmpeg --threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4")->andReturns($this->process);
         $this->process->expects()->run();
-        $this->process->expects()->isSuccessful()->andReturns(false);
+        $this->process->expects()->isSuccessful()->andReturns(false)->twice();
         $this->process->expects()->getCommandLine();
         $this->process->expects()->getExitCode();
         $this->process->expects()->getExitCodeText();
-        $this->process->expects()->getWorkingFolder();
+        $this->process->expects()->getWorkingDirectory();
         $this->process->expects()->isOutputDisabled();
         $this->process->expects()->getOutput();
         $this->process->expects()->getErrorOutput();
@@ -128,8 +141,8 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictKeepKeepPreserve_NoConflict_ShouldStoreOutputInSourceFolder()
     {
-        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[0]);
-        $this->videoFolder->expects()->nodeExists('test-1.mp4')->andReturns(false);
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->videoFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
         $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
         $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
         $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
@@ -147,14 +160,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictKeepKeepPreserve_WhenConflict_ShouldStoreOutputInSourceFolderWithNewFilename()
     {
-        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[0]);
-        $this->videoFolder->expects()->nodeExists('test-1.mp4')->andReturns(true)->twice();
-        $this->videoFolder->expects()->nodeExists('test-1 (1).mp4')->andReturns(false);
+        $sourceFile = $this->videoFolderNodes[3];
+        $existingFile = $this->videoFolderNodes[4];
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mov')->andReturns($sourceFile);
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mp4')->andReturns($existingFile);
+        $this->videoFolder->expects()->nodeExists('test-3.mp4')->andReturns(true, false)->twice();
         $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
-        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
-        $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1 (1).mp4');
+        $this->view->expects()->toTmpFile('test-3.mov')->andReturns('/tmp/random-filename-for-test-3.mov');
+        $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-3.mp4', 'test-3.mp4');
 
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-3.mov',
             'postConversionSourceRule' => 'keep',
             'postConversionOutputRule' => 'keep',
             'postConversionOutputConflictRule' => 'preserve'
@@ -167,7 +183,7 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictKeepKeepOverwrite_NoConflict_ShouldStoreOutputInSourceFolder()
     {
-        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[0]);
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
         $this->videoFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
         $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
         $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
@@ -214,14 +230,14 @@ class ConvertMediaJobTest extends BackgroundJobTest
         $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
         $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
         $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
-        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[0]);
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
         $this->videoFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
 
         $this->setJobArguments([
             'postConversionSourceRule' => 'keep',
             'postConversionOutputRule' => 'keep',
             'postConversionOutputConflictRule' => 'move',
-            'postConversionOutputConflictRuleMoveFolder' => 'converted/conflicts'
+            'postConversionOutputConflictRuleMoveFolder' => '/admin/files/converted/conflicts'
         ]);
 
         $result = $this->job->handlePostConversion();
@@ -245,7 +261,7 @@ class ConvertMediaJobTest extends BackgroundJobTest
             'postConversionSourceRule' => 'keep',
             'postConversionOutputRule' => 'keep',
             'postConversionOutputConflictRule' => 'move',
-            'postConversionOutputConflictRuleMoveFolder' => '/converted/conflicts'
+            'postConversionOutputConflictRuleMoveFolder' => '/admin/files/converted/conflicts'
         ]);
 
         $result = $this->job->handlePostConversion();
@@ -255,7 +271,7 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictKeepMovePreserve_NoConflict_ShouldMoveOutputToOutputFolder()
     {
-        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[0]);
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
         $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
         $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
         $this->outputView = m::mock(View::class);
@@ -276,21 +292,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
     }
     public function test_HandlePostConversion_GivenSourceOutputConflictKeepMovePreserve_WhenConflict_ShouldMoveOutputToOutputFolderWithNewFileName()
     {
-        $sourceFile = $this->videoFolderNodes[3];
-        $existingFile = $this->videoFolderNodes[4];
-        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mov')->andReturns($sourceFile);
-        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mp4')->andReturns($existingFile);
-        $this->outputMoveFolder->expects()->nodeExists('test-3.mp4')->andReturns(true)->twice();
-        $this->outputMoveFolder->expects()->nodeExists('test-3 (1).mp4')->andReturns(false)->once();
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
 
         $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
         $this->outputView = m::mock(View::class);
         $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
-        $this->view->expects()->toTmpFile('test-3.mov')->andReturns('/tmp/random-filename-for-test-3.mov');
-        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-3.mp4', 'test-3 (1).mp4');
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
 
         $this->setJobArguments([
-            'path' => '/admin/files/camera-uploads/test-3.mov',
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'keep',
             'postConversionOutputRule' => 'move',
             'postConversionOutputRuleMoveFolder' => '/admin/files/converted/output',
@@ -304,7 +316,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictKeepMoveOverwrite_WhenOutputNotInFolder()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'keep',
             'postConversionOutputRule' => 'move',
             'postConversionOutputRuleMoveFolder' => '/admin/files/converted/output',
@@ -317,7 +339,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
     }
     public function test_HandlePostConversion_GivenSourceOutputConflictKeepMoveOverwrite_WhenOutputInFolder()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'keep',
             'postConversionOutputRule' => 'move',
             'postConversionOutputRuleMoveFolder' => '/admin/files/converted/output',
@@ -331,7 +363,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictKeepMoveMove_WhenOutputNotInFolderAndConflictNotInFolder_ShouldStoreInOutputFolder()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'keep',
             'postConversionOutputRule' => 'move',
             'postConversionOutputRuleMoveFolder' => '/admin/files/converted/output',
@@ -345,7 +387,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
     }
     public function test_HandlePostConversion_GivenSourceOutputConflictKeepMoveMove_WhenOutputNotInFolderAndConflictInFolder_ShouldStoreInOutputFolder()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'keep',
             'postConversionOutputRule' => 'move',
             'postConversionOutputRuleMoveFolder' => '/admin/files/converted/output',
@@ -359,7 +411,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
     }
     public function test_HandlePostConversion_GivenSourceOutputConflictKeepMoveMove_WhenOutputInFolderAndConflictNotInFolder_ShouldMoveExistingOutputToConflict()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'keep',
             'postConversionOutputRule' => 'move',
             'postConversionOutputRuleMoveFolder' => '/admin/files/converted/output',
@@ -373,7 +435,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
     }
     public function test_HandlePostConversion_GivenSourceOutputConflictKeepMoveMove_WhenOutputInFolderAndConflictInFolder_ShouldMoveExistingOutputToConflictWithNewName()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'keep',
             'postConversionOutputRule' => 'move',
             'postConversionOutputRuleMoveFolder' => '/admin/files/converted/output',
@@ -388,7 +460,16 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictDeleteKeepPreserve_WhenNoConflict_ShouldAddFile()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->videoFolder->expects()->nodeExists('test-1.mp4')->twice()->andReturns(false);
+        $this->videoFolderNodes[1]->expects()->delete();
+
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'delete',
             'postConversionOutputRule' => 'keep',
             'postConversionOutputConflictRule' => 'preserve'
@@ -401,7 +482,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictDeleteKeepPreserve_WhenConflict_ShouldAddNewFile()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mov')->andReturns($this->videoFolderNodes[3]);
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mp4')->andReturns($this->videoFolderNodes[4]);
+        $this->videoFolder->expects()->nodeExists('test-3.mp4')->andReturns(true)->twice();
+        $this->videoFolder->expects()->nodeExists('test-3 (1).mp4')->andReturns(false);
+        $this->videoFolderNodes[3]->expects()->delete();
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
+        $this->view->expects()->toTmpFile('test-3.mov')->andReturns('/tmp/random-filename-for-test-3.mov');
+        $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-3.mp4', 'test-3 (1).mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-3.mov',
             'postConversionSourceRule' => 'delete',
             'postConversionOutputRule' => 'keep',
             'postConversionOutputConflictRule' => 'preserve'
@@ -414,7 +505,15 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictDeleteKeepOverwrite_NoConflict_ShouldNotOverwrite()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mov')->andReturns($this->videoFolderNodes[3]);
+        $this->videoFolder->expects()->nodeExists('test-3.mp4')->andReturns(false)->twice();
+        $this->videoFolderNodes[3]->expects()->delete();
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
+        $this->view->expects()->toTmpFile('test-3.mov')->andReturns('/tmp/random-filename-for-test-3.mov');
+        $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-3.mp4', 'test-3.mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-3.mov',
             'postConversionSourceRule' => 'delete',
             'postConversionOutputRule' => 'keep',
             'postConversionOutputConflictRule' => 'overwrite',
@@ -427,7 +526,18 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictDeleteKeepMove_NoConflict_ShouldStoreOutputInSourceFolder()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mov')->andReturns($this->videoFolderNodes[3]);
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mp4')->andReturns($this->videoFolderNodes[4]);
+        $this->videoFolder->expects()->nodeExists('test-3.mp4')->andReturns(true)->twice();
+        $this->videoFolder->expects()->nodeExists('test-3 (1).mp4')->andReturns(false);
+        $this->videoFolderNodes[3]->expects()->delete();
+        $this->videoFolderNodes[4]->expects()->move('/admin/files/converted/conflicts/test-3.mp4');
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
+        $this->view->expects()->toTmpFile('test-3.mov')->andReturns('/tmp/random-filename-for-test-3.mov');
+        $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-3.mp4', 'test-3 (1).mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-3.mov',
             'postConversionSourceRule' => 'delete',
             'postConversionOutputRule' => 'keep',
             'postConversionOutputConflictRule' => 'move',
@@ -441,7 +551,19 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictDeleteKeepMove_WhenConflict_ShouldMoveExistingOutputToConflictAndStoreOutputInSourceFolder()
     {
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
+        $this->videoFolder->expects()->nodeExists('test-3.mp4')->andReturns(true);
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mp4')->andReturns($this->videoFolderNodes[4]);
+        $this->videoFolderNodes[3]->expects()->delete();
+        $this->videoFolderNodes[4]->expects()->move('/admin/files/converted/conflicts/test-3.mp4');
+        $this->videoFolder->expects()->nodeExists('test-3.mp4')->andReturns(false);
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mov')->andReturns($this->videoFolderNodes[3]);
+        $this->view->expects()->toTmpFile('test-3.mov')->andReturns('/tmp/random-filename-for-test-3.mov');
+        $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-3.mp4', 'test-3.mp4');
+
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-3.mov',
             'postConversionSourceRule' => 'delete',
             'postConversionOutputRule' => 'keep',
             'postConversionOutputConflictRule' => 'move',
@@ -455,7 +577,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictDeleteMovePreserve_NoConflict_ShouldStoreOutputInOutputFolder()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+        $this->videoFolderNodes[1]->expects()->delete();
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'delete',
             'postConversionOutputRule' => 'move',
             'postConversionOutputRuleMoveFolder' => '/admin/files/converted/output',
@@ -469,7 +601,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictDeleteMovePreserve_WhenConflict_ShouldStoreOutputInOutputFolderWithNewName()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+        $this->videoFolderNodes[1]->expects()->delete();
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'delete',
             'postConversionOutputRule' => 'move',
             'postConversionOutputRuleMoveFolder' => '/admin/files/converted/output',
@@ -483,7 +625,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictDeleteMoveOverwrite_NoConflict_ShouldMoveOutputToOutputFolder()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+        $this->videoFolderNodes[1]->expects()->delete();
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'delete',
             'postConversionOutputRule' => 'move',
             'postConversionOutputRuleMoveFolder' => '/admin/files/converted/output',
@@ -497,7 +649,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictDeleteMoveOverwrite_WhenConflict_ShouldOverwriteOutputInOutputFolder()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+        $this->videoFolderNodes[1]->expects()->delete();
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'delete',
             'postConversionOutputRule' => 'move',
             'postConversionOutputRuleMoveFolder' => '/admin/files/converted/output',
@@ -511,7 +673,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictDeleteMoveMove_NoConflict_ShouldStoreOutputInOutputFolder()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+        $this->videoFolderNodes[1]->expects()->delete();
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'delete',
             'postConversionOutputRule' => 'move',
             'postConversionOutputRuleMoveFolder' => '/admin/files/converted/output',
@@ -526,7 +698,22 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictDeleteMoveMove_WhenConflict_ShouldMoveExistingOutputAndStoreOutputInOutputFolder()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mov')->andReturns($this->videoFolderNodes[3]);
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mp4')->andReturns($this->videoFolderNodes[4]);
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->view->expects()->toTmpFile('test-3.mov')->andReturns('/tmp/random-filename-for-test-3.mov');
+        $this->outputMoveFolder->expects()->nodeExists('test-3.mp4')->andReturns(true)->twice();
+        $this->videoFolderNodes[4]->expects()->move('/admin/files/converted/conflicts/test-3.mp4');
+        $this->outputMoveFolder->expects()->nodeExists('test-3 (1).mp4')->andReturns(false)->once();
+
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView);
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-3.mp4', 'test-3 (1).mp4');
+
+        $this->videoFolderNodes[3]->expects()->delete();
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-3.mov',
             'postConversionSourceRule' => 'delete',
             'postConversionOutputRule' => 'move',
             'postConversionOutputRuleMoveFolder' => '/admin/files/converted/output',
@@ -539,9 +726,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
         $this->assertEquals($this->job, $result);
     }
 
-    public function test_HandlePostConversion_GivenSourceOutputConflictMoveKeepKeep()
+    public function test_HandlePostConversion_GivenSourceOutputConflictMoveKeepKeep_WhenNoConflict_ShouldMoveSourceAndStoreOutputInSourceFolder()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->videoFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+        $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+        $this->videoFolderNodes[1]->expects()->move('/admin/files/converted/source/test-1.mov');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'move',
             'postConversionSourceRuleMoveFolder' => '/admin/files/converted/source',
             'postConversionOutputRule' => 'keep',
@@ -553,9 +748,42 @@ class ConvertMediaJobTest extends BackgroundJobTest
         $this->assertEquals($this->job, $result);
     }
 
-    public function test_HandlePostConversion_GivenSourceOutputConflictMoveKeepOverwrite()
+    public function test_HandlePostConversion_GivenSourceOutputConflictMoveKeepKeep_WhenConflict_ShouldMoveSourceAndStoreOutputInSourceFolderWithNewFileName()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mov')->andReturns($this->videoFolderNodes[3]);
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mp4')->andReturns($this->videoFolderNodes[4]);
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
+        $this->view->expects()->toTmpFile('test-3.mov')->andReturns('/tmp/random-filename-for-test-3.mov');
+        $this->videoFolder->expects()->nodeExists('test-3.mp4')->andReturns(true)->twice();
+        $this->videoFolder->expects()->nodeExists('test-3 (1).mp4')->andReturns(false)->once();
+        $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-3.mp4', 'test-3 (1).mp4');
+        $this->videoFolderNodes[3]->expects()->move('/admin/files/converted/source/test-3.mov');
+
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-3.mov',
+            'postConversionSourceRule' => 'move',
+            'postConversionSourceRuleMoveFolder' => '/admin/files/converted/source',
+            'postConversionOutputRule' => 'keep',
+            'postConversionOutputConflictRule' => 'preserve',
+        ]);
+
+        $result = $this->job->handlePostConversion();
+
+        $this->assertEquals($this->job, $result);
+    }
+
+    public function test_HandlePostConversion_GivenSourceOutputConflictMoveKeepOverwrite_WhenNoConflict_ShouldNotOverwriteOutput()
+    {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->videoFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+        $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+        $this->videoFolderNodes[1]->expects()->move('/admin/files/converted/source/test-1.mov');
+
+        $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'move',
             'postConversionSourceRuleMoveFolder' => '/admin/files/converted/source',
             'postConversionOutputRule' => 'keep',
@@ -567,9 +795,65 @@ class ConvertMediaJobTest extends BackgroundJobTest
         $this->assertEquals($this->job, $result);
     }
 
-    public function test_HandlePostConversion_GivenSourceOutputConflictMoveKeepMove()
+    public function test_HandlePostConversion_GivenSourceOutputConflictMoveKeepOverwrite_WhenConflict_ShouldOverwriteOutput()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mov')->andReturns($this->videoFolderNodes[3]);
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-3.mp4')->andReturns($this->videoFolderNodes[4]);
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
+        $this->view->expects()->toTmpFile('test-3.mov')->andReturns('/tmp/random-filename-for-test-3.mov');
+        $this->videoFolder->expects()->nodeExists('test-3.mp4')->andReturns(true)->twice();
+        $this->videoFolderNodes[4]->expects()->delete();
+        $this->videoFolder->expects()->nodeExists('test-3 (1).mp4')->andReturns(false)->once();
+        $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-3.mp4', 'test-3 (1).mp4');
+        $this->videoFolderNodes[3]->expects()->move('/admin/files/converted/source/test-3.mov');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-3.mov',
+            'postConversionSourceRule' => 'move',
+            'postConversionSourceRuleMoveFolder' => '/admin/files/converted/source',
+            'postConversionOutputRule' => 'keep',
+            'postConversionOutputConflictRule' => 'overwrite',
+        ]);
+
+        $result = $this->job->handlePostConversion();
+
+        $this->assertEquals($this->job, $result);
+    }
+
+    public function test_HandlePostConversion_GivenSourceOutputConflictMoveKeepMove_WhenNoConflict_ShouldMoveSource()
+    {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->videoFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+        $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+        $this->videoFolderNodes[1]->expects()->move('/admin/files/converted/source/test-1.mov');
+
+        $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
+            'postConversionSourceRule' => 'move',
+            'postConversionSourceRuleMoveFolder' => '/admin/files/converted/source',
+            'postConversionOutputRule' => 'keep',
+            'postConversionOutputConflictRule' => 'move',
+            'postConversionOutputConflictRuleMoveFolder' => '/admin/files/converted/conflicts'
+        ]);
+
+        $result = $this->job->handlePostConversion();
+
+        $this->assertEquals($this->job, $result);
+    }
+
+    public function test_HandlePostConversion_GivenSourceOutputConflictMoveKeepMove_WhenConflict_ShouldMoveSourceAndConflict()
+    {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->twice();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->videoFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+        $this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+        $this->videoFolderNodes[1]->expects()->move('/admin/files/converted/source/test-1.mov');
+
+        $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'move',
             'postConversionSourceRuleMoveFolder' => '/admin/files/converted/source',
             'postConversionOutputRule' => 'keep',
@@ -584,7 +868,17 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictMoveMoveKeep()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+        $this->videoFolderNodes[1]->expects()->move('/admin/files/converted/source/test-1.mov');
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'move',
             'postConversionSourceRuleMoveFolder' => '/admin/files/converted/source',
             'postConversionOutputRule' => 'move',
@@ -599,7 +893,18 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictMoveMoveOverwrite()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+        $this->videoFolderNodes[1]->expects()->move('/admin/files/converted/source/test-1.mov');
+
         $this->setJobArguments([
+            'path' => '/admin/files/camera-uploads/test-1.mov',
             'postConversionSourceRule' => 'move',
             'postConversionSourceRuleMoveFolder' => '/admin/files/converted/source',
             'postConversionOutputRule' => 'move',
@@ -614,6 +919,16 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
     public function test_HandlePostConversion_GivenSourceOutputConflictMoveMoveMove()
     {
+        $this->rootFolder->expects()->get('/admin/files/camera-uploads/test-1.mov')->andReturns($this->videoFolderNodes[1]);
+        $this->outputMoveFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+
+        $this->viewFactory->expects()->create('/admin/files/camera-uploads')->andReturns($this->view)->once();
+        $this->outputView = m::mock(View::class);
+        $this->viewFactory->expects()->create('/admin/files/converted/output')->andReturns($this->outputView)->once();
+        $this->view->expects()->toTmpFile('test-1.mov')->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->outputView->expects()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4');
+        $this->videoFolderNodes[1]->expects()->move('/admin/files/converted/source/test-1.mov');
+
         $this->setJobArguments([
             'postConversionSourceRule' => 'move',
             'postConversionSourceRuleMoveFolder' => '/admin/files/converted/source',
@@ -628,6 +943,99 @@ class ConvertMediaJobTest extends BackgroundJobTest
         $this->assertEquals($this->job, $result);
     }
 
+    public function test_Run_GivenSuccess_ShouldUpdateParentBatch()
+    {
+        $arguments = $this->createJobArguments();
+
+        $this->viewFactory->allows()->create(dirname($arguments['path']))->andReturns($this->view);
+        $this->view->allows()->toTmpFile(basename($arguments['path']))->andReturns('/tmp/random-filename-for-test-1.mov');
+        $this->view->allows()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4')->once();
+
+
+        $this->configService->allows()->getAppConfigValue('threadLimit', 0)->andReturns(0);
+        $this->rootFolder->allows()->get($arguments['path'])->andReturns($this->videoFolderNodes[0]);
+
+        $this->processFactory->expects()->create("ffmpeg --threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4")->andReturns($this->process);
+        $this->process->expects()->run();
+        $this->process->expects()->isSuccessful()->andReturns(true);
+
+        $run = self::getMethod('run');
+
+        $this->videoFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
+
+        $this->configService->expects()->setUserId($arguments['user_id']);
+        $this->configService->expects()->getBatch($arguments['batch_id'])->andReturns([
+            'id' => $arguments['batch_id'],
+            'user_id' => $arguments['user_id'],
+            'status' => 'queued',
+            'sourceFolder' => '/admin/files/camera-uploads',
+            'convertMediaInSubFolders' => true,
+            'sourceExtension' => 'mov',
+            'outputExtension' => 'mp4',
+            'postConversionSourceRule' => 'keep',
+            'postConversionSourceRuleMoveFolder' => null,
+            'postConversionOutputRule' => 'keep',
+            'postConversionOutputRuleMoveFolder' => null,
+            'postConversionOutputConflictRule' => 'preserve',
+            'postConversionOutputConflictRuleMoveFolder' => null
+        ]);
+        $this->configService->expects()->updateBatch($arguments['batch_id'], [
+            'status' => 'converting',
+            'converted' => 1
+        ]);
+
+        $run->invoke($this->job, $arguments);
+    }
+
+    public function test_Run_GivenFailure_ShouldUpdateParentBatch()
+    {
+        $arguments = $this->createJobArguments();
+
+        $this->viewFactory->allows()->create(dirname($arguments['path']))->andReturns($this->view);
+        $this->view->allows()->toTmpFile(basename($arguments['path']))->andReturns('/tmp/random-filename-for-test-1.mov');
+
+        $this->configService->allows()->getAppConfigValue('threadLimit', 0)->andReturns(0);
+        $this->rootFolder->allows()->get($arguments['path'])->andReturns($this->videoFolderNodes[0]);
+
+        $this->processFactory->expects()->create("ffmpeg --threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4")->andReturns($this->process);
+        $this->process->expects()->run();
+        $this->process->expects()->isSuccessful()->andReturns(false)->twice();
+        $this->process->expects()->getCommandLine();
+        $this->process->expects()->getExitCode();
+        $this->process->expects()->getExitCodeText();
+        $this->process->expects()->getWorkingDirectory();
+        $this->process->expects()->isOutputDisabled();
+        $this->process->expects()->getOutput();
+        $this->process->expects()->getErrorOutput();
+
+        $this->configService->expects()->setUserId($arguments['user_id']);
+        $this->configService->expects()->getBatch($arguments['batch_id'])->andReturns([
+            'id' => $arguments['batch_id'],
+            'user_id' => $arguments['user_id'],
+            'status' => 'queued',
+            'sourceFolder' => '/admin/files/camera-uploads',
+            'convertMediaInSubFolders' => true,
+            'sourceExtension' => 'mov',
+            'outputExtension' => 'mp4',
+            'postConversionSourceRule' => 'keep',
+            'postConversionSourceRuleMoveFolder' => null,
+            'postConversionOutputRule' => 'keep',
+            'postConversionOutputRuleMoveFolder' => null,
+            'postConversionOutputConflictRule' => 'preserve',
+            'postConversionOutputConflictRuleMoveFolder' => null
+        ]);
+        $this->configService->expects()->updateBatch($arguments['batch_id'], [
+            'status' => 'has-failures',
+            'failed' => 1,
+            'errors' => [
+                "The command \"\" failed.\n\nExit Code: ()\n\nWorking directory: \n\nOutput:\n================\n\n\nError Output:\n================\n -- Error code 0"
+            ]
+        ]);
+
+        $run = self::getMethod('run');
+        $run->invoke($this->job, $arguments);
+    }
+
     protected function createJobArguments($overrides = [])
     {
         return array_merge([
@@ -636,11 +1044,11 @@ class ConvertMediaJobTest extends BackgroundJobTest
             'path' => '/admin/files/camera-uploads/test-1.mov',
             'outputExtension' => 'mp4',
             'postConversionSourceRule' => 'keep',
-            'postConversionSourceRuleMoveFolder' => '/admin/files/videos/sources',
+            'postConversionSourceRuleMoveFolder' => '/admin/files/converted/source',
             'postConversionOutputRule' => 'keep',
-            'postConversionOutputRuleMoveFolder' => '/admin/files/videos/converted',
+            'postConversionOutputRuleMoveFolder' => '/admin/files/converted/output',
             'postConversionOutputConflictRule' => 'preserve',
-            'postConversionOutputConflictRuleMoveFolder' => '/admin/files/videos/conflicts',
+            'postConversionOutputConflictRuleMoveFolder' => '/admin/files/converted/conflicts',
         ], $overrides);
     }
 

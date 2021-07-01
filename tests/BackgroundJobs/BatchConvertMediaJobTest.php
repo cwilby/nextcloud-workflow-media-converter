@@ -2,19 +2,22 @@
 
 namespace OCA\WorkflowMediaConverter\Tests\BackgroundJobs;
 
+use Mockery\MockInterface;
 use OCA\WorkflowMediaConverter\BackgroundJobs\BatchConvertMediaJob;
 use OCA\WorkflowMediaConverter\BackgroundJobs\ConvertMediaJob;
+use stdClass;
 
 class BatchConvertMediaJobTest extends BackgroundJobTest
 {
+    /** @var BatchConvertMediaJob */
     protected $job;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->configService->expects()->setBatchStatus(\Mockery::any(), 'seeking');
-        $this->configService->expects()->setBatchStatus(\Mockery::any(), 'converting');
+        $this->configService->allows()->setBatchStatus(\Mockery::any(), 'seeking');
+        $this->configService->allows()->setBatchStatus(\Mockery::any(), 'converting');
 
         $this->job = new BatchConvertMediaJob(
             $this->time,
@@ -27,19 +30,15 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
 
     public function test_ParseArguments()
     {
-        $arguments = $this->createJobArguments([
-            'postConversionSourceRuleMoveFolder' => 'test',
-            'postConversionOutputRuleMoveFolder' => 'test',
-            'postConversionOutputConflictRuleMoveFolder' => 'test',
-        ]);
+        $arguments = $this->createJobArguments();
 
         $this->configService->expects()->setUserId($arguments['user_id']);
-        $this->rootFolder->expects()->get($arguments['sourceFolder']);
 
         $result = $this->job->parseArguments($arguments);
 
         $this->assertEquals($arguments['user_id'], $this->job->userId);
         $this->assertEquals($this->job, $result);
+        $this->assertEquals($this->videoFolder, $result->sourceFolder);
     }
 
     public function test_FindUnconvertedMediaInFolder_WhenSubfoldersOptionYes_ShouldFindFilesInSubFolders()
@@ -82,13 +81,14 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
 
     public function test_QueueUnconvertedMediaForConversion_QueuesConvertJobs()
     {
+        $folder = $this->createTestFolder('/admin/files/camera-uploads');
+
         $arguments = $this->setJobArguments();
 
-        $folder = $this->createTestFolder('/admin/files spot /source-folder');
 
         $unconvertedMedia = [
-            ['path' => '/admin/files spot /source-folder/test-1.mov', 'node' => $this->createFile($folder, 'test-1.mov', '/admin/files spot /source-folder')],
-            ['path' => '/admin/files spot /source-folder/test-2.mov', 'node' => $this->createFile($folder, 'test-2.mov', '/admin/files spot /source-folder')],
+            ['path' => '/admin/files/camera-uploads/test-1.mov', 'node' => $this->createFile($folder, 'test-1.mov', '/admin/files/camera-uploads')],
+            ['path' => '/admin/files/camera-uploads/test-2.mov', 'node' => $this->createFile($folder, 'test-2.mov', '/admin/files/camera-uploads')],
         ];
 
         $this->job->unconvertedMedia = array_map(function ($x) {
@@ -104,11 +104,11 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
                 'path'                                       => $media['path'],
                 'outputExtension'                            => $arguments['outputExtension'],
                 'postConversionSourceRule'                   => $arguments['postConversionSourceRule'],
-                'postConversionSourceRuleMoveFolder'         => $arguments['postConversionSourceRuleMoveFolder'],
+                'postConversionSourceRuleMoveFolder'         => null,
                 'postConversionOutputRule'                   => $arguments['postConversionOutputRule'],
-                'postConversionOutputRuleMoveFolder'         => $arguments['postConversionOutputRuleMoveFolder'],
+                'postConversionOutputRuleMoveFolder'         => null,
                 'postConversionOutputConflictRule'           => $arguments['postConversionOutputConflictRule'],
-                'postConversionOutputConflictRuleMoveFolder' => $arguments['postConversionOutputConflictRuleMoveFolder'],
+                'postConversionOutputConflictRuleMoveFolder' => null
             ]);
         }
 
@@ -123,8 +123,6 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
 
         $this->configService->allows()->setUserId($arguments['user_id']);
 
-        $this->rootFolder->expects()->get($arguments['sourceFolder'])->andReturns($this->videoFolder);
-
         $this->videoFolder->allows()->nodeExists('test-1.mp4')->andReturns(false);
         $this->videoFolder->allows()->nodeExists('test-2.mp4')->andReturns(false);
         $this->videoFolder->allows()->nodeExists('test-3.mp4')->andReturns(true);
@@ -136,7 +134,29 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
             'unconverted' => 4
         ]);
 
-        $this->jobList->expects()->add(ConvertMediaJob::class, \Mockery::any())->twice();
+        $this->jobList->expects()->add(ConvertMediaJob::class, \Mockery::any())->times(4);
+
+        $this->job->run($arguments);
+
+        $this->assertTrue(true);
+    }
+
+    public function test_Run_ShouldHandleBatchFailures()
+    {
+        $arguments = $this->createJobArguments();
+
+        $this->configService->allows()->setUserId($arguments['user_id']);
+
+        $this->videoFolder->allows()->nodeExists('test-1.mp4')->andThrows(new \Exception());
+        $this->videoFolder->allows()->nodeExists('test-2.mp4')->andReturns(false);
+        $this->videoFolder->allows()->nodeExists('test-3.mp4')->andReturns(true);
+        $this->videoSubfolder->allows()->nodeExists('test-1.mp4')->andReturns(false);
+        $this->videoSubfolder->allows()->nodeExists('test-2.mp4')->andReturns(false);
+        $this->videoSubfolder->allows()->nodeExists('test-3.mp4')->andReturns(true);
+        
+        $this->configService->expects()->setBatchStatus($arguments['id'], 'failed');
+
+        $this->jobList->expects()->add(ConvertMediaJob::class, \Mockery::any())->times(0);
 
         $this->job->run($arguments);
 
@@ -149,7 +169,7 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
             'user_id' => 'admin',
             'id' => 'rjmoalgbvoekv4yy11ijegpjpnk90gmv',
             'status' => 'queued',
-            'sourceFolder' => '/admin/files/source-folder',
+            'sourceFolder' => '/camera-uploads',
             'convertMediaInSubFolders' => true,
             'sourceExtension' => 'mov',
             'outputExtension' => 'mp4',
@@ -165,8 +185,6 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
     protected function setJobArguments($overrides = [])
     {
         $arguments = parent::setJobArguments($overrides);
-
-        $this->rootFolder->expects()->get($arguments['sourceFolder'])->once();
 
         return $arguments;
     }

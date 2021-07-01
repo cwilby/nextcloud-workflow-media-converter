@@ -1,46 +1,54 @@
 <template>
 	<div class="wmc-rules">
-		<p>{{ t('workflow_media_converter', 'Convert to format') }}</p>
-		<select v-model="outputExtension">
-			<option v-for="format in formats" :key="format.extension" :value="format.extension">
-				(.{{ format.extension }}) {{ format.label }}
-			</option>
-		</select>
-		<p>{{ t('workflow_media_converter', 'Then after conversion') }}</p>
-		<select v-model="postConversionSourceRule">
-			<option v-for="option in postConversionSourceRules" :key="option.id" :value="option.id">
-				{{ option.label }}
-			</option>
-		</select>
-		<div v-if="postConversionSourceRule === 'move'">
-			<button @click="openFilePicker('postConversionSourceRuleMoveFolder')">
-				{{ t('workflow_media_converter', 'Choose Folder') }}
-			</button>
-			<span>{{ postConversionSourceRuleMoveFolder }}</span>
+		<div class="mb">
+			<p>{{ t('workflow_media_converter', 'Convert to format') }}</p>
+			<select v-model="outputExtension">
+				<option v-for="format in formats" :key="format.extension" :value="format.extension">
+					(.{{ format.extension }}) {{ format.label }}
+				</option>
+			</select>
 		</div>
-		<p>{{ t('workflow_media_converter', 'And') }}</p>
-		<select v-model="postConversionOutputRule">
-			<option v-for="option in postConversionOutputRules" :key="option.id" :value="option.id">
-				{{ option.label }}
-			</option>
-		</select>
-		<div v-if="postConversionOutputRule === 'move'">
-			<button @click="openFilePicker('postConversionOutputRuleMoveFolder')">
-				{{ t('workflow_media_converter', 'Choose Folder') }}
-			</button>
-			<span>{{ postConversionOutputRuleMoveFolder }}</span>
+		<div class="mb">
+			<p>{{ t('workflow_media_converter', 'After the source file has been converted:') }}</p>
+			<select v-model="postConversionSourceRule">
+				<option v-for="option in postConversionSourceRules" :key="option.id" :value="option.id">
+					{{ option.label }}
+				</option>
+			</select>
+			<div v-if="postConversionSourceRule === 'move'">
+				<button @click="openFilePicker('postConversionSourceRuleMoveFolder')">
+					{{ t('workflow_media_converter', 'Choose Folder') }}
+				</button>
+				<span>{{ postConversionSourceRuleMoveFolder }}</span>
+			</div>
 		</div>
-		<p>If the output file exists,</p>
-		<select v-model="postConversionOutputConflictRule">
-			<option v-for="option in postConversionOutputConflictRules" :key="option.id" :value="option.id">
-				{{ option.label }}
-			</option>
-		</select>
-		<div v-if="postConversionOutputConflictRule === 'move'">
-			<button @click="openFilePicker('postConversionOutputConflictRuleMoveFolder')">
-				{{ t('workflow_media_converter', 'Choose Folder') }}
-			</button>
-			<span>{{ postConversionOutputConflictRuleMoveFolder }}</span>
+		<div class="mb">
+			<p>{{ t('workflow_media_converter', 'After the new output is created:') }}</p>
+			<select v-model="postConversionOutputRule">
+				<option v-for="option in postConversionOutputRules" :key="option.id" :value="option.id">
+					{{ option.label }}
+				</option>
+			</select>
+			<div v-if="postConversionOutputRule === 'move'" class="mb-2">
+				<button @click="openFilePicker('postConversionOutputRuleMoveFolder')">
+					{{ t('workflow_media_converter', 'Choose Folder') }}
+				</button>
+				<span>{{ postConversionOutputRuleMoveFolder }}</span>
+			</div>
+		</div>
+		<div class="mb">
+			<p>{{ t('workflow_media_converter', 'If the output file exists:') }}</p>
+			<select v-model="postConversionOutputConflictRule">
+				<option v-for="option in postConversionOutputConflictRules" :key="option.id" :value="option.id">
+					{{ option.label }}
+				</option>
+			</select>
+			<div v-if="postConversionOutputConflictRule === 'move'" class="mb-2">
+				<button @click="openFilePicker('postConversionOutputConflictRuleMoveFolder')">
+					{{ t('workflow_media_converter', 'Choose Folder') }}
+				</button>
+				<span>{{ postConversionOutputConflictRuleMoveFolder }}</span>
+			</div>
 		</div>
 	</div>
 </template>
@@ -176,5 +184,13 @@ export default {
 		width: 100%;
 		margin: auto;
 		text-align: center;
+	}
+
+	select {
+		width: 100%;
+	}
+
+	.mb {
+		margin-bottom: 1.5em;
 	}
 </style>

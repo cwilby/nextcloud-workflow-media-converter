@@ -42,8 +42,9 @@ class ConvertMediaJob extends QueuedJob
                 ->handlePostConversion()
                 ->notifyBatchSuccess();
         } catch (\Throwable $e) {
+            $eType = get_class($e);
             $this->notifyBatchFail($e);
-            $this->logger->error("({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
+            $this->logger->error("[{$eType}] :: ({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
         } finally {
             $this->logger->info(ConvertMedia::class . ' finished');
         }
@@ -54,7 +55,7 @@ class ConvertMediaJob extends QueuedJob
         $this->configService->setUserId((string)$arguments['user_id']);
         $this->batchId = (string)$arguments['batch_id'];
         $this->path = (string)$arguments['path'];
-        $this->userPath = implode('/', array_slice(explode('/', $this->path, 4), 0, 3));
+
         $this->postConversionSourceRule = (string)$arguments['postConversionSourceRule'];
         $this->postConversionSourceRuleMoveFolder = (string)$arguments['postConversionSourceRuleMoveFolder'];
         $this->postConversionOutputRule = (string)$arguments['postConversionOutputRule'];
@@ -116,7 +117,7 @@ class ConvertMediaJob extends QueuedJob
 
             switch ($this->postConversionOutputConflictRule) {
                 case 'move':
-                    $existingFile->move($this->toUserFolder($this->postConversionOutputConflictRuleMoveFolder) . '/' . $this->outputFileName);
+                    $existingFile->move($this->removeDoubleSlashes($this->postConversionOutputConflictRuleMoveFolder) . '/' . $this->outputFileName);
                     break;
                 case 'overwrite':
                     $existingFile->delete();
@@ -134,7 +135,7 @@ class ConvertMediaJob extends QueuedJob
                 $this->sourceFile->delete();
                 break;
             case 'move':
-                $this->sourceFile->move($this->toUserFolder($this->postConversionSourceRuleMoveFolder) . '/' . $this->sourceFilename);
+                $this->sourceFile->move($this->removeDoubleSlashes($this->postConversionSourceRuleMoveFolder) . '/' . $this->sourceFilename);
                 break;
             default:
                 break;
@@ -181,8 +182,8 @@ class ConvertMediaJob extends QueuedJob
         return $this;
     }
 
-    protected function toUserFolder($path)
+    protected function removeDoubleSlashes($path)
     {
-        return preg_replace('#/+#', '/', $this->userPath . '/' . $path);
+        return preg_replace('#/+#', '/', $path);
     }
 }
