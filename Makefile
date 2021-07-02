@@ -142,7 +142,7 @@ appstore:
 			--path=$(appstore_sign_dir)/$(app_name); \
 		echo "Signing app files ... done"; \
 	fi
-	tar cvzf $(appstore_package_name).tar.gz ../$(app_name) \
+	tar cvzf $(appstore_package_name).tar.gz \
 		--exclude="../$(app_name)/build" \
 		--exclude="../$(app_name)/tests" \
 		--exclude="../$(app_name)/Makefile" \
@@ -163,7 +163,8 @@ appstore:
 		--exclude="../$(app_name)/protractor\.*" \
 		--exclude="../$(app_name)/.*" \
 		--exclude="../$(app_name)/js/.*" \
-		--exclude-vcs
+		--exclude-vcs \
+		../$(app_name)
 
 .PHONY: test
 test: composer
