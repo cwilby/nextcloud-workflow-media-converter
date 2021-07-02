@@ -19,12 +19,12 @@
     <website>https://github.com/cwilby/nextcloud-workflow-media-converter</website>
     <bugs>https://github.com/cwilby/nextcloud-workflow-media-converter/issues</bugs>
     <repository type="git">https://github.com/cwilby/nextcloud-workflow-media-converter.git</repository>
-    
-    <screenshot small-thumbnail="https://raw.githubusercontent.com/nextcloud/workflow_pdf_converter/master/screenshots/thumbnail.png">https://raw.githubusercontent.com/nextcloud/workflow_pdf_converter/master/screenshots/thumbnail.png</screenshot>
-    <screenshot>https://raw.githubusercontent.com/nextcloud/workflow_pdf_converter/master/screenshots/flow-settings-ui.png</screenshot>
-    <screenshot>https://raw.githubusercontent.com/nextcloud/workflow_pdf_converter/master/screenshots/conversion-batch-ui.png</screenshot>
-    <screenshot>https://raw.githubusercontent.com/nextcloud/workflow_pdf_converter/master/screenshots/admin-settings-ui.png</screenshot>
-    
+
+    <screenshot small-thumbnail="https://raw.githubusercontent.com/cwilby/workflow_media_converter/master/screenshots/thumbnail.png">https://raw.githubusercontent.com/cwilby/workflow_media_converter/master/screenshots/thumbnail.png</screenshot>
+    <screenshot>https://raw.githubusercontent.com/cwilby/workflow_media_converter/master/screenshots/flow-settings-ui.png</screenshot>
+    <screenshot>https://raw.githubusercontent.com/cwilby/workflow_media_converter/master/screenshots/conversion-batch-ui.png</screenshot>
+    <screenshot>https://raw.githubusercontent.com/cwilby/workflow_media_converter/master/screenshots/admin-settings-ui.png</screenshot>
+
     <dependencies>
         <nextcloud min-version="21" max-version="22"/>
     </dependencies>
