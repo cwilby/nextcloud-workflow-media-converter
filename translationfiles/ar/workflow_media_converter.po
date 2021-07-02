@@ -1,0 +1,311 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Nextcloud package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Nextcloud 3.14159\n"
+"Report-Msgid-Bugs-To: translations\\@example.com\n"
+"POT-Creation-Date: 2021-07-02 03:40-0700\n"
+"PO-Revision-Date: 2021-07-02 03:54-0700\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"Language: ar\n"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Controller/ConversionBatchesController.php:100
+msgid ""
+"A similar conversion batch has already been created.  Delete that batch and "
+"try again"
+msgstr "تم إنشاء دفعة تحويل مماثلة بالفعل.  حذف تلك الدفعة والمحاولة مرة أخرى"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Operation/ConvertMediaOperation.php:41
+msgid "Convert media"
+msgstr "تحويل الوسائط"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Operation/ConvertMediaOperation.php:51
+msgid "Convert video/audio files using FFmpeg."
+msgstr "تحويل ملفات الفيديو / الصوت باستخدام FFmpeg."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Settings/AdminSection.php:28
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Settings/PersonalSection.php:28
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:28
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:33
+msgid "Media conversion"
+msgstr "تحويل الوسائط التلقائي"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialAppInfoFakeDummyForL10nScript.php:2
+msgid "Automated Media Conversion"
+msgstr "تحويل الوسائط التلقائي"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialAppInfoFakeDummyForL10nScript.php:3
+msgid "Rule based conversion of Video/Audio files via FFmpeg"
+msgstr "تحويل قاعدة على أساس ملفات الفيديو / الصوت عبر FFmpeg"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialAppInfoFakeDummyForL10nScript.php:4
+msgid ""
+"An app to trigger automatic conversion of media using FFmpeg.  Based on user "
+"defined rules, media conversion jobs will be dispatched in the background.  "
+"A common use case is for converting videos uploaded from iPhones in Apple "
+"Quicktime format to MP4 so that those videos can be played in non-Apple "
+"browsers."
+msgstr ""
+"تطبيق لتشغيل التحويل التلقائي للوسائط باستخدام FFmpeg.  استنادا إلى قواعد "
+"المعرفة من قبل المستخدم، سيتم إرسال مهام تحويل الوسائط في الخلفية.  حالة "
+"الاستخدام الشائعة هي لتحويل مقاطع الفيديو التي تم تحميلها من أجهزة iPhone "
+"بتنسيق Apple Quicktime إلى MP4 بحيث يمكن تشغيل مقاطع الفيديو هذه في متصفحات "
+"غير Apple."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:1
+msgid "Add Conversion Batch"
+msgstr "إضافة دفعة التحويل"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:2
+msgid "Add batches to convert existing media outside of your flow."
+msgstr "إضافة دفعات لتحويل الوسائط الموجودة خارج التدفق."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:3
+msgid "Convert to format"
+msgstr "التحويل إلى تنسيق"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:4
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:14
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:16
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:19
+msgid "Choose Folder"
+msgstr "اختيار مجلد"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:5
+msgid "Convert media in sub-folders"
+msgstr "تحويل الوسائط في المجلدات الفرعية"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:6
+msgid "Find source files with this extension/format"
+msgstr "البحث عن الملفات المصدر باستخدام هذا الملحق/التنسيق"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:7
+msgid "Store converted output in this extension/format"
+msgstr "تخزين الإخراج المحول في هذا الملحق/التنسيق"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:8
+msgid "Save"
+msgstr "حفظ"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:9
+msgid "Convert all files in this folder"
+msgstr "تحويل كافة الملفات في هذا المجلد"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:10
+msgid "Converted"
+msgstr "تم التحويل"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:11
+msgid "Total"
+msgstr "المجموع"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:12
+msgid "Error code"
+msgstr "خطا بالكود"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:13
+msgid "After the source file has been converted:"
+msgstr "بعد تحويل الملف المصدر:"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:15
+msgid "After the output is ready:"
+msgstr "بعد الإخراج جاهز:"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:17
+msgid "If the output file exists:"
+msgstr "إذا كان ملف الإخراج موجودا:"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:18
+msgid ""
+"Note: a new file will be added in this folder with a number added to its "
+"name if there is already a conflict file."
+msgstr ""
+"ملاحظة: سيتم إضافة ملف جديد في هذا المجلد مع إضافة رقم إلى اسمه إذا كان هناك "
+"بالفعل ملف تعارض."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:20
+msgid "Keep source file"
+msgstr "الاحتفاظ بملف المصدر"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:21
+msgid "Delete source file"
+msgstr "حذف الملف المصدر"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:22
+msgid "Move source file to specific folder"
+msgstr "نقل الملف المصدر إلى مجلد معين"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:23
+msgid "Store output in source folder"
+msgstr "إخراج مخزن في المجلد المصدر"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:24
+msgid "Move output to specific folder"
+msgstr "نقل الإخراج إلى مجلد معين"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:25
+msgid "Add new file with a number added to its name"
+msgstr "إضافة ملف جديد مع إضافة رقم إلى اسمه"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:26
+msgid "Overwrite existing file"
+msgstr "الكتابة فوق الملف الموجود"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:27
+msgid "Move existing file to specific folder"
+msgstr "نقل الملف الموجود إلى مجلد معين"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:29
+msgid ""
+"You may set the number of threads used by FFmpeg to manage the resources "
+"used by FFmpeg."
+msgstr ""
+"يمكنك تعيين عدد مؤشرات الترابط المستخدمة من قبل FFmpeg لإدارة الموارد "
+"المستخدمة من قبل FFmpeg."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:30
+msgid ""
+"This value can be set to 0 to let FFmpeg choose how many threads it should "
+"use depending on the codec."
+msgstr ""
+"يمكن تعيين هذه القيمة إلى 0 للسماح FFmpeg اختيار عدد مؤشرات الترابط التي يجب "
+"استخدامها اعتمادا على برنامج الترميز."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:31
+msgid ""
+"Changes made here will apply to any media that is not being converted at "
+"this moment in time."
+msgstr ""
+"سيتم تطبيق التغييرات التي تم إجراؤها هنا على أي وسائط لم يتم تحويلها في هذه "
+"اللحظة من الزمن."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:32
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:47
+msgid "Failed to save config, please try again shortly"
+msgstr "فشل حفظ التكوين، الرجاء المحاولة مرة أخرى بعد قليل"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:34
+msgid ""
+"You may create conversion batches to convert existing media based on a set "
+"of rules."
+msgstr ""
+"يمكنك إنشاء مجموعات التحويل لتحويل الوسائط الموجودة استنادا إلى مجموعة من "
+"القواعد."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:35
+msgid "Please make sure the form is valid before saving"
+msgstr "الرجاء التأكد من أن النموذج صالح قبل الحفظ"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:36
+msgid "Invalid data"
+msgstr "بيانات غير صالحة"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:37
+msgid ""
+"This will batch convert any unconverted media in the specified folder. Are "
+"you sure you want to proceed?"
+msgstr ""
+"سيؤدي هذا إلى تحويل أي وسائط غير محولة في المجلد المحدد. هل أنت متأكد من أنك "
+"تريد المضي قدما؟"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:38
+msgid "Start conversion batch"
+msgstr "بدء دفعة التحويل"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:39
+msgid "Yes"
+msgstr "نعم"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:40
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:46
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:41
+msgid "Error saving"
+msgstr "خطأ في الحفظ"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:42
+msgid ""
+"All queued conversions for this batch will be cancelled, are you sure you "
+"want to proceed?"
+msgstr ""
+"سيتم إلغاء جميع التحويلات في قائمة الانتظار لهذه الدفعة، هل أنت متأكد من أنك "
+"تريد المتابعة؟"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:43
+msgid "Are you sure you want to stop making this batch?"
+msgstr "هل أنت متأكد من أنك تريد التوقف عن صنع هذه الدفعة؟"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:44
+msgid "Delete conversion batch"
+msgstr "حذف دفعة التحويل"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:45
+msgid "Delete"
+msgstr "حذف"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/ActionNotSupportedException.php:44
+#, php-format
+msgid "Action \"%s\" not supported or implemented."
+msgstr "الإجراء \"%s\" غير معتمد أو منفذ."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/AuthenticationFailedException.php:44
+msgid "Authentication failed, wrong token or provider ID given"
+msgstr "فشل المصادقة أو إعطاء رمز مميز خاطئ أو معرف موفر"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/BadRequestException.php:49
+#, php-format
+msgid ""
+"Parameters missing in order to complete the request. Missing Parameters: \"%s"
+"\""
+msgstr "المعلمات مفقودة لإكمال الطلب. المعلمات المفقودة: \"%s\""
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/ProviderAlreadyExistsException.php:48
+#, php-format
+msgid "ID \"%1$s\" already used by cloud federation provider \"%2$s\""
+msgstr "معرف \"%1$s\" المستخدمة بالفعل من قبل موفر اتحاد سحابة \"%2$s\""
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/ProviderDoesNotExistsException.php:45
+#, php-format
+msgid "Cloud Federation Provider with ID: \"%s\" does not exist."
+msgstr "موفر اتحاد مجموعة النظراء مع معرف: \"%s\" غير موجود."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/LockNotAcquiredException.php:46
+#, php-format
+msgid "Could not obtain lock type %d on \"%s\"."
+msgstr "تعذر الحصول على نوع التأمين %d على \"%s\"."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageAuthException.php:41
+#, php-format
+msgid "Storage unauthorized. %s"
+msgstr "التخزين غير مصرح به. %s"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageBadConfigException.php:41
+#, php-format
+msgid "Storage incomplete configuration. %s"
+msgstr "تكوين التخزين غير كامل. %s"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageConnectionException.php:41
+#, php-format
+msgid "Storage connection error. %s"
+msgstr "خطأ اتصال التخزين. %s"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageNotAvailableException.php:60
+msgid "Storage is temporarily not available"
+msgstr "التخزين غير متوفر مؤقتا"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageTimeoutException.php:41
+#, php-format
+msgid "Storage connection timeout. %s"
+msgstr "مهلة اتصال التخزين. %s"

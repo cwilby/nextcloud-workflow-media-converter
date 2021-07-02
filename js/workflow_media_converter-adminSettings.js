@@ -20364,19 +20364,36 @@ var render = function() {
     _vm._v(" "),
     _c("p", [
       _vm._v(
-        "To manage the resources used by FFmpeg, you may set the number of threads provided to FFmpeg below."
+        _vm._s(
+          _vm.t(
+            "workflow_media_converter",
+            "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg."
+          )
+        )
       )
     ]),
     _vm._v(" "),
     _c("p", [
-      _vm._v("There are "),
-      _c("strong", [_vm._v(_vm._s(_vm.maxThreads))]),
       _vm._v(
-        " available CPU cores to NextCloud.  It is recommended to not exceed this limit."
+        _vm._s(
+          _vm.t(
+            "workflow_media_converter",
+            "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec."
+          )
+        )
       )
     ]),
     _vm._v(" "),
-    _vm._m(0),
+    _c("p", [
+      _vm._v(
+        _vm._s(
+          _vm.t(
+            "workflow_media_converter",
+            "Changes made here will apply to any media that is not being converted at this moment in time."
+          )
+        )
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "wmc-threads" }, [
       _c("input", {
@@ -20430,18 +20447,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _vm._v("This value can be set to "),
-      _c("strong", [_vm._v("0")]),
-      _vm._v(" to let FFmpeg decide how many threads it should use.")
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -1,6 +1,6 @@
 <template>
 	<div :class="`wmc-status-badge ${shouldPulse ? 'pulse' : ''}`" :style="{ backgroundColor: colorMap[status] }">
-		{{ status }}
+		{{ t('workflow_media_converter', status) }}
 	</div>
 </template>
 

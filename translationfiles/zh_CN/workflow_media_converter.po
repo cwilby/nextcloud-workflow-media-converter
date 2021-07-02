@@ -1,0 +1,295 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Nextcloud package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Nextcloud 3.14159\n"
+"Report-Msgid-Bugs-To: translations\\@example.com\n"
+"POT-Creation-Date: 2021-07-02 03:40-0700\n"
+"PO-Revision-Date: 2021-07-02 03:49-0700\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Controller/ConversionBatchesController.php:100
+msgid ""
+"A similar conversion batch has already been created.  Delete that batch and "
+"try again"
+msgstr "已创建类似的转换批次。 删除该批次并重试"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Operation/ConvertMediaOperation.php:41
+msgid "Convert media"
+msgstr "转换介质"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Operation/ConvertMediaOperation.php:51
+msgid "Convert video/audio files using FFmpeg."
+msgstr "使用 FFmpeg 转换视频/音频文件。"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Settings/AdminSection.php:28
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Settings/PersonalSection.php:28
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:28
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:33
+msgid "Media conversion"
+msgstr "媒体转换"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialAppInfoFakeDummyForL10nScript.php:2
+msgid "Automated Media Conversion"
+msgstr "自动媒体转换"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialAppInfoFakeDummyForL10nScript.php:3
+msgid "Rule based conversion of Video/Audio files via FFmpeg"
+msgstr "通过 FFmpeg 对视频/音频文件进行基于规则的转换"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialAppInfoFakeDummyForL10nScript.php:4
+msgid ""
+"An app to trigger automatic conversion of media using FFmpeg.  Based on user "
+"defined rules, media conversion jobs will be dispatched in the background.  "
+"A common use case is for converting videos uploaded from iPhones in Apple "
+"Quicktime format to MP4 so that those videos can be played in non-Apple "
+"browsers."
+msgstr ""
+"使用 FFmpeg 触发媒体自动转换的应用程序。 根据用户定义的规则，媒体转换工作将在"
+"后台发送。 一个常见的用例是将从苹果快速时间格式的 iPhone 上传的视频转换为 "
+"MP4，以便这些视频可以在非苹果浏览器中播放。"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:1
+msgid "Add Conversion Batch"
+msgstr "添加转换批次"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:2
+msgid "Add batches to convert existing media outside of your flow."
+msgstr "添加批次以在流量之外转换现有媒体。"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:3
+msgid "Convert to format"
+msgstr "转换为格式"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:4
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:14
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:16
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:19
+msgid "Choose Folder"
+msgstr "选择文件夹"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:5
+msgid "Convert media in sub-folders"
+msgstr "在子文件夹中转换介质"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:6
+msgid "Find source files with this extension/format"
+msgstr "查找具有此扩展/格式的源文件"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:7
+msgid "Store converted output in this extension/format"
+msgstr "在此扩展/格式中存储转换的输出"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:8
+msgid "Save"
+msgstr "保存"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:9
+msgid "Convert all files in this folder"
+msgstr "转换此文件夹中的所有文件"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:10
+msgid "Converted"
+msgstr "转化"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:11
+msgid "Total"
+msgstr "总计"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:12
+msgid "Error code"
+msgstr "错误代码"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:13
+msgid "After the source file has been converted:"
+msgstr "转换源文件后："
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:15
+msgid "After the output is ready:"
+msgstr "输出准备好后："
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:17
+msgid "If the output file exists:"
+msgstr "如果输出文件存在："
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:18
+msgid ""
+"Note: a new file will be added in this folder with a number added to its "
+"name if there is already a conflict file."
+msgstr ""
+"注意：如果已存在冲突文件，将在此文件夹中添加新文件，其名称中将添加一个数字。"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:20
+msgid "Keep source file"
+msgstr "保留源文件"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:21
+msgid "Delete source file"
+msgstr "删除源文件"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:22
+msgid "Move source file to specific folder"
+msgstr "将源文件移动到特定文件夹"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:23
+msgid "Store output in source folder"
+msgstr "将输出存储在源文件夹中"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:24
+msgid "Move output to specific folder"
+msgstr "将输出移动到特定文件夹"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:25
+msgid "Add new file with a number added to its name"
+msgstr "添加新文件，并添加一个号码到其名称"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:26
+msgid "Overwrite existing file"
+msgstr "覆盖现有文件"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:27
+msgid "Move existing file to specific folder"
+msgstr "将现有文件移动到特定文件夹"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:29
+msgid ""
+"You may set the number of threads used by FFmpeg to manage the resources "
+"used by FFmpeg."
+msgstr "您可以设置 FFmpeg 用于管理 FFmpeg 使用的资源的线程数。"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:30
+msgid ""
+"This value can be set to 0 to let FFmpeg choose how many threads it should "
+"use depending on the codec."
+msgstr "此值可设置为 0，以便 FFmpeg 根据编译器选择应该使用多少线程。"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:31
+msgid ""
+"Changes made here will apply to any media that is not being converted at "
+"this moment in time."
+msgstr "此处所做的更改将适用于此时未转换的任何媒体。"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:32
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:47
+msgid "Failed to save config, please try again shortly"
+msgstr "未能保存配置，请尽快重试"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:34
+msgid ""
+"You may create conversion batches to convert existing media based on a set "
+"of rules."
+msgstr "您可以创建转换批次，根据一组规则转换现有媒体。"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:35
+msgid "Please make sure the form is valid before saving"
+msgstr "请在保存前确保表单有效"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:36
+msgid "Invalid data"
+msgstr "无效数据"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:37
+msgid ""
+"This will batch convert any unconverted media in the specified folder. Are "
+"you sure you want to proceed?"
+msgstr "这将批量转换指定文件夹中的任何未转换的介质。你确定要继续吗？"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:38
+msgid "Start conversion batch"
+msgstr "开始转换批次"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:39
+msgid "Yes"
+msgstr "是"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:40
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:46
+msgid "Cancel"
+msgstr "取消"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:41
+msgid "Error saving"
+msgstr "省错"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:42
+msgid ""
+"All queued conversions for this batch will be cancelled, are you sure you "
+"want to proceed?"
+msgstr "此批次的所有排队转换都将被取消，您确定要继续吗？"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:43
+msgid "Are you sure you want to stop making this batch?"
+msgstr "你确定要停止生产这批吗？"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:44
+msgid "Delete conversion batch"
+msgstr "删除转换批次"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:45
+msgid "Delete"
+msgstr "删除"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/ActionNotSupportedException.php:44
+#, php-format
+msgid "Action \"%s\" not supported or implemented."
+msgstr "不支持或执行\"%s\"行动。"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/AuthenticationFailedException.php:44
+msgid "Authentication failed, wrong token or provider ID given"
+msgstr "身份验证失败、令牌错误或提供者 ID"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/BadRequestException.php:49
+#, php-format
+msgid ""
+"Parameters missing in order to complete the request. Missing Parameters: \"%s"
+"\""
+msgstr "为了完成请求而缺少参数。缺少参数：\"%s\""
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/ProviderAlreadyExistsException.php:48
+#, php-format
+msgid "ID \"%1$s\" already used by cloud federation provider \"%2$s\""
+msgstr "ID\"%1$s\"已由云联盟提供商\"%2$s\"使用"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/ProviderDoesNotExistsException.php:45
+#, php-format
+msgid "Cloud Federation Provider with ID: \"%s\" does not exist."
+msgstr "带有 ID 的云联盟提供商：\"%s\"不存在。"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/LockNotAcquiredException.php:46
+#, php-format
+msgid "Could not obtain lock type %d on \"%s\"."
+msgstr "无法在%s上获得锁型%d。"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageAuthException.php:41
+#, php-format
+msgid "Storage unauthorized. %s"
+msgstr "未经授权的存储。%s"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageBadConfigException.php:41
+#, php-format
+msgid "Storage incomplete configuration. %s"
+msgstr "存储配置不完整。%s"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageConnectionException.php:41
+#, php-format
+msgid "Storage connection error. %s"
+msgstr "存储连接错误。%s"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageNotAvailableException.php:60
+msgid "Storage is temporarily not available"
+msgstr "暂时不可用存储"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageTimeoutException.php:41
+#, php-format
+msgid "Storage connection timeout. %s"
+msgstr "存储连接超时。%s"

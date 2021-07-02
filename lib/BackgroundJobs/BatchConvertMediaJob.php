@@ -24,8 +24,13 @@ class BatchConvertMediaJob extends QueuedJob
     /** @var Node[] */
     public array $unconvertedMedia = [];
 
-    public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, IJobList $jobList, ConfigService $configService)
-    {
+    public function __construct(
+        ITimeFactory $time,
+        LoggerInterface $logger,
+        IRootFolder $rootFolder,
+        IJobList $jobList,
+        ConfigService $configService
+    ) {
         parent::__construct($time);
         $this->logger = $logger;
         $this->rootFolder = $rootFolder;
@@ -43,7 +48,6 @@ class BatchConvertMediaJob extends QueuedJob
 
             $this->configService->setBatchStatus($this->batchId, 'converting');
         } catch (\Throwable $e) {
-            $eType = get_class($e);
             $this->configService->updateBatch($this->batchId, [
                 'status' => 'failed',
                 'error' => [
@@ -51,7 +55,7 @@ class BatchConvertMediaJob extends QueuedJob
                     'message' => $e->getMessage()
                 ]
             ]);
-            $this->logger->error("[{$eType}] :: ({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
+            $this->logger->error((string)$e);
         } finally {
             $this->logger->info(ConvertMedia::class . ' finished');
         }

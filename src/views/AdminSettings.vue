@@ -4,9 +4,9 @@
 			<img src="/apps/workflow_media_converter/img/icon.svg">
 			{{ t('workflow_media_converter', 'Media conversion') }}
 		</h2>
-		<p>To manage the resources used by FFmpeg, you may set the number of threads provided to FFmpeg below.</p>
-		<p>There are <strong>{{ maxThreads }}</strong> available CPU cores to NextCloud.  It is recommended to not exceed this limit.</p>
-		<p>This value can be set to <strong>0</strong> to let FFmpeg decide how many threads it should use.</p>
+		<p>{{ t('workflow_media_converter', 'You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg.') }}</p>
+		<p>{{ t('workflow_media_converter', 'This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec.') }}</p>
+		<p>{{ t('workflow_media_converter', 'Changes made here will apply to any media that is not being converted at this moment in time.') }}</p>
 		<div class="wmc-threads">
 			<input v-model="threadLimit"
 				type="range"
@@ -49,8 +49,6 @@ export default {
 			async set(value) {
 				this.state.threadLimit = value
 				await this.saveConfig()
-				// todo: notify user that changes will not take effect for currently queued jobs
-				// it would be wicked sick to get the number of pending conversions out of IJobList and display that. :o)
 			},
 		},
 	},

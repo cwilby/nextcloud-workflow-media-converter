@@ -1,0 +1,320 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Nextcloud package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Nextcloud 3.14159\n"
+"Report-Msgid-Bugs-To: translations\\@example.com\n"
+"POT-Creation-Date: 2021-07-02 03:40-0700\n"
+"PO-Revision-Date: 2021-07-02 04:01-0700\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Controller/ConversionBatchesController.php:100
+msgid ""
+"A similar conversion batch has already been created.  Delete that batch and "
+"try again"
+msgstr ""
+"Un lot de conversion similaire a déjà été créé.  Supprimer ce lot et "
+"réessayer"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Operation/ConvertMediaOperation.php:41
+msgid "Convert media"
+msgstr "Convertir un média"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Operation/ConvertMediaOperation.php:51
+msgid "Convert video/audio files using FFmpeg."
+msgstr "Convertissez des fichiers vidéo / audio en utilisant FFmpeg."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Settings/AdminSection.php:28
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/lib/Settings/PersonalSection.php:28
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:28
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:33
+msgid "Media conversion"
+msgstr "Conversion automatisée des médias"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialAppInfoFakeDummyForL10nScript.php:2
+msgid "Automated Media Conversion"
+msgstr "Conversion automatisée des médias"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialAppInfoFakeDummyForL10nScript.php:3
+msgid "Rule based conversion of Video/Audio files via FFmpeg"
+msgstr "Conversion basée sur des règles de fichiers vidéo / audio via FFmpeg"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialAppInfoFakeDummyForL10nScript.php:4
+msgid ""
+"An app to trigger automatic conversion of media using FFmpeg.  Based on user "
+"defined rules, media conversion jobs will be dispatched in the background.  "
+"A common use case is for converting videos uploaded from iPhones in Apple "
+"Quicktime format to MP4 so that those videos can be played in non-Apple "
+"browsers."
+msgstr ""
+"Une application pour déclencher la conversion automatique des médias à "
+"l’aide de FFmpeg.  En fonction de règles définies par l’utilisateur, les "
+"tâches de conversion de média seront distribuées en arrière-plan.  Un cas "
+"d’utilisation courant consiste à convertir des vidéos téléchargées à partir "
+"d’iPhones au format Apple Quicktime en MP4 afin que ces vidéos puissent être "
+"lues dans des navigateurs non Apple."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:1
+msgid "Add Conversion Batch"
+msgstr "Ajouter un lot de conversion"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:2
+msgid "Add batches to convert existing media outside of your flow."
+msgstr ""
+"Ajoutez des lots pour convertir les médias existants en dehors de votre flux."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:3
+msgid "Convert to format"
+msgstr "Convertir au format"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:4
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:14
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:16
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:19
+msgid "Choose Folder"
+msgstr "Choisir un dossier"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:5
+msgid "Convert media in sub-folders"
+msgstr "Convertir un média dans des sous-dossiers"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:6
+msgid "Find source files with this extension/format"
+msgstr "Trouver les fichiers sources avec cette extension/format"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:7
+msgid "Store converted output in this extension/format"
+msgstr "Stocker la sortie convertie dans cette extension/format"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:8
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:9
+msgid "Convert all files in this folder"
+msgstr "Convertir tous les fichiers de ce dossier"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:10
+msgid "Converted"
+msgstr "Converti"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:11
+msgid "Total"
+msgstr "Total"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:12
+msgid "Error code"
+msgstr "Code d’erreur"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:13
+msgid "After the source file has been converted:"
+msgstr "Une fois le fichier source converti :"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:15
+msgid "After the output is ready:"
+msgstr "Une fois la sortie prête :"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:17
+msgid "If the output file exists:"
+msgstr "Si le fichier de sortie existe :"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:18
+msgid ""
+"Note: a new file will be added in this folder with a number added to its "
+"name if there is already a conflict file."
+msgstr ""
+"Remarque: un nouveau fichier sera ajouté dans ce dossier avec un numéro "
+"ajouté à son nom s’il existe déjà un fichier de conflit."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:20
+msgid "Keep source file"
+msgstr "Conserver le fichier source"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:21
+msgid "Delete source file"
+msgstr "Supprimer le fichier source"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:22
+msgid "Move source file to specific folder"
+msgstr "Déplacer le fichier source vers un dossier spécifique"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:23
+msgid "Store output in source folder"
+msgstr "Stocker la sortie dans le dossier source"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:24
+msgid "Move output to specific folder"
+msgstr "Déplacer la sortie vers un dossier spécifique"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:25
+msgid "Add new file with a number added to its name"
+msgstr "Ajouter un nouveau fichier avec un numéro ajouté à son nom"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:26
+msgid "Overwrite existing file"
+msgstr "Écraser le fichier existant"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:27
+msgid "Move existing file to specific folder"
+msgstr "Déplacer le fichier existant vers un dossier spécifique"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:29
+msgid ""
+"You may set the number of threads used by FFmpeg to manage the resources "
+"used by FFmpeg."
+msgstr ""
+"Vous pouvez définir le nombre de threads utilisés par FFmpeg pour gérer les "
+"ressources utilisées par FFmpeg."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:30
+msgid ""
+"This value can be set to 0 to let FFmpeg choose how many threads it should "
+"use depending on the codec."
+msgstr ""
+"Cette valeur peut être définie sur 0 pour permettre à FFmpeg de choisir le "
+"nombre de threads qu’il doit utiliser en fonction du codec."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:31
+msgid ""
+"Changes made here will apply to any media that is not being converted at "
+"this moment in time."
+msgstr ""
+"Les modifications apportées ici s’appliqueront à tous les médias qui ne sont "
+"pas convertis pour le moment."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:32
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:47
+msgid "Failed to save config, please try again shortly"
+msgstr ""
+"Impossible d’enregistrer la configuration, veuillez réessayer sous peu de "
+"temps"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:34
+msgid ""
+"You may create conversion batches to convert existing media based on a set "
+"of rules."
+msgstr ""
+"Vous pouvez créer des lots de conversion pour convertir des médias existants "
+"en fonction d’un ensemble de règles."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:35
+msgid "Please make sure the form is valid before saving"
+msgstr "Assurez-vous que le formulaire est valide avant de l’enregistrer"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:36
+msgid "Invalid data"
+msgstr "Données non valides"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:37
+msgid ""
+"This will batch convert any unconverted media in the specified folder. Are "
+"you sure you want to proceed?"
+msgstr ""
+"Cela convertira par lots tous les médias non convertis dans le dossier "
+"spécifié. Êtes-vous sûr de vouloir continuer?"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:38
+msgid "Start conversion batch"
+msgstr "Démarrer le lot de conversion"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:39
+msgid "Yes"
+msgstr "Oui"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:40
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:46
+msgid "Cancel"
+msgstr "Annuler"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:41
+msgid "Error saving"
+msgstr "Erreur d’enregistrement"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:42
+msgid ""
+"All queued conversions for this batch will be cancelled, are you sure you "
+"want to proceed?"
+msgstr ""
+"Toutes les conversions en file d’attente pour ce lot seront annulées, êtes-"
+"vous sûr de vouloir continuer?"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:43
+msgid "Are you sure you want to stop making this batch?"
+msgstr "Êtes-vous sûr de vouloir arrêter de faire ce lot?"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:44
+msgid "Delete conversion batch"
+msgstr "Supprimer le lot de conversion"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/specialVueFakeDummyForL10nScript.js:45
+msgid "Delete"
+msgstr "Supprimer"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/ActionNotSupportedException.php:44
+#, php-format
+msgid "Action \"%s\" not supported or implemented."
+msgstr "Action « %s » non prise en charge ou mise en œuvre."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/AuthenticationFailedException.php:44
+msgid "Authentication failed, wrong token or provider ID given"
+msgstr ""
+"Échec de l’authentification, jeton ou ID de fournisseur incorrect donné"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/BadRequestException.php:49
+#, php-format
+msgid ""
+"Parameters missing in order to complete the request. Missing Parameters: \"%s"
+"\""
+msgstr ""
+"Paramètres manquants afin de terminer la demande. Paramètres manquants : « "
+"%s »"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/ProviderAlreadyExistsException.php:48
+#, php-format
+msgid "ID \"%1$s\" already used by cloud federation provider \"%2$s\""
+msgstr ""
+"ID « %1$s » déjà utilisé par le fournisseur de fédération cloud « %2$s »"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Federation/Exceptions/ProviderDoesNotExistsException.php:45
+#, php-format
+msgid "Cloud Federation Provider with ID: \"%s\" does not exist."
+msgstr "Fournisseur de fédération cloud avec ID : « %s » n’existe pas."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/LockNotAcquiredException.php:46
+#, php-format
+msgid "Could not obtain lock type %d on \"%s\"."
+msgstr "Impossible d’obtenir le type de verrou %d sur « %s »."
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageAuthException.php:41
+#, php-format
+msgid "Storage unauthorized. %s"
+msgstr "Stockage non autorisé. %s"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageBadConfigException.php:41
+#, php-format
+msgid "Storage incomplete configuration. %s"
+msgstr "Configuration incomplète du stockage. %s"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageConnectionException.php:41
+#, php-format
+msgid "Storage connection error. %s"
+msgstr "Erreur de connexion de stockage. %s"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageNotAvailableException.php:60
+msgid "Storage is temporarily not available"
+msgstr "Le stockage est temporairement introuvable"
+
+#: /Users/cwilby/Code/docker/nextcloud-dev/nextcloud/apps/workflow_media_converter/vendor/christophwurst/nextcloud/OCP/Files/StorageTimeoutException.php:41
+#, php-format
+msgid "Storage connection timeout. %s"
+msgstr "Délai d’expiration de la connexion de stockage. %s"

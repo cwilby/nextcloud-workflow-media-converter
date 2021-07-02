@@ -1,4 +1,6 @@
-js/workflow_media_converter.js
-js/workflow_media_converter.js.map
-js/workflow_media_converter-main.js
-js/workflow_media_converter-main.js.map
+js/workflow_media_converter-adminSettings.js
+js/workflow_media_converter-adminSettings.js.map
+js/workflow_media_converter-operator.js
+js/workflow_media_converter-operator.js.map
+js/workflow_media_converter-personalSettings.js
+js/workflow_media_converter-personalSettings.js.map

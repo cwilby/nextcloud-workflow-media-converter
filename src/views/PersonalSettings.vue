@@ -4,9 +4,7 @@
 			<img src="/apps/workflow_media_converter/img/icon.svg">
 			{{ t('workflow_media_converter', 'Media conversion') }}
 		</h2>
-		<p>Use the form below to start a batch of conversions for existing media.</p>
-		<p>You can based on the same set of rules available in Flow.</p>
-		<p>Any video that has already been converted with the same rules will not be included in the batch.</p>
+		<p>{{ t('workflow_media_converter', 'You may create conversion batches to convert existing media based on a set of rules.') }}</p>
 		<hr>
 		<ConversionBatchList
 			:conversion-batches="conversionBatches"
@@ -48,7 +46,7 @@ export default {
 
 	created() {
 		this.pollingInterval = setInterval(async() => {
-			if (document.hasFocus() && this.state.conversionBatches.length && this.state.conversionBatches.every(b => b.id)) {
+			if (this.state.conversionBatches.length && this.state.conversionBatches.every(b => b.id)) {
 				await this.refreshBatches()
 			}
 		}, 10000)
@@ -118,19 +116,17 @@ export default {
 		},
 
 		validateSaveConversionBatch() {
-			if (!this.newConversionBatch.outputExtension
-			|| !this.newConversionBatch.sourceFolder
-			|| !this.newConversionBatch.sourceExtension
-			|| !this.newConversionBatch.postConversionSourceRule
-			|| (this.newConversionBatch.postConversionSourceRule === 'move' && !this.newConversionBatch.postConversionSourceRuleMoveFolder)
-			|| !this.newConversionBatch.postConversionOutputRule
-			|| (this.newConversionBatch.postConversionOutputRule === 'move' && !this.newConversionBatch.postConversionOutputRuleMoveFolder)
-			|| !this.newConversionBatch.postConversionOutputConflictRule
-			|| (this.newConversionBatch.postConversionOutputConflictRule === 'move' && !this.newConversionBatch.postConversionOutputConflictRuleMoveFolder)) {
-				return false
-			}
+			const batch = this.newConversionBatch
 
-			return true
+			return batch.outputExtension
+				&& batch.sourceFolder
+				&& batch.sourceExtension
+				&& batch.postConversionSourceRule
+				&& (batch.postConversionSourceRule === 'move' ? batch.postConversionSourceRuleMoveFolder : true)
+				&& batch.postConversionOutputRule
+				&& (batch.postConversionOutputRule === 'move' ? batch.postConversionOutputRuleMoveFolder : true)
+				&& batch.postConversionOutputConflictRule
+				&& (batch.postConversionOutputConflictRule === 'move' ? batch.postConversionOutputConflictRuleMoveFolder : true)
 		},
 
 		async saveConversionBatch() {

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div v-if="!conversionBatches.length" class="alert">
-			{{ t(`There are no conversion batches, click "+ Add" to get started.`) }}
+			{{ t('workflow_media_converter', `Add batches to convert existing media outside of your flow.`) }}
 		</div>
 		<ul>
 			<li v-for="(conversionBatch, i) in conversionBatches" :key="i">
