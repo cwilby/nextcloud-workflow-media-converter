@@ -2,6 +2,7 @@
 
 namespace OCA\WorkflowMediaConverter\BackgroundJobs;
 
+use OC\Files\Filesystem;
 use OCA\WorkflowMediaConverter\Service\ConfigService;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\IJobList;
@@ -10,6 +11,7 @@ use OCP\Files\File;
 use OCP\Files\Folder;
 use OCP\Files\IRootFolder;
 use OCP\Files\Node;
+use OCP\IL10N;
 use Psr\Log\LoggerInterface;
 
 class BatchConvertMediaJob extends QueuedJob
@@ -42,27 +44,29 @@ class BatchConvertMediaJob extends QueuedJob
             $this->configService->setBatchStatus($this->batchId, 'converting');
         } catch (\Throwable $e) {
             $eType = get_class($e);
-            $this->configService->setBatchStatus($this->batchId, 'failed');
+            $this->configService->updateBatch($this->batchId, [
+                'status' => 'failed',
+                'error' => [
+                    'code' => $e->getCode(),
+                    'message' => $e->getMessage()
+                ]
+            ]);
             $this->logger->error("[{$eType}] :: ({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
         } finally {
             $this->logger->info(ConvertMedia::class . ' finished');
         }
     }
 
-    private function prependUserFolder($path)
-    {
-        if (empty($path)) return null;
-
-        return $this->userPath . '/' . ltrim($path, '/');
-    }
-
     public function parseArguments($arguments)
     {
-        $this->configService->setUserId($arguments['user_id']);
-        $this->userId = $arguments['user_id'];
+        $this->userId = (string)($arguments['uid'] ?? $arguments['user_id']);
+
+        Filesystem::init($this->userId, "/{$this->userId}/files");
+
+        $this->configService->setUserId($this->userId);
         $this->batchId = $arguments['id'];
         $this->status = $arguments['status'];
-        $this->userPath = "/{$this->userId}/files";
+        $this->userFolder = "/{$this->userId}/files";
         $this->sourceFolderPath = $this->prependUserFolder($arguments['sourceFolder']);
         $this->convertMediaInSubFolders = $arguments['convertMediaInSubFolders'];
         $this->sourceExtension = $arguments['sourceExtension'];
@@ -112,13 +116,12 @@ class BatchConvertMediaJob extends QueuedJob
 
     public function queueUnconvertedMediaForConversion()
     {
-        $this->configService->updateBatch($this->batchId, [
-            'unconverted' => count($this->unconvertedMedia)
-        ]);
+        $count = 0;
 
         foreach ($this->unconvertedMedia as $node) {
+            $count++;
             $this->jobList->add(ConvertMediaJob::class, [
-                'user_id' => $this->userId,
+                'uid' => $this->userId,
                 'batch_id' => $this->batchId,
                 'path' => $node->getPath(),
                 'outputExtension' => $this->outputExtension,
@@ -131,6 +134,15 @@ class BatchConvertMediaJob extends QueuedJob
             ]);
         }
 
+        $this->configService->updateBatch($this->batchId, ['unconverted' => $count]);
+
         return $this;
+    }
+
+    protected function prependUserFolder($path)
+    {
+        if (empty($path)) return null;
+
+        return $this->userFolder . '/' . ltrim(str_replace($this->userFolder, '', $path), '/');
     }
 }

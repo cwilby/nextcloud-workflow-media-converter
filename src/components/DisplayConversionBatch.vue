@@ -1,23 +1,30 @@
 <template>
 	<div class="wmc-display-conversion-batch">
-		<div class="wmc-display-conversion-batch__status">
-			<StatusBadge :status="conversionBatch.status" />
-		</div>
-		<div class="wmc-display-conversion-batch__progress">
-			<ProgressBar size="medium" :value="((conversionBatch.converted / conversionBatch.unconverted) || 0) * 100" :error="conversionBatch.status === 'has-errors'" />
-			<div v-if="conversionBatch.status !== 'queued'" class="wmc-display-conversion-batch__progress-labels">
-				<small class="wmc-display-conversion-batch__progress-labels-converted">
-					{{ t('workflow_media_converter', 'Converted') }}: {{ conversionBatch.converted }}
-				</small>
-				<small class="wmc-display-conversion-batch__progress-labels-total">
-					{{ t('workflow_media_converter', 'Total') }}: {{ conversionBatch.unconverted }}
-				</small>
+		<div class="wmc-display-conversion-batch__status-container">
+			<div class="wmc-display-conversion-batch__status">
+				<StatusBadge :status="conversionBatch.status" />
+			</div>
+			<div class="wmc-display-conversion-batch__progress">
+				<ProgressBar size="medium" :value="((conversionBatch.converted / conversionBatch.unconverted) || 0) * 100" :error="['has-errors', 'failed'].includes(conversionBatch.status)" />
+				<div v-if="conversionBatch.status !== 'queued'" class="wmc-display-conversion-batch__progress-labels">
+					<small class="wmc-display-conversion-batch__progress-labels-converted">
+						{{ t('workflow_media_converter', 'Converted') }}: {{ conversionBatch.converted }}
+					</small>
+					<small class="wmc-display-conversion-batch__progress-labels-total">
+						{{ t('workflow_media_converter', 'Total') }}: {{ conversionBatch.unconverted }}
+					</small>
+				</div>
+			</div>
+			<div class="wmc-display-conversion-batch__delete-button">
+				<Actions>
+					<ActionButton icon="icon-delete" @click="$emit('remove')" />
+				</Actions>
 			</div>
 		</div>
-		<div class="wmc-display-conversion-batch__delete-button">
-			<Actions>
-				<ActionButton icon="icon-delete" @click="$emit('remove')" />
-			</Actions>
+		<div v-if="conversionBatch.error" class="wmc-display-conversion-batch__error-message">
+			<p>
+				{{ t('workflow_media_converter', '') }} ({{ t('workflow_media_converter', 'Error code') }} {{ conversionBatch.error.code }}) {{ conversionBatch.error.message }}
+			</p>
 		</div>
 	</div>
 </template>
@@ -44,15 +51,24 @@ export default {
 .wmc-display-conversion-batch {
 	position: relative;
 	border-radius: .5em;
-	display: grid;
-	grid-template-columns: 10em 1fr 4em;
-	grid-template-rows: 1fr;
-	align-items: center;
+
+	&__error-message {
+		p {
+			color: #ff4402;
+		}
+	}
 
 	&__status {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+
+		&-container {
+			display: grid;
+			grid-template-columns: 10em 1fr 4em;
+			grid-template-rows: 1fr;
+			align-items: center;
+		}
 	}
 
 	&__progress {

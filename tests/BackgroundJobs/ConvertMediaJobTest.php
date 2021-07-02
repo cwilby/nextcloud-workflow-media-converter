@@ -61,7 +61,7 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
         $this->configService
             ->allows()
-            ->setUserId($arguments['user_id']);
+            ->setUserId($arguments['uid']);
 
         $result = $this->job->parseArguments($arguments);
 
@@ -81,7 +81,7 @@ class ConvertMediaJobTest extends BackgroundJobTest
         $this->rootFolder->expects()->get($arguments['path'])->andReturns($this->videoFolderNodes[0]);
         $this->rootFolder->expects()->get($arguments['postConversionOutputRuleMoveFolder'])->andReturns($this->outputMoveFolder);
 
-        $this->configService->allows()->setUserId($arguments['user_id']);
+        $this->configService->allows()->setUserId($arguments['uid']);
 
         $result = $this->job->parseArguments($arguments);
 
@@ -98,7 +98,7 @@ class ConvertMediaJobTest extends BackgroundJobTest
         $this->configService->allows()->getAppConfigValue('threadLimit', 0)->andReturns(0);
         $this->rootFolder->allows()->get($arguments['path'])->andReturns($this->videoFolderNodes[0]);
 
-        $this->processFactory->expects()->create("ffmpeg --threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4")->andReturns($this->process);
+        $this->processFactory->expects()->create("ffmpeg -threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4")->andReturns($this->process);
         $this->process->expects()->run();
         $this->process->expects()->isSuccessful()->andReturns(true);
 
@@ -119,7 +119,7 @@ class ConvertMediaJobTest extends BackgroundJobTest
         $this->configService->allows()->getAppConfigValue('threadLimit', 0)->andReturns(0);
         $this->rootFolder->allows()->get($arguments['path'])->andReturns($this->videoFolderNodes[0]);
 
-        $this->processFactory->expects()->create("ffmpeg --threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4")->andReturns($this->process);
+        $this->processFactory->expects()->create("ffmpeg -threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4")->andReturns($this->process);
         $this->process->expects()->run();
         $this->process->expects()->isSuccessful()->andReturns(false)->twice();
         $this->process->expects()->getCommandLine();
@@ -955,7 +955,7 @@ class ConvertMediaJobTest extends BackgroundJobTest
         $this->configService->allows()->getAppConfigValue('threadLimit', 0)->andReturns(0);
         $this->rootFolder->allows()->get($arguments['path'])->andReturns($this->videoFolderNodes[0]);
 
-        $this->processFactory->expects()->create("ffmpeg --threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4")->andReturns($this->process);
+        $this->processFactory->expects()->create("ffmpeg -threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4")->andReturns($this->process);
         $this->process->expects()->run();
         $this->process->expects()->isSuccessful()->andReturns(true);
 
@@ -963,10 +963,10 @@ class ConvertMediaJobTest extends BackgroundJobTest
 
         $this->videoFolder->expects()->nodeExists('test-1.mp4')->andReturns(false)->twice();
 
-        $this->configService->expects()->setUserId($arguments['user_id']);
+        $this->configService->expects()->setUserId($arguments['uid']);
         $this->configService->expects()->getBatch($arguments['batch_id'])->andReturns([
             'id' => $arguments['batch_id'],
-            'user_id' => $arguments['user_id'],
+            'uid' => $arguments['uid'],
             'status' => 'queued',
             'sourceFolder' => '/admin/files/camera-uploads',
             'convertMediaInSubFolders' => true,
@@ -997,7 +997,7 @@ class ConvertMediaJobTest extends BackgroundJobTest
         $this->configService->allows()->getAppConfigValue('threadLimit', 0)->andReturns(0);
         $this->rootFolder->allows()->get($arguments['path'])->andReturns($this->videoFolderNodes[0]);
 
-        $this->processFactory->expects()->create("ffmpeg --threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4")->andReturns($this->process);
+        $this->processFactory->expects()->create("ffmpeg -threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4")->andReturns($this->process);
         $this->process->expects()->run();
         $this->process->expects()->isSuccessful()->andReturns(false)->twice();
         $this->process->expects()->getCommandLine();
@@ -1008,10 +1008,10 @@ class ConvertMediaJobTest extends BackgroundJobTest
         $this->process->expects()->getOutput();
         $this->process->expects()->getErrorOutput();
 
-        $this->configService->expects()->setUserId($arguments['user_id']);
+        $this->configService->expects()->setUserId($arguments['uid']);
         $this->configService->expects()->getBatch($arguments['batch_id'])->andReturns([
             'id' => $arguments['batch_id'],
-            'user_id' => $arguments['user_id'],
+            'uid' => $arguments['uid'],
             'status' => 'queued',
             'sourceFolder' => '/admin/files/camera-uploads',
             'convertMediaInSubFolders' => true,
@@ -1039,7 +1039,7 @@ class ConvertMediaJobTest extends BackgroundJobTest
     protected function createJobArguments($overrides = [])
     {
         return array_merge([
-            'user_id' => 'admin',
+            'uid' => 'admin',
             'batch_id' => 'rjmoalgbvoekv4yy11ijegpjpnk90gmv',
             'path' => '/admin/files/camera-uploads/test-1.mov',
             'outputExtension' => 'mp4',

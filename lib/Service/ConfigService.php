@@ -115,9 +115,9 @@ class ConfigService
         return json_decode($this->getConfigValue("video_conversion_rules", '[]'), true);
     }
 
-    public function getBatch($id)
+    public function getBatch($id, $batches = null)
     {
-        $batches = $this->getConfigValueJson('batchConversions');
+        $batches ??= $this->getConfigValueJson('conversionBatches');
 
         $index = array_search($id, array_column($batches, 'id'));
 
@@ -130,23 +130,42 @@ class ConfigService
 
     public function updateBatch($id, $changes)
     {
-        $batches = $this->getConfigValueJson('batchConversions');
+        $batches = $this->getConfigValueJson('conversionBatches');
 
-        $index = array_search($id, array_column($batches, 'id'));
+        $batch = $this->getBatch($id, $batches);
 
-        if (isset($batches[$index])) {
-            $batch = $batches[$index];
-            foreach ($changes as $key => $value) {
-                $batch[$key] = $value;
-            }
+        if (empty($batch)) {
+            return $this;
         }
 
-        $this->setConfigValueJson('batchConversions', $batches);
+        foreach ($changes as $key => $value) {
+            $batch[$key] = $value;
+        }
+
+        $this->setConfigValueJson('conversionBatches', array_map(function ($b) use ($batch, $id) {
+            if ($batch['id'] === $id) {
+                return $batch;
+            }
+
+            return $b;
+        }, $batches));
+
+        return $this;
     }
 
-    public function getQueueCount($queueName)
+    public function setBatchStatus($batchId, $status)
     {
-        return count($this->getAppConfigValueJson($queueName));
+        $batches = $this->getConfigValueJson('conversionBatches');
+
+        $index = array_search($batchId, array_column($batches, 'id'));
+
+        if (isset($batches[$index])) {
+            $batches[$index]['status'] = $status;
+        }
+
+        $this->setConfigValueJson('conversionBatches', $batches);
+
+        return $this;
     }
 
     private function getMaxThreads()
@@ -189,20 +208,5 @@ class ConfigService
                 //
             }
         }
-    }
-
-    public function setBatchStatus($batchId, $status)
-    {
-        $batches = $this->getConfigValueJson('batches');
-
-        $index = array_search($batchId, array_column($batches, 'id'));
-
-        if (isset($batches[$index])) {
-            $batches[$index]['status'] = $status;
-        }
-
-        $this->setConfigValueJson('batches', $batches);
-
-        return $this;
     }
 }

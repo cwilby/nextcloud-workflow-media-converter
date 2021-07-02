@@ -32,11 +32,11 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
     {
         $arguments = $this->createJobArguments();
 
-        $this->configService->expects()->setUserId($arguments['user_id']);
+        $this->configService->expects()->setUserId($arguments['uid'] ?? $arguments['user_id']);
 
         $result = $this->job->parseArguments($arguments);
 
-        $this->assertEquals($arguments['user_id'], $this->job->userId);
+        $this->assertEquals($arguments['uid'], $this->job->userId);
         $this->assertEquals($this->job, $result);
         $this->assertEquals($this->videoFolder, $result->sourceFolder);
     }
@@ -99,7 +99,7 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
 
         foreach ($unconvertedMedia as $media) {
             $this->jobList->expects('add')->with(ConvertMediaJob::class, [
-                'user_id'                                    => $arguments['user_id'],
+                'uid'                                        => $arguments['uid'],
                 'batch_id'                                   => $arguments['id'],
                 'path'                                       => $media['path'],
                 'outputExtension'                            => $arguments['outputExtension'],
@@ -121,7 +121,7 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
     {
         $arguments = $this->createJobArguments();
 
-        $this->configService->allows()->setUserId($arguments['user_id']);
+        $this->configService->allows()->setUserId($arguments['uid']);
 
         $this->videoFolder->allows()->nodeExists('test-1.mp4')->andReturns(false);
         $this->videoFolder->allows()->nodeExists('test-2.mp4')->andReturns(false);
@@ -145,7 +145,7 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
     {
         $arguments = $this->createJobArguments();
 
-        $this->configService->allows()->setUserId($arguments['user_id']);
+        $this->configService->allows()->setUserId($arguments['uid']);
 
         $this->videoFolder->allows()->nodeExists('test-1.mp4')->andThrows(new \Exception());
         $this->videoFolder->allows()->nodeExists('test-2.mp4')->andReturns(false);
@@ -153,7 +153,7 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
         $this->videoSubfolder->allows()->nodeExists('test-1.mp4')->andReturns(false);
         $this->videoSubfolder->allows()->nodeExists('test-2.mp4')->andReturns(false);
         $this->videoSubfolder->allows()->nodeExists('test-3.mp4')->andReturns(true);
-        
+
         $this->configService->expects()->setBatchStatus($arguments['id'], 'failed');
 
         $this->jobList->expects()->add(ConvertMediaJob::class, \Mockery::any())->times(0);
@@ -166,7 +166,7 @@ class BatchConvertMediaJobTest extends BackgroundJobTest
     protected function createJobArguments($overrides = [])
     {
         return array_merge([
-            'user_id' => 'admin',
+            'uid' => 'admin',
             'id' => 'rjmoalgbvoekv4yy11ijegpjpnk90gmv',
             'status' => 'queued',
             'sourceFolder' => '/camera-uploads',

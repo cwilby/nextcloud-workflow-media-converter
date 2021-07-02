@@ -99,7 +99,7 @@ abstract class BackgroundJobTest extends MockeryTestCase
     {
         $arguments = $this->createJobArguments($overrides);
 
-        $this->configService->expects()->setUserId($arguments['user_id'])->once();
+        $this->configService->expects()->setUserId($arguments['uid'])->once();
 
         $this->job->parseArguments($arguments);
 

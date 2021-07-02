@@ -139,7 +139,12 @@ export default {
 				this.newConversionBatch.id = getUniqueId()
 				await axios.post(generateUrl('/apps/workflow_media_converter/conversion-batches'), { batch: this.newConversionBatch })
 			} catch (error) {
-				console.error(error)
+				this.conversionBatches.splice(this.conversionBatches.findIndex(b => b.id === this.newConversionBatch.id), 1)
+				this.newConversionBatch = {}
+				OC.dialogs.alert(
+					error.response.data,
+					this.t('workflow_media_converter', 'Error saving')
+				)
 			} finally {
 				this.saving = false
 			}

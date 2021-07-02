@@ -15499,6 +15499,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -15548,6 +15555,7 @@ __webpack_require__.r(__webpack_exports__);
         seeking: '#007bff',
         converting: '#007bff',
         'has-failures': '#ffc107',
+        failed: '#ff4402',
         finished: '#28a745'
       }
     };
@@ -15789,25 +15797,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 5:
-                _context4.next = 10;
+                _context4.next = 12;
                 break;
 
               case 7:
                 _context4.prev = 7;
                 _context4.t0 = _context4["catch"](0);
-                console.error(_context4.t0);
 
-              case 10:
-                _context4.prev = 10;
+                _this6.conversionBatches.splice(_this6.conversionBatches.findIndex(function (b) {
+                  return b.id === _this6.newConversionBatch.id;
+                }), 1);
+
+                _this6.newConversionBatch = {};
+                OC.dialogs.alert(_context4.t0.response.data, _this6.t('workflow_media_converter', 'Error saving'));
+
+              case 12:
+                _context4.prev = 12;
                 _this6.saving = false;
-                return _context4.finish(10);
+                return _context4.finish(12);
 
-              case 13:
+              case 15:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 7, 10, 13]]);
+        }, _callee4, null, [[0, 7, 12, 15]]);
       }))();
     },
     confirmRemoveConversionBatch: function confirmRemoveConversionBatch(conversionBatch) {
@@ -18783,7 +18797,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".wmc-display-conversion-batch {\n  position: relative;\n  border-radius: .5em;\n  display: grid;\n  grid-template-columns: 10em 1fr 4em;\n  grid-template-rows: 1fr;\n  align-items: center;\n}\n.wmc-display-conversion-batch__status {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n.wmc-display-conversion-batch__progress {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n.wmc-display-conversion-batch__progress-labels {\n      display: flex;\n      flex-direction: row;\n      width: 100%;\n}\n.wmc-display-conversion-batch__progress-labels-converted {\n        display: block;\n}\n.wmc-display-conversion-batch__progress-labels-total {\n        display: block;\n        margin-left: auto;\n}\n.wmc-display-conversion-batch__delete-button {\n    margin-left: auto;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".wmc-display-conversion-batch {\n  position: relative;\n  border-radius: .5em;\n}\n.wmc-display-conversion-batch__error-message p {\n    color: #ff4402;\n}\n.wmc-display-conversion-batch__status {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n.wmc-display-conversion-batch__status-container {\n      display: grid;\n      grid-template-columns: 10em 1fr 4em;\n      grid-template-rows: 1fr;\n      align-items: center;\n}\n.wmc-display-conversion-batch__progress {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n.wmc-display-conversion-batch__progress-labels {\n      display: flex;\n      flex-direction: row;\n      width: 100%;\n}\n.wmc-display-conversion-batch__progress-labels-converted {\n        display: block;\n}\n.wmc-display-conversion-batch__progress-labels-total {\n        display: block;\n        margin-left: auto;\n}\n.wmc-display-conversion-batch__delete-button {\n    margin-left: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -37612,91 +37626,127 @@ var render = function() {
   return _c("div", { staticClass: "wmc-display-conversion-batch" }, [
     _c(
       "div",
-      { staticClass: "wmc-display-conversion-batch__status" },
-      [_c("StatusBadge", { attrs: { status: _vm.conversionBatch.status } })],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "wmc-display-conversion-batch__progress" },
+      { staticClass: "wmc-display-conversion-batch__status-container" },
       [
-        _c("ProgressBar", {
-          attrs: {
-            size: "medium",
-            value:
-              (_vm.conversionBatch.converted /
-                _vm.conversionBatch.unconverted || 0) * 100,
-            error: _vm.conversionBatch.status === "has-errors"
-          }
-        }),
+        _c(
+          "div",
+          { staticClass: "wmc-display-conversion-batch__status" },
+          [
+            _c("StatusBadge", { attrs: { status: _vm.conversionBatch.status } })
+          ],
+          1
+        ),
         _vm._v(" "),
-        _vm.conversionBatch.status !== "queued"
-          ? _c(
-              "div",
-              { staticClass: "wmc-display-conversion-batch__progress-labels" },
-              [
-                _c(
-                  "small",
+        _c(
+          "div",
+          { staticClass: "wmc-display-conversion-batch__progress" },
+          [
+            _c("ProgressBar", {
+              attrs: {
+                size: "medium",
+                value:
+                  (_vm.conversionBatch.converted /
+                    _vm.conversionBatch.unconverted || 0) * 100,
+                error: ["has-errors", "failed"].includes(
+                  _vm.conversionBatch.status
+                )
+              }
+            }),
+            _vm._v(" "),
+            _vm.conversionBatch.status !== "queued"
+              ? _c(
+                  "div",
                   {
-                    staticClass:
-                      "wmc-display-conversion-batch__progress-labels-converted"
+                    staticClass: "wmc-display-conversion-batch__progress-labels"
                   },
                   [
-                    _vm._v(
-                      "\n\t\t\t\t" +
-                        _vm._s(_vm.t("workflow_media_converter", "Converted")) +
-                        ": " +
-                        _vm._s(_vm.conversionBatch.converted) +
-                        "\n\t\t\t"
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "small",
-                  {
-                    staticClass:
-                      "wmc-display-conversion-batch__progress-labels-total"
-                  },
-                  [
-                    _vm._v(
-                      "\n\t\t\t\t" +
-                        _vm._s(_vm.t("workflow_media_converter", "Total")) +
-                        ": " +
-                        _vm._s(_vm.conversionBatch.unconverted) +
-                        "\n\t\t\t"
+                    _c(
+                      "small",
+                      {
+                        staticClass:
+                          "wmc-display-conversion-batch__progress-labels-converted"
+                      },
+                      [
+                        _vm._v(
+                          "\n\t\t\t\t\t" +
+                            _vm._s(
+                              _vm.t("workflow_media_converter", "Converted")
+                            ) +
+                            ": " +
+                            _vm._s(_vm.conversionBatch.converted) +
+                            "\n\t\t\t\t"
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "small",
+                      {
+                        staticClass:
+                          "wmc-display-conversion-batch__progress-labels-total"
+                      },
+                      [
+                        _vm._v(
+                          "\n\t\t\t\t\t" +
+                            _vm._s(_vm.t("workflow_media_converter", "Total")) +
+                            ": " +
+                            _vm._s(_vm.conversionBatch.unconverted) +
+                            "\n\t\t\t\t"
+                        )
+                      ]
                     )
                   ]
                 )
-              ]
-            )
-          : _vm._e()
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "wmc-display-conversion-batch__delete-button" },
-      [
+              : _vm._e()
+          ],
+          1
+        ),
+        _vm._v(" "),
         _c(
-          "Actions",
+          "div",
+          { staticClass: "wmc-display-conversion-batch__delete-button" },
           [
-            _c("ActionButton", {
-              attrs: { icon: "icon-delete" },
-              on: {
-                click: function($event) {
-                  return _vm.$emit("remove")
-                }
-              }
-            })
+            _c(
+              "Actions",
+              [
+                _c("ActionButton", {
+                  attrs: { icon: "icon-delete" },
+                  on: {
+                    click: function($event) {
+                      return _vm.$emit("remove")
+                    }
+                  }
+                })
+              ],
+              1
+            )
           ],
           1
         )
-      ],
-      1
-    )
+      ]
+    ),
+    _vm._v(" "),
+    _vm.conversionBatch.error
+      ? _c(
+          "div",
+          { staticClass: "wmc-display-conversion-batch__error-message" },
+          [
+            _c("p", [
+              _vm._v(
+                "\n\t\t\t" +
+                  _vm._s(_vm.t("workflow_media_converter", "")) +
+                  " (" +
+                  _vm._s(_vm.t("workflow_media_converter", "Error code")) +
+                  " " +
+                  _vm._s(_vm.conversionBatch.error.code) +
+                  ") " +
+                  _vm._s(_vm.conversionBatch.error.message) +
+                  "\n\t\t"
+              )
+            ])
+          ]
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []

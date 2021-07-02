@@ -52,16 +52,25 @@ class ConvertMediaJob extends QueuedJob
 
     public function parseArguments($arguments)
     {
-        $this->configService->setUserId((string)$arguments['user_id']);
-        $this->batchId = (string)$arguments['batch_id'];
         $this->path = (string)$arguments['path'];
+        $this->userId = (string)($arguments['uid'] ?? $arguments['user_id'] ?? '');
+        if (empty($this->userId)) {
+            $this->userId = explode('/', $this->path, 4)[1];
+        }
+
+        $this->userFolder = "/{$this->userId}/files";
+
+        Filesystem::init($this->userId, $this->userFolder);
+
+        $this->configService->setUserId($this->userId);
+        $this->batchId = (string)($arguments['batch_id'] ?? '');
 
         $this->postConversionSourceRule = (string)$arguments['postConversionSourceRule'];
-        $this->postConversionSourceRuleMoveFolder = (string)$arguments['postConversionSourceRuleMoveFolder'];
+        $this->postConversionSourceRuleMoveFolder = $this->prependUserFolder($arguments['postConversionSourceRuleMoveFolder']);
         $this->postConversionOutputRule = (string)$arguments['postConversionOutputRule'];
-        $this->postConversionOutputRuleMoveFolder = (string)$arguments['postConversionOutputRuleMoveFolder'];
+        $this->postConversionOutputRuleMoveFolder = $this->prependUserFolder($arguments['postConversionOutputRuleMoveFolder']);
         $this->postConversionOutputConflictRule = (string)$arguments['postConversionOutputConflictRule'];
-        $this->postConversionOutputConflictRuleMoveFolder = (string)$arguments['postConversionOutputConflictRuleMoveFolder'];
+        $this->postConversionOutputConflictRuleMoveFolder = $this->prependUserFolder($arguments['postConversionOutputConflictRuleMoveFolder']);
         $this->outputExtension = (string)$arguments['outputExtension'];
 
         $this->sourceFile = $this->rootFolder->get($this->path);
@@ -89,7 +98,7 @@ class ConvertMediaJob extends QueuedJob
     {
         $threads = $this->configService->getAppConfigValue('threadLimit', 0);
 
-        $command = "ffmpeg --threads $threads -i {$this->tempSourcePath} {$this->tempOutputPath}";
+        $command = "ffmpeg -threads $threads -i {$this->tempSourcePath} {$this->tempOutputPath}";
 
         $process = $this->processFactory->create($command);
 
@@ -113,7 +122,7 @@ class ConvertMediaJob extends QueuedJob
     public function writePostConversionOutputFile()
     {
         if ($this->outputFolder->nodeExists($this->outputFileName)) {
-            $existingFile = $this->rootFolder->get($this->outputFilePath);
+            $existingFile = $this->outputFolder->get($this->outputFileName);
 
             switch ($this->postConversionOutputConflictRule) {
                 case 'move':
@@ -144,6 +153,10 @@ class ConvertMediaJob extends QueuedJob
 
     public function notifyBatchSuccess()
     {
+        if (!$this->batchId) {
+            return;
+        }
+
         $batch = $this->configService->getBatch($this->batchId);
 
         $this->configService->updateBatch($this->batchId, [
@@ -154,6 +167,10 @@ class ConvertMediaJob extends QueuedJob
 
     public function notifyBatchFail(\Throwable $e)
     {
+        if (!$this->batchId) {
+            return;
+        }
+
         $batch = $this->configService->getBatch($this->batchId);
 
         $this->configService->updateBatch($this->batchId, [
@@ -185,5 +202,12 @@ class ConvertMediaJob extends QueuedJob
     protected function removeDoubleSlashes($path)
     {
         return preg_replace('#/+#', '/', $path);
+    }
+
+    protected function prependUserFolder($path)
+    {
+        if (empty($path)) return null;
+
+        return $this->userFolder . '/' . ltrim(str_replace($this->userFolder, '', $path), '/');
     }
 }

@@ -2,7 +2,6 @@
 
 namespace OCA\WorkflowMediaConverter\Operation;
 
-use OCA\WorkflowMediaConverter\Support\Util;
 use OCP\BackgroundJob\IJobList;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\GenericEvent;

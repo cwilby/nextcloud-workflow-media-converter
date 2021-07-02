@@ -12,6 +12,7 @@ use OCP\BackgroundJob\IJobList;
 use OCP\IDBConnection;
 use OCP\IL10N;
 use OCP\IRequest;
+use OCP\IUserSession;
 
 class ConversionBatchesController extends Controller
 {
@@ -20,10 +21,10 @@ class ConversionBatchesController extends Controller
     private IL10N $l;
     private IDBConnection $connection;
 
-    public function __construct($userId, $AppName, IRequest $request, IJobList $jobList, ConfigService $configService, IL10N $l, IDBConnection $connection)
+    public function __construct($AppName, IRequest $request, IJobList $jobList, ConfigService $configService, IL10N $l, IDBConnection $connection, IUserSession $session)
     {
         parent::__construct($AppName, $request);
-        $this->userId = $userId;
+        $this->userId = $session->getUser()->getUID();
         $this->jobList = $jobList;
         $this->configService = $configService;
         $this->l = $l;
@@ -56,7 +57,7 @@ class ConversionBatchesController extends Controller
             return new DataResponse($error, Http::STATUS_BAD_REQUEST);
         }
 
-        $batch['user_id'] = $this->userId;
+        $batch['uid'] = $this->userId;
 
         $this->jobList->add(BatchConvertMediaJob::class, $batch);
 
@@ -96,7 +97,7 @@ class ConversionBatchesController extends Controller
                 && $conversionBatch['sourceExtension'] === $batch['sourceExtension']
                 && $conversionBatch['outputExtension'] === $batch['outputExtension']
             ) {
-                return $this->l->t('A similar job has already been created.  Delete that rule and try again.');
+                return $this->l->t('A similar conversion batch has already been created.  Delete that batch and try again');
             }
         }
     }

@@ -19,6 +19,7 @@ export default {
 			seeking: '#007bff',
 			converting: '#007bff',
 			'has-failures': '#ffc107',
+			failed: '#ff4402',
 			finished: '#28a745',
 		},
 	}),
