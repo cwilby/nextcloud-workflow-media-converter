@@ -85,8 +85,11 @@ endif
 .PHONY: npm
 npm:
 ifeq (,$(wildcard $(CURDIR)/package.json))
-	cd js && $(npm) run build
+	cd js
+	$(npm) install
+	$(npm) run build
 else
+	npm install
 	npm run build
 endif
 
