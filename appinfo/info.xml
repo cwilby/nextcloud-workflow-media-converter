@@ -4,7 +4,7 @@
     <name>Automated Media Conversion</name>
     <summary>Rule based conversion of Video/Audio files via FFmpeg</summary>
     <description>An app to trigger automatic conversion of media using FFmpeg.  Based on user defined rules, media conversion jobs will be dispatched in the background.  A common use case is for converting videos uploaded from iPhones in Apple Quicktime format to MP4 so that those videos can be played in non-Apple browsers.</description>
-    <version>1.0.0</version>
+    <version>1.1.11</version>
     <licence>agpl</licence>
     <author mail="cameron@wilby.com" homepage="https://github.com/cwilby">Cameron Wilby</author>
     <namespace>WorkflowMediaConverter</namespace>
@@ -20,10 +20,10 @@
     <bugs>https://github.com/cwilby/nextcloud-workflow-media-converter/issues</bugs>
     <repository type="git">https://github.com/cwilby/nextcloud-workflow-media-converter.git</repository>
 
-    <screenshot small-thumbnail="https://raw.githubusercontent.com/cwilby/workflow_media_converter/master/screenshots/thumbnail.png">https://raw.githubusercontent.com/cwilby/workflow_media_converter/master/screenshots/thumbnail.png</screenshot>
-    <screenshot>https://raw.githubusercontent.com/cwilby/workflow_media_converter/master/screenshots/flow-settings-ui.png</screenshot>
-    <screenshot>https://raw.githubusercontent.com/cwilby/workflow_media_converter/master/screenshots/conversion-batch-ui.png</screenshot>
-    <screenshot>https://raw.githubusercontent.com/cwilby/workflow_media_converter/master/screenshots/admin-settings-ui.png</screenshot>
+    <screenshot small-thumbnail="https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/thumbnail.png">https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/thumbnail.png</screenshot>
+    <screenshot>https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/flow-settings-ui.png</screenshot>
+    <screenshot>https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/conversion-batch-ui.png</screenshot>
+    <screenshot>https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/admin-settings-ui.png</screenshot>
 
     <dependencies>
         <nextcloud min-version="21" max-version="22"/>

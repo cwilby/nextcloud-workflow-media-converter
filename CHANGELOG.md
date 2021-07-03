@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## 1.1.11 - 07/02/2021
+* After several CI hiccups.. 1.1.11 is the first version in the app store 🎉
 ## 1.1.0 - 07/02/2021
 * Added batch conversions to be able to convert existing media.
 
