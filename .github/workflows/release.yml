@@ -9,24 +9,29 @@ env:
 
 jobs:
   build_and_publish:
+    name: "Release: build, sign and upload the app"
     environment: release
     runs-on: ubuntu-latest
-    name: "Release: build, sign and upload the app"
     strategy:
       matrix:
         php-versions: ['7.4']
         nextcloud: ['stable21']
         database: ['sqlite']
     steps:
-      - name: Checkout
-        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
-
+      - name: Use Node 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      
       - name: Setup PHP
         uses: shivammathur/setup-php@afefcaf556d98dc7896cca380e181decb609ca44
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: pdo_sqlite,pdo_mysql,pdo_pgsql,gd,zip
           coverage: none
+
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Set up server non MySQL
         uses: SMillerDev/nextcloud-actions/setup-nextcloud@fae87e29aa7cdf1ea0b8033c67f60e75b10be2cd
