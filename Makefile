@@ -78,7 +78,7 @@ ifeq (, $(composer))
 	mv composer.phar $(build_tools_directory)
 	php $(build_tools_directory)/composer.phar install --prefer-dist
 else
-	composer install --prefer-dist
+	composer install --no-dev
 endif
 
 # Installs npm dependencies
