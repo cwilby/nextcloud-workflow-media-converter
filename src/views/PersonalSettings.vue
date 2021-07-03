@@ -1,7 +1,7 @@
 <template>
 	<div class="wmc-personal-settings">
 		<h2>
-			<img src="/apps/workflow_media_converter/img/icon.svg">
+			<img :src="iconUrl">
 			{{ t('workflow_media_converter', 'Media conversion') }}
 		</h2>
 		<p>{{ t('workflow_media_converter', 'You may create conversion batches to convert existing media based on a set of rules.') }}</p>
@@ -39,6 +39,9 @@ export default {
 	}),
 
 	computed: {
+		iconUrl() {
+			return generateUrl('/apps/workflow_media_converter/img/icon.svg')
+		},
 		conversionBatches() {
 			return this.state.conversionBatches
 		},

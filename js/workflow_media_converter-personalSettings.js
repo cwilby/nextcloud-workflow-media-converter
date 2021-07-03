@@ -15679,6 +15679,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   computed: {
+    iconUrl: function iconUrl() {
+      return (0,_nextcloud_router__WEBPACK_IMPORTED_MODULE_2__.generateUrl)('/apps/workflow_media_converter/img/icon.svg');
+    },
     conversionBatches: function conversionBatches() {
       return this.state.conversionBatches;
     }
@@ -38035,9 +38038,7 @@ var render = function() {
     { staticClass: "wmc-personal-settings" },
     [
       _c("h2", [
-        _c("img", {
-          attrs: { src: "/apps/workflow_media_converter/img/icon.svg" }
-        }),
+        _c("img", { attrs: { src: _vm.iconUrl } }),
         _vm._v(
           "\n\t\t" +
             _vm._s(_vm.t("workflow_media_converter", "Media conversion")) +

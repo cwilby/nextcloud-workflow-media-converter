@@ -14596,6 +14596,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     maxThreads: function maxThreads() {
       return this.state.maxThreads;
     },
+    iconUrl: function iconUrl() {
+      return (0,_nextcloud_router__WEBPACK_IMPORTED_MODULE_2__.generateUrl)('/apps/workflow_media_converter/img/icon.svg');
+    },
     threadLimit: {
       get: function get() {
         return this.state.threadLimit;
@@ -20352,9 +20355,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "wmc-admin-settings" }, [
     _c("h2", [
-      _c("img", {
-        attrs: { src: "/apps/workflow_media_converter/img/icon.svg" }
-      }),
+      _c("img", { attrs: { src: _vm.iconUrl } }),
       _vm._v(
         "\n\t\t" +
           _vm._s(_vm.t("workflow_media_converter", "Media conversion")) +

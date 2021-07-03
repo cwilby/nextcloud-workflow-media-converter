@@ -1,7 +1,7 @@
 <template>
 	<div class="wmc-admin-settings">
 		<h2>
-			<img src="/apps/workflow_media_converter/img/icon.svg">
+			<img :src="iconUrl">
 			{{ t('workflow_media_converter', 'Media conversion') }}
 		</h2>
 		<p>{{ t('workflow_media_converter', 'You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg.') }}</p>
@@ -41,6 +41,9 @@ export default {
 	computed: {
 		maxThreads() {
 			return this.state.maxThreads
+		},
+		iconUrl() {
+			return generateUrl('/apps/workflow_media_converter/img/icon.svg')
 		},
 		threadLimit: {
 			get() {
