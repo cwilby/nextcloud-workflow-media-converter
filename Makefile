@@ -76,7 +76,7 @@ ifeq (, $(composer))
 	mkdir -p $(build_tools_directory)
 	curl -sS https://getcomposer.org/installer | php
 	mv composer.phar $(build_tools_directory)
-	php $(build_tools_directory)/composer.phar install --prefer-dist
+	php $(build_tools_directory)/composer.phar install --no-dev
 else
 	composer install --no-dev
 endif
