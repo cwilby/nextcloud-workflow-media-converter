@@ -4,7 +4,7 @@
     <name>Automated Media Conversion</name>
     <summary>Rule based conversion of Video/Audio files via FFmpeg</summary>
     <description>An app to trigger automatic conversion of media using FFmpeg.  Based on user defined rules, media conversion jobs will be dispatched in the background.  A common use case is for converting videos uploaded from iPhones in Apple Quicktime format to MP4 so that those videos can be played in non-Apple browsers.</description>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
     <licence>agpl</licence>
     <author mail="cameron@wilby.com" homepage="https://github.com/cwilby">Cameron Wilby</author>
     <namespace>WorkflowMediaConverter</namespace>
