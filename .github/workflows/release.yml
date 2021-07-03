@@ -18,10 +18,10 @@ jobs:
         nextcloud: ['stable21']
         database: ['sqlite']
     steps:
-      - name: Use Node 12
+      - name: Use Node 14
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 14
       
       - name: Setup PHP
         uses: shivammathur/setup-php@afefcaf556d98dc7896cca380e181decb609ca44
