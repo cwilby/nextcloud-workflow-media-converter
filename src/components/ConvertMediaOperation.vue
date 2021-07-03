@@ -55,7 +55,7 @@ export default {
 				}
 			},
 			set(mutation) {
-				this.$emit('change', JSON.stringify({ ...(this.config || {}), ...mutation }))
+				this.$emit('input', JSON.stringify({ ...(this.config || {}), ...mutation }))
 			},
 		},
 

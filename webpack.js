@@ -1,6 +1,8 @@
 const path = require('path')
 const webpackConfig = require('@nextcloud/webpack-vue-config')
 
+webpackConfig.devtool = 'cheap-source-map'
+
 webpackConfig.stats = {
 	colors: true,
 	modules: true,
