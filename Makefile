@@ -88,6 +88,7 @@ appstore:
 		--exclude="../$(app_name)/js/karma.*" \
 		--exclude="../$(app_name)/js/protractor.*" \
 		--exclude="../$(app_name)/package.json" \
+		--exclude="../$(app_name)/package-lock.json" \
 		--exclude="../$(app_name)/bower.json" \
 		--exclude="../$(app_name)/karma.*" \
 		--exclude="../$(app_name)/protractor\.*" \
