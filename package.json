@@ -21,6 +21,7 @@
 		"@nextcloud/l10n": "^1.4.1",
 		"@nextcloud/router": "^2.0.0",
 		"@nextcloud/vue": "^4.0.2",
+		"@nextcloud/webpack-vue-config": "^4.0.3",
 		"debounce": "^1.2.1",
 		"vue": "^2.6.14"
 	},
@@ -32,7 +33,6 @@
 		"npm": ">=7.0.0"
 	},
 	"devDependencies": {
-		"@nextcloud/webpack-vue-config": "^4.0.3",
 		"@babel/core": "^7.14.6",
 		"@babel/eslint-parser": "^7.14.7",
 		"@babel/plugin-proposal-object-rest-spread": "^7.13.8",
