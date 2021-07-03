@@ -4,9 +4,8 @@ This app lets Nextcloud automatically convert media using FFmpeg. By utilizing t
 
 Depending on the selected behaviour the source file can either be kept or deleted and the output can either be preserved by increasing a number added to the filename or overwritten.
 
-![https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/conversion-batch-ui.png]()
-
-![https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/flow-settings-ui.png]()
+<img height="240" src="https://github.com/cwilby/nextcloud-workflow-media-converter/blob/main/screenshots/conversion-batch-ui.png" />
+<img height="240" src="https://github.com/cwilby/nextcloud-workflow-media-converter/blob/main/screenshots/flow-settings-ui.png" />
 
 ## Requirements
 
