@@ -72,6 +72,12 @@ appstore:
 	fi
 	tar cvzf $(appstore_package_name).tar.gz \
 		--exclude-vcs \
+		--exclude="../$(app_name)/COPYING" \
+		--exclude="../$(app_name)/README.md" \
+		--exclude="../$(app_name)/screenshots" \
+		--exclude="../$(app_name)/src" \
+		--exclude="../$(app_name)/vendor" \
+		--exclude="../$(app_name)/webpack.js" \
 		--exclude="../$(app_name)/build" \
 		--exclude="../$(app_name)/tests" \
 		--exclude="../$(app_name)/Makefile" \
