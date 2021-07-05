@@ -10,23 +10,20 @@ use OCP\IServerContainer;
 use OCP\Util;
 use OCP\WorkflowEngine\Events\RegisterOperationsEvent;
 
-class RegisterFlowOperationsListener implements IEventListener
-{
-    private IServerContainer $container;
+class RegisterFlowOperationsListener implements IEventListener {
+	private $container;
 
-    public function __construct(IServerContainer $container)
-    {
-        $this->container = $container;
-    }
+	public function __construct(IServerContainer $container) {
+		$this->container = $container;
+	}
 
-    public function handle(Event $event): void
-    {
-        if (!($event instanceof RegisterOperationsEvent)) {
-            return;
-        }
+	public function handle(Event $event): void {
+		if (!($event instanceof RegisterOperationsEvent)) {
+			return;
+		}
 
-        $event->registerOperation($this->container->get(ConvertMediaOperation::class));
+		$event->registerOperation($this->container->get(ConvertMediaOperation::class));
 
-        Util::addScript(Application::APP_ID, Application::APP_ID . '-operator');
-    }
+		Util::addScript(Application::APP_ID, Application::APP_ID . '-operator');
+	}
 }

@@ -4,10 +4,8 @@ namespace OCA\WorkflowMediaConverter\Factory;
 
 use Symfony\Component\Process\Process;
 
-class ProcessFactory
-{
-    public function create($command)
-    {
-        return new Process($command, null, null, null, null);
-    }
+class ProcessFactory {
+	public function create($command) {
+		return new Process($command, null, null, null, null);
+	}
 }

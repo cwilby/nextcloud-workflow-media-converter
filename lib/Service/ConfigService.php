@@ -6,207 +6,183 @@ use OCA\WorkflowMediaConverter\AppInfo\Application;
 use OCP\IConfig;
 use Psr\Log\LoggerInterface;
 
-class ConfigService
-{
-    private $userId;
-    private IConfig $config;
-    private LoggerInterface $logger;
+class ConfigService {
+	private $userId;
+	private $config;
+	private $logger;
 
-    public function __construct($userId, IConfig $config, LoggerInterface $logger)
-    {
-        $this->userId = $userId;
-        $this->config = $config;
-        $this->logger = $logger;
-    }
+	public function __construct($userId, IConfig $config, LoggerInterface $logger) {
+		$this->userId = $userId;
+		$this->config = $config;
+		$this->logger = $logger;
+	}
 
-    public function setUserId($id)
-    {
-        $this->userId = $id;
-    }
+	public function setUserId($id) {
+		$this->userId = $id;
+	}
 
-    public function getCurrentUserConfig()
-    {
-        return [
-            'conversionBatches' => $this->getConfigValueJson('conversionBatches', '[]')
-        ];
-    }
+	public function getCurrentUserConfig() {
+		return [
+			'conversionBatches' => $this->getConfigValueJson('conversionBatches', '[]')
+		];
+	}
 
-    public function getCurrentUserStatistics()
-    {
-        return [];
-    }
+	public function getCurrentUserStatistics() {
+		return [];
+	}
 
-    public function getAdminConfig()
-    {
-        return [
-            'threadLimit' => $this->getAppConfigValue('threadLimit', 0),
-            'maxThreads' => $this->getMaxThreads()
-        ];
-    }
+	public function getAdminConfig() {
+		return [
+			'threadLimit' => $this->getAppConfigValue('threadLimit', 0),
+			'maxThreads' => $this->getMaxThreads()
+		];
+	}
 
-    public function getConfigValue($key, $default = '')
-    {
-        return $this->config->getUserValue($this->userId, Application::APP_ID, $key, $default);
-    }
+	public function getConfigValue($key, $default = '') {
+		return $this->config->getUserValue($this->userId, Application::APP_ID, $key, $default);
+	}
 
-    public function getConfigValueJson($key, $default = '[]')
-    {
-        return json_decode($this->getConfigValue($key, $default), true);
-    }
+	public function getConfigValueJson($key, $default = '[]') {
+		return json_decode($this->getConfigValue($key, $default), true);
+	}
 
-    public function setConfig($values)
-    {
-        $this->setConfigValueJson('conversionBatches', $values['conversionBatches']);
-    }
+	public function setConfig($values) {
+		$this->setConfigValueJson('conversionBatches', $values['conversionBatches']);
+	}
 
-    public function setConfigValue($key, $value)
-    {
-        $this->config->setUserValue($this->userId, Application::APP_ID, $key, $value);
-    }
+	public function setConfigValue($key, $value) {
+		$this->config->setUserValue($this->userId, Application::APP_ID, $key, $value);
+	}
 
-    public function setConfigValueJson($key, $value = [])
-    {
-        $this->setConfigValue($key, json_encode($value));
-    }
+	public function setConfigValueJson($key, $value = []) {
+		$this->setConfigValue($key, json_encode($value));
+	}
 
-    public function getAppConfigValue($key, $default = '')
-    {
-        return $this->config->getAppValue(Application::APP_ID, $key, $default);
-    }
+	public function getAppConfigValue($key, $default = '') {
+		return $this->config->getAppValue(Application::APP_ID, $key, $default);
+	}
 
-    public function getAppConfigValueJson($key, $default = '[]')
-    {
-        return json_decode($this->getAppConfigValue($key, $default), true);
-    }
+	public function getAppConfigValueJson($key, $default = '[]') {
+		return json_decode($this->getAppConfigValue($key, $default), true);
+	}
 
-    public function setAppConfigValue($key, $value)
-    {
-        $this->config->setAppValue(Application::APP_ID, $key, $value);
-    }
+	public function setAppConfigValue($key, $value) {
+		$this->config->setAppValue(Application::APP_ID, $key, $value);
+	}
 
-    public function setAppConfigValueJson($key, $value = [])
-    {
-        $this->setAppConfigValue($key, json_encode($value));
-    }
+	public function setAppConfigValueJson($key, $value = []) {
+		$this->setAppConfigValue($key, json_encode($value));
+	}
 
-    public function setAppConfig($values)
-    {
-        $this->setAppConfigValue('threadLimit', $values['threadLimit']);
-    }
+	public function setAppConfig($values) {
+		$this->setAppConfigValue('threadLimit', $values['threadLimit']);
+	}
 
-    public function addToCounters($counter, $amount)
-    {
-        $this->addToAdminCounter($counter, $amount);
-        $this->addToCounter($counter, $amount);
-    }
+	public function addToCounters($counter, $amount) {
+		$this->addToAdminCounter($counter, $amount);
+		$this->addToCounter($counter, $amount);
+	}
 
-    public function addToAdminCounter($counter, $amount)
-    {
-        $this->setAppConfigValue($counter, $this->getAppConfigValue($counter, '0') + $amount);
-    }
+	public function addToAdminCounter($counter, $amount) {
+		$this->setAppConfigValue($counter, $this->getAppConfigValue($counter, '0') + $amount);
+	}
 
-    public function addToCounter($counter, $amount)
-    {
-        $this->setConfigValue($counter, $this->getConfigValue($counter, '0') + $amount);
-    }
+	public function addToCounter($counter, $amount) {
+		$this->setConfigValue($counter, $this->getConfigValue($counter, '0') + $amount);
+	}
 
-    public function getConversionRules()
-    {
-        return json_decode($this->getConfigValue("video_conversion_rules", '[]'), true);
-    }
+	public function getConversionRules() {
+		return json_decode($this->getConfigValue("video_conversion_rules", '[]'), true);
+	}
 
-    public function getBatch($id, $batches = null)
-    {
-        $batches ??= $this->getConfigValueJson('conversionBatches');
+	public function getBatch($id, $batches = null) {
+		$batches = $batches ?: $this->getConfigValueJson('conversionBatches');
 
-        $index = array_search($id, array_column($batches, 'id'));
+		$index = array_search($id, array_column($batches, 'id'));
 
-        if (isset($batches[$index])) {
-            return $batches[$index];
-        }
+		if (isset($batches[$index])) {
+			return $batches[$index];
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    public function updateBatch($id, $changes)
-    {
-        $batches = $this->getConfigValueJson('conversionBatches');
+	public function updateBatch($id, $changes) {
+		$batches = $this->getConfigValueJson('conversionBatches');
 
-        $batch = $this->getBatch($id, $batches);
+		$batch = $this->getBatch($id, $batches);
 
-        if (empty($batch)) {
-            return $this;
-        }
+		if (empty($batch)) {
+			return $this;
+		}
 
-        foreach ($changes as $key => $value) {
-            $batch[$key] = $value;
-        }
+		foreach ($changes as $key => $value) {
+			$batch[$key] = $value;
+		}
 
-        $this->setConfigValueJson('conversionBatches', array_map(function ($b) use ($batch, $id) {
-            if ($batch['id'] === $id) {
-                return $batch;
-            }
+		$this->setConfigValueJson('conversionBatches', array_map(function ($b) use ($batch, $id) {
+			if ($batch['id'] === $id) {
+				return $batch;
+			}
 
-            return $b;
-        }, $batches));
+			return $b;
+		}, $batches));
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function setBatchStatus($batchId, $status)
-    {
-        $batches = $this->getConfigValueJson('conversionBatches');
+	public function setBatchStatus($batchId, $status) {
+		$batches = $this->getConfigValueJson('conversionBatches');
 
-        $index = array_search($batchId, array_column($batches, 'id'));
+		$index = array_search($batchId, array_column($batches, 'id'));
 
-        if (isset($batches[$index])) {
-            $batches[$index]['status'] = $status;
-        }
+		if (isset($batches[$index])) {
+			$batches[$index]['status'] = $status;
+		}
 
-        $this->setConfigValueJson('conversionBatches', $batches);
+		$this->setConfigValueJson('conversionBatches', $batches);
 
-        return $this;
-    }
+		return $this;
+	}
 
-    private function getMaxThreads()
-    {
-        try {
-            $numCpus = 4;
+	private function getMaxThreads() {
+		try {
+			$numCpus = 4;
 
-            if (is_file('/proc/cpuinfo')) {
-                $cpuinfo = file_get_contents('/proc/cpuinfo');
-                preg_match_all('/^processor/m', $cpuinfo, $matches);
-                $numCpus = count($matches[0]);
-            } else if ('WIN' == strtoupper(substr(PHP_OS, 0, 3))) {
-                $process = @popen('wmic cpu get NumberOfCores', 'rb');
-                if (false !== $process) {
-                    fgets($process);
-                    $numCpus = intval(fgets($process));
-                    pclose($process);
-                }
-            } else {
-                $process = @popen('sysctl -a', 'rb');
-                if (false !== $process) {
-                    $output = stream_get_contents($process);
-                    preg_match('/hw.ncpu: (\d+)/', $output, $matches);
-                    if ($matches) {
-                        $numCpus = intval($matches[1][0]);
-                    }
-                    pclose($process);
-                }
-            }
+			if (is_file('/proc/cpuinfo')) {
+				$cpuinfo = file_get_contents('/proc/cpuinfo');
+				preg_match_all('/^processor/m', $cpuinfo, $matches);
+				$numCpus = count($matches[0]);
+			} elseif ('WIN' == strtoupper(substr(PHP_OS, 0, 3))) {
+				$process = @popen('wmic cpu get NumberOfCores', 'rb');
+				if (false !== $process) {
+					fgets($process);
+					$numCpus = intval(fgets($process));
+					pclose($process);
+				}
+			} else {
+				$process = @popen('sysctl -a', 'rb');
+				if (false !== $process) {
+					$output = stream_get_contents($process);
+					preg_match('/hw.ncpu: (\d+)/', $output, $matches);
+					if ($matches) {
+						$numCpus = intval($matches[1][0]);
+					}
+					pclose($process);
+				}
+			}
 
-            return $numCpus;
-        } catch (\Throwable $e) {
-            $this->logger->info($e->getMessage());
+			return $numCpus;
+		} catch (\Throwable $e) {
+			$this->logger->info($e->getMessage());
 
-            return 4;
-        } finally {
-            try {
-                pclose($process);
-            } catch (\Throwable $e) {
-                //
-            }
-        }
-    }
+			return 4;
+		} finally {
+			try {
+				pclose($process);
+			} catch (\Throwable $e) {
+				//
+			}
+		}
+	}
 }
