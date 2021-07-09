@@ -15,4 +15,4 @@ FFmpeg must be installed on the server and the binary must detectable by Nextclo
 
 This app does not work if encryption is enabled.
 
-Since FFmpeg is used for conversion, its import filters decide the possibility and quality of conversion. Essentially, video and audio files can be converted. Due to a high number of codecs and formats, by default we feed anything to LibreOffice matching the rules specified in the workflow.
+Since FFmpeg is used for conversion, its import filters decide the possibility and quality of conversion. Essentially, video and audio files can be converted. Due to a high number of codecs and formats, by default we feed anything to FFmpeg matching the rules specified in the workflow.
