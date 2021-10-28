@@ -56,7 +56,7 @@
 		"file-loader": "^6.2.0",
 		"node-polyfill-webpack-plugin": "^1.1.4",
 		"node-sass": "^6.0.1",
-		"sass-loader": "^12.1.0",
+		"sass-loader": "^12.3.0",
 		"style-loader": "^2.0.0",
 		"stylelint": "^13.13.1",
 		"stylelint-config-recommended-scss": "^4.3.0",
