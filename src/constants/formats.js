@@ -12,10 +12,16 @@ export default [
 		label: 'raw AC-3',
 	},
 	{
+		extension: 'av1',
+		decode: true,
+		encode: true,
+		label: 'AOMedia Video 1 (AV1)'
+	},
+	{
 		extension: 'avi',
 		decode: true,
 		encode: true,
-		label: 'AVI (Audio Video Interleaved)',
+		label: 'Audio Video Interleaved (AVI)',
 	},
 	{
 		extension: 'flac',
