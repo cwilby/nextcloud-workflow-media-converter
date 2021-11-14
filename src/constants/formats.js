@@ -15,7 +15,7 @@ export default [
 		extension: 'av1',
 		decode: true,
 		encode: true,
-		label: 'AOMedia Video 1 (AV1)'
+		label: 'AOMedia Video 1 (AV1)',
 	},
 	{
 		extension: 'avi',
@@ -76,6 +76,12 @@ export default [
 		decode: true,
 		encode: true,
 		label: 'MP4 (MPEG-4 Part 14)',
+	},
+    {
+		extension: 'mxf',
+		decode: true,
+		encode: true,
+		label: 'Material Exchange Format (MXF)',
 	},
 	{
 		extension: 'oga',
