@@ -77,7 +77,7 @@ export default [
 		encode: true,
 		label: 'MP4 (MPEG-4 Part 14)',
 	},
-    {
+	{
 		extension: 'mxf',
 		decode: true,
 		encode: true,
