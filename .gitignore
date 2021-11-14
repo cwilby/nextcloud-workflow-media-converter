@@ -7,3 +7,4 @@ coverage
 .phpunit.result.cache
 *.key
 .DS_Store
+js/
