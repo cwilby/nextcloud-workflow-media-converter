@@ -57,7 +57,7 @@ class ConvertMediaOperation implements ISpecificOperation {
 		try {
 			$this->handleEvent($eventName, $event, $ruleMatcher);
 		} catch (\Throwable $e) {
-			$this->logger->error("({$e->getCode()}) :: $e->getMessage()", ['eventName' => $eventName]);
+			$this->logger->error("({$e->getCode()}) :: {$e->getMessage()}", ['eventName' => $eventName]);
 		}
 	}
 
