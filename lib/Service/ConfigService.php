@@ -179,7 +179,9 @@ class ConfigService {
 			return 4;
 		} finally {
 			try {
-				pclose($process);
+                if (isset($process)) {
+                    pclose($process);
+                }
 			} catch (\Throwable $e) {
 				//
 			}
