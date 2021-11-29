@@ -178,9 +178,15 @@ class ConfigService {
 
 			return 4;
 		} finally {
-            if (isset($process)) {
-                pclose($process);
-            }
+			try {
+				if (isset($process)) {
+					pclose($process);
+				}
+			} catch (\Throwable $e) {
+				$this->logger->info($e->getMessage());
+
+				return 4;
+			}
 		}
 	}
 }
