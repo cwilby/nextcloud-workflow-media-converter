@@ -6,6 +6,7 @@ use OC\Files\Filesystem;
 use OCA\WorkflowMediaConverter\Factory\ProcessFactory;
 use OCA\WorkflowMediaConverter\Factory\ViewFactory;
 use OCA\WorkflowMediaConverter\Service\ConfigService;
+use OCA\WorkflowMediaConverter\Exceptions\MediaConversionThrottledException;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\QueuedJob;
 use OCP\Files\IRootFolder;
@@ -18,14 +19,16 @@ class ConvertMediaJob extends QueuedJob {
 	private $configService;
 	private $viewFactory;
 	private $processFactory;
+    private $jobList;
 
-	public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, ConfigService $configService, ViewFactory $viewFactory, ProcessFactory $processFactory) {
+	public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, ConfigService $configService, ViewFactory $viewFactory, ProcessFactory $processFactory, IJobList $jobList) {
 		parent::__construct($time);
 		$this->rootFolder = $rootFolder;
 		$this->logger = $logger;
 		$this->configService = $configService;
 		$this->viewFactory = $viewFactory;
 		$this->processFactory = $processFactory;
+        $this->jobList = $jobList;
 	}
 
 	protected function run($arguments) {
@@ -33,10 +36,15 @@ class ConvertMediaJob extends QueuedJob {
 		try {
 			$this
 				->parseArguments($arguments)
+                ->lockConversion()
 				->convertMedia()
 				->handlePostConversion()
+                ->unlockConversion()
 				->notifyBatchSuccess();
-		} catch (\Throwable $e) {
+        } catch (\MediaConversionLockedException $e) {
+            $this->logger->info(ConvertMedia::class . ' requeued - another conversion is currently running.');
+        } catch (\Throwable $e) {
+            $this->configService->releaseConversionLock();
 			$eType = get_class($e);
 			$this->notifyBatchFail($e);
 			$this->logger->error("[{$eType}] :: ({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
@@ -59,6 +67,7 @@ class ConvertMediaJob extends QueuedJob {
 		$this->configService->setUserId($this->userId);
 		$this->batchId = (string)($arguments['batch_id'] ?? '');
 
+        $this->convertMediaInParallel = (bool)($arguments['convertMediaInParallel'] ?? false);
 		$this->postConversionSourceRule = (string)$arguments['postConversionSourceRule'];
 		$this->postConversionSourceRuleMoveFolder = $this->prependUserFolder($arguments['postConversionSourceRuleMoveFolder']);
 		$this->postConversionOutputRule = (string)$arguments['postConversionOutputRule'];
@@ -87,6 +96,37 @@ class ConvertMediaJob extends QueuedJob {
 
 		return $this;
 	}
+
+    public function lockConversion()
+    {
+		$adminAllowedParallelConversion = $this->configService->getAppConfigValue('convertMediaInParallel', false);
+
+        if ($this->convertMediaInParallel && $adminAllowedParallelConversion) {
+            return $this; // (continue with conversion)
+        }
+
+        if ($this->configService->checkConversionLock()) {
+            $this->jobList->add(ConvertMediaJob::class, [
+				'uid' => $this->userId,
+				'batch_id' => $this->batchId,
+				'path' => $this->path,
+				'outputExtension' => $this->outputExtension,
+                'convertMediaInParallel' => $this->convertMediaInParallel,
+				'postConversionSourceRule' => $this->postConversionSourceRule,
+				'postConversionSourceRuleMoveFolder' => $this->postConversionSourceRuleMoveFolder,
+				'postConversionOutputRule' => $this->postConversionOutputRule,
+				'postConversionOutputRuleMoveFolder' => $this->postConversionOutputRuleMoveFolder,
+				'postConversionOutputConflictRule' => $this->postConversionOutputConflictRule,
+				'postConversionOutputConflictRuleMoveFolder' => $this->postConversionOutputConflictRuleMoveFolder
+			]);
+
+            throw new MediaConversionLockedException();
+        }
+
+        $this->configService->setConversionLock();
+
+        return $this;
+    }
 
 	public function convertMedia() {
 		$threads = $this->configService->getAppConfigValue('threadLimit', 0);
@@ -153,6 +193,16 @@ class ConvertMediaJob extends QueuedJob {
 			'status' => ($batch['converted'] + 1) === $batch['unconverted'] ? 'finished' : 'converting'
 		]);
 	}
+
+    public function unlockConversion() {
+        if ($this->convertMediaInParallel) {
+            return $this;
+        }
+
+        $this->configService->releaseConversionLock();
+
+        return $this;
+    }
 
 	public function notifyBatchFail(\Throwable $e) {
 		if (!$this->batchId) {

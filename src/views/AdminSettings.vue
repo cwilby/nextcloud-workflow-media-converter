@@ -14,11 +14,14 @@
 				:max="maxThreads"
 				:disabled="saving">
 			<input v-model="threadLimit"
+				type="number"
 				min="0"
 				:max="maxThreads"
-				type="number"
 				:disabled="saving">
 		</div>
+		<CheckboxRadioSwitch :checked.sync="convertMediaInParallel">
+			{{ t("workflow_media_converter", "Convert media in parallel") }}
+		</CheckboxRadioSwitch>
 	</div>
 </template>
 
@@ -26,11 +29,14 @@
 import debounce from 'debounce'
 import { showError } from '@nextcloud/dialogs'
 import { generateUrl } from '@nextcloud/router'
+import CheckboxRadioSwitch from '@nextcloud/vue/dist/Components/CheckboxRadioSwitch'
 import axios from '@nextcloud/axios'
 import { loadState } from '@nextcloud/initial-state'
 
 export default {
 	name: 'AdminSettings',
+
+	components: { CheckboxRadioSwitch },
 
 	data: () => ({
 		saving: false,
@@ -51,6 +57,15 @@ export default {
 			},
 			async set(value) {
 				this.state.threadLimit = value
+				await this.saveConfig()
+			},
+		},
+		convertMediaInParallel: {
+			get() {
+				return this.state.convertMediaInParallel
+			},
+			async set(value) {
+				this.state.convertMediaInParallel = value
 				await this.saveConfig()
 			},
 		},

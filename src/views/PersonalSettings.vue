@@ -2,9 +2,16 @@
 	<div class="wmc-personal-settings">
 		<h2>
 			<img :src="iconUrl">
-			{{ t('workflow_media_converter', 'Media conversion') }}
+			{{ t("workflow_media_converter", "Media conversion") }}
 		</h2>
-		<p>{{ t('workflow_media_converter', 'You may create conversion batches to convert existing media based on a set of rules.') }}</p>
+		<p>
+			{{
+				t(
+					"workflow_media_converter",
+					"You may create conversion batches to convert existing media based on a set of rules."
+				)
+			}}
+		</p>
 		<hr>
 		<ConversionBatchList
 			:conversion-batches="conversionBatches"
@@ -49,7 +56,7 @@ export default {
 
 	created() {
 		this.pollingInterval = setInterval(async() => {
-			if (this.state.conversionBatches.length && this.state.conversionBatches.every(b => b.id)) {
+			if (this.state.conversionBatches.length && this.state.conversionBatches.every((b) => b.id)) {
 				await this.refreshBatches()
 			}
 		}, 10000)
@@ -62,7 +69,9 @@ export default {
 	methods: {
 		async refreshBatches() {
 			try {
-				const { data: state } = await axios.get(generateUrl('/apps/workflow_media_converter/personal-settings'))
+				const { data: state } = await axios.get(
+					generateUrl('/apps/workflow_media_converter/personal-settings')
+				)
 
 				this.state = state
 			} catch (error) {
@@ -75,6 +84,7 @@ export default {
 				id: null,
 				status: 'queued',
 				convertMediaInSubFolders: false,
+				convertMediaInParallel: false,
 				sourceFolder: null,
 				sourceExtension: null,
 				outputExtension: null,
@@ -106,14 +116,17 @@ export default {
 			}
 
 			OC.dialogs.confirmDestructive(
-				this.t('workflow_media_converter', 'This will batch convert any unconverted media in the specified folder.  Are you sure you want to proceed?'),
+				this.t(
+					'workflow_media_converter',
+					'This will batch convert any unconverted media in the specified folder.  Are you sure you want to proceed?'
+				),
 				this.t('workflow_media_converter', 'Start conversion batch'),
 				{
 					type: OC.dialogs.YES_NO_BUTTONS,
 					confirm: this.t('workflow_media_converter', 'Yes'),
 					cancel: this.t('workflow_media_converter', 'Cancel'),
 				},
-				confirmed => confirmed && this.saveConversionBatch(),
+				(confirmed) => confirmed && this.saveConversionBatch(),
 				true
 			)
 		},
@@ -121,7 +134,8 @@ export default {
 		validateSaveConversionBatch() {
 			const batch = this.newConversionBatch
 
-			return batch.outputExtension
+			return (
+				batch.outputExtension
 				&& batch.sourceFolder
 				&& batch.sourceExtension
 				&& batch.postConversionSourceRule
@@ -130,20 +144,23 @@ export default {
 				&& (batch.postConversionOutputRule === 'move' ? batch.postConversionOutputRuleMoveFolder : true)
 				&& batch.postConversionOutputConflictRule
 				&& (batch.postConversionOutputConflictRule === 'move' ? batch.postConversionOutputConflictRuleMoveFolder : true)
+			)
 		},
 
 		async saveConversionBatch() {
 			try {
 				this.saving = true
 				this.newConversionBatch.id = getUniqueId()
-				await axios.post(generateUrl('/apps/workflow_media_converter/conversion-batches'), { batch: this.newConversionBatch })
+				await axios.post(generateUrl('/apps/workflow_media_converter/conversion-batches'), {
+					batch: this.newConversionBatch,
+				})
 			} catch (error) {
-				this.conversionBatches.splice(this.conversionBatches.findIndex(b => b.id === this.newConversionBatch.id), 1)
-				this.newConversionBatch = {}
-				OC.dialogs.alert(
-					error.response.data,
-					this.t('workflow_media_converter', 'Error saving')
+				this.conversionBatches.splice(
+					this.conversionBatches.findIndex((b) => b.id === this.newConversionBatch.id),
+					1
 				)
+				this.newConversionBatch = {}
+				OC.dialogs.alert(error.response.data, this.t('workflow_media_converter', 'Error saving'))
 			} finally {
 				this.saving = false
 			}
@@ -152,7 +169,10 @@ export default {
 		confirmRemoveConversionBatch(conversionBatch) {
 			OC.dialogs.confirmDestructive(
 				conversionBatch.id
-					? this.t('workflow_media_converter', 'All queued conversions for this batch will be cancelled, are you sure you want to proceed?')
+					? this.t(
+						'workflow_media_converter',
+						'All queued conversions for this batch will be cancelled, are you sure you want to proceed?'
+					)
 					: this.t('workflow_media_converter', 'Are you sure you want to stop making this batch?'),
 				this.t('workflow_media_converter', 'Delete conversion batch'),
 				{
@@ -161,7 +181,7 @@ export default {
 					confirmClasses: 'error',
 					cancel: this.t('workflow_media_converter', 'Cancel'),
 				},
-				confirmed => confirmed && this.removeConversionBatch(conversionBatch),
+				(confirmed) => confirmed && this.removeConversionBatch(conversionBatch),
 				true
 			)
 		},
@@ -171,10 +191,12 @@ export default {
 				this.removingConversionBatch = true
 
 				if (conversionBatch.id) {
-					await axios.delete(generateUrl(`/apps/workflow_media_converter/conversion-batches/${conversionBatch.id}`))
+					await axios.delete(
+						generateUrl(`/apps/workflow_media_converter/conversion-batches/${conversionBatch.id}`)
+					)
 				}
 
-				this.state.conversionBatches = this.state.conversionBatches.filter(j => j.id !== conversionBatch.id)
+				this.state.conversionBatches = this.state.conversionBatches.filter((j) => j.id !== conversionBatch.id)
 			} catch (error) {
 				console.error(error)
 			} finally {
@@ -185,7 +207,9 @@ export default {
 		saveConfig: debounce(async function() {
 			try {
 				this.saving = true
-				await axios.put(generateUrl('/apps/workflow_media_converter/personal-settings'), { values: this.state })
+				await axios.put(generateUrl('/apps/workflow_media_converter/personal-settings'), {
+					values: this.state,
+				})
 			} catch (e) {
 				showError(this.t('workflow_media_converter', 'Failed to save config, please try again shortly'))
 				console.error(e)

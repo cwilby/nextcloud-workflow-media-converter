@@ -67,6 +67,7 @@ class BatchConvertMediaJob extends QueuedJob {
 		$this->userFolder = "/{$this->userId}/files";
 		$this->sourceFolderPath = $this->prependUserFolder($arguments['sourceFolder']);
 		$this->convertMediaInSubFolders = $arguments['convertMediaInSubFolders'];
+        $this->convertMediaInParallel = $arguments['convertMediaInParallel'];
 		$this->sourceExtension = $arguments['sourceExtension'];
 		$this->outputExtension = $arguments['outputExtension'];
 		$this->postConversionSourceRule = $arguments['postConversionSourceRule'];
@@ -121,6 +122,7 @@ class BatchConvertMediaJob extends QueuedJob {
 				'batch_id' => $this->batchId,
 				'path' => $node->getPath(),
 				'outputExtension' => $this->outputExtension,
+                'convertMediaInParallel' => $this->convertMediaInParallel,
 				'postConversionSourceRule' => $this->postConversionSourceRule,
 				'postConversionSourceRuleMoveFolder' => $this->postConversionSourceRuleMoveFolder,
 				'postConversionOutputRule' => $this->postConversionOutputRule,

@@ -34,7 +34,8 @@ class ConfigService {
 	public function getAdminConfig() {
 		return [
 			'threadLimit' => $this->getAppConfigValue('threadLimit', 0),
-			'maxThreads' => $this->getMaxThreads()
+			'maxThreads' => $this->getMaxThreads(),
+			'convertMediaInParallel' => $this->getAppConfigValue('convertMediaInParallel', false),
 		];
 	}
 
@@ -77,6 +78,18 @@ class ConfigService {
 	public function setAppConfig($values) {
 		$this->setAppConfigValue('threadLimit', $values['threadLimit']);
 	}
+
+    public function checkConversionLock() {
+        return $this->getAppConfigValue('conversionLock', false);
+    }
+
+    public function acquireConversionLock() {
+        $this->setAppConfigValue('conversionLock', true);
+    }
+
+    public function releaseConversionLock() {
+        $this->setAppConfigValue('conversionLock', false);
+    }
 
 	public function addToCounters($counter, $amount) {
 		$this->addToAdminCounter($counter, $amount);

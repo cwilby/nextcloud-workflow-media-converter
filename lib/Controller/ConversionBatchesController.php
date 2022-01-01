@@ -87,6 +87,7 @@ class ConversionBatchesController extends Controller {
 			if (
 				$conversionBatch['sourceFolder'] === $batch['sourceFolder']
 				&& $conversionBatch['convertMediaInSubFolders'] === $batch['convertMediaInSubFolders']
+                && $conversionBatch['convertMediaInParallel'] === $batch['convertMediaInParallel']
 				&& $conversionBatch['sourceExtension'] === $batch['sourceExtension']
 				&& $conversionBatch['outputExtension'] === $batch['outputExtension']
 			) {

@@ -8,19 +8,22 @@
 		<div class="grid">
 			<div class="column">
 				<div class="wmc-conversion-batch__source-directory">
-					<span>{{ t('workflow_media_converter', `Convert all files in this folder`) }}</span>
+					<span>{{ t("workflow_media_converter", `Convert all files in this folder`) }}</span>
 					<div>
 						<button @click="openFilePicker('sourceFolder')">
-							{{ t('workflow_media_converter', 'Choose Folder') }}
+							{{ t("workflow_media_converter", "Choose Folder") }}
 						</button>
 						<span>{{ sourceFolder }}</span>
 					</div>
 				</div>
 				<CheckboxRadioSwitch :checked.sync="convertMediaInSubFolders">
-					{{ t('workflow_media_converter', 'Convert media in sub-folders') }}
+					{{ t("workflow_media_converter", "Convert media in sub-folders") }}
+				</CheckboxRadioSwitch>
+				<CheckboxRadioSwitch :checked.sync="convertMediaInParallel">
+					{{ t("workflow_media_converter", "Convert media in parallel") }}
 				</CheckboxRadioSwitch>
 				<div class="wmc-conversion-batch__from-format">
-					<label>{{ t('workflow_media_converter', 'Find source files with this extension/format') }}</label>
+					<label>{{ t("workflow_media_converter", "Find source files with this extension/format") }}</label>
 					<select v-model="sourceExtension" class="wmc-conversion-batch__from-format-picker">
 						<option value="" />
 						<option
@@ -32,7 +35,9 @@
 					</select>
 				</div>
 				<div class="wmc-conversion-batch__to-format">
-					<label>{{ t('workflow_media_converter', 'Store converted output in this extension/format') }}</label>
+					<label>{{
+						t("workflow_media_converter", "Store converted output in this extension/format")
+					}}</label>
 					<select v-model="outputExtension" class="wmc-conversion-batch__to-format-picker">
 						<option value="" />
 						<option
@@ -50,7 +55,7 @@
 		</div>
 		<div class="wmc-conversion-batch__actions">
 			<button v-if="!conversionBatch.id" class="save" @click="$emit('save')">
-				{{ t('workflow_media_converter', 'Save') }}
+				{{ t("workflow_media_converter", "Save") }}
 			</button>
 		</div>
 	</div>
@@ -95,6 +100,14 @@ export default {
 			},
 			set(convertMediaInSubFolders) {
 				this.commit({ convertMediaInSubFolders })
+			},
+		},
+		convertMediaInParallel: {
+			get() {
+				return this.conversionBatch.convertMediaInParallel
+			},
+			set(convertMediaInParallel) {
+				this.commit({ convertMediaInParallel })
 			},
 		},
 		sourceExtension: {
