@@ -36,6 +36,7 @@ class BatchConvertMediaJob extends QueuedJob {
 
 	public function run($arguments) {
 		try {
+			$this->logger->info(BatchConvertMediaJob::class . ' started');
 			$this
 				->parseArguments($arguments)
 				->findUnconvertedMediaInFolder($this->sourceFolder)
@@ -52,7 +53,7 @@ class BatchConvertMediaJob extends QueuedJob {
 			]);
 			$this->logger->error((string)$e);
 		} finally {
-			$this->logger->info(ConvertMedia::class . ' finished');
+			$this->logger->info(BatchConvertMediaJob::class . ' finished');
 		}
 	}
 

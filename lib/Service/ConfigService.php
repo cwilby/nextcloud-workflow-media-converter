@@ -34,7 +34,8 @@ class ConfigService {
 	public function getAdminConfig() {
 		return [
 			'threadLimit' => $this->getAppConfigValue('threadLimit', 0),
-			'maxThreads' => $this->getMaxThreads()
+			'maxThreads' => $this->getMaxThreads(),
+			'convertMediaInParallel' => $this->getAppConfigValue('convertMediaInParallel', "no") === "yes",
 		];
 	}
 
@@ -75,6 +76,7 @@ class ConfigService {
 	}
 
 	public function setAppConfig($values) {
+		$this->setAppConfigValue('convertMediaInParallel', $values['convertMediaInParallel'] ? "yes" : "no");
 		$this->setAppConfigValue('threadLimit', $values['threadLimit']);
 	}
 

@@ -6,8 +6,10 @@ use OC\Files\Filesystem;
 use OCA\WorkflowMediaConverter\Factory\ProcessFactory;
 use OCA\WorkflowMediaConverter\Factory\ViewFactory;
 use OCA\WorkflowMediaConverter\Service\ConfigService;
+use OCA\WorkflowMediaConverter\Exceptions\MediaConversionLockedException;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\QueuedJob;
+use OCP\BackgroundJob\IJobList;
 use OCP\Files\IRootFolder;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Process\Exception\ProcessFailedException;
@@ -18,30 +20,37 @@ class ConvertMediaJob extends QueuedJob {
 	private $configService;
 	private $viewFactory;
 	private $processFactory;
+	private $jobList;
 
-	public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, ConfigService $configService, ViewFactory $viewFactory, ProcessFactory $processFactory) {
+	public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, ConfigService $configService, ViewFactory $viewFactory, ProcessFactory $processFactory, IJobList $jobList) {
 		parent::__construct($time);
 		$this->rootFolder = $rootFolder;
 		$this->logger = $logger;
 		$this->configService = $configService;
 		$this->viewFactory = $viewFactory;
 		$this->processFactory = $processFactory;
+		$this->jobList = $jobList;
 	}
 
 	protected function run($arguments) {
-		$this->logger->info(ConvertMedia::class . ' started');
+		$this->logger->info(ConvertMediaJob::class . ' started - converting ' . $arguments['path']);
 		try {
 			$this
 				->parseArguments($arguments)
+				->lockConversion()
 				->convertMedia()
 				->handlePostConversion()
+				->unlockConversion()
 				->notifyBatchSuccess();
+		} catch (MediaConversionLockedException $e) {
+			$this->logger->info(ConvertMediaJob::class . ' requeued for ' . $arguments['path']);
 		} catch (\Throwable $e) {
+			$this->configService->setAppConfigValue('conversionLock', "no");
 			$eType = get_class($e);
 			$this->notifyBatchFail($e);
 			$this->logger->error("[{$eType}] :: ({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
 		} finally {
-			$this->logger->info(ConvertMedia::class . ' finished');
+			$this->logger->info(ConvertMediaJob::class . ' finished - output file: ' . $this->outputFilePath);
 		}
 	}
 
@@ -84,6 +93,34 @@ class ConvertMediaJob extends QueuedJob {
 		} else {
 			$this->outputFolder = $this->sourceFile->getParent();
 		}
+
+		return $this;
+	}
+
+	public function lockConversion() {
+		if ($this->parallelConversionEnabled()) {
+			return $this;
+		}
+
+		if ($this->conversionLockIsActive($this->batchId)) {
+			$this->jobList->add(ConvertMediaJob::class, [
+				'uid' => $this->userId,
+				'batch_id' => $this->batchId,
+				'path' => $this->path,
+				'outputExtension' => $this->outputExtension,
+				'convertMediaInParallel' => $this->convertMediaInParallel,
+				'postConversionSourceRule' => $this->postConversionSourceRule,
+				'postConversionSourceRuleMoveFolder' => $this->postConversionSourceRuleMoveFolder,
+				'postConversionOutputRule' => $this->postConversionOutputRule,
+				'postConversionOutputRuleMoveFolder' => $this->postConversionOutputRuleMoveFolder,
+				'postConversionOutputConflictRule' => $this->postConversionOutputConflictRule,
+				'postConversionOutputConflictRuleMoveFolder' => $this->postConversionOutputConflictRuleMoveFolder
+			]);
+
+			throw new MediaConversionLockedException();
+		}
+
+		$this->setConversionLockActive($this->batchId, true);
 
 		return $this;
 	}
@@ -141,6 +178,16 @@ class ConvertMediaJob extends QueuedJob {
 		}
 	}
 
+	public function unlockConversion() {
+		if ($this->parallelConversionEnabled()) {
+			return $this;
+		}
+
+		$this->setConversionLockActive($this->batchId, false);
+
+		return $this;
+	}
+
 	public function notifyBatchSuccess() {
 		if (!$this->batchId) {
 			return;
@@ -184,6 +231,37 @@ class ConvertMediaJob extends QueuedJob {
 		$view->fromTmpFile($tempFile, $newFileName);
 
 		return $this;
+	}
+
+	protected function parallelConversionEnabled() {
+		return $this->configService->getAppConfigValue('convertMediaInParallel') === "yes";
+	}
+	
+	protected function setConversionLockActive($batchId, $state) {
+		$this->configService->updateBatch($this->batchId, [
+			'conversion_lock' => $state ? date('Y-m-d H:i:s') : null
+		]);
+	}
+
+	protected function conversionLockIsActive($batchId) {
+		$batch = $this->configService->getBatch($batchId);
+		if (empty($batch)) {
+			return false;
+		}
+
+		$lock = new DateTime($batch['conversion_lock']);
+		if (empty($lock)) {
+			return false;
+		}
+
+		$expires = $lock->add(new DateInterval('PT' . 30 . 'M'));
+		$now = new DateTime();
+		if ($now < $expires) {
+			return true;
+		}
+
+		$this->setConversionLockActive($batchId, false);
+		return false;
 	}
 
 	protected function removeDoubleSlashes($path) {

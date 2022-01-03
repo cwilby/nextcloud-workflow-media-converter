@@ -4,6 +4,10 @@
 			<img :src="iconUrl">
 			{{ t('workflow_media_converter', 'Media conversion') }}
 		</h2>
+		<CheckboxRadioSwitch :checked.sync="convertMediaInParallel">
+			{{ t("workflow_media_converter", "Enable parallel media conversion") }}
+		</CheckboxRadioSwitch>
+		<hr>
 		<p>{{ t('workflow_media_converter', 'You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg.') }}</p>
 		<p>{{ t('workflow_media_converter', 'This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec.') }}</p>
 		<p>{{ t('workflow_media_converter', 'Changes made here will apply to any media that is not being converted at this moment in time.') }}</p>
@@ -26,11 +30,14 @@
 import debounce from 'debounce'
 import { showError } from '@nextcloud/dialogs'
 import { generateUrl } from '@nextcloud/router'
+import CheckboxRadioSwitch from '@nextcloud/vue/dist/Components/CheckboxRadioSwitch'
 import axios from '@nextcloud/axios'
 import { loadState } from '@nextcloud/initial-state'
 
 export default {
 	name: 'AdminSettings',
+
+	components: { CheckboxRadioSwitch },
 
 	data: () => ({
 		saving: false,
@@ -50,20 +57,24 @@ export default {
 				return this.state.threadLimit
 			},
 			async set(value) {
-				this.state.threadLimit = value
+				this.state.threadLimit = Math.min(Math.max(value, 0), this.maxThreads)
+				await this.saveConfig()
+			},
+		},
+		convertMediaInParallel: {
+			get() {
+				return this.state.convertMediaInParallel
+			},
+			async set(value) {
+				this.state.convertMediaInParallel = value
 				await this.saveConfig()
 			},
 		},
 	},
 
 	methods: {
-		validate() {
-			this.threadLimit = Math.min(Math.max(this.threadLimit, 0), this.maxThreads)
-		},
-
 		saveConfig: debounce(async function() {
 			try {
-				this.validate()
 				this.saving = true
 				await axios.put(generateUrl('/apps/workflow_media_converter/admin-settings'), { values: this.state })
 			} catch (e) {
