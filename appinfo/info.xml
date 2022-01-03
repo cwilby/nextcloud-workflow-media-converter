@@ -12,7 +12,7 @@
  * Create batch jobs to convert existing media.
     ]]>
     </description>
-    <version>1.3.0</version>
+    <version>1.3.2</version>
     <licence>agpl</licence>
     <author mail="cameron@wilby.com" homepage="https://github.com/cwilby">Cameron Wilby</author>
     <namespace>WorkflowMediaConverter</namespace>
@@ -34,7 +34,7 @@
     <screenshot>https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/admin-settings-ui.png</screenshot>
 
     <dependencies>
-        <php min-version="7.3" max-version="8.0" />
+        <php min-version="7.3" max-version="8.1" />
         <nextcloud min-version="21" max-version="23"/>
     </dependencies>
     <settings>
