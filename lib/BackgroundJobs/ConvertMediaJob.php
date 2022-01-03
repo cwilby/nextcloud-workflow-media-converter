@@ -2,6 +2,8 @@
 
 namespace OCA\WorkflowMediaConverter\BackgroundJobs;
 
+use DateTime;
+use DateInterval;
 use OC\Files\Filesystem;
 use OCA\WorkflowMediaConverter\Factory\ProcessFactory;
 use OCA\WorkflowMediaConverter\Factory\ViewFactory;
