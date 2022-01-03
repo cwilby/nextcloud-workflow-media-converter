@@ -104,7 +104,7 @@ class ConvertMediaJob extends QueuedJob {
 			return $this;
 		}
 
-		if ($this->conversionLockIsActive($this->batchId)) {
+		if ($this->conversionLockIsActive()) {
 			$this->jobList->add(ConvertMediaJob::class, [
 				'uid' => $this->userId,
 				'batch_id' => $this->batchId,
@@ -122,7 +122,7 @@ class ConvertMediaJob extends QueuedJob {
 			throw new MediaConversionLockedException();
 		}
 
-		$this->setConversionLockActive($this->batchId, true);
+		$this->setConversionLockActive(true);
 
 		return $this;
 	}
@@ -185,7 +185,7 @@ class ConvertMediaJob extends QueuedJob {
 			return $this;
 		}
 
-		$this->setConversionLockActive($this->batchId, false);
+		$this->setConversionLockActive(false);
 
 		return $this;
 	}
@@ -238,31 +238,45 @@ class ConvertMediaJob extends QueuedJob {
 	protected function parallelConversionEnabled() {
 		return $this->configService->getAppConfigValue('convertMediaInParallel') === "yes";
 	}
-	
-	protected function setConversionLockActive($batchId, $state) {
-		$this->configService->updateBatch($this->batchId, [
-			'conversion_lock' => $state ? date('Y-m-d H:i:s') : null
-		]);
+
+	protected function setConversionLockActive($state) {
+		$lockValue = $state ? date('Y-m-d H:i:s') : null;
+
+		if (empty($this->batchId)) {
+			$this->configService->setAppConfigValue('conversionLock', $lockValue);
+		} else {
+			$this->configService->updateBatch($this->batchId, ['conversion_lock' => $lockValue]);
+		}
 	}
 
-	protected function conversionLockIsActive($batchId) {
-		$batch = $this->configService->getBatch($batchId);
-		if (empty($batch)) {
-			return false;
+	protected function conversionLockIsActive() {
+		if (empty($this->batchId)) {
+			$lockValue = $this->configService->getAppConfigValue('conversionLock');
+			if (empty($lockValue)) {
+				return false;
+			}
+			$lock = new DateTime($lockValue);
+		} else {
+			$batch = $this->configService->getBatch($this->batchId);
+			if (empty($batch)) {
+				return false;
+			}
+			$lock = new DateTime($batch['conversion_lock']);
 		}
 
-		$lock = new DateTime($batch['conversion_lock']);
 		if (empty($lock)) {
 			return false;
 		}
 
-		$expires = $lock->add(new DateInterval('PT' . 30 . 'M'));
+		$expiration = $lock->add(new DateInterval('PT' . 30 . 'M'));
 		$now = new DateTime();
-		if ($now < $expires) {
+
+		if ($now < $expiration) {
 			return true;
 		}
 
-		$this->setConversionLockActive($batchId, false);
+		$this->setConversionLockActive(false);
+
 		return false;
 	}
 
