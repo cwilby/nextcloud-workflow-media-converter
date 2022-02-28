@@ -77,6 +77,7 @@ class ConvertMediaJob extends QueuedJob {
 		$this->postConversionOutputConflictRule = (string)$arguments['postConversionOutputConflictRule'];
 		$this->postConversionOutputConflictRuleMoveFolder = $this->prependUserFolder($arguments['postConversionOutputConflictRuleMoveFolder']);
 		$this->outputExtension = (string)$arguments['outputExtension'];
+		$this->convertMediaInParallel = $arguments['convertMediaInParallel'] == 'true';
 
 		$this->sourceFile = $this->rootFolder->get($this->path);
 		$this->sourceFolder = dirname($this->path);
