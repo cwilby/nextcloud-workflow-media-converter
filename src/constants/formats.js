@@ -84,6 +84,12 @@ export default [
 		label: 'Material Exchange Format (MXF)',
 	},
 	{
+		extension: 'mkv',
+		decode: true,
+		encode: true,
+		label: 'Matroska Video Format (MKV)',
+	},
+	{
 		extension: 'oga',
 		decode: false,
 		encode: true,
