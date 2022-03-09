@@ -23,6 +23,7 @@ class ConvertMediaJob extends QueuedJob {
 	private $viewFactory;
 	private $processFactory;
 	private $jobList;
+	private $convertMediaInParallel;
 
 	public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, ConfigService $configService, ViewFactory $viewFactory, ProcessFactory $processFactory, IJobList $jobList) {
 		parent::__construct($time);
@@ -262,7 +263,11 @@ class ConvertMediaJob extends QueuedJob {
 			if (empty($batch)) {
 				return false;
 			}
-			$lock = new DateTime($batch['conversion_lock']);
+			if (isset($batch['conversion_lock'])) {
+				$lock = new DateTime($batch['conversion_lock']);
+			} else {
+				$lock = new DateTime;
+			}
 		}
 
 		if (empty($lock)) {
