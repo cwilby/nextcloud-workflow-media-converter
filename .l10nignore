@@ -1,6 +1,2 @@
-js/workflow_media_converter-adminSettings.js
-js/workflow_media_converter-adminSettings.js.map
-js/workflow_media_converter-operator.js
-js/workflow_media_converter-operator.js.map
-js/workflow_media_converter-personalSettings.js
-js/workflow_media_converter-personalSettings.js.map
+js/
+vendor/
