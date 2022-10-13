@@ -2,58 +2,55 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the Nextcloud package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Nextcloud 3.14159\n"
 "Report-Msgid-Bugs-To: translations\\@example.com\n"
-"POT-Creation-Date: 2021-10-06 14:07-0300\n"
-"PO-Revision-Date: 2021-10-06 14:24-0300\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2022-10-13 09:36+0000\n"
+"PO-Revision-Date: 2022-10-13 09:36+0000\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/nextcloud/teams/64236/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language: pt_BR\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/lib/Controller/ConversionBatchesController.php:93
+#: /app/lib/Controller/ConversionBatchesController.php:93
 msgid ""
 "A similar conversion batch has already been created.  Delete that batch and "
 "try again"
 msgstr ""
-"Um lote de conversão semelhante já foi criado. Remova-o e tente novamente"
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/lib/Operation/ConvertMediaOperation.php:37
+#: /app/lib/Operation/ConvertMediaOperation.php:37
 msgid "Convert media"
-msgstr "Converter mídia"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/lib/Operation/ConvertMediaOperation.php:45
+#: /app/lib/Operation/ConvertMediaOperation.php:45
 msgid "Convert video/audio files using FFmpeg."
-msgstr "Converter arquivos de vídeo/áudio usando o FFmpeg"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/lib/Settings/AdminSection.php:24
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/lib/Settings/PersonalSection.php:24
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:28
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:33
+#. TRANSLATORS ngs.vue:5
+#. TRANSLATORS ttings.vue:5
+#: /app/lib/Settings/AdminSection.php:24
+#: /app/lib/Settings/PersonalSection.php:24
+#: /app/specialVueFakeDummyForL10nScript.js:56
+#: /app/specialVueFakeDummyForL10nScript.js:68
 msgid "Media conversion"
-msgstr "Conversão de Mídia"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialAppInfoFakeDummyForL10nScript.php:2
+#: /app/specialAppInfoFakeDummyForL10nScript.php:2
 msgid "Automated media conversion"
-msgstr "Conversão automática de mídia"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialAppInfoFakeDummyForL10nScript.php:3
+#: /app/specialAppInfoFakeDummyForL10nScript.php:3
 msgid "Rule-based automated conversion of video/audio files using FFmpeg"
 msgstr ""
-"Conversão automática de arquivos de vídeo/áudio baseada em regras "
-"utilizando o FFmpeg"
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialAppInfoFakeDummyForL10nScript.php:4
+#: /app/specialAppInfoFakeDummyForL10nScript.php:4
 msgid ""
-"A dedicated media conversion manager for Nextcloud that allows you to "
-"automate media conversion.\n"
+"A dedicated media conversion manager for Nextcloud that allows you to automate media conversion.\n"
 "\n"
 "**Features**\n"
 " * Convert video/audio between formats supported by FFmpeg.\n"
@@ -61,205 +58,228 @@ msgid ""
 " * Automatically convert media as it is uploaded.\n"
 " * Create batch jobs to convert existing media."
 msgstr ""
-"Um gerenciador de conversão de mídia dedicado para o Nextcloud que permite "
-"automatizar a conversão de mídia.\n"
-"\n"
-"**Funcionalidades**\n"
-" * Converta vídeo/áudio entre formatos suportados pelo FFmpeg.\n"
-" * Controle completo do processo de conversão.\n"
-" * Converter automaticamente a mídia à medida que for carregada.\n"
-" * Criar lote para converter mídia existente."
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:1
+#. TRANSLATORS rsionBatchList.vue:16
+#: /app/specialVueFakeDummyForL10nScript.js:2
 msgid "Add Conversion Batch"
-msgstr "Adicionar lote de conversão"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:2
+#. TRANSLATORS rsionBatchList.vue:4
+#: /app/specialVueFakeDummyForL10nScript.js:4
 msgid "Add batches to convert existing media outside of your flow."
 msgstr ""
-"Adicionar lote para converter mídia pré-existente que não se enquadre em "
-"nenhum fluxo"
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:3
+#. TRANSLATORS rtMediaOperation.vue:4
+#: /app/specialVueFakeDummyForL10nScript.js:6
 msgid "Convert to format"
-msgstr "Converter para formato"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:4
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:14
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:16
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:19
+#. TRANSLATORS eConversionBatch.vue:14
+#. TRANSLATORS onversionRules.vue:12
+#: /app/specialVueFakeDummyForL10nScript.js:8
+#: /app/specialVueFakeDummyForL10nScript.js:28
+#: /app/specialVueFakeDummyForL10nScript.js:32
+#: /app/specialVueFakeDummyForL10nScript.js:38
 msgid "Choose Folder"
-msgstr "Escolher pasta"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:5
+#. TRANSLATORS eConversionBatch.vue:20
+#: /app/specialVueFakeDummyForL10nScript.js:10
 msgid "Convert media in sub-folders"
-msgstr "Converter mídia em sub-pastas"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:6
+#. TRANSLATORS eConversionBatch.vue:23
+#: /app/specialVueFakeDummyForL10nScript.js:12
 msgid "Find source files with this extension/format"
-msgstr "Encontrar arquivos com essa extensão/formato"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:7
+#. TRANSLATORS eConversionBatch.vue:35
+#: /app/specialVueFakeDummyForL10nScript.js:14
 msgid "Store converted output in this extension/format"
-msgstr "Salvar arquivo convertido nesta extensão/formato"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:8
+#. TRANSLATORS eConversionBatch.vue:53
+#: /app/specialVueFakeDummyForL10nScript.js:16
 msgid "Save"
-msgstr "Salvar"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:9
+#. TRANSLATORS eConversionBatch.vue:11
+#: /app/specialVueFakeDummyForL10nScript.js:18
 msgid "Convert all files in this folder"
-msgstr "Converter todos os arquivos desta pasta"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:10
+#. TRANSLATORS ayConversionBatch.vue:11
+#: /app/specialVueFakeDummyForL10nScript.js:20
 msgid "Converted"
-msgstr "Convertido"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:11
+#. TRANSLATORS ayConversionBatch.vue:14
+#: /app/specialVueFakeDummyForL10nScript.js:22
 msgid "Total"
-msgstr "Total"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:12
+#: /app/specialVueFakeDummyForL10nScript.js:24
 msgid "Error code"
-msgstr "Código de erro"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:13
+#. TRANSLATORS onversionRules.vue:4
+#: /app/specialVueFakeDummyForL10nScript.js:26
 msgid "After the source file has been converted:"
-msgstr "Quando o arquivo original for convertido:"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:15
+#. TRANSLATORS onversionRules.vue:18
+#: /app/specialVueFakeDummyForL10nScript.js:30
 msgid "After the output is ready:"
-msgstr "Quando o arquivo final estiver pronto:"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:17
+#. TRANSLATORS onversionRules.vue:32
+#: /app/specialVueFakeDummyForL10nScript.js:34
 msgid "If the output file exists:"
-msgstr "Se o arquivo destino já existir:"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:18
+#. TRANSLATORS onversionRules.vue:39
+#: /app/specialVueFakeDummyForL10nScript.js:36
 msgid ""
 "Note: a new file will be added in this folder with a number added to its "
 "name if there is already a conflict file."
 msgstr ""
-"Nota: um novo arquivo será adicionado à pasta com um número adicionado ao "
-"final se já existir um arquivo conflitante"
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:20
+#. TRANSLATORS onversionRules.vue:66
+#: /app/specialVueFakeDummyForL10nScript.js:40
 msgid "Keep source file"
-msgstr "Manter arquivo original"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:21
+#. TRANSLATORS onversionRules.vue:67
+#: /app/specialVueFakeDummyForL10nScript.js:42
 msgid "Delete source file"
-msgstr "Remover arquivo original"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:22
+#. TRANSLATORS onversionRules.vue:68
+#: /app/specialVueFakeDummyForL10nScript.js:44
 msgid "Move source file to specific folder"
-msgstr "Mover arquivo original para uma pasta específica"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:23
+#. TRANSLATORS onversionRules.vue:71
+#: /app/specialVueFakeDummyForL10nScript.js:46
 msgid "Store output in source folder"
-msgstr "Salvar arquivo final na mesma pasta do arquivo original"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:24
+#. TRANSLATORS onversionRules.vue:72
+#: /app/specialVueFakeDummyForL10nScript.js:48
 msgid "Move output to specific folder"
-msgstr "Salvar arquivo final em uma pasta específica"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:25
+#. TRANSLATORS onversionRules.vue:75
+#: /app/specialVueFakeDummyForL10nScript.js:50
 msgid "Add new file with a number added to its name"
-msgstr "Adicionar novo arquivo com um número colocado no nome"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:26
+#. TRANSLATORS onversionRules.vue:76
+#: /app/specialVueFakeDummyForL10nScript.js:52
 msgid "Overwrite existing file"
-msgstr "Sobrescrever arquivo existente"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:27
+#. TRANSLATORS onversionRules.vue:77
+#: /app/specialVueFakeDummyForL10nScript.js:54
 msgid "Move existing file to specific folder"
-msgstr "Mover arquivo existente para pasta específica"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:29
+#. TRANSLATORS ngs.vue:11
+#: /app/specialVueFakeDummyForL10nScript.js:58
 msgid ""
 "You may set the number of threads used by FFmpeg to manage the resources "
 "used by FFmpeg."
 msgstr ""
-"Você pode configurar a quantidade de threads usadas pelo FFmpeg para "
-"gerenciar os recursos do FFmpeg"
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:30
+#. TRANSLATORS ngs.vue:12
+#: /app/specialVueFakeDummyForL10nScript.js:60
 msgid ""
 "This value can be set to 0 to let FFmpeg choose how many threads it should "
 "use depending on the codec."
 msgstr ""
-"Esse valor pode ser 0. O FFmpeg irá escolher quantas threads usar "
-"dependendo do codec."
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:31
+#. TRANSLATORS ngs.vue:13
+#: /app/specialVueFakeDummyForL10nScript.js:62
 msgid ""
 "Changes made here will apply to any media that is not being converted at "
 "this moment in time."
 msgstr ""
-"Mudanças feitas aqui serão aplicadas a todas as mídias que não estão sendo "
-"convertidas agora."
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:32
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:47
+#. TRANSLATORS ngs.vue:81
+#. TRANSLATORS ttings.vue:190
+#: /app/specialVueFakeDummyForL10nScript.js:64
+#: /app/specialVueFakeDummyForL10nScript.js:96
 msgid "Failed to save config, please try again shortly"
-msgstr "Falha ao salvar configuração, por favor tente novamente"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:34
+#. TRANSLATORS ngs.vue:8
+#: /app/specialVueFakeDummyForL10nScript.js:66
+msgid "Enable parallel media conversion"
+msgstr ""
+
+#. TRANSLATORS ttings.vue:7
+#: /app/specialVueFakeDummyForL10nScript.js:70
 msgid ""
 "You may create conversion batches to convert existing media based on a set "
 "of rules."
 msgstr ""
-"Você pode criar lotes de conversão de mídias existentes baseado em regras."
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:35
+#. TRANSLATORS ttings.vue:102
+#: /app/specialVueFakeDummyForL10nScript.js:72
 msgid "Please make sure the form is valid before saving"
-msgstr "Por favor verifique que o formulário é válido antes de salvar"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:36
+#. TRANSLATORS ttings.vue:103
+#: /app/specialVueFakeDummyForL10nScript.js:74
 msgid "Invalid data"
-msgstr "Dados inválidos"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:37
+#. TRANSLATORS ttings.vue:109
+#: /app/specialVueFakeDummyForL10nScript.js:76
 msgid ""
 "This will batch convert any unconverted media in the specified folder. Are "
 "you sure you want to proceed?"
 msgstr ""
-"Esse lote irá converter qualquer mídia não-convertida na pasta escolhida. "
-"Tem certeza que deseja continuar?"
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:38
+#. TRANSLATORS ttings.vue:110
+#: /app/specialVueFakeDummyForL10nScript.js:78
 msgid "Start conversion batch"
-msgstr "Começar conversão"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:39
+#. TRANSLATORS ttings.vue:113
+#: /app/specialVueFakeDummyForL10nScript.js:80
 msgid "Yes"
-msgstr "Sim"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:40
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:46
+#. TRANSLATORS ttings.vue:114
+#: /app/specialVueFakeDummyForL10nScript.js:82
+#: /app/specialVueFakeDummyForL10nScript.js:94
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:41
+#. TRANSLATORS ttings.vue:145
+#: /app/specialVueFakeDummyForL10nScript.js:84
 msgid "Error saving"
-msgstr "Erro ao salvar"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:42
+#. TRANSLATORS ttings.vue:155
+#: /app/specialVueFakeDummyForL10nScript.js:86
 msgid ""
 "All queued conversions for this batch will be cancelled, are you sure you "
 "want to proceed?"
 msgstr ""
-"Todas as conversões ainda em fila para este lote serão canceladas. Tem "
-"certeza que deseja continuar?"
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:43
+#. TRANSLATORS ttings.vue:156
+#: /app/specialVueFakeDummyForL10nScript.js:88
 msgid "Are you sure you want to stop making this batch?"
-msgstr "Tem certeza que deseja parar este lote?"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:44
+#. TRANSLATORS ttings.vue:157
+#: /app/specialVueFakeDummyForL10nScript.js:90
 msgid "Delete conversion batch"
-msgstr "Remover lote de conversão"
+msgstr ""
 
-#: /home/leonardo/Workspace/nextcloud-workflow-media-converter/specialVueFakeDummyForL10nScript.js:45
+#. TRANSLATORS ttings.vue:160
+#: /app/specialVueFakeDummyForL10nScript.js:92
 msgid "Delete"
-msgstr "Remover"
+msgstr ""
