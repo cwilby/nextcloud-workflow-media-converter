@@ -1,0 +1,8 @@
+{ "translations": {
+    "Save" : "შენახვა",
+    "Total" : "სულ",
+    "Yes" : "კი",
+    "Cancel" : "უარყოფა",
+    "Delete" : "წაშლა"
+},"pluralForm" :"nplurals=2; plural=(n!=1);"
+}

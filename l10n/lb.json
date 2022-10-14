@@ -1,0 +1,7 @@
+{ "translations": {
+    "Save" : "Späicheren",
+    "Yes" : "Yes",
+    "Cancel" : "Ofbriechen",
+    "Delete" : "Läschen"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}

@@ -1,0 +1,6 @@
+{ "translations": {
+    "Yes" : "Si",
+    "Cancel" : "Canzelar",
+    "Delete" : "Borrar"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}

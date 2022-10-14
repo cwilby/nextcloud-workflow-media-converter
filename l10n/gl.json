@@ -1,0 +1,8 @@
+{ "translations": {
+    "Save" : "Gardar",
+    "Total" : "Total",
+    "Yes" : "Si",
+    "Cancel" : "Cancelar",
+    "Delete" : "Eliminar"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}

@@ -1,0 +1,8 @@
+{ "translations": {
+    "Save" : "ذخیره",
+    "Total" : "جمع",
+    "Yes" : "بله",
+    "Cancel" : "لغو",
+    "Delete" : "حذف"
+},"pluralForm" :"nplurals=2; plural=(n > 1);"
+}

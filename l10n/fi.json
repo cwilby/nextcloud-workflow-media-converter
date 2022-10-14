@@ -1,0 +1,8 @@
+{ "translations": {
+    "Save" : "Tallenna",
+    "Total" : "Yhteensä",
+    "Yes" : "Kyllä",
+    "Cancel" : "Peruuta",
+    "Delete" : "Poista"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
