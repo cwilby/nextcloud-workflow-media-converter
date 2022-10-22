@@ -3,6 +3,8 @@ OC.L10N.register(
     {
     "Save" : "Guardar",
     "Total" : "Total",
+    "If the output file exists:" : "Si el archivo de salida existe:",
+    "Invalid data" : "Dato inválido",
     "Yes" : "Sí",
     "Cancel" : "Cancelar",
     "Delete" : "Eliminar"

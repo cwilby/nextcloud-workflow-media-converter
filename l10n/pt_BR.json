@@ -5,6 +5,7 @@
     "Media conversion" : "Conversão de mídia.",
     "Automated media conversion" : "Conversão automatizada de mídia.",
     "Rule-based automated conversion of video/audio files using FFmpeg" : "Conversão de arquivos de vídeo/audio usando regras customizadas no FFmpeg",
+    "A dedicated media conversion manager for Nextcloud that allows you to automate media conversion.\n\n**Features**\n * Convert video/audio between formats supported by FFmpeg.\n * Complete control of the conversion process.\n * Automatically convert media as it is uploaded.\n * Create batch jobs to convert existing media." : "Um gerenciador de conversão de mídia dedicado para Nextcloud que permite automatizar a conversão de mídia.\n\n**Características**\n* Converta vídeo/áudio entre os formatos suportados pelo FFmpeg.\n* Controle completo do processo de conversão.\n* Converta automaticamente a mídia à medida que ela é carregada.\n* Crie trabalhos em lote para converter mídia existente.",
     "Add Conversion Batch" : "Iniciar conversão em lote",
     "Add batches to convert existing media outside of your flow." : "Adicione lotes para converter mídia existente fora do fluxo.",
     "Convert to format" : "Converter para formato",
