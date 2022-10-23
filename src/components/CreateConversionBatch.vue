@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<div class="wmc-conversion-batch__delete-button">
-			<Actions>
-				<ActionButton icon="icon-delete" @click="$emit('remove')" />
-			</Actions>
+			<NcActions>
+				<NcActionButton icon="icon-delete" @click="$emit('remove')" />
+			</NcActions>
 		</div>
 		<div class="grid">
 			<div class="column">
@@ -16,9 +16,9 @@
 						<span>{{ sourceFolder }}</span>
 					</div>
 				</div>
-				<CheckboxRadioSwitch :checked.sync="convertMediaInSubFolders">
+				<NcCheckboxRadioSwitch :checked.sync="convertMediaInSubFolders">
 					{{ t('workflow_media_converter', 'Convert media in sub-folders') }}
-				</CheckboxRadioSwitch>
+				</NcCheckboxRadioSwitch>
 				<div class="wmc-conversion-batch__from-format">
 					<label>{{ t('workflow_media_converter', 'Find source files with this extension/format') }}</label>
 					<select v-model="sourceExtension" class="wmc-conversion-batch__from-format-picker">
@@ -57,15 +57,15 @@
 </template>
 
 <script>
-import Actions from '@nextcloud/vue/dist/Components/Actions'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
-import CheckboxRadioSwitch from '@nextcloud/vue/dist/Components/CheckboxRadioSwitch'
+import NcActions from '@nextcloud/vue/dist/Components/NcActions'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
+import NcCheckboxRadioSwitch from '@nextcloud/vue/dist/Components/NcCheckboxRadioSwitch'
 import formats from '../constants/formats'
 import filepicker from '../mixins/filepicker'
 import PostConversionRules from './PostConversionRules.vue'
 
 export default {
-	components: { Actions, ActionButton, CheckboxRadioSwitch, PostConversionRules },
+	components: { NcActions, NcActionButton, NcCheckboxRadioSwitch, PostConversionRules },
 
 	mixins: [filepicker],
 

@@ -4,9 +4,9 @@
 			<img :src="iconUrl">
 			{{ t('workflow_media_converter', 'Media conversion') }}
 		</h2>
-		<CheckboxRadioSwitch :checked.sync="convertMediaInParallel">
+		<NcCheckboxRadioSwitch :checked.sync="convertMediaInParallel">
 			{{ t("workflow_media_converter", "Enable parallel media conversion") }}
-		</CheckboxRadioSwitch>
+		</NcCheckboxRadioSwitch>
 		<hr>
 		<p>{{ t('workflow_media_converter', 'You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg.') }}</p>
 		<p>{{ t('workflow_media_converter', 'This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec.') }}</p>
@@ -30,14 +30,14 @@
 import debounce from 'debounce'
 import { showError } from '@nextcloud/dialogs'
 import { generateUrl } from '@nextcloud/router'
-import CheckboxRadioSwitch from '@nextcloud/vue/dist/Components/CheckboxRadioSwitch'
+import NcCheckboxRadioSwitch from '@nextcloud/vue/dist/Components/NcCheckboxRadioSwitch'
 import axios from '@nextcloud/axios'
 import { loadState } from '@nextcloud/initial-state'
 
 export default {
 	name: 'AdminSettings',
 
-	components: { CheckboxRadioSwitch },
+	components: { NcCheckboxRadioSwitch },
 
 	data: () => ({
 		saving: false,
