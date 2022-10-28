@@ -27,11 +27,11 @@
     "Move source file to specific folder" : "Die Quelldatei in einen bestimmten Ordner verschieben",
     "Store output in source folder" : "Ausgabe im Quellordner speichern",
     "Move output to specific folder" : "Ausgabe in einen bestimmten Ordner verschieben",
-    "Add new file with a number added to its name" : "Neue Datei mit einer Zahl zum Namen hinzufügen",
+    "Add new file with a number added to its name" : "Neue Datei mit einer angehängten Zahl hinzufügen",
     "Overwrite existing file" : "Vorhandene Datei überschreiben",
     "Move existing file to specific folder" : "Bestehende Datei in einen bestimmten Ordner verschieben",
     "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg." : "Sie können die Anzahl der Threads festlegen, die von FFmpeg verwendet werden, um die von FFmpeg verwendeten Ressourcen zu verwalten.",
-    "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec." : "Dieser Wert kann auf 0 gesetzt werden, damit FFmpeg je nach Codec auswählen kann, wie viele Threads es verwenden soll.",
+    "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec." : "Dieser Wert kann auf 0 gesetzt werden, damit FFmpeg je nach Codec auswählen kann, wie viele Threads verwendet werden.",
     "Changes made here will apply to any media that is not being converted at this moment in time." : "Hier vorgenommene Änderungen gelten für alle Medien, die derzeit nicht konvertiert werden.",
     "Failed to save config, please try again shortly" : "Die Konfiguration konnte nicht gespeichert werden. Bitte versuchen Sie es in Kürze erneut",
     "Enable parallel media conversion" : "Parallele Medienkonvertierung aktivieren",
@@ -44,7 +44,7 @@
     "Cancel" : "Abbrechen",
     "Error saving" : "Fehler beim Speichern",
     "All queued conversions for this batch will be cancelled, are you sure you want to proceed?" : "Alle Conversions in der Warteschlange für diesen Batch werden abgebrochen. Möchten Sie wirklich fortfahren?",
-    "Are you sure you want to stop making this batch?" : "Möchten Sie die Bearbeitung dieses Batch wirklich beenden?",
+    "Are you sure you want to stop making this batch?" : "Möchten Sie die Bearbeitung dieses Batches wirklich beenden?",
     "Delete conversion batch" : "Konvertierungsbatch löschen",
     "Delete" : "Löschen"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
