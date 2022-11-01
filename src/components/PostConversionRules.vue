@@ -1,9 +1,18 @@
 <template>
 	<div>
 		<div class="mb">
-			<p>{{ t('workflow_media_converter', 'After the source file has been converted:') }}</p>
+			<p>
+				{{
+					t(
+						'workflow_media_converter',
+						'After the source file has been converted:'
+					)
+				}}
+			</p>
 			<select v-model="postConversionSourceRule">
-				<option v-for="option in postConversionSourceRules" :key="option.id" :value="option.id">
+				<option v-for="option in postConversionSourceRules"
+					:key="option.id"
+					:value="option.id">
 					{{ option.label }}
 				</option>
 			</select>
@@ -17,7 +26,9 @@
 		<div class="mb">
 			<p>{{ t('workflow_media_converter', 'After the output is ready:') }}</p>
 			<select v-model="postConversionOutputRule">
-				<option v-for="option in postConversionOutputRules" :key="option.id" :value="option.id">
+				<option v-for="option in postConversionOutputRules"
+					:key="option.id"
+					:value="option.id">
 					{{ option.label }}
 				</option>
 			</select>
@@ -31,12 +42,19 @@
 		<div class="mb">
 			<p>{{ t('workflow_media_converter', 'If the output file exists:') }}</p>
 			<select v-model="postConversionOutputConflictRule">
-				<option v-for="option in postConversionOutputConflictRules" :key="option.id" :value="option.id">
+				<option v-for="option in postConversionOutputConflictRules"
+					:key="option.id"
+					:value="option.id">
 					{{ option.label }}
 				</option>
 			</select>
 			<small v-if="postConversionOutputConflictRule === 'move'">
-				{{ t('workflow_media_converter', 'Note: a new file will be added in this folder with a number added to its name if there is already a conflict file.') }}
+				{{
+					t(
+						'workflow_media_converter',
+						'Note: a new file will be added in this folder with a number added to its name if there is already a conflict file.'
+					)
+				}}
 			</small>
 			<div v-if="postConversionOutputConflictRule === 'move'" class="mb-2">
 				<button @click="openFilePicker('postConversionOutputConflictRuleMoveFolder')">
@@ -49,7 +67,7 @@
 </template>
 
 <script>
-import filepicker from '../mixins/filepicker'
+import filepicker from '../mixins/filepicker.js'
 
 export default {
 	mixins: [filepicker],
@@ -64,17 +82,47 @@ export default {
 	data: () => ({
 		postConversionSourceRules: [
 			{ id: 'keep', label: t('workflow_media_converter', 'Keep source file') },
-			{ id: 'delete', label: t('workflow_media_converter', 'Delete source file') },
-			{ id: 'move', label: t('workflow_media_converter', 'Move source file to specific folder') },
+			{
+				id: 'delete',
+				label: t('workflow_media_converter', 'Delete source file'),
+			},
+			{
+				id: 'move',
+				label: t(
+					'workflow_media_converter',
+					'Move source file to specific folder'
+				),
+			},
 		],
 		postConversionOutputRules: [
-			{ id: 'keep', label: t('workflow_media_converter', 'Store output in source folder') },
-			{ id: 'move', label: t('workflow_media_converter', 'Move output to specific folder') },
+			{
+				id: 'keep',
+				label: t('workflow_media_converter', 'Store output in source folder'),
+			},
+			{
+				id: 'move',
+				label: t('workflow_media_converter', 'Move output to specific folder'),
+			},
 		],
 		postConversionOutputConflictRules: [
-			{ id: 'preserve', label: t('workflow_media_converter', 'Add new file with a number added to its name') },
-			{ id: 'overwrite', label: t('workflow_media_converter', 'Overwrite existing file') },
-			{ id: 'move', label: t('workflow_media_converter', 'Move existing file to specific folder') },
+			{
+				id: 'preserve',
+				label: t(
+					'workflow_media_converter',
+					'Add new file with a number added to its name'
+				),
+			},
+			{
+				id: 'overwrite',
+				label: t('workflow_media_converter', 'Overwrite existing file'),
+			},
+			{
+				id: 'move',
+				label: t(
+					'workflow_media_converter',
+					'Move existing file to specific folder'
+				),
+			},
 		],
 	}),
 
@@ -137,12 +185,12 @@ export default {
 </script>
 
 <style lang="scss">
-	.mb {
-		margin-bottom: 1.5em !important;
-	}
+.mb {
+	margin-bottom: 1.5em !important;
+}
 
-	.mb-1 {
-		display: inline-block;
-		margin-bottom: 1em !important;
-	}
+.mb-1 {
+	display: inline-block;
+	margin-bottom: 1em !important;
+}
 </style>

@@ -8,7 +8,9 @@
 		<div class="grid">
 			<div class="column">
 				<div class="wmc-conversion-batch__source-directory">
-					<span>{{ t('workflow_media_converter', `Convert all files in this folder`) }}</span>
+					<span>{{
+						t('workflow_media_converter', `Convert all files in this folder`)
+					}}</span>
 					<div>
 						<button @click="openFilePicker('sourceFolder')">
 							{{ t('workflow_media_converter', 'Choose Folder') }}
@@ -20,11 +22,16 @@
 					{{ t('workflow_media_converter', 'Convert media in sub-folders') }}
 				</NcCheckboxRadioSwitch>
 				<div class="wmc-conversion-batch__from-format">
-					<label>{{ t('workflow_media_converter', 'Find source files with this extension/format') }}</label>
-					<select v-model="sourceExtension" class="wmc-conversion-batch__from-format-picker">
+					<label>{{
+						t(
+							'workflow_media_converter',
+							'Find source files with this extension/format'
+						)
+					}}</label>
+					<select v-model="sourceExtension"
+						class="wmc-conversion-batch__from-format-picker">
 						<option value="" />
-						<option
-							v-for="(format, index) in formats"
+						<option v-for="(format, index) in formats"
 							:key="`format-from-${index}`"
 							:value="format.extension">
 							<span>.{{ format.extension }} ({{ format.label }})</span>
@@ -32,11 +39,16 @@
 					</select>
 				</div>
 				<div class="wmc-conversion-batch__to-format">
-					<label>{{ t('workflow_media_converter', 'Store converted output in this extension/format') }}</label>
-					<select v-model="outputExtension" class="wmc-conversion-batch__to-format-picker">
+					<label>{{
+						t(
+							'workflow_media_converter',
+							'Store converted output in this extension/format'
+						)
+					}}</label>
+					<select v-model="outputExtension"
+						class="wmc-conversion-batch__to-format-picker">
 						<option value="" />
-						<option
-							v-for="(format, index) in formats"
+						<option v-for="(format, index) in formats"
 							:key="`format-to-${index}`"
 							:value="format.extension">
 							<span>.{{ format.extension }} ({{ format.label }})</span>
@@ -57,15 +69,20 @@
 </template>
 
 <script>
-import NcActions from '@nextcloud/vue/dist/Components/NcActions'
-import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
-import NcCheckboxRadioSwitch from '@nextcloud/vue/dist/Components/NcCheckboxRadioSwitch'
-import formats from '../constants/formats'
-import filepicker from '../mixins/filepicker'
+import NcActions from '@nextcloud/vue/dist/Components/NcActions.js'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
+import NcCheckboxRadioSwitch from '@nextcloud/vue/dist/Components/NcCheckboxRadioSwitch.js'
+import formats from '../constants/formats.js'
+import filepicker from '../mixins/filepicker.js'
 import PostConversionRules from './PostConversionRules.vue'
 
 export default {
-	components: { NcActions, NcActionButton, NcCheckboxRadioSwitch, PostConversionRules },
+	components: {
+		NcActions,
+		NcActionButton,
+		NcCheckboxRadioSwitch,
+		PostConversionRules,
+	},
 
 	mixins: [filepicker],
 

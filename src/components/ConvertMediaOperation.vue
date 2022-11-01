@@ -3,7 +3,9 @@
 		<div class="mb">
 			<p>{{ t('workflow_media_converter', 'Convert to format') }}</p>
 			<select v-model="outputExtension">
-				<option v-for="format in formats" :key="format.extension" :value="format.extension">
+				<option v-for="format in formats"
+					:key="format.extension"
+					:value="format.extension">
 					(.{{ format.extension }}) {{ format.label }}
 				</option>
 			</select>
@@ -14,7 +16,7 @@
 
 <script>
 import formats from '../constants/formats.js'
-import filepicker from '../mixins/filepicker'
+import filepicker from '../mixins/filepicker.js'
 import PostConversionRules from './PostConversionRules.vue'
 
 const defaultState = {
@@ -55,7 +57,10 @@ export default {
 				}
 			},
 			set(mutation) {
-				this.$emit('input', JSON.stringify({ ...(this.config || {}), ...mutation }))
+				this.$emit(
+					'input',
+					JSON.stringify({ ...(this.config || {}), ...mutation })
+				)
 			},
 		},
 
@@ -72,17 +77,17 @@ export default {
 </script>
 
 <style scoped>
-	.multiselect {
-		width: 100%;
-		margin: auto;
-		text-align: center;
-	}
+.multiselect {
+	width: 100%;
+	margin: auto;
+	text-align: center;
+}
 
-	select {
-		width: 100%;
-	}
+select {
+	width: 100%;
+}
 
-	.mb {
-		margin-bottom: 1.5em;
-	}
+.mb {
+	margin-bottom: 1.5em;
+}
 </style>

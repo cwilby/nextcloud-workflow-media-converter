@@ -1,11 +1,11 @@
 <template>
 	<div class="wmc-conversion-batch">
 		<div v-if="conversionBatch.id">
-			<DisplayConversionBatch :conversion-batch="conversionBatch" @remove="$emit('remove', conversionBatch)" />
+			<DisplayConversionBatch :conversion-batch="conversionBatch"
+				@remove="$emit('remove', conversionBatch)" />
 		</div>
 		<div v-else>
-			<CreateConversionBatch
-				:conversion-batch="conversionBatch"
+			<CreateConversionBatch :conversion-batch="conversionBatch"
 				@remove="$emit('remove', conversionBatch)"
 				@change="$emit('change', $event)"
 				@save="$emit('save')" />
@@ -34,7 +34,7 @@ export default {
 	position: relative;
 	padding: 2em;
 	border: 1px solid #ededed;
-	border-radius: .5em;
+	border-radius: 0.5em;
 	margin-bottom: 1em;
 
 	label {
@@ -48,14 +48,15 @@ export default {
 		}
 	}
 
-	select, input {
+	select,
+	input {
 		width: 100%;
 		margin-bottom: 2em;
 	}
 
 	&__delete-button {
 		position: absolute;
-		top: .5em;
+		top: 0.5em;
 		right: 1em;
 	}
 

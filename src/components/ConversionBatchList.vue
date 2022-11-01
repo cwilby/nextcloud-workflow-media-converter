@@ -1,18 +1,22 @@
 <template>
 	<div>
 		<div v-if="!conversionBatches.length" class="alert">
-			{{ t('workflow_media_converter', `Add batches to convert existing media outside of your flow.`) }}
+			{{
+				t(
+					'workflow_media_converter',
+					`Add batches to convert existing media outside of your flow.`
+				)
+			}}
 		</div>
 		<ul>
 			<li v-for="(conversionBatch, i) in conversionBatches" :key="i">
-				<ConversionBatch
-					:conversion-batch="conversionBatch"
-					@change="$emit('changeConversionBatch', $event)"
-					@remove="$emit('removeConversionBatch', conversionBatch)"
-					@save="$emit('saveConversionBatch')" />
+				<ConversionBatch :conversion-batch="conversionBatch"
+					@change="$emit('change-conversion-batch', $event)"
+					@remove="$emit('remove-conversion-batch', conversionBatch)"
+					@save="$emit('save-conversion-batch')" />
 			</li>
 			<li class="add">
-				<button @click="$emit('makeConversionBatch')">
+				<button @click="$emit('make-conversion-batch')">
 					{{ t('workflow_media_converter', 'Add Conversion Batch') }}
 				</button>
 			</li>
