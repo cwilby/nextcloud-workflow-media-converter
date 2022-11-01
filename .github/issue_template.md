@@ -9,9 +9,9 @@ Tell us what should happen
 ### Actual behaviour
 Tell us what happens instead
 
-## PDF Converter app
+## Workflow Media Converter app
 
-**PDF Converter app version:** (see apps admin page: `/index.php/settings/apps`)
+**Workflow Media Converter app version:** (see apps admin page: `/index.php/settings/apps`)
 
 ## Server configuration
 <!--
