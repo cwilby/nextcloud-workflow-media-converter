@@ -19,7 +19,7 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 class ConvertMediaJob extends QueuedJob {
 	private $logger;
 	private $rootFolder;
-	private $configService;
+	private ConfigService $configService;
 	private $viewFactory;
 	private $processFactory;
 	private $jobList;
@@ -58,6 +58,8 @@ class ConvertMediaJob extends QueuedJob {
 	}
 
 	public function parseArguments($arguments) {
+		$adminSettings = $this->configService->getAdminConfig();
+
 		$this->path = (string)$arguments['path'];
 		$this->userId = (string)($arguments['uid'] ?? $arguments['user_id'] ?? '');
 		if (empty($this->userId)) {
@@ -78,7 +80,7 @@ class ConvertMediaJob extends QueuedJob {
 		$this->postConversionOutputConflictRule = (string)$arguments['postConversionOutputConflictRule'];
 		$this->postConversionOutputConflictRuleMoveFolder = $this->prependUserFolder($arguments['postConversionOutputConflictRuleMoveFolder']);
 		$this->outputExtension = (string)$arguments['outputExtension'];
-		$this->convertMediaInParallel = $arguments['convertMediaInParallel'] == 'true';
+		$this->convertMediaInParallel = isset($adminSettings) && isset($adminSettings['convertMediaInParallel']) ? (bool)$adminSettings['convertMediaInParallel'] : false;
 
 		$this->sourceFile = $this->rootFolder->get($this->path);
 		$this->sourceFolder = dirname($this->path);
@@ -254,7 +256,7 @@ class ConvertMediaJob extends QueuedJob {
 	protected function conversionLockIsActive() {
 		if (empty($this->batchId)) {
 			$lockValue = $this->configService->getAppConfigValue('conversionLock');
-			if (empty($lockValue)) {
+			if (empty($lockValue) || $lockValue === 'no') {
 				return false;
 			}
 			$lock = new DateTime($lockValue);
