@@ -19,7 +19,7 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 class ConvertMediaJob extends QueuedJob {
 	private $logger;
 	private $rootFolder;
-	private ConfigService $configService;
+	private $configService;
 	private $viewFactory;
 	private $processFactory;
 	private $jobList;
