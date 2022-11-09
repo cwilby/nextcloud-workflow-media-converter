@@ -125,4 +125,10 @@ export default [
 		encode: true,
 		label: 'WebM',
 	},
+	{
+		extension: 'wmv',
+		decode: true,
+		encode: true,
+		label: 'Windows Media Video (WMV)'
+	}
 ]
