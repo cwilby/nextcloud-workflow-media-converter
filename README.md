@@ -1,6 +1,6 @@
 # Nextcloud Media Converter app
 
-This app allows you automatically convert media with FFmpeg in a couple of useful ways:
+This app allows you to automatically convert media using FFmpeg in a couple of different ways:
 
 1.  Automatically via [Workflows](https://nextcloud.com/workflow/) to convert files as soon as they are created.
 2.  Manually via conversion batches.
