@@ -7,6 +7,7 @@ OC.L10N.register(
     "Media conversion" : "Medienkonvertierung",
     "Automated media conversion" : "Automatisierte Medienkonvertierung",
     "Rule-based automated conversion of video/audio files using FFmpeg" : "Regelbasierte automatische Umwandlung von Video-/Audiodateien durch die Verwendung von FFmpeg",
+    "A dedicated media conversion manager for Nextcloud that allows you to automate media conversion.\n\n**Features**\n * Convert video/audio between formats supported by FFmpeg.\n * Complete control of the conversion process.\n * Automatically convert media as it is uploaded.\n * Create batch jobs to convert existing media." : "Ein dedizierter Medienkonvertierungsmanager für Nextcloud, mit dem du die Medienkonvertierung automatisieren kannst.\n\n**Merkmale**\n* Konvertiere Video/Audio zwischen Formaten, die von FFmpeg unterstützt werden.\n* Vollständige Kontrolle über den Konvertierungsprozess.\n* Konvertiere Medien automatisch, während sie hochgeladen werden.\n* Erstelle Batch-Jobs, um vorhandene Medien zu konvertieren.",
     "Add batches to convert existing media outside of your flow." : "Fügen Verarbeitungen hinzu, um vorhandene Medien außerhalb deines Flows zu konvertieren.",
     "Convert to format" : "In Format umwandeln",
     "Choose Folder" : "Ordner auswählen",
