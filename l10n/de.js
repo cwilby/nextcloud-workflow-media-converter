@@ -1,7 +1,7 @@
 OC.L10N.register(
     "workflow_media_converter",
     {
-    "A similar conversion batch has already been created.  Delete that batch and try again" : "Ein ähnlicher Konvertierungsstapel wurde bereits erstellt. Löschen Sie diesen Stapel und versuchen Sie es erneut",
+    "A similar conversion batch has already been created.  Delete that batch and try again" : "Ein ähnlicher Konvertierungsstapel wurde bereits erstellt. Lösche diesen Stapel und versuche es erneut",
     "Convert media" : "Datei umwandeln",
     "Convert video/audio files using FFmpeg." : "Video/Audio-Dateien umwandeln mit FFmpeg.",
     "Media conversion" : "Medienkonvertierung",
