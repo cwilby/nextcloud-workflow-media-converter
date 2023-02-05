@@ -114,6 +114,12 @@ export default [
 		label: 'OpenGL output',
 	},
 	{
+		extension: 'ts',
+		decode: true,
+		encode: false,
+		label: 'MPEG transport stream',
+	},
+	{
 		extension: 'wav',
 		decode: true,
 		encode: true,
