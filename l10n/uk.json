@@ -23,7 +23,7 @@
     "If the output file exists:" : "Якщо вихідний файл існує:",
     "Note: a new file will be added in this folder with a number added to its name if there is already a conflict file." : "Примітка: новий файл буде додано до цієї папки з номером, доданим до його назви, якщо вже існує конфліктний файл.",
     "Keep source file" : "Зберегти вихідний файл",
-    "Delete source file" : "Видалити вихідний файл",
+    "Delete source file" : "Вилучити вихідний файл",
     "Move source file to specific folder" : "Перемістіть вихідний файл у певну папку",
     "Store output in source folder" : "Зберігати вихідні дані у вихідній папці",
     "Move output to specific folder" : "Перемістити вихідні дані до певної папки",
@@ -45,7 +45,7 @@
     "Error saving" : "Помилка збереження",
     "All queued conversions for this batch will be cancelled, are you sure you want to proceed?" : "Усі перетворення в черзі для цього пакету буде скасовано. Ви впевнені, що бажаєте продовжити?",
     "Are you sure you want to stop making this batch?" : "Ви впевнені, що хочете припинити створення цієї партії?",
-    "Delete conversion batch" : "Видалити пакет конверсій",
+    "Delete conversion batch" : "Вилучити пакет перетворень",
     "Delete" : "Вилучити"
 },"pluralForm" :"nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);"
 }
