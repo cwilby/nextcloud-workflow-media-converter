@@ -6,7 +6,7 @@
     "Automated media conversion" : "Automatisierte Medienkonvertierung",
     "Rule-based automated conversion of video/audio files using FFmpeg" : "Regelbasierte automatische Konvertierung von Video-/Audiodateien mit FFmpeg",
     "A dedicated media conversion manager for Nextcloud that allows you to automate media conversion.\n\n**Features**\n * Convert video/audio between formats supported by FFmpeg.\n * Complete control of the conversion process.\n * Automatically convert media as it is uploaded.\n * Create batch jobs to convert existing media." : "Ein dedizierter Medienkonvertierungsmanager für Nextcloud, mit dem Sie die Medienkonvertierung automatisieren können.\n\n**Merkmale**\n* Konvertieren Sie Video/Audio zwischen Formaten, die von FFmpeg unterstützt werden.\n* Vollständige Kontrolle über den Konvertierungsprozess.\n* Konvertieren Sie Medien automatisch, während sie hochgeladen werden.\n* Erstellen Sie Batch-Jobs, um vorhandene Medien zu konvertieren.",
-    "Add Conversion Batch" : "Konvertierungs-Batch hinzufügen",
+    "Add Conversion Batch" : "Konvertierungs-Stapel hinzufügen",
     "Add batches to convert existing media outside of your flow." : "Fügen Sie Batches hinzu, um vorhandene Medien außerhalb Ihres Flows zu konvertieren.",
     "Convert to format" : "In Format umwandeln",
     "Choose Folder" : "Ordner auswählen",
@@ -43,8 +43,8 @@
     "Yes" : "Ja",
     "Cancel" : "Abbrechen",
     "Error saving" : "Fehler beim Speichern",
-    "All queued conversions for this batch will be cancelled, are you sure you want to proceed?" : "Alle Konvertierungen in der Warteschlange für diesen Batch werden abgebrochen. Möchten Sie wirklich fortfahren?",
-    "Are you sure you want to stop making this batch?" : "Möchten Sie die Bearbeitung dieses Batches wirklich beenden?",
+    "All queued conversions for this batch will be cancelled, are you sure you want to proceed?" : "Alle Konvertierungen in der Warteschlange für diesen Stapel werden abgebrochen. Möchten Sie wirklich fortfahren?",
+    "Are you sure you want to stop making this batch?" : "Möchten Sie die Bearbeitung dieses Stapels wirklich beenden?",
     "Delete conversion batch" : "Konvertierungsbatch löschen",
     "Delete" : "Löschen"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
