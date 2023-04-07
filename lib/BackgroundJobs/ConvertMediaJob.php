@@ -4,11 +4,11 @@ namespace OCA\WorkflowMediaConverter\BackgroundJobs;
 
 use DateTime;
 use DateInterval;
-use OC\Files\Filesystem;
 use OCA\WorkflowMediaConverter\Factory\ProcessFactory;
 use OCA\WorkflowMediaConverter\Factory\ViewFactory;
 use OCA\WorkflowMediaConverter\Service\ConfigService;
 use OCA\WorkflowMediaConverter\Exceptions\MediaConversionLockedException;
+use OCA\WorkflowMediaConverter\Factory\LockFactory;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\QueuedJob;
 use OCP\BackgroundJob\IJobList;
@@ -17,22 +17,42 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class ConvertMediaJob extends QueuedJob {
-	private $logger;
-	private $rootFolder;
-	private $configService;
-	private $viewFactory;
-	private $processFactory;
-	private $jobList;
-	private $convertMediaInParallel;
+	public $outputFilePath;
+	public $path;
+	public $userId;
+	public $userFolder;
+	public $convertMediaInParallel;
+	public $batchId;
+	public $postConversionSourceRule;
+	public $postConversionSourceRuleMoveFolder;
+	public $postConversionOutputRule;
+	public $postConversionOutputRuleMoveFolder;
+	public $postConversionOutputConflictRule;
+	public $postConversionOutputConflictRuleMoveFolder;
+	public $outputExtension;
+	public $sourceFile;
+	public $sourceFolder;
+	public $sourceFolderView;
+	public $sourceFilename;
+	public $sourceExtension;
+	public $tempSourcePath;
+	public $tempSourceFilename;
+	public $tempOutputPath;
+	public $tempOutputFilename;
+	public $outputFileName;
+	public $outputFolder;
 
-	public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, ConfigService $configService, ViewFactory $viewFactory, ProcessFactory $processFactory, IJobList $jobList) {
+	public function __construct(
+		protected ITimeFactory $time,
+		private LoggerInterface $logger, 
+		private IRootFolder $rootFolder, 
+		private ConfigService $configService, 
+		private ViewFactory $viewFactory, 
+		private ProcessFactory $processFactory, 
+		private LockFactory $lockFactory,
+		private IJobList $jobList
+	) {
 		parent::__construct($time);
-		$this->rootFolder = $rootFolder;
-		$this->logger = $logger;
-		$this->configService = $configService;
-		$this->viewFactory = $viewFactory;
-		$this->processFactory = $processFactory;
-		$this->jobList = $jobList;
 	}
 
 	protected function run($arguments) {
@@ -48,10 +68,10 @@ class ConvertMediaJob extends QueuedJob {
 		} catch (MediaConversionLockedException $e) {
 			$this->logger->info(ConvertMediaJob::class . ' requeued for ' . $arguments['path']);
 		} catch (\Throwable $e) {
-			$this->configService->setAppConfigValue('conversionLock', "no");
 			$eType = get_class($e);
 			$this->notifyBatchFail($e);
 			$this->logger->error("[{$eType}] :: ({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
+			$this->configService->setAppConfigValue('conversionLock', "no");
 		} finally {
 			$this->logger->info(ConvertMediaJob::class . ' finished - output file: ' . $this->outputFilePath);
 		}
@@ -68,7 +88,8 @@ class ConvertMediaJob extends QueuedJob {
 
 		$this->userFolder = "/{$this->userId}/files";
 
-		Filesystem::init($this->userId, $this->userFolder);
+		// todo: is this needed?
+		// Filesystem::init($this->userId, $this->userFolder);
 
 		$this->configService->setUserId($this->userId);
 		$this->batchId = (string)($arguments['batch_id'] ?? '');
@@ -214,11 +235,11 @@ class ConvertMediaJob extends QueuedJob {
 
 		$batch = $this->configService->getBatch($this->batchId);
 
-		$this->configService->updateBatch($this->batchId, [
+		$this->configService->updateBatch($this->batchId, json_encode([
 			'status' => 'has-failures',
 			'failed' => ($batch['failed'] ?? 0) + 1,
 			'errors' => array_merge(($batch['errors'] ?? []), ["{$e->getMessage()} -- Error code {$e->getCode()}"])
-		]);
+		]));
 	}
 
 	public function writeFileSafe($folder, $tempFile, $filename) {
@@ -244,7 +265,7 @@ class ConvertMediaJob extends QueuedJob {
 	}
 
 	protected function setConversionLockActive($state) {
-		$lockValue = $state ? date('Y-m-d H:i:s') : null;
+		$lockValue = $this->lockFactory->create($state);
 
 		if (empty($this->batchId)) {
 			$this->configService->setAppConfigValue('conversionLock', $lockValue);

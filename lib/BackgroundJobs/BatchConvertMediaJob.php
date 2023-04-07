@@ -2,7 +2,6 @@
 
 namespace OCA\WorkflowMediaConverter\BackgroundJobs;
 
-use OC\Files\Filesystem;
 use OCA\WorkflowMediaConverter\Service\ConfigService;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\IJobList;
@@ -12,26 +11,33 @@ use OCP\Files\Folder;
 use OCP\Files\IRootFolder;
 use Psr\Log\LoggerInterface;
 
-class BatchConvertMediaJob extends QueuedJob {
-	private $logger;
-	private $rootFolder;
-	private $jobList;
-	private $configService;
+class BatchConvertMediaJob extends QueuedJob implements MediaConversionJob {
+	public Folder $sourceFolder;
+	public $batchId;
+	public $userId;
+	public $status;
+	public $userFolder;
+	public $sourceFolderPath;
+	public $convertMediaInSubFolders;
+	public $sourceExtension;
+	public $outputExtension;
+	public $postConversionSourceRule;
+	public $postConversionSourceRuleMoveFolder;
+	public $postConversionOutputRule;
+	public $postConversionOutputRuleMoveFolder;
+	public $postConversionOutputConflictRule;
+	public $postConversionOutputConflictRuleMoveFolder;
 
 	public $unconvertedMedia = [];
 
 	public function __construct(
-		ITimeFactory $time,
-		LoggerInterface $logger,
-		IRootFolder $rootFolder,
-		IJobList $jobList,
-		ConfigService $configService
+		protected ITimeFactory $time,
+		private LoggerInterface $logger,
+		private IRootFolder $rootFolder,
+		private IJobList $jobList,
+		private ConfigService $configService
 	) {
 		parent::__construct($time);
-		$this->logger = $logger;
-		$this->rootFolder = $rootFolder;
-		$this->jobList = $jobList;
-		$this->configService = $configService;
 	}
 
 	public function run($arguments) {
@@ -60,7 +66,8 @@ class BatchConvertMediaJob extends QueuedJob {
 	public function parseArguments($arguments) {
 		$this->userId = (string)($arguments['uid'] ?? $arguments['user_id']);
 
-		Filesystem::init($this->userId, "/{$this->userId}/files");
+		// todo: is there another way of doing this? does this need to happen?
+		// Filesystem::init($this->userId, "/{$this->userId}/files");
 
 		$this->configService->setUserId($this->userId);
 		$this->batchId = $arguments['id'];

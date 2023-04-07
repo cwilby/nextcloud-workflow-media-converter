@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd" bootstrap="./tests/bootstrap.php" colors="true">
-    <testsuites>
-        <testsuite name="Tests">
-            <directory suffix="Test.php">./tests</directory>
-        </testsuite>
-    </testsuites>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">./appinfo</directory>
-            <directory suffix=".php">./lib</directory>
-        </whitelist>
-    </filter>
-    <logging>
-        <log type="coverage-html" target="./tests/coverage"/>
-    </logging>
-    <php>
-        <server name="DATABASEHOST" value="sqlite"/>
-    </php>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd" bootstrap="./tests/bootstrap.php" colors="true" cacheDirectory=".phpunit.cache">
+  <coverage>
+    <include>
+      <directory suffix=".php">./appinfo</directory>
+      <directory suffix=".php">./lib</directory>
+    </include>
+    <report>
+      <html outputDirectory="./tests/coverage"/>
+    </report>
+  </coverage>
+  <testsuites>
+    <testsuite name="Tests">
+      <directory suffix="Test.php">./tests</directory>
+    </testsuite>
+  </testsuites>
+  <logging/>
+  <php>
+    <server name="DATABASEHOST" value="sqlite"/>
+  </php>
 </phpunit>
