@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: ['7.4']
-        nextcloud: ['stable21']
+        php-versions: ['8.0', '8.1']
+        nextcloud: ['stable25', 'stable26']
         database: ['sqlite']
     steps:
       - name: Use Node 16
