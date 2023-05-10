@@ -2,7 +2,6 @@
 
 namespace OCA\WorkflowMediaConverter\BackgroundJobs;
 
-use OC\Files\Filesystem;
 use OCA\WorkflowMediaConverter\Service\ConfigService;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\IJobList;
@@ -17,6 +16,21 @@ class BatchConvertMediaJob extends QueuedJob {
 	private $rootFolder;
 	private $jobList;
 	private $configService;
+	private $batchId;
+	private $userFolder;
+	private $convertMediaInSubFolders;
+	private $userId;
+	private $sourceFolderPath;
+	private $sourceExtension;
+	private $outputExtension;
+	private $status;
+	private $sourceFolder;
+	private $postConversionSourceRule;
+	private $postConversionSourceRuleMoveFolder;
+	private $postConversionOutputRule;
+	private $postConversionOutputRuleMoveFolder;
+	private $postConversionOutputConflictRule;
+	private $postConversionOutputConflictRuleMoveFolder;
 
 	public $unconvertedMedia = [];
 
@@ -59,8 +73,6 @@ class BatchConvertMediaJob extends QueuedJob {
 
 	public function parseArguments($arguments) {
 		$this->userId = (string)($arguments['uid'] ?? $arguments['user_id']);
-
-		Filesystem::init($this->userId, "/{$this->userId}/files");
 
 		$this->configService->setUserId($this->userId);
 		$this->batchId = $arguments['id'];

@@ -176,7 +176,7 @@ class ConfigService {
 
 			return $numCpus;
 		} catch (\Throwable $e) {
-			$this->logger->info($e->getMessage());
+			$this->logger->error($e->getMessage());
 
 			return 4;
 		} finally {
@@ -185,7 +185,7 @@ class ConfigService {
 					pclose($process);
 				}
 			} catch (\Throwable $e) {
-				$this->logger->info($e->getMessage());
+				$this->logger->error($e->getMessage());
 
 				return 4;
 			}

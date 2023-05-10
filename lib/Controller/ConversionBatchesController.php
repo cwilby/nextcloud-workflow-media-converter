@@ -19,6 +19,7 @@ class ConversionBatchesController extends Controller {
 	private $configService;
 	private $l;
 	private $connection;
+	private $userId;
 
 	public function __construct($AppName, IRequest $request, IJobList $jobList, ConfigService $configService, IL10N $l, IDBConnection $connection, IUserSession $session) {
 		parent::__construct($AppName, $request);
@@ -115,7 +116,7 @@ class ConversionBatchesController extends Controller {
 					$query->createNamedParameter('%' . $this->connection->escapeLikeParameter($id) . '%')
 				)
 			)
-			->execute();
+			->executeStatement();
 
 		$query = $this->connection->getQueryBuilder();
 		$query
@@ -127,6 +128,6 @@ class ConversionBatchesController extends Controller {
 					$query->createNamedParameter('%' . $this->connection->escapeLikeParameter($id) . '%')
 				)
 			)
-			->execute();
+			->executeStatement();
 	}
 }

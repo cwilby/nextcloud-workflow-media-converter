@@ -4,7 +4,6 @@ namespace OCA\WorkflowMediaConverter\BackgroundJobs;
 
 use DateTime;
 use DateInterval;
-use OC\Files\Filesystem;
 use OCA\WorkflowMediaConverter\Factory\ProcessFactory;
 use OCA\WorkflowMediaConverter\Factory\ViewFactory;
 use OCA\WorkflowMediaConverter\Service\ConfigService;
@@ -24,6 +23,29 @@ class ConvertMediaJob extends QueuedJob {
 	private $processFactory;
 	private $jobList;
 	private $convertMediaInParallel;
+	private $outputFilePath;
+	private $path;
+	private $userId;
+	private $userFolder;
+	private $batchId;
+	private $postConversionSourceRule;
+	private $postConversionSourceRuleMoveFolder;
+	private $postConversionOutputRule;
+	private $postConversionOutputRuleMoveFolder;
+	private $postConversionOutputConflictRule;
+	private $postConversionOutputConflictRuleMoveFolder;
+	private $outputExtension;
+	private $sourceFile;
+	private $sourceFolder;
+	private $sourceFolderView;
+	private $sourceFilename;
+	private $sourceExtension;
+	private $tempSourcePath;
+	private $tempSourceFilename;
+	private $tempOutputPath;
+	private $tempOutputFilename;
+	private $outputFileName;
+	private $outputFolder;
 
 	public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, ConfigService $configService, ViewFactory $viewFactory, ProcessFactory $processFactory, IJobList $jobList) {
 		parent::__construct($time);
@@ -67,8 +89,6 @@ class ConvertMediaJob extends QueuedJob {
 		}
 
 		$this->userFolder = "/{$this->userId}/files";
-
-		Filesystem::init($this->userId, $this->userFolder);
 
 		$this->configService->setUserId($this->userId);
 		$this->batchId = (string)($arguments['batch_id'] ?? '');
