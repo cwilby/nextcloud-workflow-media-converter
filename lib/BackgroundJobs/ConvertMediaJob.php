@@ -264,7 +264,7 @@ class ConvertMediaJob extends QueuedJob {
 	}
 
 	protected function setConversionLockActive($state) {
-		$lockValue = $state ? date('Y-m-d H:i:s') : null;
+		$lockValue = $state ? time() : null;
 
 		if (empty($this->batchId)) {
 			$this->configService->setAppConfigValue('conversionLock', $lockValue);
@@ -274,30 +274,31 @@ class ConvertMediaJob extends QueuedJob {
 	}
 
 	protected function conversionLockIsActive() {
+		$now = time();
+
 		if (empty($this->batchId)) {
 			$lockValue = $this->configService->getAppConfigValue('conversionLock');
 			if (empty($lockValue) || $lockValue === 'no') {
 				return false;
 			}
-			$lock = new DateTime($lockValue);
+			$lock = $lockValue;
 		} else {
 			$batch = $this->configService->getBatch($this->batchId);
 			if (empty($batch)) {
 				return false;
 			}
 			if (isset($batch['conversion_lock'])) {
-				$lock = new DateTime($batch['conversion_lock']);
+				$lock = $batch['conversion_lock'];
 			} else {
-				$lock = new DateTime;
+				$lock = $now - (31 * 60);
 			}
 		}
 
-		if (empty($lock)) {
+		if (!isset($lock) || empty($lock)) {
 			return false;
 		}
 
-		$expiration = $lock->add(new DateInterval('PT' . 30 . 'M'));
-		$now = new DateTime();
+		$expiration = $lock + (30 * 60);
 
 		if ($now < $expiration) {
 			return true;
