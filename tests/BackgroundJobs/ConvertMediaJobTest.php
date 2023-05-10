@@ -2,9 +2,9 @@
 
 namespace OCA\WorkflowMediaConverter\Tests\BackgroundJobs;
 
-use OCA\WorkflowMediaConverter\BackgroundJobs\ConvertMediaJob;
 use Mockery as m;
 use OC\Files\View;
+use OCA\WorkflowMediaConverter\BackgroundJobs\ConvertMediaJob;
 use OCA\WorkflowMediaConverter\Factory\ProcessFactory;
 use OCA\WorkflowMediaConverter\Factory\ViewFactory;
 use ReflectionClass;

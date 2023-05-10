@@ -2,8 +2,8 @@
 
 namespace OCA\WorkflowMediaConverter\Tests\BackgroundJobs;
 
-use Mockery as m;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
+use Mockery as m;
 use OCA\WorkflowMediaConverter\Service\ConfigService;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\IJobList;

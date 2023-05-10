@@ -2,15 +2,13 @@
 
 namespace OCA\WorkflowMediaConverter\BackgroundJobs;
 
-use DateTime;
-use DateInterval;
+use OCA\WorkflowMediaConverter\Exceptions\MediaConversionLockedException;
 use OCA\WorkflowMediaConverter\Factory\ProcessFactory;
 use OCA\WorkflowMediaConverter\Factory\ViewFactory;
 use OCA\WorkflowMediaConverter\Service\ConfigService;
-use OCA\WorkflowMediaConverter\Exceptions\MediaConversionLockedException;
 use OCP\AppFramework\Utility\ITimeFactory;
-use OCP\BackgroundJob\QueuedJob;
 use OCP\BackgroundJob\IJobList;
+use OCP\BackgroundJob\QueuedJob;
 use OCP\Files\IRootFolder;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Process\Exception\ProcessFailedException;
