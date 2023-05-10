@@ -12,7 +12,7 @@
  * Create batch jobs to convert existing media.
     ]]>
     </description>
-    <version>1.7.0</version>
+    <version>1.8.0</version>
     <licence>agpl</licence>
     <author mail="cameron@wilby.com" homepage="https://github.com/cwilby">Cameron Wilby</author>
     <namespace>WorkflowMediaConverter</namespace>
