@@ -114,6 +114,12 @@ export default [
 		label: 'OpenGL output',
 	},
 	{
+		extension: 'opus',
+		decode: true,
+		encode: true,
+		label: 'Opus',
+	},
+	{
 		extension: 'ts',
 		decode: true,
 		encode: false,
