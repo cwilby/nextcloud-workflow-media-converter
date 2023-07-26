@@ -11,7 +11,7 @@ OC.L10N.register(
     "Add Conversion Batch" : "Engadir un lote de conversión",
     "Add batches to convert existing media outside of your flow." : "Engadir traballos en lote para converter medios fora do seu fluxo.",
     "Convert to format" : "Converter a formato",
-    "Choose Folder" : "Escolla o cartafol",
+    "Choose Folder" : "Escoller o cartafol",
     "Convert media in sub-folders" : " Converter medios en sub-cartafoles",
     "Find source files with this extension/format" : "Buscar os ficheiros de orixe con esta extensión/formato",
     "Store converted output in this extension/format" : "Almacenar a saída convertida nesta extensión/formato",
