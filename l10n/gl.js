@@ -23,7 +23,7 @@ OC.L10N.register(
     "After the source file has been converted:" : "Após converter o ficheiro de orixe:",
     "After the output is ready:" : "Após que a saída estea preparada:",
     "If the output file exists:" : "Se o ficheiro de saída xa existe:",
-    "Note: a new file will be added in this folder with a number added to its name if there is already a conflict file." : "Nota: engadirase un ficheiro novo neste cartafol cun número engadido ao seu nome se xa hai un ficheiro en conflito.",
+    "Note: a new file will be added in this folder with a number added to its name if there is already a conflict file." : "Nota: Engadirase un ficheiro novo neste cartafol cun número engadido ao seu nome se xa hai un ficheiro en conflito.",
     "Keep source file" : "Manter o ficheiro de orixe",
     "Delete source file" : "Eliminar o ficheiro de orixe",
     "Move source file to specific folder" : "Mover o ficheiro de orixe a un cartafol específico",
