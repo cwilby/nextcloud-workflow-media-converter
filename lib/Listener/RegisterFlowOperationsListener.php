@@ -6,14 +6,14 @@ use OCA\WorkflowMediaConverter\AppInfo\Application;
 use OCA\WorkflowMediaConverter\Operation\ConvertMediaOperation;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
-use OCP\IServerContainer;
 use OCP\Util;
 use OCP\WorkflowEngine\Events\RegisterOperationsEvent;
+use Psr\Container\ContainerInterface;
 
 class RegisterFlowOperationsListener implements IEventListener {
-	private $container;
+	private ContainerInterface $container;
 
-	public function __construct(IServerContainer $container) {
+	public function __construct(ContainerInterface $container) {
 		$this->container = $container;
 	}
 
