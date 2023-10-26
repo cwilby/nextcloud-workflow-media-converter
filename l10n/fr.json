@@ -18,7 +18,7 @@
     "Converted" : "Converti",
     "Total" : "Total",
     "Error code" : "Code d'erreur",
-    "After the source file has been converted:" : "Après que le fichier source soit converti :",
+    "After the source file has been converted:" : "Après que le fichier source est converti :",
     "After the output is ready:" : "Lorsque le fichier de sortie est prêt :",
     "If the output file exists:" : "Si le fichier de sortie existe déjà :",
     "Note: a new file will be added in this folder with a number added to its name if there is already a conflict file." : "Remarque : un nouveau fichier sera ajouté dans ce dossier avec un nombre à la fin de son nom s'il y a un conflit avec un fichier déjà existant.",
