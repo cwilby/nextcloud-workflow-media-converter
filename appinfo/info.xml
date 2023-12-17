@@ -12,7 +12,7 @@
  * Create batch jobs to convert existing media.
     ]]>
     </description>
-    <version>1.8.4</version>
+    <version>1.9.0</version>
     <licence>agpl</licence>
     <author mail="cameron@wilby.com" homepage="https://github.com/cwilby">Cameron Wilby</author>
     <namespace>WorkflowMediaConverter</namespace>
@@ -35,7 +35,7 @@
 
     <dependencies>
         <php min-version="8.1" max-version="8.2" />
-        <nextcloud min-version="25" max-version="26"/>
+        <nextcloud min-version="26" max-version="28"/>
     </dependencies>
     <settings>
         <admin>OCA\WorkflowMediaConverter\Settings\AdminSettings</admin>

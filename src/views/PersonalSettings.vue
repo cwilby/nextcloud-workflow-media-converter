@@ -13,7 +13,7 @@
 			}}
 		</p>
 		<hr>
-		<ConversionBatchList :conversion-batches="conversionBatches"
+		<ConversionBatchList :conversion-batches="conversionBatches" :threads="threads"
 			@change-conversion-batch="changeConversionBatch"
 			@make-conversion-batch="makeConversionBatch"
 			@save-conversion-batch="confirmSaveConversionBatch"
@@ -39,6 +39,7 @@ export default {
 	data: () => ({
 		saving: false,
 		state: loadState('workflow_media_converter', 'personal-config'),
+		threads: loadState('workflow_media_converter', 'threadLimit'),
 		readonly: true,
 		newConversionBatch: {},
 		pollingInterval: null,
@@ -89,6 +90,7 @@ export default {
 				sourceFolder: null,
 				sourceExtension: null,
 				outputExtension: null,
+				additionalConversionFlags: null,
 				postConversionSourceRule: 'keep',
 				postConversionSourceRuleMoveFolder: null,
 				postConversionOutputRule: 'keep',
@@ -103,7 +105,7 @@ export default {
 
 		changeConversionBatch(conversionBatch) {
 			Object.entries(conversionBatch).forEach(([key, value]) => {
-				this.newConversionBatch[key] = value
+				this.$set(this.newConversionBatch, key, value);
 			})
 		},
 

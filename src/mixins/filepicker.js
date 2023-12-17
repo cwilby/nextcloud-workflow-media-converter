@@ -1,4 +1,5 @@
 import { FilePicker } from '@nextcloud/dialogs'
+import '@nextcloud/dialogs/style.css'
 
 export default {
 	methods: {

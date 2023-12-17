@@ -11,16 +11,24 @@
 			</select>
 		</div>
 		<PostConversionRules v-model="config" />
+		<div class="wmc-conversion-batch__FFmpeg">
+			<label>{{t('workflow_media_converter', 'Additional FFmpeg flags')}}</label>
+			<div><input type="text" v-model="additionalConversionFlags" /></div>
+		</div>
+		<div><input type="text" :value="commandString" style="background-color: #eee" /></div>
 	</div>
 </template>
 
 <script>
+import axios from '@nextcloud/axios'
+import { generateUrl } from '@nextcloud/router'
 import formats from '../constants/formats.js'
 import filepicker from '../mixins/filepicker.js'
 import PostConversionRules from './PostConversionRules.vue'
 
 const defaultState = {
 	outputExtension: null,
+	additionalConversionFlags: '',
 	postConversionSourceRule: 'keep',
 	postConversionSourceRuleMoveFolder: null,
 	postConversionOutputRule: 'keep',
@@ -45,7 +53,14 @@ export default {
 
 	data: () => ({
 		formats,
+		threads: 0
 	}),
+
+	async mounted() {
+		const { data } = await axios.get(generateUrl('/apps/workflow_media_converter/admin-settings'))
+
+		this.threads = data.threadLimit;
+	},
 
 	computed: {
 		config: {
@@ -72,22 +87,45 @@ export default {
 				this.config = { outputExtension }
 			},
 		},
+
+		additionalConversionFlags: {
+			get() {
+				return this.config.additionalConversionFlags
+			},
+			set(additionalConversionFlags) {
+				this.config = { additionalConversionFlags }
+			},
+		},
+
+		commandString() {
+			return [
+				'ffmpeg',
+				this.threads != 0 ? `-threads ${this.threads}` : '',
+				this.additionalConversionFlags ? `${this.additionalConversionFlags}` : '',
+				'-i {input}',
+				'{output}',
+			].filter(Boolean).join(' ')
+		}
 	},
 }
 </script>
 
-<style scoped>
-.multiselect {
-	width: 100%;
-	margin: auto;
-	text-align: center;
-}
+<style lang="scss">
+.wmc-rules {
+	.multiselect {
+		width: 100%;
+		margin: auto;
+		text-align: center;
+	}
+	
+	input, select {
+		width: 100%;
+	}
+	
+	.mb {
+		margin-bottom: 1.5em;
+	}
 
-select {
-	width: 100%;
-}
 
-.mb {
-	margin-bottom: 1.5em;
 }
 </style>
