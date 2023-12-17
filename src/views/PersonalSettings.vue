@@ -13,7 +13,8 @@
 			}}
 		</p>
 		<hr>
-		<ConversionBatchList :conversion-batches="conversionBatches" :threads="threads"
+		<ConversionBatchList :conversion-batches="conversionBatches"
+			:threads="threads"
 			@change-conversion-batch="changeConversionBatch"
 			@make-conversion-batch="makeConversionBatch"
 			@save-conversion-batch="confirmSaveConversionBatch"
@@ -73,7 +74,7 @@ export default {
 		async refreshBatches() {
 			try {
 				const { data: state } = await axios.get(
-					generateUrl('/apps/workflow_media_converter/personal-settings')
+					generateUrl('/apps/workflow_media_converter/personal-settings'),
 				)
 
 				this.state = state
@@ -105,7 +106,7 @@ export default {
 
 		changeConversionBatch(conversionBatch) {
 			Object.entries(conversionBatch).forEach(([key, value]) => {
-				this.$set(this.newConversionBatch, key, value);
+				this.$set(this.newConversionBatch, key, value)
 			})
 		},
 
@@ -114,9 +115,9 @@ export default {
 				OC.dialogs.alert(
 					this.t(
 						'workflow_media_converter',
-						'Please make sure the form is valid before saving'
+						'Please make sure the form is valid before saving',
 					),
-					this.t('workflow_media_converter', 'Invalid data')
+					this.t('workflow_media_converter', 'Invalid data'),
 				)
 				return
 			}
@@ -124,7 +125,7 @@ export default {
 			OC.dialogs.confirmDestructive(
 				this.t(
 					'workflow_media_converter',
-					'This will batch convert any unconverted media in the specified folder.  Are you sure you want to proceed?'
+					'This will batch convert any unconverted media in the specified folder.  Are you sure you want to proceed?',
 				),
 				this.t('workflow_media_converter', 'Start conversion batch'),
 				{
@@ -133,7 +134,7 @@ export default {
 					cancel: this.t('workflow_media_converter', 'Cancel'),
 				},
 				(confirmed) => confirmed && this.saveConversionBatch(),
-				true
+				true,
 			)
 		},
 
@@ -165,19 +166,19 @@ export default {
 				this.newConversionBatch.id = getUniqueId()
 				await axios.post(
 					generateUrl('/apps/workflow_media_converter/conversion-batches'),
-					{ batch: this.newConversionBatch }
+					{ batch: this.newConversionBatch },
 				)
 			} catch (error) {
 				this.conversionBatches.splice(
 					this.conversionBatches.findIndex(
-						(b) => b.id === this.newConversionBatch.id
+						(b) => b.id === this.newConversionBatch.id,
 					),
-					1
+					1,
 				)
 				this.newConversionBatch = {}
 				OC.dialogs.alert(
 					error.response.data,
-					this.t('workflow_media_converter', 'Error saving')
+					this.t('workflow_media_converter', 'Error saving'),
 				)
 			} finally {
 				this.saving = false
@@ -189,11 +190,11 @@ export default {
 				conversionBatch.id
 					? this.t(
 						'workflow_media_converter',
-						'All queued conversions for this batch will be cancelled, are you sure you want to proceed?'
+						'All queued conversions for this batch will be cancelled, are you sure you want to proceed?',
 					  )
 					: this.t(
 						'workflow_media_converter',
-						'Are you sure you want to stop making this batch?'
+						'Are you sure you want to stop making this batch?',
 					  ),
 				this.t('workflow_media_converter', 'Delete conversion batch'),
 				{
@@ -203,7 +204,7 @@ export default {
 					cancel: this.t('workflow_media_converter', 'Cancel'),
 				},
 				(confirmed) => confirmed && this.removeConversionBatch(conversionBatch),
-				true
+				true,
 			)
 		},
 
@@ -214,13 +215,13 @@ export default {
 				if (conversionBatch.id) {
 					await axios.delete(
 						generateUrl(
-							`/apps/workflow_media_converter/conversion-batches/${conversionBatch.id}`
-						)
+							`/apps/workflow_media_converter/conversion-batches/${conversionBatch.id}`,
+						),
 					)
 				}
 
 				this.state.conversionBatches = this.state.conversionBatches.filter(
-					(j) => j.id !== conversionBatch.id
+					(j) => j.id !== conversionBatch.id,
 				)
 			} catch (error) {
 				console.error(error)
@@ -234,14 +235,14 @@ export default {
 				this.saving = true
 				await axios.put(
 					generateUrl('/apps/workflow_media_converter/personal-settings'),
-					{ values: this.state }
+					{ values: this.state },
 				)
 			} catch (e) {
 				showError(
 					this.t(
 						'workflow_media_converter',
-						'Failed to save config, please try again shortly'
-					)
+						'Failed to save config, please try again shortly',
+					),
 				)
 				console.error(e)
 			} finally {

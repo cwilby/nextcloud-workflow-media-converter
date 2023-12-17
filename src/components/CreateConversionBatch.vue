@@ -63,9 +63,9 @@
 			</div>
 		</div>
 		<div class="wmc-conversion-batch__FFmpeg">
-			<label>{{t('workflow_media_converter', 'Additional FFmpeg flags (optional, leave blank to use defaults)')}}</label>
-			<input type="text" v-model="additionalConversionFlags" />
-			<input type="text" :value="commandString" style="background-color: #eee" />
+			<label>{{ t('workflow_media_converter', 'Additional FFmpeg flags (optional, leave blank to use defaults)') }}</label>
+			<input v-model="additionalConversionFlags" type="text">
+			<input type="text" :value="commandString" style="background-color: #eee">
 		</div>
 		<div class="wmc-conversion-batch__actions">
 			<button v-if="!conversionBatch.id" class="save" @click="$emit('save')">
@@ -160,12 +160,12 @@ export default {
 		commandString() {
 			return [
 				'ffmpeg',
-				this.threads != 0 ? `-threads ${this.threads}` : '',
+				parseInt(this.threads) !== 0 ? `-threads ${this.threads}` : '',
 				this.additionalConversionFlags ? `${this.additionalConversionFlags}` : '',
 				'-i {input}',
 				'{output}',
 			].filter(Boolean).join(' ')
-		}
+		},
 	},
 
 	methods: {

@@ -90,7 +90,7 @@ export default {
 				id: 'move',
 				label: t(
 					'workflow_media_converter',
-					'Move source file to specific folder'
+					'Move source file to specific folder',
 				),
 			},
 		],
@@ -109,7 +109,7 @@ export default {
 				id: 'preserve',
 				label: t(
 					'workflow_media_converter',
-					'Add new file with a number added to its name'
+					'Add new file with a number added to its name',
 				),
 			},
 			{
@@ -120,7 +120,7 @@ export default {
 				id: 'move',
 				label: t(
 					'workflow_media_converter',
-					'Move existing file to specific folder'
+					'Move existing file to specific folder',
 				),
 			},
 		],

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { translate, translatePlural } from '@nextcloud/l10n'
 
 Vue.filter('ucwords', (value) =>
-	value?.toLowerCase().replace(/\b[a-z]/g, (letter) => letter.toUpperCase())
+	value?.toLowerCase().replace(/\b[a-z]/g, (letter) => letter.toUpperCase()),
 )
 
 Vue.prototype.t = translate

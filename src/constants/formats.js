@@ -141,6 +141,6 @@ export default [
 		extension: 'wmv',
 		decode: true,
 		encode: true,
-		label: 'Windows Media Video (WMV)'
-	}
+		label: 'Windows Media Video (WMV)',
+	},
 ]

@@ -12,10 +12,10 @@
 		</div>
 		<PostConversionRules v-model="config" />
 		<div class="wmc-conversion-batch__FFmpeg">
-			<label>{{t('workflow_media_converter', 'Additional FFmpeg flags')}}</label>
-			<div><input type="text" v-model="additionalConversionFlags" /></div>
+			<label>{{ t('workflow_media_converter', 'Additional FFmpeg flags') }}</label>
+			<div><input v-model="additionalConversionFlags" type="text"></div>
 		</div>
-		<div><input type="text" :value="commandString" style="background-color: #eee" /></div>
+		<div><input type="text" :value="commandString" style="background-color: #eee"></div>
 	</div>
 </template>
 
@@ -53,14 +53,8 @@ export default {
 
 	data: () => ({
 		formats,
-		threads: 0
+		threads: 0,
 	}),
-
-	async mounted() {
-		const { data } = await axios.get(generateUrl('/apps/workflow_media_converter/admin-settings'))
-
-		this.threads = data.threadLimit;
-	},
 
 	computed: {
 		config: {
@@ -74,7 +68,7 @@ export default {
 			set(mutation) {
 				this.$emit(
 					'input',
-					JSON.stringify({ ...(this.config || {}), ...mutation })
+					JSON.stringify({ ...(this.config || {}), ...mutation }),
 				)
 			},
 		},
@@ -100,12 +94,18 @@ export default {
 		commandString() {
 			return [
 				'ffmpeg',
-				this.threads != 0 ? `-threads ${this.threads}` : '',
+				parseInt(this.threads) !== 0 ? `-threads ${this.threads}` : '',
 				this.additionalConversionFlags ? `${this.additionalConversionFlags}` : '',
 				'-i {input}',
 				'{output}',
 			].filter(Boolean).join(' ')
-		}
+		},
+	},
+
+	async mounted() {
+		const { data } = await axios.get(generateUrl('/apps/workflow_media_converter/admin-settings'))
+
+		this.threads = data.threadLimit
 	},
 }
 </script>
@@ -117,15 +117,14 @@ export default {
 		margin: auto;
 		text-align: center;
 	}
-	
+
 	input, select {
 		width: 100%;
 	}
-	
+
 	.mb {
 		margin-bottom: 1.5em;
 	}
-
 
 }
 </style>
