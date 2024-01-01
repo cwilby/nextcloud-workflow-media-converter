@@ -19,6 +19,7 @@ class PersonalSettings implements ISettings {
 
 	public function getForm(): TemplateResponse {
 		$this->initialStateService->provideInitialState('personal-config', $this->configService->getCurrentUserConfig());
+		$this->initialStateService->provideInitialState('threadLimit', $this->configService->getAppConfigValue('threadLimit'));
 
 		return new TemplateResponse(Application::APP_ID, 'personalSettings');
 	}

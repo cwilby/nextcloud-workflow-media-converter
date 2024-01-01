@@ -2,6 +2,7 @@ OC.L10N.register(
     "workflow_media_converter",
     {
     "Save" : "Salva",
+    "Converted" : "Convertito",
     "Total" : "Totale",
     "Yes" : "Si",
     "Cancel" : "Annulla",

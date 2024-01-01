@@ -32,6 +32,7 @@ class ConvertMediaJob extends QueuedJob {
 	private $postConversionOutputRuleMoveFolder;
 	private $postConversionOutputConflictRule;
 	private $postConversionOutputConflictRuleMoveFolder;
+	private $additionalConversionFlags;
 	private $outputExtension;
 	private $sourceFile;
 	private $sourceFolder;
@@ -99,6 +100,7 @@ class ConvertMediaJob extends QueuedJob {
 		$this->postConversionOutputConflictRuleMoveFolder = $this->prependUserFolder($arguments['postConversionOutputConflictRuleMoveFolder']);
 		$this->outputExtension = (string)$arguments['outputExtension'];
 		$this->convertMediaInParallel = isset($adminSettings) && isset($adminSettings['convertMediaInParallel']) ? (bool)$adminSettings['convertMediaInParallel'] : false;
+		$this->additionalConversionFlags = (string)$arguments['additionalConversionFlags'];
 
 		$this->sourceFile = $this->rootFolder->get($this->path);
 		$this->sourceFolder = dirname($this->path);
@@ -131,6 +133,7 @@ class ConvertMediaJob extends QueuedJob {
 				'uid' => $this->userId,
 				'batch_id' => $this->batchId,
 				'path' => $this->path,
+				'additionalConversionFlags' => $this->additionalConversionFlags,
 				'outputExtension' => $this->outputExtension,
 				'convertMediaInParallel' => $this->convertMediaInParallel,
 				'postConversionSourceRule' => $this->postConversionSourceRule,
@@ -152,7 +155,9 @@ class ConvertMediaJob extends QueuedJob {
 	public function convertMedia() {
 		$threads = $this->configService->getAppConfigValue('threadLimit', 0);
 
-		$command = "ffmpeg -threads $threads -i {$this->tempSourcePath} {$this->tempOutputPath}";
+		$additionalConversionFlags = empty($this->additionalConversionFlags) ? '' : " {$this->additionalConversionFlags}";
+
+		$command = "ffmpeg -threads $threads {$additionalConversionFlags} -i {$this->tempSourcePath} {$this->tempOutputPath}";
 
 		$process = $this->processFactory->create($command);
 

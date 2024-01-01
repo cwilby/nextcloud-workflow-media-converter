@@ -1,14 +1,14 @@
 <template>
 	<div>
-		<div class="mb">
-			<p>
+		<div>
+			<label>
 				{{
 					t(
 						'workflow_media_converter',
 						'After the source file has been converted:'
 					)
 				}}
-			</p>
+			</label>
 			<select v-model="postConversionSourceRule">
 				<option v-for="option in postConversionSourceRules"
 					:key="option.id"
@@ -23,8 +23,8 @@
 				<span>{{ postConversionSourceRuleMoveFolder }}</span>
 			</div>
 		</div>
-		<div class="mb">
-			<p>{{ t('workflow_media_converter', 'After the output is ready:') }}</p>
+		<div>
+			<label>{{ t('workflow_media_converter', 'After the output is ready:') }}</label>
 			<select v-model="postConversionOutputRule">
 				<option v-for="option in postConversionOutputRules"
 					:key="option.id"
@@ -39,8 +39,8 @@
 				<span>{{ postConversionOutputRuleMoveFolder }}</span>
 			</div>
 		</div>
-		<div class="mb">
-			<p>{{ t('workflow_media_converter', 'If the output file exists:') }}</p>
+		<div>
+			<label>{{ t('workflow_media_converter', 'If the output file exists:') }}</label>
 			<select v-model="postConversionOutputConflictRule">
 				<option v-for="option in postConversionOutputConflictRules"
 					:key="option.id"
@@ -90,7 +90,7 @@ export default {
 				id: 'move',
 				label: t(
 					'workflow_media_converter',
-					'Move source file to specific folder'
+					'Move source file to specific folder',
 				),
 			},
 		],
@@ -109,7 +109,7 @@ export default {
 				id: 'preserve',
 				label: t(
 					'workflow_media_converter',
-					'Add new file with a number added to its name'
+					'Add new file with a number added to its name',
 				),
 			},
 			{
@@ -120,7 +120,7 @@ export default {
 				id: 'move',
 				label: t(
 					'workflow_media_converter',
-					'Move existing file to specific folder'
+					'Move existing file to specific folder',
 				),
 			},
 		],
@@ -186,7 +186,7 @@ export default {
 
 <style lang="scss">
 .mb {
-	margin-bottom: 1.5em !important;
+	margin-bottom: 1em !important;
 }
 
 .mb-1 {

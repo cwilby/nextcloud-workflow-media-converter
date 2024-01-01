@@ -2,10 +2,12 @@
 	<div class="wmc-conversion-batch">
 		<div v-if="conversionBatch.id">
 			<DisplayConversionBatch :conversion-batch="conversionBatch"
+				:threads="threads"
 				@remove="$emit('remove', conversionBatch)" />
 		</div>
 		<div v-else>
 			<CreateConversionBatch :conversion-batch="conversionBatch"
+				:threads="threads"
 				@remove="$emit('remove', conversionBatch)"
 				@change="$emit('change', $event)"
 				@save="$emit('save')" />
@@ -24,6 +26,10 @@ export default {
 		conversionBatch: {
 			required: true,
 			type: Object,
+		},
+		threads: {
+			required: true,
+			type: Number,
 		},
 	},
 }

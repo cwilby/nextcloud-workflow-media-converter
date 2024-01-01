@@ -11,6 +11,7 @@
 		<ul>
 			<li v-for="(conversionBatch, i) in conversionBatches" :key="i">
 				<ConversionBatch :conversion-batch="conversionBatch"
+					:threads="threads"
 					@change="$emit('change-conversion-batch', $event)"
 					@remove="$emit('remove-conversion-batch', conversionBatch)"
 					@save="$emit('save-conversion-batch')" />
@@ -34,6 +35,10 @@ export default {
 		conversionBatches: {
 			required: true,
 			type: Array,
+		},
+		threads: {
+			required: true,
+			type: Number,
 		},
 	},
 }

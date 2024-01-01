@@ -12,15 +12,17 @@
 						t('workflow_media_converter', `Convert all files in this folder`)
 					}}</span>
 					<div>
-						<button @click="openFilePicker('sourceFolder')">
-							{{ t('workflow_media_converter', 'Choose Folder') }}
-						</button>
+						<div class="wmc-conversion-batch__source-directory--picker">
+							<button @click="openFilePicker('sourceFolder')">
+								{{ t('workflow_media_converter', 'Choose Folder') }}
+							</button>
+							<NcCheckboxRadioSwitch :checked.sync="convertMediaInSubFolders">
+								{{ t('workflow_media_converter', 'Convert media in sub-folders') }}
+							</NcCheckboxRadioSwitch>
+						</div>
 						<span>{{ sourceFolder }}</span>
 					</div>
 				</div>
-				<NcCheckboxRadioSwitch :checked.sync="convertMediaInSubFolders">
-					{{ t('workflow_media_converter', 'Convert media in sub-folders') }}
-				</NcCheckboxRadioSwitch>
 				<div class="wmc-conversion-batch__from-format">
 					<label>{{
 						t(
@@ -60,6 +62,11 @@
 				<PostConversionRules v-model="postConversionRules" />
 			</div>
 		</div>
+		<div class="wmc-conversion-batch__FFmpeg">
+			<label>{{ t('workflow_media_converter', 'Additional FFmpeg flags (optional, leave blank to use defaults)') }}</label>
+			<input v-model="additionalConversionFlags" type="text">
+			<input type="text" :value="commandString" style="background-color: #eee">
+		</div>
 		<div class="wmc-conversion-batch__actions">
 			<button v-if="!conversionBatch.id" class="save" @click="$emit('save')">
 				{{ t('workflow_media_converter', 'Save') }}
@@ -90,6 +97,10 @@ export default {
 		conversionBatch: {
 			required: true,
 			type: Object,
+		},
+		threads: {
+			required: true,
+			type: Number,
 		},
 	},
 
@@ -138,6 +149,23 @@ export default {
 				this.commit(change)
 			},
 		},
+		additionalConversionFlags: {
+			get() {
+				return this.conversionBatch.additionalConversionFlags
+			},
+			set(additionalConversionFlags) {
+				this.commit({ additionalConversionFlags })
+			},
+		},
+		commandString() {
+			return [
+				'ffmpeg',
+				parseInt(this.threads) !== 0 ? `-threads ${this.threads}` : '',
+				this.additionalConversionFlags ? `${this.additionalConversionFlags}` : '',
+				'-i {input}',
+				'{output}',
+			].filter(Boolean).join(' ')
+		},
 	},
 
 	methods: {
@@ -162,6 +190,22 @@ export default {
 
 	&__from-format {
 		margin-top: 2em;
+	}
+
+	&__source-directory {
+		&--picker {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 1em;
+		}
+	}
+
+	&__FFmpeg {
+		textarea {
+			width: 100%;
+			height: 10em;
+		}
 	}
 }
 </style>
