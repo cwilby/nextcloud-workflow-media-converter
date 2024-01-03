@@ -22,7 +22,7 @@
 		"@nextcloud/router": "^2.2.0",
 		"@nextcloud/vue": "^8.3.0",
 		"debounce": "^2.0.0",
-		"vue": "^2.7.14"
+		"vue": "^2.7.16"
 	},
 	"browserslist": [
 		"extends @nextcloud/browserslist-config"
@@ -47,8 +47,8 @@
 		"style-loader": "^3.3.3",
 		"stylelint-webpack-plugin": "^4.1.1",
 		"vue-loader": "^15.10.0",
-		"vue-template-compiler": "^2.7.15",
-		"vue": "^2.7.14",
+		"vue-template-compiler": "^2.7.16",
+		"vue": "^2.7.16",
 		"webpack-cli": "^5.1.4",
 		"webpack-dev-server": "^4.15.1",
 		"webpack": "^5.89.0"
