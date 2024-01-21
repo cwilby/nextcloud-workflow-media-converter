@@ -4,7 +4,7 @@ OC.L10N.register(
     "Save" : "Salva",
     "Converted" : "Convertito",
     "Total" : "Totale",
-    "Yes" : "Si",
+    "Yes" : "Sì",
     "Cancel" : "Annulla",
     "Delete" : "Elimina"
 },
