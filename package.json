@@ -44,7 +44,7 @@
 		"node-polyfill-webpack-plugin": "2.0.1",
 		"sass-loader": "^13.3.3",
 		"sass": "^1.69.7",
-		"style-loader": "^3.3.3",
+		"style-loader": "^3.3.4",
 		"stylelint-webpack-plugin": "^4.1.1",
 		"vue-loader": "^15.10.0",
 		"vue-template-compiler": "^2.7.15",
