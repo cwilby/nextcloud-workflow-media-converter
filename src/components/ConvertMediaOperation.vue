@@ -103,7 +103,7 @@ export default {
 	},
 
 	async mounted() {
-		const { data } = await axios.get(generateUrl('/apps/workflow_media_converter/admin-settings'))
+		const { data } = await axios.get(generateUrl('/custom_apps/workflow_media_converter/admin-settings'))
 
 		this.threads = data.threadLimit
 	},
