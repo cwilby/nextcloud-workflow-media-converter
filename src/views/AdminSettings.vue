@@ -50,7 +50,7 @@ export default {
 			return this.state.maxThreads
 		},
 		iconUrl() {
-			return generateUrl('/apps/workflow_media_converter/img/icon.svg')
+			return generateUrl('/custom_apps/workflow_media_converter/img/icon.svg')
 		},
 		threadLimit: {
 			get() {
@@ -76,7 +76,7 @@ export default {
 		saveConfig: debounce(async function() {
 			try {
 				this.saving = true
-				await axios.put(generateUrl('/apps/workflow_media_converter/admin-settings'), { values: this.state })
+				await axios.put(generateUrl('/custom_apps/workflow_media_converter/admin-settings'), { values: this.state })
 			} catch (e) {
 				showError(this.t('workflow_media_converter', 'Failed to save config, please try again shortly'))
 				console.error(e)

@@ -74,7 +74,7 @@ export default {
 		async refreshBatches() {
 			try {
 				const { data: state } = await axios.get(
-					generateUrl('/apps/workflow_media_converter/personal-settings'),
+					generateUrl('/custom_apps/workflow_media_converter/personal-settings'),
 				)
 
 				this.state = state
