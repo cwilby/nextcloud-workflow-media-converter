@@ -138,6 +138,12 @@ export default [
 		label: 'WebM',
 	},
 	{
+		extension: 'wma',
+		decode: true,
+		encode: true,
+		label: 'Windows Media Audio (WMA)',
+	},
+	{
 		extension: 'wmv',
 		decode: true,
 		encode: true,
