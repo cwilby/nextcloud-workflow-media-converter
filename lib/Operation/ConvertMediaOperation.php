@@ -7,8 +7,8 @@ use OCA\WorkflowMediaConverter\AppInfo\Application;
 use OCA\WorkflowMediaConverter\BackgroundJobs\ConvertMediaJob;
 use OCP\BackgroundJob\IJobList;
 use OCP\EventDispatcher\Event;
-use OCP\EventDispatcher\GenericEvent;
 use OCP\Files\Folder;
+use OCP\Files\IRootFolder;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\WorkflowEngine\IManager;
@@ -17,17 +17,13 @@ use OCP\WorkflowEngine\ISpecificOperation;
 use Psr\Log\LoggerInterface;
 
 class ConvertMediaOperation implements ISpecificOperation {
-	private $jobList;
-	private $urlGenerator;
-	private $logger;
-	private $l;
-
-	public function __construct(IJobList $jobList, IURLGenerator $urlGenerator, LoggerInterface $logger, IL10N $l) {
-		$this->jobList = $jobList;
-		$this->urlGenerator = $urlGenerator;
-		$this->logger = $logger;
-		$this->l = $l;
-	}
+	public function __construct(
+		private IJobList $jobList, 
+		private IURLGenerator $urlGenerator, 
+		private LoggerInterface $logger, 
+		private IRootFolder $rootFolder,
+		private IL10N $l
+	) {}
 
 	public function validateOperation(string $name, array $checks, string $operation): void {
 		//
@@ -61,11 +57,21 @@ class ConvertMediaOperation implements ISpecificOperation {
 		}
 	}
 
-	private function handleEvent(string $eventName, GenericEvent $event, IRuleMatcher $ruleMatcher): void {
-		$node = $event->getSubject();
+	private function handleEvent(string $eventName, Event $event, IRuleMatcher $ruleMatcher): void {
+		if ($event instanceof \OCP\Files\Events\Node\AbstractNodeEvent) {
+			$node = $event->getNode();
+		} else if ($event instanceof \OCP\SystemTag\MapperEvent) {
+			$objectType = $event->getObjectType();
+			if ($objectType !== 'files') {
+				return;
+			}
 
-		if ($eventName === '\OCP\Files::postRename') {
-			$node = $node[1];
+			$node = $this->rootFolder->getById($event->getObjectId());
+			if ($node === null) {
+				return;
+			}
+
+			$node = $node[0];
 		}
 
 		$path = $node->getPath();
