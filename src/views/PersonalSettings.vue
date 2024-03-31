@@ -25,7 +25,7 @@
 <script>
 import debounce from 'debounce'
 import { showError } from '@nextcloud/dialogs'
-import { generateUrl } from '@nextcloud/router'
+import { generateUrl } from '../utils'
 import axios from '@nextcloud/axios'
 import { loadState } from '@nextcloud/initial-state'
 
@@ -48,7 +48,7 @@ export default {
 
 	computed: {
 		iconUrl() {
-			return generateUrl('/apps/workflow_media_converter/img/icon.svg')
+			return generateUrl('img/icon.svg')
 		},
 		conversionBatches() {
 			return this.state.conversionBatches
@@ -74,7 +74,7 @@ export default {
 		async refreshBatches() {
 			try {
 				const { data: state } = await axios.get(
-					generateUrl('/apps/workflow_media_converter/personal-settings'),
+					generateUrl('personal-settings'),
 				)
 
 				this.state = state
@@ -165,7 +165,7 @@ export default {
 				this.saving = true
 				this.newConversionBatch.id = getUniqueId()
 				await axios.post(
-					generateUrl('/apps/workflow_media_converter/conversion-batches'),
+					generateUrl('conversion-batches'),
 					{ batch: this.newConversionBatch },
 				)
 			} catch (error) {
@@ -214,9 +214,7 @@ export default {
 
 				if (conversionBatch.id) {
 					await axios.delete(
-						generateUrl(
-							`/apps/workflow_media_converter/conversion-batches/${conversionBatch.id}`,
-						),
+						generateUrl(`conversion-batches/${conversionBatch.id}`)
 					)
 				}
 
@@ -234,7 +232,7 @@ export default {
 			try {
 				this.saving = true
 				await axios.put(
-					generateUrl('/apps/workflow_media_converter/personal-settings'),
+					generateUrl('personal-settings'),
 					{ values: this.state },
 				)
 			} catch (e) {

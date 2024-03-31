@@ -21,7 +21,7 @@
 
 <script>
 import axios from '@nextcloud/axios'
-import { generateUrl } from '@nextcloud/router'
+import { generateUrl } from '../utils';
 import formats from '../constants/formats.js'
 import filepicker from '../mixins/filepicker.js'
 import PostConversionRules from './PostConversionRules.vue'
@@ -103,7 +103,7 @@ export default {
 	},
 
 	async mounted() {
-		const { data } = await axios.get(generateUrl('/apps/workflow_media_converter/admin-settings'))
+		const { data } = await axios.get(generateUrl('admin-settings'))
 
 		this.threads = data.threadLimit
 	},

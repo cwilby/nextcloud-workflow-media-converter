@@ -1,3 +1,7 @@
+import { generateUrl, getAppRootUrl } from '@nextcloud/router';
+
+export const APP_ID = 'workflow_media_converter';
+
 /**
  * Gets a UUID
  *
@@ -13,4 +17,8 @@ export function getUniqueId(length = 32) {
 		result.push(characters.charAt(Math.floor(Math.random() * charactersLength)))
 	}
 	return result.join('')
+}
+
+export function generateUrl(url, params, options) {
+	return generateUrl(url, params, { ...options, baseURL: getAppRootUrl(APP_ID) });
 }
