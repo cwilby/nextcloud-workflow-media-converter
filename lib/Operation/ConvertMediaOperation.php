@@ -18,12 +18,13 @@ use Psr\Log\LoggerInterface;
 
 class ConvertMediaOperation implements ISpecificOperation {
 	public function __construct(
-		private IJobList $jobList, 
-		private IURLGenerator $urlGenerator, 
-		private LoggerInterface $logger, 
+		private IJobList $jobList,
+		private IURLGenerator $urlGenerator,
+		private LoggerInterface $logger,
 		private IRootFolder $rootFolder,
 		private IL10N $l
-	) {}
+	) {
+	}
 
 	public function validateOperation(string $name, array $checks, string $operation): void {
 		//
@@ -60,7 +61,7 @@ class ConvertMediaOperation implements ISpecificOperation {
 	private function handleEvent(string $eventName, Event $event, IRuleMatcher $ruleMatcher): void {
 		if ($event instanceof \OCP\Files\Events\Node\AbstractNodeEvent) {
 			$node = $event->getNode();
-		} else if ($event instanceof \OCP\SystemTag\MapperEvent) {
+		} elseif ($event instanceof \OCP\SystemTag\MapperEvent) {
 			$objectType = $event->getObjectType();
 			if ($objectType !== 'files') {
 				return;
