@@ -155,16 +155,16 @@ class ConfigService {
 				$cpuinfo = file_get_contents('/proc/cpuinfo');
 				preg_match_all('/^processor/m', $cpuinfo, $matches);
 				$numCpus = count($matches[0]);
-			} elseif ('WIN' == strtoupper(substr(PHP_OS, 0, 3))) {
+			} elseif (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
 				$process = @popen('wmic cpu get NumberOfCores', 'rb');
-				if (false !== $process) {
+				if ($process !== false) {
 					fgets($process);
 					$numCpus = intval(fgets($process));
 					pclose($process);
 				}
 			} else {
 				$process = @popen('sysctl -a', 'rb');
-				if (false !== $process) {
+				if ($process !== false) {
 					$output = stream_get_contents($process);
 					preg_match('/hw.ncpu: (\d+)/', $output, $matches);
 					if ($matches) {
