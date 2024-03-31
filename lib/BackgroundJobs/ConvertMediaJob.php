@@ -180,8 +180,7 @@ class ConvertMediaJob extends QueuedJob {
 		return $this;
 	}
 
-	private function getConversionCommand($flagsBeforeInput = false)
-	{
+	private function getConversionCommand($flagsBeforeInput = false) {
 		$threads = $this->configService->getAppConfigValue('threadLimit', 0);
 		
 		$additionalConversionFlags = empty($this->additionalConversionFlags) ? '' : " {$this->additionalConversionFlags}";
@@ -198,7 +197,7 @@ class ConvertMediaJob extends QueuedJob {
 			}
 		} else {
 			if (!empty($additionalInputConversionFlags)) {
-				$command .= " {$additionalInputConversionFlags}"; 
+				$command .= " {$additionalInputConversionFlags}";
 			}
 
 			$command .= " -i {$this->tempSourcePath}";

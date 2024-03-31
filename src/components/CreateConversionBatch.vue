@@ -67,14 +67,17 @@
 			<div class="grid">
 				<div class="column">
 					<label><small>{{ t('workflow_media_converter', 'Input flags') }}</small></label>
-					<input style="margin-bottom: 0.5em" v-model="additionalInputConversionFlags" type="text">
+					<input v-model="additionalInputConversionFlags" type="text" style="margin-bottom: 0.5em">
 				</div>
 				<div class="column">
 					<label><small>{{ t('workflow_media_converter', 'Output flags') }}</small></label>
-					<input style="margin-bottom: 0.5em" v-model="additionalOutputConversionFlags" type="text">
+					<input v-model="additionalOutputConversionFlags" type="text" style="margin-bottom: 0.5em">
 				</div>
 			</div>
-			<input type="text" :value="commandString" style="background-color: #eee; color: #000" disabled>
+			<input type="text"
+				:value="commandString"
+				style="background-color: #eee; color: #000"
+				disabled>
 		</div>
 		<div class="wmc-conversion-batch__actions">
 			<button v-if="!conversionBatch.id" class="save" @click="$emit('save')">

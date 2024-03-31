@@ -23,7 +23,10 @@
 					<input v-model="additionalOutputConversionFlags" type="text">
 				</div>
 			</div>
-			<input type="text" :value="commandString" style="background-color: #eee; color: #000" disabled>
+			<input type="text"
+				:value="commandString"
+				style="background-color: #eee; color: #000"
+				disabled>
 		</div>
 	</div>
 </template>
