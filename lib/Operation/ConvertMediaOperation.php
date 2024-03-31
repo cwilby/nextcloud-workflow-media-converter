@@ -96,7 +96,8 @@ class ConvertMediaOperation implements ISpecificOperation {
 			$postConversionOutputRuleMoveFolder = $config['postConversionOutputRuleMoveFolder'];
 			$postConversionOutputConflictRule = $config['postConversionOutputConflictRule'];
 			$postConversionOutputConflictRuleMoveFolder = $config['postConversionOutputConflictRuleMoveFolder'];
-			$additionalConversionFlags = $config['additionalConversionFlags'];
+			$additionalInputConversionFlags = $config['additionalInputConversionFlags'];
+			$additionalOutputConversionFlags = $config['additionalOutputConversionFlags'];
 
 			if ($originalFileMode === 'keep' && $targetFileMode === 'preserve') {
 				break;
@@ -109,7 +110,8 @@ class ConvertMediaOperation implements ISpecificOperation {
 			$this->jobList->add(ConvertMediaJob::class, [
 				'path' => $path,
 				'outputExtension' => $outputExtension,
-				'additionalConversionFlags' => $additionalConversionFlags,
+				'additionalInputConversionFlags' => $additionalInputConversionFlags,
+				'additionalOutputConversionFlags' => $additionalOutputConversionFlags,
 				'postConversionSourceRule' => $postConversionSourceRule,
 				'postConversionSourceRuleMoveFolder' => $postConversionSourceRuleMoveFolder,
 				'postConversionOutputRule' => $postConversionOutputRule,

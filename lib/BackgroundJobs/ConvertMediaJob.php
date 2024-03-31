@@ -33,6 +33,8 @@ class ConvertMediaJob extends QueuedJob {
 	private $postConversionOutputConflictRule;
 	private $postConversionOutputConflictRuleMoveFolder;
 	private $additionalConversionFlags;
+	private $additionalInputConversionFlags;
+	private $additionalOutputConversionFlags;
 	private $outputExtension;
 	private $sourceFile;
 	private $sourceFolder;
@@ -100,7 +102,9 @@ class ConvertMediaJob extends QueuedJob {
 		$this->postConversionOutputConflictRuleMoveFolder = $this->prependUserFolder($arguments['postConversionOutputConflictRuleMoveFolder']);
 		$this->outputExtension = (string)$arguments['outputExtension'];
 		$this->convertMediaInParallel = isset($adminSettings) && isset($adminSettings['convertMediaInParallel']) ? (bool)$adminSettings['convertMediaInParallel'] : false;
-		$this->additionalConversionFlags = (string)$arguments['additionalConversionFlags'];
+		$this->additionalConversionFlags = (string)($arguments['additionalConversionFlags'] ?? '');
+		$this->additionalInputConversionFlags = (string)($arguments['additionalInputConversionFlags'] ?? '');
+		$this->additionalOutputConversionFlags = (string)($arguments['additionalOutputConversionFlags'] ?? '');
 
 		$this->sourceFile = $this->rootFolder->get($this->path);
 		$this->sourceFolder = dirname($this->path);
@@ -134,6 +138,8 @@ class ConvertMediaJob extends QueuedJob {
 				'batch_id' => $this->batchId,
 				'path' => $this->path,
 				'additionalConversionFlags' => $this->additionalConversionFlags,
+				'additionalInputConversionFlags' => $this->additionalInputConversionFlags,
+				'additionalOutputConversionFlags' => $this->additionalOutputConversionFlags,
 				'outputExtension' => $this->outputExtension,
 				'convertMediaInParallel' => $this->convertMediaInParallel,
 				'postConversionSourceRule' => $this->postConversionSourceRule,
@@ -153,21 +159,58 @@ class ConvertMediaJob extends QueuedJob {
 	}
 
 	public function convertMedia() {
-		$threads = $this->configService->getAppConfigValue('threadLimit', 0);
-
-		$additionalConversionFlags = empty($this->additionalConversionFlags) ? '' : " {$this->additionalConversionFlags}";
-
-		$command = "ffmpeg -threads $threads {$additionalConversionFlags} -i {$this->tempSourcePath} {$this->tempOutputPath}";
-
-		$process = $this->processFactory->create($command);
+		$process = $this->processFactory->create(
+			command: $this->getConversionCommand(flagsBeforeInput: false)
+		);
 
 		$process->run();
 
 		if (!$process->isSuccessful()) {
-			throw new ProcessFailedException($process);
+			$process = $this->processFactory->create(
+				command: $this->getConversionCommand(flagsBeforeInput: true)
+			);
+
+			$process->run();
+
+			if (!$process->isSuccessful()) {
+				throw new ProcessFailedException($process);
+			}
 		}
 
 		return $this;
+	}
+
+	private function getConversionCommand($flagsBeforeInput = false)
+	{
+		$threads = $this->configService->getAppConfigValue('threadLimit', 0);
+		
+		$additionalConversionFlags = empty($this->additionalConversionFlags) ? '' : " {$this->additionalConversionFlags}";
+		$additionalInputConversionFlags = empty($this->additionalInputConversionFlags) ? '' : " {$this->additionalInputConversionFlags}";
+		$additionalOutputConversionFlags = empty($this->additionalOutputConversionFlags) ? '' : " {$this->additionalOutputConversionFlags}";
+
+		$command = "ffmpeg -threads $threads";
+
+		if (!empty($additionalConversionFlags)) {
+			if ($flagsBeforeInput) {
+				$command .= " {$additionalConversionFlags} -i {$this->tempSourcePath}";
+			} else {
+				$command .= " -i {$this->tempSourcePath} {$additionalConversionFlags}";
+			}
+		} else {
+			if (!empty($additionalInputConversionFlags)) {
+				$command .= " {$additionalInputConversionFlags}"; 
+			}
+
+			$command .= " -i {$this->tempSourcePath}";
+
+			if (!empty($additionalOutputConversionFlags)) {
+				$command .= " {$additionalOutputConversionFlags}";
+			}
+		}
+
+		$command .= " {$this->tempOutputPath}";
+
+		return $command;
 	}
 
 	public function handlePostConversion() {

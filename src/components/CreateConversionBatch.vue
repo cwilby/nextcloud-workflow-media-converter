@@ -63,9 +63,18 @@
 			</div>
 		</div>
 		<div class="wmc-conversion-batch__FFmpeg">
-			<label>{{ t('workflow_media_converter', 'Additional FFmpeg flags (optional, leave blank to use defaults)') }}</label>
-			<input v-model="additionalConversionFlags" type="text">
-			<input type="text" :value="commandString" style="background-color: #eee">
+			<label>{{ t('workflow_media_converter', 'Additional FFmpeg flags') }}</label>
+			<div class="grid">
+				<div class="column">
+					<label><small>{{ t('workflow_media_converter', 'Input flags') }}</small></label>
+					<input style="margin-bottom: 0.5em" v-model="additionalInputConversionFlags" type="text">
+				</div>
+				<div class="column">
+					<label><small>{{ t('workflow_media_converter', 'Output flags') }}</small></label>
+					<input style="margin-bottom: 0.5em" v-model="additionalOutputConversionFlags" type="text">
+				</div>
+			</div>
+			<input type="text" :value="commandString" style="background-color: #eee; color: #000" disabled>
 		</div>
 		<div class="wmc-conversion-batch__actions">
 			<button v-if="!conversionBatch.id" class="save" @click="$emit('save')">
@@ -149,20 +158,29 @@ export default {
 				this.commit(change)
 			},
 		},
-		additionalConversionFlags: {
+		additionalInputConversionFlags: {
 			get() {
-				return this.conversionBatch.additionalConversionFlags
+				return this.conversionBatch.additionalInputConversionFlags
 			},
-			set(additionalConversionFlags) {
-				this.commit({ additionalConversionFlags })
+			set(additionalInputConversionFlags) {
+				this.commit({ additionalInputConversionFlags })
+			},
+		},
+		additionalOutputConversionFlags: {
+			get() {
+				return this.conversionBatch.additionalOutputConversionFlags
+			},
+			set(additionalOutputConversionFlags) {
+				this.commit({ additionalOutputConversionFlags })
 			},
 		},
 		commandString() {
 			return [
 				'ffmpeg',
 				parseInt(this.threads) !== 0 ? `-threads ${this.threads}` : '',
-				this.additionalConversionFlags ? `${this.additionalConversionFlags}` : '',
+				this.additionalInputConversionFlags ? `${this.additionalInputConversionFlags}` : '',
 				'-i {input}',
+				this.additionalOutputConversionFlags ? `${this.additionalOutputConversionFlags}` : '',
 				'{output}',
 			].filter(Boolean).join(' ')
 		},

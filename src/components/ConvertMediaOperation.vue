@@ -12,10 +12,19 @@
 		</div>
 		<PostConversionRules v-model="config" />
 		<div class="wmc-conversion-batch__FFmpeg">
-			<label>{{ t('workflow_media_converter', 'Additional FFmpeg flags') }}</label>
-			<div><input v-model="additionalConversionFlags" type="text"></div>
+			<label><strong>{{ t('workflow_media_converter', 'Additional FFmpeg flags') }}</strong></label>
+			<div class="grid">
+				<div class="column">
+					<label>{{ t('workflow_media_converter', 'Input flags') }}</label>
+					<input v-model="additionalInputConversionFlags" type="text">
+				</div>
+				<div class="column">
+					<label>{{ t('workflow_media_converter', 'Output flags') }}</label>
+					<input v-model="additionalOutputConversionFlags" type="text">
+				</div>
+			</div>
+			<input type="text" :value="commandString" style="background-color: #eee; color: #000" disabled>
 		</div>
-		<div><input type="text" :value="commandString" style="background-color: #eee"></div>
 	</div>
 </template>
 
@@ -28,7 +37,8 @@ import PostConversionRules from './PostConversionRules.vue'
 
 const defaultState = {
 	outputExtension: null,
-	additionalConversionFlags: '',
+	additionalInputConversionFlags: '',
+	additionalOutputConversionFlags: '',
 	postConversionSourceRule: 'keep',
 	postConversionSourceRuleMoveFolder: null,
 	postConversionOutputRule: 'keep',
@@ -82,12 +92,21 @@ export default {
 			},
 		},
 
-		additionalConversionFlags: {
+		additionalInputConversionFlags: {
 			get() {
-				return this.config.additionalConversionFlags
+				return this.config.additionalInputConversionFlags
 			},
-			set(additionalConversionFlags) {
-				this.config = { additionalConversionFlags }
+			set(additionalInputConversionFlags) {
+				this.config = { additionalInputConversionFlags }
+			},
+		},
+
+		additionalOutputConversionFlags: {
+			get() {
+				return this.config.additionalOutputConversionFlags
+			},
+			set(additionalOutputConversionFlags) {
+				this.config = { additionalOutputConversionFlags }
 			},
 		},
 
@@ -95,8 +114,9 @@ export default {
 			return [
 				'ffmpeg',
 				parseInt(this.threads) !== 0 ? `-threads ${this.threads}` : '',
-				this.additionalConversionFlags ? `${this.additionalConversionFlags}` : '',
+				this.additionalInputConversionFlags ? `${this.additionalInputConversionFlags}` : '',
 				'-i {input}',
+				this.additionalOutputConversionFlags ? `${this.additionalOutputConversionFlags}` : '',
 				'{output}',
 			].filter(Boolean).join(' ')
 		},
