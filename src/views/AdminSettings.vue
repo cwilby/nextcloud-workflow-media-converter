@@ -29,7 +29,7 @@
 <script>
 import debounce from 'debounce'
 import { showError } from '@nextcloud/dialogs'
-import { generateUrl } from '../utils'
+import { generateUrl } from '../utils.js'
 import NcCheckboxRadioSwitch from '@nextcloud/vue/dist/Components/NcCheckboxRadioSwitch.js'
 import axios from '@nextcloud/axios'
 import { loadState } from '@nextcloud/initial-state'

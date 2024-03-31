@@ -25,11 +25,10 @@
 <script>
 import debounce from 'debounce'
 import { showError } from '@nextcloud/dialogs'
-import { generateUrl } from '../utils'
 import axios from '@nextcloud/axios'
 import { loadState } from '@nextcloud/initial-state'
 
-import { getUniqueId } from '../utils.js'
+import { generateUrl, getUniqueId } from '../utils.js'
 import ConversionBatchList from '../components/ConversionBatchList.vue'
 
 export default {
@@ -214,7 +213,7 @@ export default {
 
 				if (conversionBatch.id) {
 					await axios.delete(
-						generateUrl(`conversion-batches/${conversionBatch.id}`)
+						generateUrl(`conversion-batches/${conversionBatch.id}`),
 					)
 				}
 
