@@ -16,7 +16,6 @@ OC.L10N.register(
     "Convert media in sub-folders" : "Convertir les médias dans les sous-dossiers",
     "Find source files with this extension/format" : "Trouver les fichiers avec cette extension, de ce format",
     "Store converted output in this extension/format" : "Stocker la sortie convertie avec cette extension, dans ce format",
-    "Additional FFmpeg flags (optional, leave blank to use defaults)" : "Drapeaux FFmpeg supplémentaires (facultatifs, laisser vide pour utiliser ceux par défaut)",
     "Save" : "Enregistrer",
     "Convert all files in this folder" : "Convertir tous les fichiers dans ce dossier",
     "Converted" : "Converti",

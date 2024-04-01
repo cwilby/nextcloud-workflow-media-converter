@@ -16,7 +16,6 @@ OC.L10N.register(
     "Convert media in sub-folders" : "Alt klasörlerdeki ortamlar da dönüştürülsün",
     "Find source files with this extension/format" : "Bu uzantı ya da biçimdeki kaynak dosyalar bulunsun",
     "Store converted output in this extension/format" : "Dönüştürülmüş sonuç dosyaları bu uzantı ya da biçimde kaydedilsin",
-    "Additional FFmpeg flags (optional, leave blank to use defaults)" : "Ek FFmpeg işaretleri (isteğe bağlı, varsayılanların kullanılması için boş bırakın)",
     "Save" : "Kaydet",
     "Convert all files in this folder" : "Bu klasördeki tüm dosyalar dönüştürülsün",
     "Converted" : "Dönüştürüldü",

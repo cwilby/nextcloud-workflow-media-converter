@@ -14,7 +14,6 @@
     "Convert media in sub-folders" : "Converter mídia em subpastas.",
     "Find source files with this extension/format" : "Encontrar arquivos de origem com essa extensão/formato.",
     "Store converted output in this extension/format" : "Guardar saídas convertidas nessa extensão/formato",
-    "Additional FFmpeg flags (optional, leave blank to use defaults)" : "Sinalizadores FFmpeg adicionais (opcional, deixe em branco para usar os padrões)",
     "Save" : "Salvar",
     "Convert all files in this folder" : "Converter todos os arquivos neste diretório",
     "Converted" : "Convertido",

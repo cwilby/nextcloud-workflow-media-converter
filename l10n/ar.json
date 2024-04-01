@@ -14,7 +14,6 @@
     "Convert media in sub-folders" : "حوِّل الوسائط في المُجلّدات الفرعية",
     "Find source files with this extension/format" : "إبحَث عن ملفات المصدر بهذا الامتداد/التنسيق",
     "Store converted output in this extension/format" : "خزّن مُخرجات التحويل في هذا الامتداد/التنسيق",
-    "Additional FFmpeg flags (optional, leave blank to use defaults)" : "علامات FFmpeg إضافية (إختيارياً، يمكنك ترك الخانة فارغة لاعتماد القيم التلقائية)",
     "Save" : "حفظ",
     "Convert all files in this folder" : "حوِّل كل الملفات في هذا المُجلّد ",
     "Converted" : "تمّ تحويلها",

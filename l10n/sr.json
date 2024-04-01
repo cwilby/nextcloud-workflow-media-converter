@@ -14,7 +14,6 @@
     "Convert media in sub-folders" : "Претвори медије из подфолдера",
     "Find source files with this extension/format" : "Пронађи улазне фајлове са овом екстензијом / у овом формату",
     "Store converted output in this extension/format" : "Сачувај претворене фајлове у овом формату / са овом екстензијом",
-    "Additional FFmpeg flags (optional, leave blank to use defaults)" : "Додатне FFmpeg заставице (није обавезно, оставите празно ако жеите да се користе подразумеване вредности)",
     "Save" : "Сачувај",
     "Convert all files in this folder" : "Претвори све фајлове у овом фолдеру",
     "Converted" : "Конвертовано",

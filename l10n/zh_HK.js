@@ -16,7 +16,6 @@ OC.L10N.register(
     "Convert media in sub-folders" : "轉換子資料夾中的媒體",
     "Find source files with this extension/format" : "尋找具有此擴展名/格式的源文件",
     "Store converted output in this extension/format" : "以此擴展名/格式存儲轉換後的輸出",
-    "Additional FFmpeg flags (optional, leave blank to use defaults)" : "其他 FFmpeg 標誌（非強制的，留空以使用預設值）",
     "Save" : "保存",
     "Convert all files in this folder" : "轉換此資料夾中的所有檔案",
     "Converted" : "已轉換",
