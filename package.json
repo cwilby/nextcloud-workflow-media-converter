@@ -1,7 +1,7 @@
 {
 	"name": "workflow_media_converter",
 	"description": "Workflow for converting media using FFmpeg",
-	"version": "1.10.1",
+	"version": "1.10.2",
 	"author": "Cameron Wilby <cameron@wilby.com>",
 	"license": "agpl",
 	"private": true,
