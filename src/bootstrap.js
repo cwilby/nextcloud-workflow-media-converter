@@ -1,5 +1,13 @@
 import Vue from 'vue'
+import { APP_ID } from './utils.js'
 import { translate, translatePlural } from '@nextcloud/l10n'
+
+// CSP config for webpack dynamic chunk loading
+// eslint-disable-next-line
+__webpack_public_path__ = generateFilePath(APP_ID, '', '');
+
+// eslint-disable-next-line
+__webpack_nonce__ = btoa(OC.requestToken)
 
 Vue.filter('ucwords', (value) =>
 	value?.toLowerCase().replace(/\b[a-z]/g, (letter) => letter.toUpperCase()),
