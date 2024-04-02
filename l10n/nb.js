@@ -12,6 +12,8 @@ OC.L10N.register(
     "Add batches to convert existing media outside of your flow." : "Legg til bunker for å konvertere eksisterende medier utenfor flyten.",
     "Convert to format" : "Konverter til format",
     "Additional FFmpeg flags" : "Ytterligere FFmpeg-flagg",
+    "Input flags" : "Inndataflagg",
+    "Output flags" : "Utdataflagg",
     "Choose Folder" : "Velg mappe",
     "Convert media in sub-folders" : "Konverter medier i undermapper",
     "Find source files with this extension/format" : "Finn kildefiler med denne filtypen/formatet",

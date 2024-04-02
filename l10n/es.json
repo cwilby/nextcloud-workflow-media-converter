@@ -10,6 +10,8 @@
     "Add batches to convert existing media outside of your flow." : "Añada trabajos en lote para convertir medios fuera de su flujo.",
     "Convert to format" : "Convertir al formato",
     "Additional FFmpeg flags" : "Banderas adicionales de FFmpeg",
+    "Input flags" : "Banderas de entrada",
+    "Output flags" : "Banderas de salida",
     "Choose Folder" : "Seleccionar carpeta",
     "Convert media in sub-folders" : "Convertir medios en sub-carpetas",
     "Find source files with this extension/format" : "Buscar archivos fuente con esta extensión/formato",

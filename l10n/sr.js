@@ -12,6 +12,8 @@ OC.L10N.register(
     "Add batches to convert existing media outside of your flow." : "Додајте пакете да претворите постојеће медије ван вашег тока обраде.",
     "Convert to format" : "Претвори у формат",
     "Additional FFmpeg flags" : "Додатне FFmpeg заставице",
+    "Input flags" : "Заставице улаза",
+    "Output flags" : "Заставице излаза",
     "Choose Folder" : "Изаберите фолдер",
     "Convert media in sub-folders" : "Претвори медије из подфолдера",
     "Find source files with this extension/format" : "Пронађи улазне фајлове са овом екстензијом / у овом формату",
