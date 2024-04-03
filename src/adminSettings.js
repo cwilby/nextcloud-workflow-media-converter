@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { generateFilePath } from '@nextcloud/router'
 import './bootstrap.js'
 import { APP_ID } from './utils.js'
 import AdminSettings from './views/AdminSettings.vue'

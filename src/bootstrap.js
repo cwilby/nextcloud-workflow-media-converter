@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { generateFilePath } from '@nextcloud/router'
 import { APP_ID } from './utils.js'
 import { translate, translatePlural } from '@nextcloud/l10n'
 
