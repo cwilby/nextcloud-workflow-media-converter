@@ -12,6 +12,8 @@ OC.L10N.register(
     "Add batches to convert existing media outside of your flow." : "Var olan ortamları akışınızın dışında dönüştürmek için gruplar ekleyin.",
     "Convert to format" : "Dönüştürülecek biçim",
     "Additional FFmpeg flags" : "Ek FFmpeg işaretleri",
+    "Input flags" : "Giriş işaretleri",
+    "Output flags" : "Çıkış işaretleri",
     "Choose Folder" : "Klasör seçin",
     "Convert media in sub-folders" : "Alt klasörlerdeki ortamlar da dönüştürülsün",
     "Find source files with this extension/format" : "Bu uzantı ya da biçimdeki kaynak dosyalar bulunsun",

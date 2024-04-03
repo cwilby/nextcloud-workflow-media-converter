@@ -12,6 +12,8 @@ OC.L10N.register(
     "Add batches to convert existing media outside of your flow." : "Adicione lotes para converter mídia existente fora do fluxo.",
     "Convert to format" : "Converter para formato",
     "Additional FFmpeg flags" : "Sinalizadores FFmpeg adicionais",
+    "Input flags" : "Sinalizadores de entrada",
+    "Output flags" : "Sinalizadores de saída",
     "Choose Folder" : "Escolher pasta",
     "Convert media in sub-folders" : "Converter mídia em subpastas.",
     "Find source files with this extension/format" : "Encontrar arquivos de origem com essa extensão/formato.",
