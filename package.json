@@ -43,7 +43,7 @@
 		"eslint-webpack-plugin": "^4.1.0",
 		"node-polyfill-webpack-plugin": "2.0.1",
 		"sass-loader": "^13.3.3",
-		"sass": "^1.72.0",
+		"sass": "^1.75.0",
 		"style-loader": "^3.3.4",
 		"stylelint-webpack-plugin": "^5.0.0",
 		"vue-loader": "^15.11.1",
