@@ -1,7 +1,7 @@
 OC.L10N.register(
     "workflow_media_converter",
     {
-    "A similar conversion batch has already been created.  Delete that batch and try again" : "Подібний пакет конвертації вже створено. Видаліть цей пакет і повторіть спробу",
+    "A similar conversion batch has already been created.  Delete that batch and try again" : "Подібний пакет конвертації вже створено. Вилучіть цей пакет та спробуйте ще раз",
     "Convert media" : "Конвертувати медіафайли",
     "Convert video/audio files using FFmpeg." : "Перетворення відео/аудіофайлів за допомогою FFmpeg.",
     "Media conversion" : "Конвертування медіафайлів",
