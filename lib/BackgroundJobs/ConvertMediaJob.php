@@ -113,7 +113,7 @@ class ConvertMediaJob extends QueuedJob {
 		$this->sourceExtension = pathinfo($this->sourceFilename, PATHINFO_EXTENSION);
 		$this->tempSourcePath = $this->sourceFolderView->toTmpFile($this->sourceFilename);
 		$this->tempSourceFilename = basename($this->tempSourcePath);
-		$this->tempOutputPath = str_replace(".{$this->sourceExtension}", ".{$this->outputExtension}", $this->tempSourcePath);
+		$this->tempOutputPath = str_replace(".{$this->sourceExtension}", "_out_.{$this->outputExtension}", $this->tempSourcePath);
 		$this->tempOutputFilename = basename($this->tempOutputPath);
 		$this->outputFilePath = str_replace(".{$this->sourceExtension}", ".{$this->outputExtension}", $this->path);
 		$this->outputFileName = basename($this->outputFilePath);
