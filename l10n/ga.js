@@ -2,6 +2,7 @@ OC.L10N.register(
     "workflow_media_converter",
     {
     "Save" : "Sábháil",
+    "Yes" : "Tá",
     "Cancel" : "Cealaigh",
     "Delete" : "Scrios"
 },
