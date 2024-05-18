@@ -1,5 +1,8 @@
 <template>
 	<div class="wmc-display-conversion-batch">
+		<div class="wmc-display-conversion-batch__label">
+			{{ conversionBatch.sourceFolder }} *.{{ conversionBatch.sourceExtension }} &#8594; {{ conversionBatch.postConversionOutputRuleMoveFolder }} *.{{ conversionBatch.outputExtension }}
+		</div>
 		<div class="wmc-display-conversion-batch__status-container">
 			<div class="wmc-display-conversion-batch__status">
 				<StatusBadge :status="conversionBatch.status" />
