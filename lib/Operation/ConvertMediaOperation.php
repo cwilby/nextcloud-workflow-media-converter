@@ -73,6 +73,12 @@ class ConvertMediaOperation implements ISpecificOperation {
 			}
 
 			$node = $node[0];
+		} elseif  ($event instanceof \OCP\EventDispatcher\GenericEvent) {
+			if ($event->getSubject() instanceof \OC\Files\Node\File) {
+				$node = $event->getSubject();
+			} else {
+				return;
+			}
 		}
 
 		$path = $node->getPath();
