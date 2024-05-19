@@ -14,14 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: ['8.2']
-        nextcloud: ['stable26']
+        php-versions: ['8.2', '8.3']
+        nextcloud: ['stable28', 'stable29']
         database: ['sqlite']
     steps:
-      - name: Use Node 16
+      - name: Use Node 20
         uses: actions/setup-node@v1
         with:
-          node-version: 16
+          node-version: 20
       
       - name: Setup PHP
         uses: shivammathur/setup-php@afefcaf556d98dc7896cca380e181decb609ca44

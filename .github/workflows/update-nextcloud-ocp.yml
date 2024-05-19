@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        branches: ["master", "stable26", "stable25"]
+        branches: ["master", "stable29", "stable28"]
 
     name: update-nextcloud-ocp-${{ matrix.branches }}
 
@@ -27,10 +27,10 @@ jobs:
           ref: ${{ matrix.branches }}
           submodules: true
 
-      - name: Set up php7.4
+      - name: Set up php8.3
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.3
           extensions: ctype,curl,dom,fileinfo,gd,intl,json,mbstring,openssl,pdo_sqlite,posix,sqlite,xml,zip
           coverage: none
 
