@@ -1,4 +1,6 @@
+import { generateFilePath } from '@nextcloud/router'
 import ConvertMediaOperation from './components/ConvertMediaOperation.vue'
+import { APP_ID } from './utils.js'
 
 // CSP config for webpack dynamic chunk loading
 // eslint-disable-next-line
