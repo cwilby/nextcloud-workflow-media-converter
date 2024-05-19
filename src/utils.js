@@ -28,5 +28,5 @@ export function getUniqueId(length = 32) {
  * @return {string}
  */
 export function generateUrl(url, params, options) {
-	return nextcloudGenerateUrl(url, params, { ...options, baseURL: getAppRootUrl(APP_ID) })
+	return nextcloudGenerateUrl(url, params, options)
 }
