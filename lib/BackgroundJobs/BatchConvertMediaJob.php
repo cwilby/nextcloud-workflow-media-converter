@@ -133,6 +133,11 @@ class BatchConvertMediaJob extends QueuedJob {
 	public function queueUnconvertedMediaForConversion() {
 		$count = 0;
 
+		if (count($this->unconvertedMedia) === 0) {
+			$this->configService->setBatchStatus($this->batchId, 'completed');
+			return $this;
+		}
+
 		foreach ($this->unconvertedMedia as $node) {
 			$count++;
 			$this->jobList->add(ConvertMediaJob::class, [

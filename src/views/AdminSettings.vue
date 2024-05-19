@@ -29,7 +29,7 @@
 <script>
 import debounce from 'debounce'
 import { showError } from '@nextcloud/dialogs'
-import { generateUrl } from '../utils.js'
+import { generateImageUrl, generateControllerUrl } from '../utils.js'
 import NcCheckboxRadioSwitch from '@nextcloud/vue/dist/Components/NcCheckboxRadioSwitch.js'
 import axios from '@nextcloud/axios'
 import { loadState } from '@nextcloud/initial-state'
@@ -50,7 +50,7 @@ export default {
 			return this.state.maxThreads
 		},
 		iconUrl() {
-			return generateUrl('img/icon.svg')
+			return generateImageUrl('img/icon.svg')
 		},
 		threadLimit: {
 			get() {
@@ -76,7 +76,7 @@ export default {
 		saveConfig: debounce(async function() {
 			try {
 				this.saving = true
-				await axios.put(generateUrl('admin-settings'), { values: this.state })
+				await axios.put(generateControllerUrl('admin-settings'), { values: this.state })
 			} catch (e) {
 				showError(this.t('workflow_media_converter', 'Failed to save config, please try again shortly'))
 				console.error(e)

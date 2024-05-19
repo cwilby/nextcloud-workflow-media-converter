@@ -27,8 +27,7 @@ import debounce from 'debounce'
 import { showError } from '@nextcloud/dialogs'
 import axios from '@nextcloud/axios'
 import { loadState } from '@nextcloud/initial-state'
-
-import { generateUrl, getUniqueId } from '../utils.js'
+import { generateImageUrl, generateControllerUrl, getUniqueId } from '../utils.js'
 import ConversionBatchList from '../components/ConversionBatchList.vue'
 
 export default {
@@ -39,7 +38,7 @@ export default {
 	data: () => ({
 		saving: false,
 		state: loadState('workflow_media_converter', 'personal-config'),
-		threads: loadState('workflow_media_converter', 'threadLimit'),
+		threads: loadState('workflow_media_converter', 'threadLimit') || 0,
 		readonly: true,
 		newConversionBatch: {},
 		pollingInterval: null,
@@ -47,7 +46,7 @@ export default {
 
 	computed: {
 		iconUrl() {
-			return generateUrl('img/icon.svg')
+			return generateImageUrl('img/icon.svg')
 		},
 		conversionBatches() {
 			return this.state.conversionBatches
@@ -73,7 +72,7 @@ export default {
 		async refreshBatches() {
 			try {
 				const { data: state } = await axios.get(
-					generateUrl('personal-settings'),
+					generateControllerUrl('personal-settings'),
 				)
 
 				this.state = state
@@ -165,7 +164,7 @@ export default {
 				this.saving = true
 				this.newConversionBatch.id = getUniqueId()
 				await axios.post(
-					generateUrl('conversion-batches'),
+					generateControllerUrl('conversion-batches'),
 					{ batch: this.newConversionBatch },
 				)
 			} catch (error) {
@@ -214,7 +213,7 @@ export default {
 
 				if (conversionBatch.id) {
 					await axios.delete(
-						generateUrl(`conversion-batches/${conversionBatch.id}`),
+						generateControllerUrl(`conversion-batches/${conversionBatch.id}`),
 					)
 				}
 
@@ -232,7 +231,7 @@ export default {
 			try {
 				this.saving = true
 				await axios.put(
-					generateUrl('personal-settings'),
+					generateControllerUrl('personal-settings'),
 					{ values: this.state },
 				)
 			} catch (e) {
