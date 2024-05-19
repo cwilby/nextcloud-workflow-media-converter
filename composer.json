@@ -13,7 +13,7 @@
     "require-dev": {
         "nextcloud/coding-standard": "^1.0.0",
         "phpunit/phpunit": "^9.5",
-        "mockery/mockery": "^1.4",
-        "nextcloud/ocp": "^28.0.4"
+        "mockery/mockery": "^1.6.12",
+        "nextcloud/ocp": "^29.0.0"
     }
 }
