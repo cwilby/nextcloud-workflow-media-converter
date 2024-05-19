@@ -12,8 +12,8 @@ use OCP\WorkflowEngine\Events\RegisterOperationsEvent;
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'workflow_media_converter';
 
-	public function __construct() {
-		parent::__construct(self::APP_ID);
+	public function __construct(array $urlParams = []) {
+		parent::__construct(self::APP_ID, $urlParams);
 	}
 
 	public function register(IRegistrationContext $context): void {
@@ -24,5 +24,6 @@ class Application extends App implements IBootstrap {
 	}
 
 	public function boot(IBootContext $context): void {
+		//
 	}
 }

@@ -16,9 +16,6 @@
     <licence>agpl</licence>
     <author mail="cameron@wilby.com" homepage="https://github.com/cwilby">Cameron Wilby</author>
     <namespace>WorkflowMediaConverter</namespace>
-    <documentation>
-        <developer>https://github.com/cwilby/nextcloud-workflow-media-converter</developer>
-    </documentation>
     <category>files</category>
     <category>tools</category>
     <category>organization</category>
@@ -27,15 +24,12 @@
     <website>https://github.com/cwilby/nextcloud-workflow-media-converter</website>
     <bugs>https://github.com/cwilby/nextcloud-workflow-media-converter/issues</bugs>
     <repository type="git">https://github.com/cwilby/nextcloud-workflow-media-converter.git</repository>
-
     <screenshot small-thumbnail="https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/thumbnail.png">https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/thumbnail.png</screenshot>
     <screenshot>https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/flow-settings-ui.png</screenshot>
     <screenshot>https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/conversion-batch-ui.png</screenshot>
     <screenshot>https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/admin-settings-ui.png</screenshot>
-
     <dependencies>
-        <php min-version="8.1" max-version="8.2" />
-        <nextcloud min-version="26" max-version="28"/>
+        <nextcloud min-version="28" max-version="29"/>
     </dependencies>
     <settings>
         <admin>OCA\WorkflowMediaConverter\Settings\AdminSettings</admin>

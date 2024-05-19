@@ -6,7 +6,7 @@ import AdminSettings from './views/AdminSettings.vue'
 
 // CSP config for webpack dynamic chunk loading
 // eslint-disable-next-line
-__webpack_public_path__ = generateFilePath(APP_ID, '', '');
+__webpack_public_path__ = generateFilePath(APP_ID, '', 'js/');
 
 // eslint-disable-next-line
 __webpack_nonce__ = btoa(OC.requestToken)
