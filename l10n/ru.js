@@ -1,8 +1,10 @@
 OC.L10N.register(
     "workflow_media_converter",
     {
+    "Add batches to convert existing media outside of your flow." : "Добавляйте пакеты для преобразования существующих носителей за пределами вашего потока.",
     "Save" : "Сохранить",
     "Total" : "Всего",
+    "You may create conversion batches to convert existing media based on a set of rules." : "Вы можете создавать пакеты конвертации для преобразования существующих носителей на основе набора правил.",
     "Yes" : "Да",
     "Cancel" : "Отменить",
     "Delete" : "Удалить"
