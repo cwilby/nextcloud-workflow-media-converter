@@ -9,7 +9,7 @@ OC.L10N.register(
     "Rule-based automated conversion of video/audio files using FFmpeg" : "التحويل الآلي لملفات الفيديو/الصوت بناءً على قواعد و باستعمال FFmpeg",
     "A dedicated media conversion manager for Nextcloud that allows you to automate media conversion.\n\n**Features**\n * Convert video/audio between formats supported by FFmpeg.\n * Complete control of the conversion process.\n * Automatically convert media as it is uploaded.\n * Create batch jobs to convert existing media." : "مدير تحويل الوسائط media conversion manager على نكست كلاود يسمح لك بأتمتة تحويل الوسائط. \n\n** الميزات ** \n* تحويل الفيديو/الصوت بين التنسيقات التي يدعمها FFmpeg. \n* إنشاء وظائف مجمعة batch jobs لتحويل الوسائط الموجودة على دفعاتٍ.",
     "Add Conversion Batch" : "أضِف دفعة تحويل",
-    "Add batches to convert existing media outside of your flow." : "أضِف دفعات لتحويل الوسائط الموجودة خارج تدفُّقك الإجرائي flow.",
+    "Add batches to convert existing media outside of your flow." : "أضِف دفعات لتحويل الوسائط الموجودة خارج مسار دفقك.",
     "Convert to format" : "تحويل إلى التنسيق",
     "Additional FFmpeg flags" : "علامات FFmpeg إضافية",
     "Input flags" : "رايات الإدخال imput flags",
