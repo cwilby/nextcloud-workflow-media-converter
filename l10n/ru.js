@@ -2,8 +2,10 @@ OC.L10N.register(
     "workflow_media_converter",
     {
     "Add batches to convert existing media outside of your flow." : "Добавляйте пакеты для преобразования существующих носителей за пределами вашего потока.",
+    "Convert media in sub-folders" : "Конвертировать медиафайлы в подпапках",
     "Save" : "Сохранить",
     "Total" : "Всего",
+    "Note: a new file will be added in this folder with a number added to its name if there is already a conflict file." : "Примечание. В эту папку будет добавлен новый файл с добавленным к его имени номером, если файл конфликта уже существует.",
     "You may create conversion batches to convert existing media based on a set of rules." : "Вы можете создавать пакеты конвертации для преобразования существующих носителей на основе набора правил.",
     "Yes" : "Да",
     "Cancel" : "Отменить",
