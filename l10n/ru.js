@@ -6,6 +6,7 @@ OC.L10N.register(
     "Save" : "Сохранить",
     "Total" : "Всего",
     "Note: a new file will be added in this folder with a number added to its name if there is already a conflict file." : "Примечание. В эту папку будет добавлен новый файл с добавленным к его имени номером, если файл конфликта уже существует.",
+    "Add new file with a number added to its name" : "Добавьте новый файл с номером, добавленным к его названию",
     "You may create conversion batches to convert existing media based on a set of rules." : "Вы можете создавать пакеты конвертации для преобразования существующих носителей на основе набора правил.",
     "Yes" : "Да",
     "Cancel" : "Отменить",
