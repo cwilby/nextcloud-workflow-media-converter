@@ -15,7 +15,7 @@ OC.L10N.register(
     "Input flags" : "رايات الإدخال imput flags",
     "Output flags" : "رايات الإخراج Output flags",
     "Choose Folder" : "إختَر مُجلّداً",
-    "Convert media in sub-folders" : "حوِّل الوسائط في المُجلّدات الفرعية",
+    "Convert media in sub-folders" : "تحويل الوسائط في المجلدات الفرعية",
     "Find source files with this extension/format" : "إبحَث عن ملفات المصدر بهذا الامتداد/التنسيق",
     "Store converted output in this extension/format" : "خزّن مُخرجات التحويل في هذا الامتداد/التنسيق",
     "Save" : "حفظ",
