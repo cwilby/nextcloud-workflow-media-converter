@@ -1,7 +1,7 @@
 OC.L10N.register(
     "workflow_media_converter",
     {
-    "Choose Folder" : "Wybierz folder",
+    "Choose Folder" : "Wybierz katalog",
     "Save" : "Zapisz",
     "Total" : "Całkowita",
     "Yes" : "Tak",
