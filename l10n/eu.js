@@ -11,6 +11,8 @@ OC.L10N.register(
     "Add Conversion Batch" : "Gehitu bihurketa sorta bat",
     "Add batches to convert existing media outside of your flow." : "Gehitu sortak zure fluxutik kanpo dauden multimedia bihurtzeko.",
     "Convert to format" : "Bihurtu formatura",
+    "Input flags" : "Sarrera-banderak",
+    "Output flags" : "Irteera-banderak",
     "Choose Folder" : "Aukeratu karpeta",
     "Convert media in sub-folders" : "Bihurtu multimediak azpi-karpetetan",
     "Find source files with this extension/format" : "Bilatu luzapen/formatu hori duten iturburu-fitxategiak ",
