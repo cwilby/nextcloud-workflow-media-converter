@@ -23,6 +23,12 @@
 				type="number"
 				:disabled="saving">
 		</div>
+		<hr>
+		<p>{{ t('workflow_media_converter', 'The path to the FFmpeg binary can be set here.') }}</p>
+		<p>{{ t('workflow_media_converter', 'This is only necessary if the FFmpeg binary is not in the system path.') }}</p>
+		<input v-model="ffmpegPath"
+			type="text"
+			:disabled="saving">
 	</div>
 </template>
 
@@ -70,6 +76,15 @@ export default {
 				await this.saveConfig()
 			},
 		},
+		ffmpegPath: {
+			get() {
+				return this.state.ffmpegPath
+			},
+			async set(value) {
+				this.state.ffmpegPath = value
+				await this.saveConfig()
+			}
+		}
 	},
 
 	methods: {

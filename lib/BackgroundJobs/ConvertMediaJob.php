@@ -35,6 +35,7 @@ class ConvertMediaJob extends QueuedJob {
 	private $additionalConversionFlags;
 	private $additionalInputConversionFlags;
 	private $additionalOutputConversionFlags;
+	private $ffmpegPath;
 	private $outputExtension;
 	private $sourceFile;
 	private $sourceFolder;
@@ -102,6 +103,7 @@ class ConvertMediaJob extends QueuedJob {
 		$this->postConversionOutputConflictRuleMoveFolder = $this->prependUserFolder($arguments['postConversionOutputConflictRuleMoveFolder']);
 		$this->outputExtension = (string)$arguments['outputExtension'];
 		$this->convertMediaInParallel = isset($adminSettings) && isset($adminSettings['convertMediaInParallel']) ? (bool)$adminSettings['convertMediaInParallel'] : false;
+		$this->ffmpegPath = isset($adminSettings) && isset($adminSettings['ffmpegPath']) ? $adminSettings['ffmpegPath'] : 'ffmpeg';
 		$this->additionalConversionFlags = (string)($arguments['additionalConversionFlags'] ?? '');
 		$this->additionalInputConversionFlags = (string)($arguments['additionalInputConversionFlags'] ?? '');
 		$this->additionalOutputConversionFlags = (string)($arguments['additionalOutputConversionFlags'] ?? '');
@@ -187,7 +189,7 @@ class ConvertMediaJob extends QueuedJob {
 		$additionalInputConversionFlags = empty($this->additionalInputConversionFlags) ? '' : " {$this->additionalInputConversionFlags}";
 		$additionalOutputConversionFlags = empty($this->additionalOutputConversionFlags) ? '' : " {$this->additionalOutputConversionFlags}";
 
-		$command = "ffmpeg -threads $threads";
+		$command = "{$this->ffmpegPath} -threads {$threads}";
 
 		if (!empty($additionalConversionFlags)) {
 			if ($flagsBeforeInput) {
