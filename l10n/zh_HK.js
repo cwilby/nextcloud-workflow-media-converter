@@ -38,6 +38,8 @@ OC.L10N.register(
     "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg." : "您可以設置 FFmpeg 使用的線程數來管理 FFmpeg 使用的資源。",
     "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec." : "該值可以設置為 0，讓 FFmpeg 根據編解碼器選擇應該使用的線程數。",
     "Changes made here will apply to any media that is not being converted at this moment in time." : "此處所做的更改將適用於此時未轉換的任何媒體。",
+    "The path to the FFmpeg binary can be set here." : "您可以在這裡設置 FFmpeg 二進製檔案的途徑。",
+    "This is only necessary if the FFmpeg binary is not in the system path." : "只有當 FFmpeg 二進製檔案不在系統途徑中時，才需要這樣做。",
     "Failed to save config, please try again shortly" : "保存配置失敗，請稍後再試",
     "Enable parallel media conversion" : "啟用平行媒體轉換",
     "You may create conversion batches to convert existing media based on a set of rules." : "您可以創建轉換批次以根據一組規則轉換現有媒體。",

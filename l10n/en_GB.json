@@ -36,6 +36,8 @@
     "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg." : "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg.",
     "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec." : "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec.",
     "Changes made here will apply to any media that is not being converted at this moment in time." : "Changes made here will apply to any media that is not being converted at this moment in time.",
+    "The path to the FFmpeg binary can be set here." : "The path to the FFmpeg binary can be set here.",
+    "This is only necessary if the FFmpeg binary is not in the system path." : "This is only necessary if the FFmpeg binary is not in the system path.",
     "Failed to save config, please try again shortly" : "Failed to save config, please try again shortly",
     "Enable parallel media conversion" : "Enable parallel media conversion",
     "You may create conversion batches to convert existing media based on a set of rules." : "You may create conversion batches to convert existing media based on a set of rules.",
