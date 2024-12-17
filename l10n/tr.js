@@ -38,6 +38,8 @@ OC.L10N.register(
     "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg." : "FFmpeg tarafından kullanılan kaynakları yönetmek için FFmpeg tarafından kullanılacak işlem sayısını ayarlayabilirsiniz.",
     "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec." : "Bu değer, işlem sayısının FFmpeg kodlayıcı/çözücü bileşeni tarafından seçilmesi için 0 olarak ayarlanabilir.",
     "Changes made here will apply to any media that is not being converted at this moment in time." : "Burada yapılan değişiklikler, şu anda dönüştürülmeyen tüm ortamlar için geçerli olur.",
+    "The path to the FFmpeg binary can be set here." : "FFmpeg uygulama dosyasının yolu buradan ayarlanabilir.",
+    "This is only necessary if the FFmpeg binary is not in the system path." : "Yalnızca FFmpeg uygulama dosyasının sistem yolunda olmaması durumunda gereklidir.",
     "Failed to save config, please try again shortly" : "Yapılandırma kaydedilemedi. Lütfen kısa bir süre sonra yeniden deneyin.",
     "Enable parallel media conversion" : "Paralel ortam dönüştürmesi kullanılsın",
     "You may create conversion batches to convert existing media based on a set of rules." : "Geçerli ortamların bir kurallar dizisine göre dönüştürülmesi için dönüştürme grupları oluşturabilirsiniz.",
