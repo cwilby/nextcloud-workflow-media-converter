@@ -38,6 +38,8 @@ OC.L10N.register(
     "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg." : "يمكنك تعيين عدد النَّظْمَات threads المستعملة بواسطة FFmpeg لإدارة الموارد التي يستخدمها FFmpeg.",
     "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec." : "يمكن تعيين هذه القيمة على 0 للسماح لـ FFmpeg باختيار عدد نَظْمَات الرسائل threads التي يجب استخدامها بناءً على codec.",
     "Changes made here will apply to any media that is not being converted at this moment in time." : "سيتم تطبيق التغييرات التي تم إجراؤها هنا على أي وسائط لم يتم تحويلها في الوقت الحالي.",
+    "The path to the FFmpeg binary can be set here." : "مسار الملف الثنائي FFmpeg يمكن تعيينه هنا.",
+    "This is only necessary if the FFmpeg binary is not in the system path." : "هذا يكون ضرورياً فقط في حالة كان الملف الثنائي FFmpeg ليس في مسار النظام.",
     "Failed to save config, please try again shortly" : "فشل حفظ التكوين ، يرجى المحاولة مرة أخرى بعد قليل",
     "Enable parallel media conversion" : "تفعيل تحويل الوسائط على التوازي",
     "You may create conversion batches to convert existing media based on a set of rules." : "يمكنك إنشاء دفعاتٍ لتحويل الوسائط الموجودة بناءً على مجموعة من القواعد.",

@@ -36,6 +36,8 @@
     "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg." : "Можете да поставите број нити које FFmpeg може да користи да бисте управљали ресурсима које троши програм FFmpeg.",
     "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec." : "Ова вредност може да се постави на 0 и тада ће FFmpeg изабрати колико нити би требало да користи у зависности од кодека који се користи.",
     "Changes made here will apply to any media that is not being converted at this moment in time." : "Измене које овде направите ће се применити на све медије који се тренутно не претварају.",
+    "The path to the FFmpeg binary can be set here." : "Овде може да се постави путања до FFmpeg извршног фајла.",
+    "This is only necessary if the FFmpeg binary is not in the system path." : "Ово је потребно само ако се FFmpeg извршни фајл не налази у системској путањи.",
     "Failed to save config, please try again shortly" : "Није успело чување конфигурације, молимо вас да ускоро пробате поново",
     "Enable parallel media conversion" : "Укључи паралелно претварање медија",
     "You may create conversion batches to convert existing media based on a set of rules." : "Можете да креирате пакете претварања којима претварате постојеће медије у зависности од скупа правила.",
