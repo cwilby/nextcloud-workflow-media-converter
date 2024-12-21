@@ -38,6 +38,8 @@ OC.L10N.register(
     "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg." : "Is féidir leat líon na snáitheanna a úsáideann FFmpeg a shocrú chun na hacmhainní a úsáideann FFmpeg a bhainistiú.",
     "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec." : "Is féidir an luach seo a shocrú go 0 chun ligean d’FFmpeg cé mhéad snáithe a roghnú ba cheart dó a úsáid ag brath ar an gcódaitheoir.",
     "Changes made here will apply to any media that is not being converted at this moment in time." : "Bainfidh na hathruithe a dhéanfar anseo le haon mheán nach bhfuil á thiontú faoi láthair.",
+    "The path to the FFmpeg binary can be set here." : "Is féidir an cosán chuig an dénártha FFmpeg a shocrú anseo.",
+    "This is only necessary if the FFmpeg binary is not in the system path." : "Níl sé seo riachtanach ach amháin mura bhfuil an dénártha FFmpeg i gcosán an chórais.",
     "Failed to save config, please try again shortly" : "Theip ar shábháil an chumraíocht, bain triail eile as gan mhoill le do thoil",
     "Enable parallel media conversion" : "Cumasaigh comhshó meán comhthreomhar",
     "You may create conversion batches to convert existing media based on a set of rules." : "Is féidir leat baisceanna comhshó a chruthú chun meáin atá ann cheana a thiontú bunaithe ar shraith rialacha.",
