@@ -38,6 +38,8 @@ OC.L10N.register(
     "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg." : "Pokud chcete zpravovat kolik systémových prostředků může FFmpeg zabrat, je možné nastavit počet vláken, které bude moci použít.",
     "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec." : "Tuto hodnotu je možné nastavit na 0 (nula) a nechat tak FFmpeg zvolit kolik vláken použít (v závislosti na použitém kodeku).",
     "Changes made here will apply to any media that is not being converted at this moment in time." : "Zde provedené změny se uplatní na jakákoli média, která v tuto chvíli nejsou už převáděna.",
+    "The path to the FFmpeg binary can be set here." : "Popis umístění spustitelného souboru s FFmpeg je možné nastavit zde.",
+    "This is only necessary if the FFmpeg binary is not in the system path." : "Toto je nezbytné pouze pokud se spustitelný soubor s FFmpeg nenachází v systémovém popisu umístění (PATH).",
     "Failed to save config, please try again shortly" : "Nastavení se nepodařilo uložit, zkuste to za chvilku znovu",
     "Enable parallel media conversion" : "Zapnout paralelní převádění médií",
     "You may create conversion batches to convert existing media based on a set of rules." : "Je možné vytvořit dávky převádění pro převedení existujících médií na základě sady pravidel.",
