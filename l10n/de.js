@@ -38,6 +38,8 @@ OC.L10N.register(
     "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg." : "Du kannst die Anzahl der Threads festlegen, die von FFmpeg verwendet werden, um die von FFmpeg verwendeten Ressourcen zu verwalten.",
     "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec." : "Dieser Wert kann auf 0 gesetzt werden, damit FFmpeg je nach Codec auswählen kann, wie viele Threads verwendet werden.",
     "Changes made here will apply to any media that is not being converted at this moment in time." : "Hier vorgenommene Änderungen gelten für alle Medien, die derzeit nicht konvertiert werden.",
+    "The path to the FFmpeg binary can be set here." : "Der Pfad zur FFmpeg-Binärdatei kann hier festgelegt werden.",
+    "This is only necessary if the FFmpeg binary is not in the system path." : "Dies ist nur erforderlich, wenn sich die FFmpeg-Binärdatei nicht im Systempfad befindet.",
     "Failed to save config, please try again shortly" : "Die Konfiguration konnte nicht gespeichert werden. Bitte versuche es in Kürze erneut",
     "Enable parallel media conversion" : "Parallele Medienkonvertierung aktivieren",
     "You may create conversion batches to convert existing media based on a set of rules." : "Du kannst Konvertierungsverarbeitungen erstellen, um vorhandene Medien basierend auf einer Reihe von Regeln zu konvertieren.",
