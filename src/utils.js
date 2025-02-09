@@ -1,6 +1,6 @@
-import { generateUrl, getAppRootUrl } from '@nextcloud/router';
+import { generateUrl, getAppRootUrl } from '@nextcloud/router'
 
-export const APP_ID = 'workflow_media_converter';
+export const APP_ID = 'workflow_media_converter'
 
 /**
  * Gets a UUID
@@ -19,12 +19,26 @@ export function getUniqueId(length = 32) {
 	return result.join('')
 }
 
+/**
+ * Calls @nextcloud/router/generateUrl with the app root url
+ * @param {string} url The url to generate
+ * @param {object} params The params to pass
+ * @param {import('@nextcloud/router').UrlOptions} options The options to pass
+ * @return {string}
+ */
 export function generateImageUrl(url, params, options) {
-	return generateUrl(url, params, { ...options, baseURL: getAppRootUrl(APP_ID) });
+	return generateUrl(url, params, { ...options, baseURL: getAppRootUrl(APP_ID) })
 }
 
+/**
+ * Calls @nextcloud/router/generateUrl with the app root url
+ * @param {string} url The url to generate
+ * @param {object} params The params to pass
+ * @param {import('@nextcloud/router').UrlOptions} options The options to pass
+ * @return {string}
+ */
 export function generateControllerUrl(url, params, options) {
-	url = url.startsWith('/') ? url.slice(1) : url;
+	url = url.startsWith('/') ? url.slice(1) : url
 
-	return generateUrl(`/apps/workflow_media_converter/${url}`, params, options);
+	return generateUrl(`/apps/workflow_media_converter/${url}`, params, options)
 }

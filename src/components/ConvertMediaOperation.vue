@@ -33,7 +33,7 @@
 
 <script>
 import axios from '@nextcloud/axios'
-import { generateControllerUrl } from '../utils';
+import { generateControllerUrl } from '../utils.js'
 import formats from '../constants/formats.js'
 import filepicker from '../mixins/filepicker.js'
 import PostConversionRules from './PostConversionRules.vue'

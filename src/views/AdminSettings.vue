@@ -83,8 +83,8 @@ export default {
 			async set(value) {
 				this.state.ffmpegPath = value
 				await this.saveConfig()
-			}
-		}
+			},
+		},
 	},
 
 	methods: {
