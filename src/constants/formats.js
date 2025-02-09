@@ -149,4 +149,40 @@ export default [
 		encode: true,
 		label: 'Windows Media Video (WMV)',
 	},
+	{
+		extension: 'jpg',
+		decode: true,
+		encode: true,
+		label: 'JPEG image',
+	},
+	{
+		extension: 'jpeg',
+		decode: true,
+		encode: true,
+		label: 'JPEG image',
+	},
+	{
+		extension: 'png',
+		decode: true,
+		encode: true,
+		label: 'Portable Network Graphics',
+	},
+	{
+		extension: 'bmp',
+		decode: true,
+		encode: true,
+		label: 'Bitmap image',
+	},
+	{
+		extension: 'tiff',
+		decode: true,
+		encode: true,
+		label: 'Tagged Image File Format',
+	},
+	{
+		extension: 'webp',
+		decode: true,
+		encode: true,
+		label: 'WebP image',
+	},
 ]
