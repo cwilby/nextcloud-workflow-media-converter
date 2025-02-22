@@ -5,8 +5,10 @@ namespace OCA\WorkflowMediaConverter\Controller;
 use OCA\WorkflowMediaConverter\Service\ConfigService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\DataResponse;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\IRequest;
 
+#[NoAdminRequired]
 class PersonalSettingsController extends Controller {
 	private $configService;
 
@@ -15,16 +17,10 @@ class PersonalSettingsController extends Controller {
 		$this->configService = $configService;
 	}
 
-	/**
-	 * @NoAdminRequired
-	 */
 	public function getSettings(): DataResponse {
 		return new DataResponse($this->configService->getCurrentUserConfig());
 	}
 
-	/**
-	 * @NoAdminRequired
-	 */
 	public function updateSettings(array $values): DataResponse {
 		$this->configService->setConfig($values);
 

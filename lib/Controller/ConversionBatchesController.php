@@ -7,6 +7,7 @@ use OCA\WorkflowMediaConverter\BackgroundJobs\ConvertMediaJob;
 use OCA\WorkflowMediaConverter\Service\ConfigService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\BackgroundJob\IJobList;
 use OCP\IDBConnection;
@@ -14,6 +15,7 @@ use OCP\IL10N;
 use OCP\IRequest;
 use OCP\IUserSession;
 
+#[NoAdminRequired]
 class ConversionBatchesController extends Controller {
 	private $jobList;
 	private $configService;
