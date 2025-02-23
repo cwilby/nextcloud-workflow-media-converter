@@ -42,7 +42,7 @@ class BatchConvertMediaJob extends QueuedJob {
 		LoggerInterface $logger,
 		IRootFolder $rootFolder,
 		IJobList $jobList,
-		ConfigService $configService
+		ConfigService $configService,
 	) {
 		parent::__construct($time);
 		$this->logger = $logger;

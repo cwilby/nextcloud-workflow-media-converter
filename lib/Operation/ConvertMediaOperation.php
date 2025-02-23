@@ -22,7 +22,7 @@ class ConvertMediaOperation implements ISpecificOperation {
 		private IURLGenerator $urlGenerator,
 		private LoggerInterface $logger,
 		private IRootFolder $rootFolder,
-		private IL10N $l
+		private IL10N $l,
 	) {
 	}
 
@@ -73,7 +73,7 @@ class ConvertMediaOperation implements ISpecificOperation {
 			}
 
 			$node = $node[0];
-		} elseif  ($event instanceof \OCP\EventDispatcher\GenericEvent) {
+		} elseif ($event instanceof \OCP\EventDispatcher\GenericEvent) {
 			if ($event->getSubject() instanceof \OC\Files\Node\File) {
 				$node = $event->getSubject();
 			} else {

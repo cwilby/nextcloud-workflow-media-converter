@@ -4,8 +4,8 @@ namespace OCA\WorkflowMediaConverter\Controller;
 
 use OCA\WorkflowMediaConverter\Service\ConfigService;
 use OCP\AppFramework\Controller;
-use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\DataResponse;
 use OCP\IRequest;
 
 #[NoAdminRequired]

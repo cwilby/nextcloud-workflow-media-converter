@@ -72,7 +72,7 @@ class ConvertMediaJob extends QueuedJob {
 		} catch (MediaConversionLockedException $e) {
 			$this->logger->info(ConvertMediaJob::class . ' requeued for ' . $arguments['path']);
 		} catch (\Throwable $e) {
-			$this->configService->setAppConfigValue('conversionLock', "no");
+			$this->configService->setAppConfigValue('conversionLock', 'no');
 			$eType = get_class($e);
 			$this->notifyBatchFail($e);
 			$this->logger->error("[{$eType}] :: ({$e->getCode()}) :: {$e->getMessage()} :: {$e->getTraceAsString()}");
@@ -313,7 +313,7 @@ class ConvertMediaJob extends QueuedJob {
 	}
 
 	protected function parallelConversionEnabled() {
-		return $this->configService->getAppConfigValue('convertMediaInParallel') === "yes";
+		return $this->configService->getAppConfigValue('convertMediaInParallel') === 'yes';
 	}
 
 	protected function setConversionLockActive($state) {

@@ -35,7 +35,7 @@ class ConfigService {
 		return [
 			'threadLimit' => $this->getAppConfigValue('threadLimit', 0),
 			'maxThreads' => $this->getMaxThreads(),
-			'convertMediaInParallel' => $this->getAppConfigValue('convertMediaInParallel', "no") === "yes",
+			'convertMediaInParallel' => $this->getAppConfigValue('convertMediaInParallel', 'no') === 'yes',
 		];
 	}
 
@@ -76,7 +76,7 @@ class ConfigService {
 	}
 
 	public function setAppConfig($values) {
-		$this->setAppConfigValue('convertMediaInParallel', $values['convertMediaInParallel'] ? "yes" : "no");
+		$this->setAppConfigValue('convertMediaInParallel', $values['convertMediaInParallel'] ? 'yes' : 'no');
 		$this->setAppConfigValue('threadLimit', $values['threadLimit']);
 	}
 
@@ -94,7 +94,7 @@ class ConfigService {
 	}
 
 	public function getConversionRules() {
-		return json_decode($this->getConfigValue("video_conversion_rules", '[]'), true);
+		return json_decode($this->getConfigValue('video_conversion_rules', '[]'), true);
 	}
 
 	public function getBatch($id, $batches = null) {
