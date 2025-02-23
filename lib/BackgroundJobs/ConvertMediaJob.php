@@ -189,29 +189,35 @@ class ConvertMediaJob extends QueuedJob {
 		$additionalInputConversionFlags = empty($this->additionalInputConversionFlags) ? '' : " {$this->additionalInputConversionFlags}";
 		$additionalOutputConversionFlags = empty($this->additionalOutputConversionFlags) ? '' : " {$this->additionalOutputConversionFlags}";
 
-		$command = "{$this->ffmpegPath} -threads {$threads}";
+		$commands = [];
+
+		$commands[] = 'umask 0077';
+
+		$ffmpegCommand = "{$this->ffmpegPath} -threads {$threads}";
 
 		if (!empty($additionalConversionFlags)) {
 			if ($flagsBeforeInput) {
-				$command .= " {$additionalConversionFlags} -i {$this->tempSourcePath}";
+				$ffmpegCommand .= " {$additionalConversionFlags} -i {$this->tempSourcePath}";
 			} else {
-				$command .= " -i {$this->tempSourcePath} {$additionalConversionFlags}";
+				$ffmpegCommand .= " -i {$this->tempSourcePath} {$additionalConversionFlags}";
 			}
 		} else {
 			if (!empty($additionalInputConversionFlags)) {
-				$command .= " {$additionalInputConversionFlags}";
+				$ffmpegCommand .= " {$additionalInputConversionFlags}";
 			}
 
-			$command .= " -i {$this->tempSourcePath}";
+			$ffmpegCommand .= " -i {$this->tempSourcePath}";
 
 			if (!empty($additionalOutputConversionFlags)) {
-				$command .= " {$additionalOutputConversionFlags}";
+				$ffmpegCommand .= " {$additionalOutputConversionFlags}";
 			}
 		}
 
-		$command .= " {$this->tempOutputPath}";
+		$ffmpegCommand .= " {$this->tempOutputPath}";
 
-		return $command;
+		$commands[] = $ffmpegCommand;
+
+		return implode(' && ', $commands);
 	}
 
 	public function handlePostConversion() {
