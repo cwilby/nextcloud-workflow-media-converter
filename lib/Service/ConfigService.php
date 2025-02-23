@@ -35,6 +35,7 @@ class ConfigService {
 		return [
 			'threadLimit' => $this->getAppConfigValue('threadLimit', 0),
 			'maxThreads' => $this->getMaxThreads(),
+			'ffmpegPath' => $this->getAppConfigValue('ffmpegPath', ''),
 			'convertMediaInParallel' => $this->getAppConfigValue('convertMediaInParallel', 'no') === 'yes',
 		];
 	}
@@ -78,6 +79,7 @@ class ConfigService {
 	public function setAppConfig($values) {
 		$this->setAppConfigValue('convertMediaInParallel', $values['convertMediaInParallel'] ? 'yes' : 'no');
 		$this->setAppConfigValue('threadLimit', $values['threadLimit']);
+		$this->setAppConfigValue('ffmpegPath', $values['ffmpegPath']);
 	}
 
 	public function addToCounters($counter, $amount) {

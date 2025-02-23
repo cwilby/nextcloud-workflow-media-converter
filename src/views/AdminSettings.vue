@@ -26,7 +26,8 @@
 		<hr>
 		<p>{{ t('workflow_media_converter', 'The path to the FFmpeg binary can be set here.') }}</p>
 		<p>{{ t('workflow_media_converter', 'This is only necessary if the FFmpeg binary is not in the system path.') }}</p>
-		<input v-model="ffmpegPath"
+		<input v-model="ffmpegPath" 
+			class="ffmpeg-settings"
 			type="text"
 			:disabled="saving">
 	</div>
@@ -134,6 +135,10 @@ export default {
 			width: 3.33em;
 			text-align: center;
 		}
+	}
+
+	input.ffmpeg-settings {
+		width: 200px !important;
 	}
 }
 </style>
