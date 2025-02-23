@@ -47,7 +47,7 @@ class ConvertMediaOperation implements ISpecificOperation {
 	}
 
 	public function isAvailableForScope(int $scope): bool {
-		return $scope === IManager::SCOPE_USER;
+		return in_array($scope, [IManager::SCOPE_ADMIN, IManager::SCOPE_USER]);
 	}
 
 	public function onEvent(string $eventName, Event $event, IRuleMatcher $ruleMatcher): void {
