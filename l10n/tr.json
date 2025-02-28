@@ -42,6 +42,7 @@
     "Enable parallel media conversion" : "Paralel ortam dönüştürmesi kullanılsın",
     "Please make sure the form is valid before saving" : "Lütfen kaydetmeden önce formdaki bilgilerin geçerli olduğundan emin olun",
     "Invalid data" : "Veriler geçersiz",
+    "This will batch convert any unconverted media in the specified folder.  Are you sure you want to proceed?" : "Bu işlem, belirtilen klasördeki dönüştürülmemiş ortamları toplu olarak dönüştürür. İlerlemek istediğinize emin misiniz?",
     "Start conversion batch" : "Toplu dönüştürme işlemini başlat",
     "Yes" : "Evet",
     "Cancel" : "İptal",

@@ -44,6 +44,7 @@ OC.L10N.register(
     "Enable parallel media conversion" : "Cumasaigh comhshó meán comhthreomhar",
     "Please make sure the form is valid before saving" : "Cinntigh le do thoil go bhfuil an fhoirm bailí roimh shábháil",
     "Invalid data" : "Sonraí neamhbhailí",
+    "This will batch convert any unconverted media in the specified folder.  Are you sure you want to proceed?" : "Tiontóidh sé seo aon mheán neamhthiontaithe san fhillteán sonraithe mar bhaisc. An bhfuil tú cinnte gur mhaith leat leanúint ar aghaidh?",
     "Start conversion batch" : "Tosaigh bhaisc chomhshó",
     "Yes" : "Tá",
     "Cancel" : "Cealaigh",

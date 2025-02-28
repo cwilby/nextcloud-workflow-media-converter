@@ -44,6 +44,7 @@ OC.L10N.register(
     "Enable parallel media conversion" : "Parallele Medienkonvertierung aktivieren",
     "Please make sure the form is valid before saving" : "Bitte stellen Sie sicher, dass das Formular gültig ist, bevor Sie es speichern",
     "Invalid data" : "Ungültige Daten",
+    "This will batch convert any unconverted media in the specified folder.  Are you sure you want to proceed?" : "Dadurch werden alle nicht konvertierten Medien im angegebenen Ordner stapelweise konvertiert. Möchten Sie fortfahren?",
     "Start conversion batch" : "Konvertierungsstapel (Batch) starten",
     "Yes" : "Ja",
     "Cancel" : "Abbrechen",

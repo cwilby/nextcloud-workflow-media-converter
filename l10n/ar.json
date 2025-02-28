@@ -42,6 +42,7 @@
     "Enable parallel media conversion" : "تفعيل تحويل الوسائط على التوازي",
     "Please make sure the form is valid before saving" : "يرجى التأكد من صحة النموذج قبل الحفظ",
     "Invalid data" : "بيانات غير صحيحة",
+    "This will batch convert any unconverted media in the specified folder.  Are you sure you want to proceed?" : "سيؤدي هذا إلى تحويل أي وسائط غير مُحوَّلَة في المجلد المحدد دفعة واحدة. هل أنت متأكد من أنك تريد المتابعة؟",
     "Start conversion batch" : "أبدأ دفعة التحويل",
     "Yes" : "نعم",
     "Cancel" : "إلغاء",
