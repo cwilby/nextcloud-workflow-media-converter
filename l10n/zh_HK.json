@@ -42,6 +42,7 @@
     "Enable parallel media conversion" : "啟用平行媒體轉換",
     "Please make sure the form is valid before saving" : "保存前請確保表格有效",
     "Invalid data" : "數據無效",
+    "This will batch convert any unconverted media in the specified folder.  Are you sure you want to proceed?" : "這將批量轉換指定資料夾中所有未轉換的媒體。您確定要繼續嗎？",
     "Start conversion batch" : "開始轉換批次",
     "Yes" : "是",
     "Cancel" : "取消",
