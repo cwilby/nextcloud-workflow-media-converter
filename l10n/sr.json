@@ -42,6 +42,7 @@
     "Enable parallel media conversion" : "Укључи паралелно претварање медија",
     "Please make sure the form is valid before saving" : "Молимо вас да осигурате исправност формулара пре него што сачувате",
     "Invalid data" : "Неисправни подаци",
+    "This will batch convert any unconverted media in the specified folder.  Are you sure you want to proceed?" : "Ово ће пакетно да конвертује све неконвертоване медије у наведеном фолдеру. Да ли желите да наставите?",
     "Start conversion batch" : "Почни пакетно претварање",
     "Yes" : "Да",
     "Cancel" : "Поништи",
