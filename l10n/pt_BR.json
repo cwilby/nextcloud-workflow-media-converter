@@ -37,6 +37,8 @@
     "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg." : "Você deve configurar a quantidade de threads utilizadas pelo FFmpeg para gerenciar os recursos usados pelo FFmpeg.",
     "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec." : "Esse valor pode ser configurado para 0 para permitir que o FFmpeg escolha a quantidade de threads a utilizar dependendo do codec utilizado.",
     "Changes made here will apply to any media that is not being converted at this moment in time." : "Mudanças feitas aqui serão aplicadas a qualquer mídia que não esteja sendo convertida neste momento.",
+    "The path to the FFmpeg binary can be set here." : "O caminho para o binário do FFmpeg pode ser definido aqui.",
+    "This is only necessary if the FFmpeg binary is not in the system path." : "Isso só é necessário se o binário do FFmpeg não estiver no caminho do sistema.",
     "Enable parallel media conversion" : "Habilitar conversão paralela de mídia",
     "Please make sure the form is valid before saving" : "Por favor verifique que o formulário é válido antes de salvar",
     "Invalid data" : "Dados inválidos",
