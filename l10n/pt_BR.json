@@ -42,6 +42,7 @@
     "Enable parallel media conversion" : "Habilitar conversão paralela de mídia",
     "Please make sure the form is valid before saving" : "Por favor verifique que o formulário é válido antes de salvar",
     "Invalid data" : "Dados inválidos",
+    "This will batch convert any unconverted media in the specified folder.  Are you sure you want to proceed?" : "Isso converterá em lote qualquer mídia não convertida na pasta especificada. Tem certeza de que deseja continuar?",
     "Start conversion batch" : "Iniciar lote de conversão",
     "Yes" : "Sim",
     "Cancel" : "Cancelar",
