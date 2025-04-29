@@ -33,7 +33,7 @@
     "After the output is ready:" : "Nachdem die Ausgabe fertig ist:",
     "If the output file exists:" : "Wenn die Ausgabedatei vorhanden ist:",
     "Note: a new file will be added in this folder with a number added to its name if there is already a conflict file." : "Hinweis: Wenn bereits eine Konfliktdatei vorhanden ist, wird diesem Ordner eine neue Datei hinzugefügt, deren Name eine Zahl angehängt wird.",
-    "Failed to save config, please try again shortly" : "Die Konfiguration konnte nicht gespeichert werden. Bitte versuchen Sie es in Kürze erneut",
+    "Failed to save config, please try again shortly" : "Die Konfiguration konnte nicht gespeichert werden. Bitte versuchen Sie es in Kürze erneut.",
     "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg." : "Sie können die Anzahl der Threads festlegen, die von FFmpeg verwendet werden, um die von FFmpeg verwendeten Ressourcen zu verwalten.",
     "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec." : "Dieser Wert kann auf 0 gesetzt werden, damit FFmpeg je nach Codec auswählen kann, wie viele Threads verwendet werden.",
     "Changes made here will apply to any media that is not being converted at this moment in time." : "Hier vorgenommene Änderungen gelten für alle Medien, die derzeit nicht konvertiert werden.",
