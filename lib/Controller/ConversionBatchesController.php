@@ -32,10 +32,12 @@ class ConversionBatchesController extends Controller {
 		$this->connection = $connection;
 	}
 
+	#[NoAdminRequired]
 	public function index(): DataResponse {
 		return new DataResponse($this->getConversionBatches());
 	}
 
+	#[NoAdminRequired]
 	public function show($id): DataResponse {
 		$conversionBatches = $this->getConversionBatches();
 
@@ -48,6 +50,7 @@ class ConversionBatchesController extends Controller {
 		return new DataResponse($conversionBatches[$index]);
 	}
 
+	#[NoAdminRequired]
 	public function create(array $batch): DataResponse {
 		$conversionBatches = $this->getConversionBatches();
 
@@ -66,6 +69,7 @@ class ConversionBatchesController extends Controller {
 		return new DataResponse($batch, Http::STATUS_CREATED);
 	}
 
+	#[NoAdminRequired]
 	public function delete($id): DataResponse {
 		$this->cancelPendingConversionsForBatch($id);
 

@@ -17,10 +17,12 @@ class PersonalSettingsController extends Controller {
 		$this->configService = $configService;
 	}
 
+    #[NoAdminRequired]
 	public function getSettings(): DataResponse {
 		return new DataResponse($this->configService->getCurrentUserConfig());
 	}
 
+    #[NoAdminRequired]
 	public function updateSettings(array $values): DataResponse {
 		$this->configService->setConfig($values);
 
