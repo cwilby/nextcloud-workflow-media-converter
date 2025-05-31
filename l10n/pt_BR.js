@@ -24,7 +24,7 @@ OC.L10N.register(
     "Total" : "Total",
     "Error code" : "Código de erro",
     "Keep source file" : "Manter arquivo origem",
-    "Delete source file" : "Remover arquivo origem",
+    "Delete source file" : "Excluir arquivo origem",
     "Move source file to specific folder" : "Mover arquivo origem para pasta específica",
     "Store output in source folder" : "Armazenar saída no diretório fonte",
     "Move output to specific folder" : "Mover saída para diretório específico",
