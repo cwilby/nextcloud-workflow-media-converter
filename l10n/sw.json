@@ -1,5 +1,6 @@
 { "translations": {
     "Save" : "Hifadhi",
+    "Yes" : "Ndiyo",
     "Cancel" : "Cancel",
     "Delete" : "Futa"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
