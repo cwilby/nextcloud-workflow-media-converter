@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Spara",
     "Total" : "Totalt",
+    "Error code" : "Felkod",
     "Yes" : "Ja",
     "Cancel" : "Avbryt",
     "Delete" : "Radera"

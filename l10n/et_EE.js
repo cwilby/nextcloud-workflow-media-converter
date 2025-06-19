@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Salvesta",
     "Total" : "Kokku",
+    "Error code" : "Veakood",
     "Yes" : "Jah",
     "Cancel" : "Loobu",
     "Delete" : "Kustuta"
