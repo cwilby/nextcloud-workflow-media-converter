@@ -221,10 +221,24 @@ class ConvertMediaJob extends QueuedJob {
 	}
 
 	public function handlePostConversion() {
-		$this->writePostConversionOutputFile();
 		$this->handlePostConversionSourceFile();
+		
+		$this->writePostConversionOutputFile();
 
 		return $this;
+	}
+
+	public function handlePostConversionSourceFile() {
+		switch ($this->postConversionSourceRule) {
+			case 'delete':
+				$this->sourceFile->delete();
+				break;
+			case 'move':
+				$this->sourceFile->move($this->removeDoubleSlashes($this->postConversionSourceRuleMoveFolder) . '/' . $this->sourceFilename);
+				break;
+			default:
+				break;
+		}
 	}
 
 	public function writePostConversionOutputFile() {
@@ -242,19 +256,6 @@ class ConvertMediaJob extends QueuedJob {
 		}
 
 		return $this->writeFileSafe($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
-	}
-
-	public function handlePostConversionSourceFile() {
-		switch ($this->postConversionSourceRule) {
-			case 'delete':
-				$this->sourceFile->delete();
-				break;
-			case 'move':
-				$this->sourceFile->move($this->removeDoubleSlashes($this->postConversionSourceRuleMoveFolder) . '/' . $this->sourceFilename);
-				break;
-			default:
-				break;
-		}
 	}
 
 	public function unlockConversion() {
