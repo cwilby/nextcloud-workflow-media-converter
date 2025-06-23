@@ -184,7 +184,7 @@ class ConvertMediaJob extends QueuedJob {
 
 	private function getConversionCommand($flagsBeforeInput = false) {
 		$threads = $this->configService->getAppConfigValue('threadLimit', 0);
-		
+
 		$additionalConversionFlags = empty($this->additionalConversionFlags) ? '' : " {$this->additionalConversionFlags}";
 		$additionalInputConversionFlags = empty($this->additionalInputConversionFlags) ? '' : " {$this->additionalInputConversionFlags}";
 		$additionalOutputConversionFlags = empty($this->additionalOutputConversionFlags) ? '' : " {$this->additionalOutputConversionFlags}";
