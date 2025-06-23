@@ -42,6 +42,12 @@ export default [
 		label: 'raw H.264 video',
 	},
 	{
+		extension: 'heic',
+		decode: true,
+		encode: true,
+		label: 'High Efficiency Image Coding (HEIC)',
+	},
+	{
 		extension: 'hevc',
 		decode: true,
 		encode: true,
@@ -160,6 +166,12 @@ export default [
 		decode: true,
 		encode: true,
 		label: 'JPEG image',
+	},
+	{
+		extension: 'jxl',
+		decode: true,
+		encode: true,
+		label: 'JPEG XL image',
 	},
 	{
 		extension: 'png',
