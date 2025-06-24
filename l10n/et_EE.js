@@ -6,6 +6,10 @@ OC.L10N.register(
     "Error code" : "Veakood",
     "Yes" : "Jah",
     "Cancel" : "Loobu",
-    "Delete" : "Kustuta"
+    "Delete" : "Kustuta",
+    "matches" : "kattub",
+    "does not match" : "ei kattu",
+    "is" : "on",
+    "is not" : "ei ole"
 },
 "nplurals=2; plural=(n != 1);");

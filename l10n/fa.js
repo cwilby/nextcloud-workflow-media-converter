@@ -47,6 +47,10 @@ OC.L10N.register(
     "Are you sure you want to stop making this batch?" : "Are you sure you want to stop making this batch?",
     "Delete conversion batch" : "Delete conversion batch",
     "Delete" : "حذف",
-    "You may create conversion batches to convert existing media based on a set of rules." : "You may create conversion batches to convert existing media based on a set of rules."
+    "You may create conversion batches to convert existing media based on a set of rules." : "You may create conversion batches to convert existing media based on a set of rules.",
+    "matches" : "مطابق است",
+    "does not match" : "مطابق نیست",
+    "is" : "هست ",
+    "is not" : "نیست"
 },
 "nplurals=2; plural=(n > 1);");

@@ -5,6 +5,10 @@ OC.L10N.register(
     "Total" : "Total",
     "Yes" : "Ya",
     "Cancel" : "Membatalkan",
-    "Delete" : "Hapus"
+    "Delete" : "Hapus",
+    "matches" : "cocok dengan",
+    "does not match" : "tidak cocok dengan",
+    "is" : "adalah",
+    "is not" : "bukan"
 },
 "nplurals=1; plural=0;");

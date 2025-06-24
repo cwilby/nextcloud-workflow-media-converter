@@ -48,6 +48,10 @@
     "Are you sure you want to stop making this batch?" : "Êtes-vous certain de vouloir interrompre la conversion en masse ?",
     "Delete conversion batch" : "Supprimer le lot de conversion",
     "Delete" : "Supprimer",
-    "You may create conversion batches to convert existing media based on a set of rules." : "Vous pouvez créer des lots de conversion pour convertir des médias existants sur la base d'un jeu de règles."
+    "You may create conversion batches to convert existing media based on a set of rules." : "Vous pouvez créer des lots de conversion pour convertir des médias existants sur la base d'un jeu de règles.",
+    "matches" : "correspond",
+    "does not match" : "ne correspond pas",
+    "is" : "est",
+    "is not" : "n’est pas"
 },"pluralForm" :"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
 }

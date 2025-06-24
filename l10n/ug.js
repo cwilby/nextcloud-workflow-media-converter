@@ -50,6 +50,10 @@ OC.L10N.register(
     "Are you sure you want to stop making this batch?" : "بۇ تۈركۈمدە ياساشنى توختاتماقچى بولغانلىقىڭىزغا ئىشىنەمسىز؟",
     "Delete conversion batch" : "ئايلاندۇرۇش گۇرۇپپىسىنى ئۆچۈرۈڭ",
     "Delete" : "ئۆچۈر",
-    "You may create conversion batches to convert existing media based on a set of rules." : "سىز بىر يۈرۈش قائىدىلەر ئاساسىدا مەۋجۇت مېدىيانى ئۆزگەرتىش ئۈچۈن ئۆزگەرتىش گۇرۇپپىسى قۇرالايسىز."
+    "You may create conversion batches to convert existing media based on a set of rules." : "سىز بىر يۈرۈش قائىدىلەر ئاساسىدا مەۋجۇت مېدىيانى ئۆزگەرتىش ئۈچۈن ئۆزگەرتىش گۇرۇپپىسى قۇرالايسىز.",
+    "matches" : "match",
+    "does not match" : "ماس كەلمەيدۇ",
+    "is" : "is",
+    "is not" : "ئەمەس"
 },
 "nplurals=2; plural=(n != 1);");

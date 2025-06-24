@@ -53,6 +53,10 @@ OC.L10N.register(
     "Are you sure you want to stop making this batch?" : "Да ли сте сигурни да желите да прекинете обраду овог пакета?",
     "Delete conversion batch" : "Обриши пакет претварања",
     "Delete" : "Избриши",
-    "You may create conversion batches to convert existing media based on a set of rules." : "Можете да креирате пакете претварања којима претварате постојеће медије у зависности од скупа правила."
+    "You may create conversion batches to convert existing media based on a set of rules." : "Можете да креирате пакете претварања којима претварате постојеће медије у зависности од скупа правила.",
+    "matches" : "се поклапа са",
+    "does not match" : "се не поклапа са",
+    "is" : "је",
+    "is not" : "није"
 },
 "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);");

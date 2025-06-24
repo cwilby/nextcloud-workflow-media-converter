@@ -5,6 +5,10 @@ OC.L10N.register(
     "Total" : "Totaal",
     "Yes" : "Ja",
     "Cancel" : "Annuleren",
-    "Delete" : "Verwijder"
+    "Delete" : "Verwijder",
+    "matches" : "komt overeen",
+    "does not match" : "komt niet overeen",
+    "is" : "is",
+    "is not" : "is niet"
 },
 "nplurals=2; plural=(n != 1);");

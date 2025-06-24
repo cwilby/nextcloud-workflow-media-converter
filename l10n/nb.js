@@ -50,6 +50,10 @@ OC.L10N.register(
     "Are you sure you want to stop making this batch?" : "Er du sikker på at du vil slutte å lage denne bunken?",
     "Delete conversion batch" : "Slett konverteringsbunke",
     "Delete" : "Slett",
-    "You may create conversion batches to convert existing media based on a set of rules." : "Du kan opprette konverteringsbunker for å konvertere eksisterende medier basert på et sett med regler."
+    "You may create conversion batches to convert existing media based on a set of rules." : "Du kan opprette konverteringsbunker for å konvertere eksisterende medier basert på et sett med regler.",
+    "matches" : "passer",
+    "does not match" : "passer ikke",
+    "is" : "er",
+    "is not" : "er ikke"
 },
 "nplurals=2; plural=(n != 1);");

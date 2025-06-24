@@ -39,6 +39,10 @@ OC.L10N.register(
     "All queued conversions for this batch will be cancelled, are you sure you want to proceed?" : "该批处理中的所有转换队列将被取消，你确定要继续取消？",
     "Are you sure you want to stop making this batch?" : "你确定要停止创建这个批处理？",
     "Delete conversion batch" : "删除转换批处理",
-    "Delete" : "删除"
+    "Delete" : "删除",
+    "matches" : "匹配",
+    "does not match" : "不匹配",
+    "is" : "是",
+    "is not" : "不是"
 },
 "nplurals=1; plural=0;");

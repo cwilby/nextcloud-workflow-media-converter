@@ -5,6 +5,10 @@ OC.L10N.register(
     "Total" : "Tổng cộng",
     "Yes" : "Có",
     "Cancel" : "Hủy",
-    "Delete" : "Xóa"
+    "Delete" : "Xóa",
+    "matches" : "so sánh",
+    "does not match" : "không so sánh",
+    "is" : "là",
+    "is not" : "không phải"
 },
 "nplurals=1; plural=0;");

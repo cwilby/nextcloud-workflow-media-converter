@@ -47,6 +47,10 @@
     "Are you sure you want to stop making this batch?" : "Ziur sorta hau egiteari utzi nahi diozula?",
     "Delete conversion batch" : "Ezabatu bihurketa sorta",
     "Delete" : "Ezabatu",
-    "You may create conversion batches to convert existing media based on a set of rules." : "Bihurketa sortak sor ditzakezu lehendik dauden multimaediak bihurtzeko, arau multzo batean oinarrituta."
+    "You may create conversion batches to convert existing media based on a set of rules." : "Bihurketa sortak sor ditzakezu lehendik dauden multimaediak bihurtzeko, arau multzo batean oinarrituta.",
+    "matches" : "bat dator",
+    "does not match" : "ez dator bat",
+    "is" : "da",
+    "is not" : "ez da"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

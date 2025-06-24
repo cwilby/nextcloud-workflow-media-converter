@@ -25,6 +25,10 @@ OC.L10N.register(
     "If the output file exists:" : "Εάν υπάρχει το αρχείο εξόδου:",
     "Yes" : "Ναι",
     "Cancel" : "Ακύρωση",
-    "Delete" : "Διαγραφή"
+    "Delete" : "Διαγραφή",
+    "matches" : "ταιριάζει",
+    "does not match" : "δεν ταιριάζει",
+    "is" : "είναι",
+    "is not" : "δεν είναι"
 },
 "nplurals=2; plural=(n != 1);");

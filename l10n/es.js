@@ -50,6 +50,10 @@ OC.L10N.register(
     "Are you sure you want to stop making this batch?" : "¿Está seguro de detener la creación de este trabajo en lotes?",
     "Delete conversion batch" : "Borrar trabajo en lotes de conversión",
     "Delete" : "Eliminar",
-    "You may create conversion batches to convert existing media based on a set of rules." : "Podrá crear trabajos en lote de conversión para convertir medios existentes basado en una serie de reglas."
+    "You may create conversion batches to convert existing media based on a set of rules." : "Podrá crear trabajos en lote de conversión para convertir medios existentes basado en una serie de reglas.",
+    "matches" : "coincidencias",
+    "does not match" : "no coincide",
+    "is" : "es/esta",
+    "is not" : "no es/esta"
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

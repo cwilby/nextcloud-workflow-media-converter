@@ -45,6 +45,10 @@
     "Are you sure you want to stop making this batch?" : "Biztos, hogy abba akarja hagyni ennek a tételnek a készítését?",
     "Delete conversion batch" : "Átalakítási köteg törlése",
     "Delete" : "Törlés",
-    "You may create conversion batches to convert existing media based on a set of rules." : "Átalakítási kötegeket hozhat létre a meglévő médiák átalakításához egy szabálykészlet alapján."
+    "You may create conversion batches to convert existing media based on a set of rules." : "Átalakítási kötegeket hozhat létre a meglévő médiák átalakításához egy szabálykészlet alapján.",
+    "matches" : "egyezik",
+    "does not match" : "nem egyezik",
+    "is" : "ez",
+    "is not" : "nem ez"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

@@ -4,6 +4,10 @@ OC.L10N.register(
     "Save" : "Save",
     "Yes" : "Yes",
     "Cancel" : "Cancel",
-    "Delete" : "Delete"
+    "Delete" : "Delete",
+    "matches" : "matches",
+    "does not match" : "does not match",
+    "is" : "is",
+    "is not" : "is not"
 },
 "nplurals=2; plural=(n!=1);");

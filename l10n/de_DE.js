@@ -53,6 +53,10 @@ OC.L10N.register(
     "Are you sure you want to stop making this batch?" : "Möchten Sie die Bearbeitung dieses Stapels wirklich beenden?",
     "Delete conversion batch" : "Konvertierungsbatch löschen",
     "Delete" : "Löschen",
-    "You may create conversion batches to convert existing media based on a set of rules." : "Sie können Konvertierungsstapel (Batches) erstellen, um vorhandene Medien basierend auf einer Reihe von Regeln zu konvertieren."
+    "You may create conversion batches to convert existing media based on a set of rules." : "Sie können Konvertierungsstapel (Batches) erstellen, um vorhandene Medien basierend auf einer Reihe von Regeln zu konvertieren.",
+    "matches" : "entspricht",
+    "does not match" : "entspricht nicht",
+    "is" : "ist",
+    "is not" : "ist nicht"
 },
 "nplurals=2; plural=(n != 1);");

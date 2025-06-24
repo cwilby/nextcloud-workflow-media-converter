@@ -5,6 +5,10 @@ OC.L10N.register(
     "Total" : "Yhteensä",
     "Yes" : "Kyllä",
     "Cancel" : "Peruuta",
-    "Delete" : "Poista"
+    "Delete" : "Poista",
+    "matches" : "täsmää",
+    "does not match" : "ei täsmää",
+    "is" : "on",
+    "is not" : "ei ole"
 },
 "nplurals=2; plural=(n != 1);");

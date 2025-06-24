@@ -51,6 +51,10 @@
     "Are you sure you want to stop making this batch?" : "您確定要停止製作此批次嗎？",
     "Delete conversion batch" : "刪除轉換批次",
     "Delete" : "刪除",
-    "You may create conversion batches to convert existing media based on a set of rules." : "您可以建立轉換批次以根據一組規則轉換現有媒體。"
+    "You may create conversion batches to convert existing media based on a set of rules." : "您可以建立轉換批次以根據一組規則轉換現有媒體。",
+    "matches" : "符合",
+    "does not match" : "不符合",
+    "is" : "是",
+    "is not" : "不是"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

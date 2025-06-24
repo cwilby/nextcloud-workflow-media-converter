@@ -53,6 +53,10 @@ OC.L10N.register(
     "Are you sure you want to stop making this batch?" : "Naozaj chcete zastaviť túto úlohu?",
     "Delete conversion batch" : "Zmazať konverznú úlohu",
     "Delete" : "Vymazať",
-    "You may create conversion batches to convert existing media based on a set of rules." : "Môžete vytvoriť konverzie v dávkach na konverziu existujúcich médií na základe súboru pravidiel."
+    "You may create conversion batches to convert existing media based on a set of rules." : "Môžete vytvoriť konverzie v dávkach na konverziu existujúcich médií na základe súboru pravidiel.",
+    "matches" : "súhlasí",
+    "does not match" : "nesúhlasí",
+    "is" : "je",
+    "is not" : "nie je"
 },
 "nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);");

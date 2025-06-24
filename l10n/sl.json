@@ -31,6 +31,10 @@
     "Error saving" : "Napaka shranjevanja",
     "Are you sure you want to stop making this batch?" : "Ali ste prepričani, da želite končati ustvarjanje tega paketnega programa?",
     "Delete conversion batch" : "Izbriši paketni program za pretvarjanje",
-    "Delete" : "Izbriši"
+    "Delete" : "Izbriši",
+    "matches" : "se sklada z",
+    "does not match" : "se ne sklada z",
+    "is" : "je",
+    "is not" : "ni"
 },"pluralForm" :"nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);"
 }

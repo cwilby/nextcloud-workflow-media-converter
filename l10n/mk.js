@@ -5,6 +5,10 @@ OC.L10N.register(
     "Total" : "Вкупно",
     "Yes" : "Да",
     "Cancel" : "Откажи",
-    "Delete" : "Избриши"
+    "Delete" : "Избриши",
+    "matches" : "се совпаѓа",
+    "does not match" : "не се совпаѓа",
+    "is" : "е",
+    "is not" : "не е"
 },
 "nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;");

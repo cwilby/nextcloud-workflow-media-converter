@@ -53,6 +53,10 @@ OC.L10N.register(
     "Are you sure you want to stop making this batch?" : "Bu toplu işlemi durdurmak istediğinize emin misiniz?",
     "Delete conversion batch" : "Toplu dönüştürme işlemini sil",
     "Delete" : "Sil",
-    "You may create conversion batches to convert existing media based on a set of rules." : "Geçerli ortamların bir kurallar dizisine göre dönüştürülmesi için dönüştürme grupları oluşturabilirsiniz."
+    "You may create conversion batches to convert existing media based on a set of rules." : "Geçerli ortamların bir kurallar dizisine göre dönüştürülmesi için dönüştürme grupları oluşturabilirsiniz.",
+    "matches" : "şuna uyan",
+    "does not match" : "şuna uymayan",
+    "is" : "şu olan",
+    "is not" : "şu olmayan"
 },
 "nplurals=2; plural=(n > 1);");

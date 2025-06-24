@@ -5,6 +5,8 @@ OC.L10N.register(
     "Total" : "Total",
     "Yes" : "Ja",
     "Cancel" : "Annuller",
-    "Delete" : "Slet"
+    "Delete" : "Slet",
+    "matches" : "er lig med",
+    "is not" : "er ikke"
 },
 "nplurals=2; plural=(n != 1);");

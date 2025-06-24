@@ -5,6 +5,10 @@ OC.L10N.register(
     "Total" : "Total",
     "Yes" : "Yes",
     "Cancel" : "Anullo",
-    "Delete" : "Fshi"
+    "Delete" : "Fshi",
+    "matches" : "përputhje",
+    "does not match" : "nuk përputhet",
+    "is" : "është",
+    "is not" : "nuk është"
 },
 "nplurals=2; plural=(n != 1);");

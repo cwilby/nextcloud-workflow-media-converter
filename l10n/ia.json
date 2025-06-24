@@ -3,6 +3,10 @@
     "Total" : "Total",
     "Yes" : "Si",
     "Cancel" : "Cancellar",
-    "Delete" : "Deler"
+    "Delete" : "Deler",
+    "matches" : "corresponde",
+    "does not match" : "non corresponde",
+    "is" : "es",
+    "is not" : "non es"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
