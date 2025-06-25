@@ -54,6 +54,7 @@ OC.L10N.register(
     "Delete conversion batch" : "Excluir lote de conversão",
     "Delete" : "Excluir",
     "You may create conversion batches to convert existing media based on a set of rules." : "Você pode criar lotes de conversão para converter mídias existentes com base em um conjunto de regras.",
+    "Path name" : "Nome do caminho",
     "matches" : "corresponde",
     "does not match" : "não coincide",
     "is" : "é",

@@ -11,6 +11,8 @@ OC.L10N.register(
     "Invalid data" : "Ongeldige data",
     "Yes" : "Ja",
     "Cancel" : "Kanselleer",
-    "Delete" : "Skrap"
+    "Delete" : "Skrap",
+    "is" : "is",
+    "is not" : "is nie"
 },
 "nplurals=2; plural=(n != 1);");

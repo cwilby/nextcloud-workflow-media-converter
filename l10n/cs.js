@@ -54,7 +54,10 @@ OC.L10N.register(
     "Delete conversion batch" : "Smazat dávku převodu",
     "Delete" : "Smazat",
     "You may create conversion batches to convert existing media based on a set of rules." : "Je možné vytvořit dávky převádění pro převedení existujících médií na základě sady pravidel.",
+    "Path name" : "Název včetně popisu umístění",
     "matches" : "odpovídá",
+    "does not match" : "neodpovídá",
+    "is" : "je",
     "is not" : "není"
 },
 "nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;");

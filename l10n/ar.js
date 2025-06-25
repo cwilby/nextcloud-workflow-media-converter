@@ -53,6 +53,10 @@ OC.L10N.register(
     "Are you sure you want to stop making this batch?" : "هل أنت متأكد أنك تريد التوقف عن استكمال هذه الدٌّفعة؟",
     "Delete conversion batch" : "حذف دُفعة تحويل",
     "Delete" : "إزالة",
-    "You may create conversion batches to convert existing media based on a set of rules." : "يمكنك إنشاء دفعاتٍ لتحويل الوسائط الموجودة بناءً على مجموعة من القواعد."
+    "You may create conversion batches to convert existing media based on a set of rules." : "يمكنك إنشاء دفعاتٍ لتحويل الوسائط الموجودة بناءً على مجموعة من القواعد.",
+    "matches" : "متوافق",
+    "does not match" : "غير متوافق",
+    "is" : "يكون",
+    "is not" : "ليس"
 },
 "nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;");

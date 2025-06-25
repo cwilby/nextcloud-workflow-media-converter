@@ -47,6 +47,10 @@ OC.L10N.register(
     "Are you sure you want to stop making this batch?" : "Сигурни ли сте, че искате да спрете създаването на това пакетно задание?",
     "Delete conversion batch" : "Изтриване на пакетните задания за преобразуване",
     "Delete" : "Изтриване",
-    "You may create conversion batches to convert existing media based on a set of rules." : "Можете да създавате пакетни задания за преобразуване, за да преобразувате съществуващи медиии въз основа на набор от правила."
+    "You may create conversion batches to convert existing media based on a set of rules." : "Можете да създавате пакетни задания за преобразуване, за да преобразувате съществуващи медиии въз основа на набор от правила.",
+    "matches" : "съвпадения",
+    "does not match" : "не съвпада",
+    "is" : "е",
+    "is not" : "не е"
 },
 "nplurals=2; plural=(n != 1);");

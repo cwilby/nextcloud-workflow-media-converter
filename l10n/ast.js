@@ -27,6 +27,10 @@ OC.L10N.register(
     "Yes" : "Sí",
     "Cancel" : "Encaboxar",
     "Error saving" : "Error al guardar",
-    "Delete" : "Desaniciar"
+    "Delete" : "Desaniciar",
+    "matches" : "concasa",
+    "does not match" : "nun concasa",
+    "is" : "ye",
+    "is not" : "nun ye"
 },
 "nplurals=2; plural=(n != 1);");

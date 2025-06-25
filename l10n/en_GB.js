@@ -54,6 +54,7 @@ OC.L10N.register(
     "Delete conversion batch" : "Delete conversion batch",
     "Delete" : "Delete",
     "You may create conversion batches to convert existing media based on a set of rules." : "You may create conversion batches to convert existing media based on a set of rules.",
+    "Path name" : "Path name",
     "matches" : "matches",
     "does not match" : "does not match",
     "is" : "is",

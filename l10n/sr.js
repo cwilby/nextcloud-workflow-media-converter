@@ -54,6 +54,7 @@ OC.L10N.register(
     "Delete conversion batch" : "Обриши пакет претварања",
     "Delete" : "Избриши",
     "You may create conversion batches to convert existing media based on a set of rules." : "Можете да креирате пакете претварања којима претварате постојеће медије у зависности од скупа правила.",
+    "Path name" : "Путања",
     "matches" : "се поклапа са",
     "does not match" : "се не поклапа са",
     "is" : "је",

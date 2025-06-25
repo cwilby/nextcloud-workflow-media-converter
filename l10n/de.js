@@ -54,7 +54,10 @@ OC.L10N.register(
     "Delete conversion batch" : "Konvertierungsbatch löschen",
     "Delete" : "Löschen",
     "You may create conversion batches to convert existing media based on a set of rules." : "Du kannst Konvertierungsverarbeitungen erstellen, um vorhandene Medien basierend auf einer Reihe von Regeln zu konvertieren.",
+    "Path name" : "Pfadname",
     "matches" : "entspricht",
+    "does not match" : "entspricht nicht",
+    "is" : "ist",
     "is not" : "ist nicht"
 },
 "nplurals=2; plural=(n != 1);");
