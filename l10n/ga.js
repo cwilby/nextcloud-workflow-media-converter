@@ -54,6 +54,7 @@ OC.L10N.register(
     "Delete conversion batch" : "Scrios bhaisc chomhshó",
     "Delete" : "Scrios",
     "You may create conversion batches to convert existing media based on a set of rules." : "Is féidir leat baisceanna comhshó a chruthú chun meáin atá ann cheana a thiontú bunaithe ar shraith rialacha.",
+    "Path name" : "Ainm an chosáin",
     "matches" : "oireann",
     "does not match" : "ní oireann",
     "is" : "tá",
