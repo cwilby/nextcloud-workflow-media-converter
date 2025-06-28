@@ -7,6 +7,8 @@ OC.L10N.register(
     "Cancel" : "Cancel·la",
     "Delete" : "Suprimir",
     "matches" : "coincidències",
+    "does not match" : "no encaixa",
+    "is" : "és",
     "is not" : "no és"
 },
 "nplurals=2; plural=(n != 1);");

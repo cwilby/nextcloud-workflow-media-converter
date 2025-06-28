@@ -5,6 +5,8 @@
     "Cancel" : "Annuller",
     "Delete" : "Slet",
     "matches" : "er lig med",
+    "does not match" : "er ikke lig med",
+    "is" : "er",
     "is not" : "er ikke"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
