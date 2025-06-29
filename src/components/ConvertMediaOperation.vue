@@ -1,7 +1,7 @@
 <template>
 	<div class="wmc-rules">
-		<div class="mb">
-			<p>{{ t('workflow_media_converter', 'Convert to format') }}</p>
+		<div class="mb" style="margin-bottom: 1.5em;">
+			<label>{{ t('workflow_media_converter', 'Convert to format') }}</label>
 			<select v-model="outputExtension">
 				<option v-for="format in formats"
 					:key="format.extension"
@@ -11,23 +11,20 @@
 			</select>
 		</div>
 		<PostConversionRules v-model="config" />
-		<div class="wmc-conversion-batch__FFmpeg">
-			<label><strong>{{ t('workflow_media_converter', 'Additional FFmpeg flags') }}</strong></label>
-			<div class="grid">
-				<div class="column">
-					<label>{{ t('workflow_media_converter', 'Input flags') }}</label>
-					<input v-model="additionalInputConversionFlags" type="text">
-				</div>
-				<div class="column">
-					<label>{{ t('workflow_media_converter', 'Output flags') }}</label>
-					<input v-model="additionalOutputConversionFlags" type="text">
-				</div>
+		<div class="grid" style="margin-top: 1.5em; margin-bottom: 1.5em;">
+			<div class="column">
+				<label>{{ t('workflow_media_converter', 'Additional FFmpeg input flags') }}</label>
+				<input v-model="additionalInputConversionFlags" type="text">
 			</div>
-			<input type="text"
-				:value="commandString"
-				style="background-color: #eee; color: #000"
-				disabled>
+			<div class="column">
+				<label>{{ t('workflow_media_converter', 'Additional FFmpeg output flags') }}</label>
+				<input v-model="additionalOutputConversionFlags" type="text">
+			</div>
 		</div>
+		<input type="text"
+			:value="commandString"
+			style="background-color: #eee; color: #000"
+			disabled>
 	</div>
 </template>
 
@@ -48,7 +45,8 @@ const defaultState = {
 	postConversionOutputRuleMoveFolder: null,
 	postConversionOutputConflictRule: 'preserve',
 	postConversionOutputConflictRuleMoveFolder: null,
-}
+	postConversionTimestampRule: 'conversionTime'
+};
 
 export default {
 	name: 'ConvertMediaOperation',

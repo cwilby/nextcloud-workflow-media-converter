@@ -104,6 +104,7 @@ class ConvertMediaOperation implements ISpecificOperation {
 			$postConversionOutputConflictRuleMoveFolder = $config['postConversionOutputConflictRuleMoveFolder'];
 			$additionalInputConversionFlags = $config['additionalInputConversionFlags'];
 			$additionalOutputConversionFlags = $config['additionalOutputConversionFlags'];
+			$postConversionTimestampRule = $config['postConversionTimestampRule'];
 
 			if ($originalFileMode === 'keep' && $targetFileMode === 'preserve') {
 				break;
@@ -124,6 +125,7 @@ class ConvertMediaOperation implements ISpecificOperation {
 				'postConversionOutputRuleMoveFolder' => $postConversionOutputRuleMoveFolder,
 				'postConversionOutputConflictRule' => $postConversionOutputConflictRule,
 				'postConversionOutputConflictRuleMoveFolder' => $postConversionOutputConflictRuleMoveFolder,
+				'postConversionTimestampRule' => $postConversionTimestampRule
 			]);
 		}
 	}

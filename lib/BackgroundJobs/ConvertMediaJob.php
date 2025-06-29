@@ -32,6 +32,7 @@ class ConvertMediaJob extends QueuedJob {
 	private $postConversionOutputRuleMoveFolder;
 	private $postConversionOutputConflictRule;
 	private $postConversionOutputConflictRuleMoveFolder;
+	private $postConversionTimestampRule;
 	private $additionalConversionFlags;
 	private $additionalInputConversionFlags;
 	private $additionalOutputConversionFlags;
@@ -101,6 +102,7 @@ class ConvertMediaJob extends QueuedJob {
 		$this->postConversionOutputRuleMoveFolder = $this->prependUserFolder($arguments['postConversionOutputRuleMoveFolder']);
 		$this->postConversionOutputConflictRule = (string)$arguments['postConversionOutputConflictRule'];
 		$this->postConversionOutputConflictRuleMoveFolder = $this->prependUserFolder($arguments['postConversionOutputConflictRuleMoveFolder']);
+		$this->postConversionTimestampRule = isset($arguments) && isset($arguments['postConversionTimestampRule']) ? (string)$arguments['postConversionTimestampRule'] : 'conversionTime';
 		$this->outputExtension = (string)$arguments['outputExtension'];
 		$this->convertMediaInParallel = isset($adminSettings) && isset($adminSettings['convertMediaInParallel']) ? (bool)$adminSettings['convertMediaInParallel'] : false;
 		$this->ffmpegPath = isset($adminSettings) && isset($adminSettings['ffmpegPath']) && !empty($adminSettings['ffmpegPath']) ? $adminSettings['ffmpegPath'] : 'ffmpeg';
@@ -149,7 +151,8 @@ class ConvertMediaJob extends QueuedJob {
 				'postConversionOutputRule' => $this->postConversionOutputRule,
 				'postConversionOutputRuleMoveFolder' => $this->postConversionOutputRuleMoveFolder,
 				'postConversionOutputConflictRule' => $this->postConversionOutputConflictRule,
-				'postConversionOutputConflictRuleMoveFolder' => $this->postConversionOutputConflictRuleMoveFolder
+				'postConversionOutputConflictRuleMoveFolder' => $this->postConversionOutputConflictRuleMoveFolder,
+				'postConversionTimestampRule' => $this->postConversionTimestampRule
 			]);
 
 			throw new MediaConversionLockedException();
@@ -255,7 +258,16 @@ class ConvertMediaJob extends QueuedJob {
 			}
 		}
 
-		return $this->writeFileSafe($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
+		$newFileName = $this->writeFileSafe($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
+
+		if ($this->postConversionTimestampRule === 'preserveSource') {
+			$view = new \OC\Files\View('');
+			$newFile = $this->outputFolder->get($newFileName);
+			$view->touch($newFile->getPath(), $this->sourceFile->getMTime());
+			$newFile->touch($view->filemtime($newFile->getPath()));
+		}
+
+		return $this;
 	}
 
 	public function unlockConversion() {
@@ -310,7 +322,7 @@ class ConvertMediaJob extends QueuedJob {
 
 		$view->fromTmpFile($tempFile, $newFileName);
 
-		return $this;
+		return $newFileName;
 	}
 
 	protected function parallelConversionEnabled() {

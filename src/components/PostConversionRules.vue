@@ -63,6 +63,19 @@
 				<span>{{ postConversionOutputConflictRuleMoveFolder }}</span>
 			</div>
 		</div>
+		<div>
+			<label>
+				{{ t('workflow_media_converter', 'Set file timestamp after conversion:') }}
+			</label>
+			<select v-model="postConversionTimestampRule">
+				<option value="conversionTime">
+					{{ t('workflow_media_converter', 'Use conversion time') }}
+				</option>
+				<option value="preserveSource">
+					{{ t('workflow_media_converter', 'Use source creation time') }}
+				</option>
+			</select>
+		</div>
 	</div>
 </template>
 
@@ -180,6 +193,15 @@ export default {
 				this.$emit('input', { postConversionOutputConflictRuleMoveFolder })
 			},
 		},
+
+		postConversionTimestampRule: {
+			get() {
+				return this.value.postConversionTimestampRule
+			},
+			set(postConversionTimestampRule) {
+				this.$emit('input', { postConversionTimestampRule })
+			},
+		}
 	},
 }
 </script>
