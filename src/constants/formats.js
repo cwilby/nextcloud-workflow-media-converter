@@ -90,6 +90,12 @@ export default [
 		label: 'Material Exchange Format (MXF)',
 	},
 	{
+		extension: 'mka',
+		decode: true,
+		encode: true,
+		label: 'Matroska Audio Format (MKA)',
+	},
+	{
 		extension: 'mkv',
 		decode: true,
 		encode: true,
