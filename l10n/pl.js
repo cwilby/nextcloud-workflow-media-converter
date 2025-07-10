@@ -4,6 +4,7 @@ OC.L10N.register(
     "Choose Folder" : "Wybierz katalog",
     "Save" : "Zapisz",
     "Total" : "Całkowita",
+    "Error code" : "Kod błędu",
     "Yes" : "Tak",
     "Cancel" : "Anuluj",
     "Error saving" : "Błąd zapisywania",
