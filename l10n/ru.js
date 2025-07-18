@@ -5,6 +5,7 @@ OC.L10N.register(
     "Convert media in sub-folders" : "Конвертировать медиафайлы в подпапках",
     "Save" : "Сохранить",
     "Total" : "Всего",
+    "Error code" : "Код ошибки",
     "Add new file with a number added to its name" : "Добавьте новый файл с номером, добавленным к его названию",
     "Note: a new file will be added in this folder with a number added to its name if there is already a conflict file." : "Примечание. В эту папку будет добавлен новый файл с добавленным к его имени номером, если файл конфликта уже существует.",
     "Yes" : "Да",
