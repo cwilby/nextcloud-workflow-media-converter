@@ -1,8 +1,8 @@
 { "translations": {
-    "Save" : "Save",
+    "Save" : "Saqlash",
     "Total" : "Total",
     "Yes" : "Yes",
-    "Cancel" : "Cancel",
-    "Delete" : "Delete"
+    "Cancel" : "Bekor qilish",
+    "Delete" : "O'chirish"
 },"pluralForm" :"nplurals=1; plural=0;"
 }
