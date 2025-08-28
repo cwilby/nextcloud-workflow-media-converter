@@ -1,5 +1,8 @@
 { "translations": {
     "Save" : "Захаваць",
+    "Converted" : "Сканвертавана",
+    "Total" : "Усяго",
+    "Error code" : "Код памылкі",
     "Yes" : "Так",
     "Cancel" : "Скасаваць",
     "Delete" : "Выдаліць"

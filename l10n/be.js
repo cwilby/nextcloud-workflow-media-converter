@@ -2,6 +2,9 @@ OC.L10N.register(
     "workflow_media_converter",
     {
     "Save" : "Захаваць",
+    "Converted" : "Сканвертавана",
+    "Total" : "Усяго",
+    "Error code" : "Код памылкі",
     "Yes" : "Так",
     "Cancel" : "Скасаваць",
     "Delete" : "Выдаліць"
