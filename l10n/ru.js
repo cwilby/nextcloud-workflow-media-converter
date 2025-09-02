@@ -3,7 +3,9 @@ OC.L10N.register(
     {
     "Add batches to convert existing media outside of your flow." : "Добавляйте пакеты для преобразования существующих носителей за пределами вашего потока.",
     "Convert media in sub-folders" : "Конвертировать медиафайлы в подпапках",
+    "Find source files with this extension/format" : "Найти исходные файлы с этим расширением/форматом",
     "Save" : "Сохранить",
+    "Convert all files in this folder" : "Конвертировать все файлы в этой папке",
     "Total" : "Всего",
     "Error code" : "Код ошибки",
     "Add new file with a number added to its name" : "Добавьте новый файл с номером, добавленным к его названию",
