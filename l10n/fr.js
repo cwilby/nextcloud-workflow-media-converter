@@ -35,6 +35,7 @@ OC.L10N.register(
     "After the output is ready:" : "Lorsque le fichier de sortie est prêt :",
     "If the output file exists:" : "Si le fichier de sortie existe déjà :",
     "Note: a new file will be added in this folder with a number added to its name if there is already a conflict file." : "Remarque : un nouveau fichier sera ajouté dans ce dossier avec un nombre à la fin de son nom s'il y a un conflit avec un fichier déjà existant.",
+    "Set file timestamp after conversion:" : "Définir l'horodatage du fichier après la conversion :",
     "Failed to save config, please try again shortly" : "Impossible d'enregistrer la configuration, veuillez réessayer sous peu",
     "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg." : "Vous pouvez configurer le nombre de fils d'exécution utilisés par FFmpeg pour gérer les ressources utilisées par celui-ci.",
     "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec." : "Cette valeur peut être mise à 0 pour laisser FFmpeg choisir le nombre de fils d'exécution qu'il doit utiliser pour le codec.",
