@@ -6,8 +6,8 @@ OC.L10N.register(
     "Yes" : "Ja",
     "Cancel" : "Annuller",
     "Delete" : "Slet",
-    "matches" : "er lig med",
-    "does not match" : "er ikke lig med",
+    "matches" : "matcher",
+    "does not match" : "matcher ikke",
     "is" : "er",
     "is not" : "er ikke"
 },
