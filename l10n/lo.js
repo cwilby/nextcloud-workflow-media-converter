@@ -2,6 +2,7 @@ OC.L10N.register(
     "workflow_media_converter",
     {
     "Save" : "ບັນທຶກ",
+    "Total" : "ທັງໝົດ",
     "Error code" : "Error code",
     "Yes" : "ແມ່ນແລ້ວ",
     "Cancel" : "ຍົກເລີກ",
