@@ -29,7 +29,7 @@
     <screenshot>https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/conversion-batch-ui.png</screenshot>
     <screenshot>https://raw.githubusercontent.com/cwilby/nextcloud-workflow-media-converter/master/screenshots/admin-settings-ui.png</screenshot>
     <dependencies>
-        <nextcloud min-version="29" max-version="31"/>
+        <nextcloud min-version="29" max-version="32"/>
     </dependencies>
     <settings>
         <admin>OCA\WorkflowMediaConverter\Settings\AdminSettings</admin>
