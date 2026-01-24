@@ -34,6 +34,7 @@ class BatchConvertMediaJob extends QueuedJob {
 	private $postConversionOutputRuleMoveFolder;
 	private $postConversionOutputConflictRule;
 	private $postConversionOutputConflictRuleMoveFolder;
+	private $postConversionTimestampRule;
 
 	public $unconvertedMedia = [];
 
