@@ -263,7 +263,7 @@ class ConvertMediaJob extends QueuedJob {
 		if ($this->postConversionTimestampRule === 'preserveSource') {
 			$view = $this->viewFactory->create($this->outputFolder->getPath());
 			$newFile = $this->outputFolder->get($newFileName);
-			$view->touch($newFile->getPath(), $this->sourceFile->getMtime());
+			$view->touch($newFileName, $this->sourceFile->getMtime());
 			$newFile->touch($this->sourceFile->getMtime());
 		}
 
