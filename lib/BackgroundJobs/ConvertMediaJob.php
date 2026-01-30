@@ -224,9 +224,9 @@ class ConvertMediaJob extends QueuedJob {
 	}
 
 	public function handlePostConversion() {
-		$this->handlePostConversionSourceFile();
-
 		$this->writePostConversionOutputFile();
+		
+		$this->handlePostConversionSourceFile();
 
 		return $this;
 	}
