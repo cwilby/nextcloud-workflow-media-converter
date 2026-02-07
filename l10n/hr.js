@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Spremi",
     "Total" : "Ukupno",
+    "Error code" : "Kôd pogreške",
     "Yes" : "Da",
     "Cancel" : "Odustani",
     "Delete" : "Izbriši",
