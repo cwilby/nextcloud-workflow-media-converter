@@ -34,6 +34,7 @@ class BatchConvertMediaJob extends QueuedJob {
 	private $postConversionOutputRuleMoveFolder;
 	private $postConversionOutputConflictRule;
 	private $postConversionOutputConflictRuleMoveFolder;
+	private $postConversionTimestampRule;
 
 	public $unconvertedMedia = [];
 
@@ -94,6 +95,7 @@ class BatchConvertMediaJob extends QueuedJob {
 		$this->postConversionOutputRuleMoveFolder = $this->prependUserFolder($arguments['postConversionOutputRuleMoveFolder']);
 		$this->postConversionOutputConflictRule = $arguments['postConversionOutputConflictRule'];
 		$this->postConversionOutputConflictRuleMoveFolder = $this->prependUserFolder($arguments['postConversionOutputConflictRuleMoveFolder']);
+		$this->postConversionTimestampRule = isset($arguments) && isset($arguments['postConversionTimestampRule']) ? (string)$arguments['postConversionTimestampRule'] : 'conversionTime';
 
 		$this->sourceFolder = $this->rootFolder->get($this->sourceFolderPath);
 
@@ -153,7 +155,8 @@ class BatchConvertMediaJob extends QueuedJob {
 				'postConversionOutputRule' => $this->postConversionOutputRule,
 				'postConversionOutputRuleMoveFolder' => $this->postConversionOutputRuleMoveFolder,
 				'postConversionOutputConflictRule' => $this->postConversionOutputConflictRule,
-				'postConversionOutputConflictRuleMoveFolder' => $this->postConversionOutputConflictRuleMoveFolder
+				'postConversionOutputConflictRuleMoveFolder' => $this->postConversionOutputConflictRuleMoveFolder,
+				'postConversionTimestampRule' => $this->postConversionTimestampRule,
 			]);
 		}
 
