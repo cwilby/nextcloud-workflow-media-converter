@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Хадгалах",
     "Total" : "Нийт",
+    "Error code" : "Алдааны код",
     "Yes" : "Тийм",
     "Cancel" : "болиулах",
     "Delete" : "Устгах",
