@@ -315,7 +315,8 @@ class ConvertMediaJob extends QueuedJob {
 		$newFileName = $filename;
 
 		while ($this->outputFolder->nodeExists($newFileName)) {
-			$newFileName = "{$fileNameNoExtension} ({$index + 1}).{$this->outputExtension}";
+			$newFileName = "{$fileNameNoExtension} ({$index}).{$this->outputExtension}";
+			$index++;
 		}
 
 		$view = $this->viewFactory->create($folder->getPath());
