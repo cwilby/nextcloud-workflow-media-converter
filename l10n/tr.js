@@ -1,7 +1,7 @@
 OC.L10N.register(
     "workflow_media_converter",
     {
-    "A similar conversion batch has already been created.  Delete that batch and try again" : "Benzer bir toplu dönüştürme işlemi zaten oluşturulmuş. O otplu işlemi silip yeniden deneyin",
+    "A similar conversion batch has already been created.  Delete that batch and try again" : "Benzer bir toplu dönüştürme işlemi zaten oluşturulmuş. O toplu işlemi silip yeniden deneyin",
     "Convert media" : "Ortam dönüştür",
     "Convert video/audio files using FFmpeg." : "Görüntü ve ses dosyalarını FFmpeg kullanarak dönüştürür.",
     "Media conversion" : "Ortam dönüşümü",
