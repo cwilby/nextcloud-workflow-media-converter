@@ -77,7 +77,6 @@ class BatchConvertMediaJobTest extends BackgroundJobTest {
 
 		$arguments = $this->setJobArguments();
 
-
 		$unconvertedMedia = [
 			['path' => '/admin/files/camera-uploads/test-1.mov', 'node' => $this->createFile($folder, 'test-1.mov', '/admin/files/camera-uploads')],
 			['path' => '/admin/files/camera-uploads/test-2.mov', 'node' => $this->createFile($folder, 'test-2.mov', '/admin/files/camera-uploads')],

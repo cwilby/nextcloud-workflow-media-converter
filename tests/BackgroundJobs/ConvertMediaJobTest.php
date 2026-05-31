@@ -201,7 +201,6 @@ class ConvertMediaJobTest extends BackgroundJobTest {
 		$this->view->expects()->toTmpFile('test-3.mov')->andReturns('/tmp/random-filename-for-test-3.mov');
 		$this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-3.mp4', 'test-3.mp4');
 
-
 		$this->setJobArguments([
 			'path' => '/admin/files/camera-uploads/test-3.mov',
 			'postConversionSourceRule' => 'keep',
@@ -535,7 +534,6 @@ class ConvertMediaJobTest extends BackgroundJobTest {
 		$this->view->expects()->toTmpFile('test-3.mov')->andReturns('/tmp/random-filename-for-test-3.mov');
 		$this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-3.mp4', 'test-3.mp4');
 
-
 		$this->setJobArguments([
 			'path' => '/admin/files/camera-uploads/test-3.mov',
 			'postConversionSourceRule' => 'delete',
@@ -725,7 +723,6 @@ class ConvertMediaJobTest extends BackgroundJobTest {
 		$this->view->expects()->fromTmpFile('/tmp/random-filename-for-test-3.mp4', 'test-3 (1).mp4');
 		$this->videoFolderNodes[3]->expects()->move('/admin/files/converted/source/test-3.mov');
 
-
 		$this->setJobArguments([
 			'path' => '/admin/files/camera-uploads/test-3.mov',
 			'postConversionSourceRule' => 'move',
@@ -908,7 +905,6 @@ class ConvertMediaJobTest extends BackgroundJobTest {
 		$this->viewFactory->allows()->create(dirname($arguments['path']))->andReturns($this->view);
 		$this->view->allows()->toTmpFile(basename($arguments['path']))->andReturns('/tmp/random-filename-for-test-1.mov');
 		$this->view->allows()->fromTmpFile('/tmp/random-filename-for-test-1.mp4', 'test-1.mp4')->once();
-
 
 		$this->configService->allows()->getAppConfigValue('threadLimit', 0)->andReturns(0);
 		$this->rootFolder->allows()->get($arguments['path'])->andReturns($this->videoFolderNodes[0]);
