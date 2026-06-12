@@ -1,7 +1,10 @@
 { "translations": {
     "Save" : "Sekles",
+    "Total" : "Aɣrud",
+    "Error code" : "Tangalt n unezri",
     "Yes" : "Ih",
     "Cancel" : "Sefsex",
-    "Delete" : "Kkes"
+    "Delete" : "Kkes",
+    "matches" : "Tinmeγruḍin"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
