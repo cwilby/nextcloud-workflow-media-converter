@@ -152,7 +152,7 @@ class ConvertMediaJob extends QueuedJob {
 				'postConversionOutputRuleMoveFolder' => $this->postConversionOutputRuleMoveFolder,
 				'postConversionOutputConflictRule' => $this->postConversionOutputConflictRule,
 				'postConversionOutputConflictRuleMoveFolder' => $this->postConversionOutputConflictRuleMoveFolder,
-				'postConversionTimestampRule' => $this->postConversionTimestampRule
+				'postConversionTimestampRule' => $this->postConversionTimestampRule,
 			]);
 
 			throw new MediaConversionLockedException();
@@ -224,9 +224,9 @@ class ConvertMediaJob extends QueuedJob {
 	}
 
 	public function handlePostConversion() {
-		$this->handlePostConversionSourceFile();
-
 		$this->writePostConversionOutputFile();
+		
+		$this->handlePostConversionSourceFile();
 
 		return $this;
 	}
@@ -261,10 +261,10 @@ class ConvertMediaJob extends QueuedJob {
 		$newFileName = $this->writeFileSafe($this->outputFolder, $this->tempOutputPath, $this->outputFileName);
 
 		if ($this->postConversionTimestampRule === 'preserveSource') {
-			$view = new \OC\Files\View('');
+			$view = $this->viewFactory->create($this->outputFolder->getPath());
 			$newFile = $this->outputFolder->get($newFileName);
-			$view->touch($newFile->getPath(), $this->sourceFile->getMTime());
-			$newFile->touch($view->filemtime($newFile->getPath()));
+			$view->touch($newFileName, $this->sourceFile->getMtime());
+			$newFile->touch($this->sourceFile->getMtime());
 		}
 
 		return $this;
