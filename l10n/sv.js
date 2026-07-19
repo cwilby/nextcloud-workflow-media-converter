@@ -6,8 +6,8 @@ OC.L10N.register(
     "Error code" : "Felkod",
     "Yes" : "Ja",
     "Cancel" : "Avbryt",
-    "Delete" : "Radera",
-    "matches" : "träffar",
+    "Delete" : "Ta bort",
+    "matches" : "matchar",
     "does not match" : "matchar inte",
     "is" : "är",
     "is not" : "är inte"
