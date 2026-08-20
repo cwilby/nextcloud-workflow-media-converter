@@ -187,7 +187,7 @@ class ConvertMediaJob extends QueuedJob {
 
 	private function getConversionCommand($flagsBeforeInput = false) {
 		$threads = $this->configService->getAppConfigValue('threadLimit', 0);
-		
+
 		$command = ['umask 0077', '&&', $this->ffmpegPath, '-threads', $threads];
 
 		if (!empty($this->additionalConversionFlags)) {
