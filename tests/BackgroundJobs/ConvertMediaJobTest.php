@@ -92,7 +92,7 @@ class ConvertMediaJobTest extends BackgroundJobTest {
 		$this->configService->allows()->getAppConfigValue('threadLimit', 0)->andReturns(0);
 		$this->rootFolder->allows()->get($arguments['path'])->andReturns($this->videoFolderNodes[0]);
 
-		$this->processFactory->expects()->create('ffmpeg -threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4')->andReturns($this->process);
+		$this->processFactory->expects()->create(['umask 0077', '&&', 'ffmpeg', '-threads', 0, '-i', '/tmp/random-filename-for-test-1.mov', '/tmp/random-filename-for-test-1.mp4'])->andReturns($this->process);
 		$this->process->expects()->run();
 		$this->process->expects()->isSuccessful()->andReturns(true);
 
@@ -112,7 +112,7 @@ class ConvertMediaJobTest extends BackgroundJobTest {
 		$this->configService->allows()->getAppConfigValue('threadLimit', 0)->andReturns(0);
 		$this->rootFolder->allows()->get($arguments['path'])->andReturns($this->videoFolderNodes[0]);
 
-		$this->processFactory->expects()->create('ffmpeg -threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4')->andReturns($this->process);
+		$this->processFactory->expects()->create(['umask 0077', '&&', 'ffmpeg', '-threads', 0, '-i', '/tmp/random-filename-for-test-1.mov', '/tmp/random-filename-for-test-1.mp4'])->andReturns($this->process);
 		$this->process->expects()->run();
 		$this->process->expects()->isSuccessful()->andReturns(false)->twice();
 		$this->process->expects()->getCommandLine();
@@ -909,7 +909,7 @@ class ConvertMediaJobTest extends BackgroundJobTest {
 		$this->configService->allows()->getAppConfigValue('threadLimit', 0)->andReturns(0);
 		$this->rootFolder->allows()->get($arguments['path'])->andReturns($this->videoFolderNodes[0]);
 
-		$this->processFactory->expects()->create('ffmpeg -threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4')->andReturns($this->process);
+		$this->processFactory->expects()->create(['umask 0077', '&&', 'ffmpeg', '-threads', 0, '-i', '/tmp/random-filename-for-test-1.mov', '/tmp/random-filename-for-test-1.mp4'])->andReturns($this->process);
 		$this->process->expects()->run();
 		$this->process->expects()->isSuccessful()->andReturns(true);
 
@@ -950,7 +950,7 @@ class ConvertMediaJobTest extends BackgroundJobTest {
 		$this->configService->allows()->getAppConfigValue('threadLimit', 0)->andReturns(0);
 		$this->rootFolder->allows()->get($arguments['path'])->andReturns($this->videoFolderNodes[0]);
 
-		$this->processFactory->expects()->create('ffmpeg -threads 0 -i /tmp/random-filename-for-test-1.mov /tmp/random-filename-for-test-1.mp4')->andReturns($this->process);
+		$this->processFactory->expects()->create(['umask 0077', '&&', 'ffmpeg', '-threads', 0, '-i', '/tmp/random-filename-for-test-1.mov', '/tmp/random-filename-for-test-1.mp4'])->andReturns($this->process);
 		$this->process->expects()->run();
 		$this->process->expects()->isSuccessful()->andReturns(false)->twice();
 		$this->process->expects()->getCommandLine();

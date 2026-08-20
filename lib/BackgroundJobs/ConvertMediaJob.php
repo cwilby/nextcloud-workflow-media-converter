@@ -187,40 +187,28 @@ class ConvertMediaJob extends QueuedJob {
 
 	private function getConversionCommand($flagsBeforeInput = false) {
 		$threads = $this->configService->getAppConfigValue('threadLimit', 0);
+		
+		$command = ['umask 0077', '&&', $this->ffmpegPath, '-threads', $threads];
 
-		$additionalConversionFlags = empty($this->additionalConversionFlags) ? '' : " {$this->additionalConversionFlags}";
-		$additionalInputConversionFlags = empty($this->additionalInputConversionFlags) ? '' : " {$this->additionalInputConversionFlags}";
-		$additionalOutputConversionFlags = empty($this->additionalOutputConversionFlags) ? '' : " {$this->additionalOutputConversionFlags}";
-
-		$commands = [];
-
-		$commands[] = 'umask 0077';
-
-		$ffmpegCommand = "{$this->ffmpegPath} -threads {$threads}";
-
-		if (!empty($additionalConversionFlags)) {
+		if (!empty($this->additionalConversionFlags)) {
 			if ($flagsBeforeInput) {
-				$ffmpegCommand .= " {$additionalConversionFlags} -i {$this->tempSourcePath}";
+				$command = [...$command, $this->additionalConversionFlags, '-i', $this->tempSourcePath];
 			} else {
-				$ffmpegCommand .= " -i {$this->tempSourcePath} {$additionalConversionFlags}";
+				$command = [...$command, '-i', $this->tempSourcePath, $this->additionalConversionFlags];
 			}
 		} else {
-			if (!empty($additionalInputConversionFlags)) {
-				$ffmpegCommand .= " {$additionalInputConversionFlags}";
+			if (!empty($this->additionalInputConversionFlags)) {
+				$command = [...$command, $this->additionalInputConversionFlags];
 			}
 
-			$ffmpegCommand .= " -i {$this->tempSourcePath}";
+			$command = [...$command, '-i', $this->tempSourcePath];
 
-			if (!empty($additionalOutputConversionFlags)) {
-				$ffmpegCommand .= " {$additionalOutputConversionFlags}";
+			if (!empty($this->additionalOutputConversionFlags)) {
+				$command = [...$command, $this->additionalOutputConversionFlags];
 			}
 		}
 
-		$ffmpegCommand .= " {$this->tempOutputPath}";
-
-		$commands[] = $ffmpegCommand;
-
-		return implode(' && ', $commands);
+		return [...$command, $this->tempOutputPath];
 	}
 
 	public function handlePostConversion() {
