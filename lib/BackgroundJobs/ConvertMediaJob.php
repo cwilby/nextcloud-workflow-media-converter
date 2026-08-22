@@ -10,6 +10,7 @@ use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\IJobList;
 use OCP\BackgroundJob\QueuedJob;
 use OCP\Files\IRootFolder;
+use OCP\App\IAppManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
@@ -20,6 +21,7 @@ class ConvertMediaJob extends QueuedJob {
 	private $viewFactory;
 	private $processFactory;
 	private $jobList;
+	private $appManager;
 	private $convertMediaInParallel;
 	private $outputFilePath;
 	private $path;
@@ -50,7 +52,7 @@ class ConvertMediaJob extends QueuedJob {
 	private $outputFileName;
 	private $outputFolder;
 
-	public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, ConfigService $configService, ViewFactory $viewFactory, ProcessFactory $processFactory, IJobList $jobList) {
+	public function __construct(ITimeFactory $time, LoggerInterface $logger, IRootFolder $rootFolder, ConfigService $configService, ViewFactory $viewFactory, ProcessFactory $processFactory, IJobList $jobList, IAppManager $appManager) {
 		parent::__construct($time);
 		$this->rootFolder = $rootFolder;
 		$this->logger = $logger;
@@ -58,6 +60,7 @@ class ConvertMediaJob extends QueuedJob {
 		$this->viewFactory = $viewFactory;
 		$this->processFactory = $processFactory;
 		$this->jobList = $jobList;
+		$this->appManager = $appManager;
 	}
 
 	protected function run($arguments) {
@@ -163,7 +166,7 @@ class ConvertMediaJob extends QueuedJob {
 		return $this;
 	}
 
-	public function convertMedia() {
+	public function convertMedia() {		
 		$process = $this->processFactory->create(
 			command: $this->getConversionCommand(flagsBeforeInput: false)
 		);
@@ -185,26 +188,42 @@ class ConvertMediaJob extends QueuedJob {
 		return $this;
 	}
 
+	private function getFfmpegCommand()
+	{
+		$appPath = $this->appManager->getAppPath('workflow_media_converter');
+
+		return [
+			$appPath . '/bin/ffmpeg-private',
+			$this->ffmpegPath,
+		];
+	}
+
 	private function getConversionCommand($flagsBeforeInput = false) {
 		$threads = $this->configService->getAppConfigValue('threadLimit', 0);
 
-		$command = ['umask 0077', '&&', $this->ffmpegPath, '-threads', $threads];
+		$command = [
+			...$this->getFfmpegCommand(),
+			'-threads',
+			$threads
+		];
 
 		if (!empty($this->additionalConversionFlags)) {
+			$additionalConversionFlags = $this->processFactory->parseFlags($this->additionalConversionFlags);
+
 			if ($flagsBeforeInput) {
-				$command = [...$command, $this->additionalConversionFlags, '-i', $this->tempSourcePath];
+				$command = [...$command, ...$additionalConversionFlags, '-i', $this->tempSourcePath];
 			} else {
-				$command = [...$command, '-i', $this->tempSourcePath, $this->additionalConversionFlags];
+				$command = [...$command, '-i', $this->tempSourcePath, ...$additionalConversionFlags];
 			}
 		} else {
 			if (!empty($this->additionalInputConversionFlags)) {
-				$command = [...$command, $this->additionalInputConversionFlags];
+				$command = [...$command, ...$this->processFactory->parseFlags($this->additionalInputConversionFlags)];
 			}
 
 			$command = [...$command, '-i', $this->tempSourcePath];
 
 			if (!empty($this->additionalOutputConversionFlags)) {
-				$command = [...$command, $this->additionalOutputConversionFlags];
+				$command = [...$command, ...$this->processFactory->parseFlags($this->additionalOutputConversionFlags)];
 			}
 		}
 

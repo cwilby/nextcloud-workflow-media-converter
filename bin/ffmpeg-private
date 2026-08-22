@@ -1,0 +1,8 @@
+#!/bin/sh
+
+umask 0077
+
+ffmpeg="$1"
+shift
+
+exec "$ffmpeg" "$@"
