@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Gem",
     "Total" : "Total",
+    "Error code" : "Fejlkode",
     "Yes" : "Ja",
     "Cancel" : "Annuller",
     "Delete" : "Slet",

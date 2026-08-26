@@ -1,6 +1,7 @@
 { "translations": {
     "Save" : "Gem",
     "Total" : "Total",
+    "Error code" : "Fejlkode",
     "Yes" : "Ja",
     "Cancel" : "Annuller",
     "Delete" : "Slet",
