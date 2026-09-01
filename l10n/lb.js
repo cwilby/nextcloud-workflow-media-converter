@@ -4,6 +4,8 @@ OC.L10N.register(
     "Save" : "Späicheren",
     "Yes" : "Yes",
     "Cancel" : "Ofbriechen",
-    "Delete" : "Läschen"
+    "Delete" : "Läschen",
+    "matches" : "entspriecht",
+    "is" : "ass"
 },
 "nplurals=2; plural=(n != 1);");

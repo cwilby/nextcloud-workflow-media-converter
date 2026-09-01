@@ -2,6 +2,8 @@
     "Save" : "Späicheren",
     "Yes" : "Yes",
     "Cancel" : "Ofbriechen",
-    "Delete" : "Läschen"
+    "Delete" : "Läschen",
+    "matches" : "entspriecht",
+    "is" : "ass"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
