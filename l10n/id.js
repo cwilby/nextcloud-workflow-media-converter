@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Save" : "Simpan",
     "Total" : "Total",
+    "Error code" : "Kode kesalahan",
     "Yes" : "Ya",
     "Cancel" : "Membatalkan",
     "Delete" : "Hapus",
