@@ -40,7 +40,7 @@ OC.L10N.register(
     "Set file timestamp after conversion:" : "Dateizeitstempel nach der Konvertierung festlegen:",
     "Use conversion time" : "Konvertierungszeit verwenden",
     "Use source creation time" : "Quellenerstellungszeit verwenden",
-    "Failed to save config, please try again shortly" : "Die Konfiguration konnte nicht gespeichert werden. Bitte versuche es in Kürze erneut",
+    "Failed to save config, please try again shortly" : "Die Konfiguration konnte nicht gespeichert werden. Bitte in Kürze erneut versuchen",
     "You may set the number of threads used by FFmpeg to manage the resources used by FFmpeg." : "Du kannst die Anzahl der Threads festlegen, die von FFmpeg verwendet werden, um die von FFmpeg verwendeten Ressourcen zu verwalten.",
     "This value can be set to 0 to let FFmpeg choose how many threads it should use depending on the codec." : "Dieser Wert kann auf 0 gesetzt werden, damit FFmpeg je nach Codec auswählen kann, wie viele Threads verwendet werden.",
     "Changes made here will apply to any media that is not being converted at this moment in time." : "Hier vorgenommene Änderungen gelten für alle Medien, die derzeit nicht konvertiert werden.",
