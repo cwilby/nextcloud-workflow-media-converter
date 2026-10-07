@@ -1,6 +1,6 @@
 { "translations": {
     "A similar conversion batch has already been created.  Delete that batch and try again" : "Podobná konverzná úloha už bola vytvorená. Odstráňte túto úlohu a skúste to znova",
-    "Convert media" : "Kovertovať médiá",
+    "Convert media" : "Konvertovať médiá",
     "Convert video/audio files using FFmpeg." : "Konvertovať video/audio súbory pomocou FFmpeg.",
     "Media conversion" : "Konverzia médií",
     "Automated media conversion" : "Automatická konverzia médií",
