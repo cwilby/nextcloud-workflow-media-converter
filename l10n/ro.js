@@ -2,11 +2,13 @@ OC.L10N.register(
     "workflow_media_converter",
     {
     "Save" : "Salvează",
+    "Total" : "Total",
     "Error code" : "Cod de eroare",
     "Yes" : "a",
     "Cancel" : "Anulare",
     "Delete" : "Șterge",
     "matches" : "se potrivește cu",
+    "does not match" : "nu se potrivește cu",
     "is" : "este",
     "is not" : "nu este"
 },
