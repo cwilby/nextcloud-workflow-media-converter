@@ -2,6 +2,7 @@ OC.L10N.register(
     "workflow_media_converter",
     {
     "Save" : "Spremi",
+    "Total" : "Ukupno",
     "Yes" : "Yes",
     "Cancel" : "Otkaži",
     "Delete" : "Obriši"
