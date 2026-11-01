@@ -23,7 +23,7 @@ OC.L10N.register(
     "Save" : "Gem",
     "Convert all files in this folder" : "Konvertér alle filer i denne mappe",
     "Converted" : "Konverteret",
-    "Total" : "Total",
+    "Total" : "I alt",
     "Error code" : "Fejlkode",
     "Keep source file" : "Behold kildefilen",
     "Delete source file" : "Slet kildefilen",
