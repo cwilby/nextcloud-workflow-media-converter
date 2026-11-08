@@ -102,9 +102,9 @@ class ConfigService {
 	public function getBatch($id, $batches = null) {
 		$batches = $batches ?: $this->getConfigValueJson('conversionBatches');
 
-		$index = array_search($id, array_column($batches, 'id'));
+		$index = array_search($id, array_column($batches, 'id'), true);
 
-		if (isset($batches[$index])) {
+		if ($index !== false && isset($batches[$index])) {
 			return $batches[$index];
 		}
 
@@ -125,7 +125,7 @@ class ConfigService {
 		}
 
 		$this->setConfigValueJson('conversionBatches', array_map(function ($b) use ($batch, $id) {
-			if ($batch['id'] === $id) {
+			if ($b['id'] === $id) {
 				return $batch;
 			}
 
@@ -138,9 +138,9 @@ class ConfigService {
 	public function setBatchStatus($batchId, $status) {
 		$batches = $this->getConfigValueJson('conversionBatches');
 
-		$index = array_search($batchId, array_column($batches, 'id'));
+		$index = array_search($batchId, array_column($batches, 'id'), true);
 
-		if (isset($batches[$index])) {
+		if ($index !== false && isset($batches[$index])) {
 			$batches[$index]['status'] = $status;
 		}
 
