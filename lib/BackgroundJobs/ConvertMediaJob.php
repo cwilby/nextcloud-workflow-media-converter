@@ -231,9 +231,14 @@ class ConvertMediaJob extends QueuedJob {
 	}
 
 	public function handlePostConversion() {
-		$this->handlePostConversionSourceFile();
-
-		$this->writePostConversionOutputFile();
+		if ($this->postConversionSourceRule === 'delete') {
+			// Keep the source until the output (including timestamp updates) is stored.
+			$this->writePostConversionOutputFile();
+			$this->handlePostConversionSourceFile();
+		} else {
+			$this->handlePostConversionSourceFile();
+			$this->writePostConversionOutputFile();
+		}
 
 		return $this;
 	}
@@ -255,7 +260,12 @@ class ConvertMediaJob extends QueuedJob {
 		if ($this->outputFolder->nodeExists($this->outputFileName)) {
 			$existingFile = $this->outputFolder->get($this->outputFileName);
 
-			switch ($this->postConversionOutputConflictRule) {
+			// Same-format conversions can resolve the output to the source itself.
+			// Preserve it until writeFileSafe has persisted a distinct output.
+			$conflictRule = $existingFile->getId() === $this->sourceFile->getId()
+				? 'preserve' : $this->postConversionOutputConflictRule;
+
+			switch ($conflictRule) {
 				case 'move':
 					$existingFile->move($this->removeDoubleSlashes($this->postConversionOutputConflictRuleMoveFolder) . '/' . $this->outputFileName);
 					break;
@@ -328,7 +338,9 @@ class ConvertMediaJob extends QueuedJob {
 
 		$view = $this->viewFactory->create($folder->getPath());
 
-		$view->fromTmpFile($tempFile, $newFileName);
+		if ($view->fromTmpFile($tempFile, $newFileName) === false) {
+			throw new \RuntimeException('Unable to store converted output; source retained.');
+		}
 
 		return $newFileName;
 	}
