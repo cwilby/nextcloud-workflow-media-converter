@@ -164,7 +164,7 @@ class ConfigService {
 					$numCpus = intval(fgets($process));
 					pclose($process);
 				}
-			} else {
+			} elseif (PHP_OS_FAMILY === 'Darwin') {
 				$process = @popen('sysctl -a', 'rb');
 				if ($process !== false) {
 					$output = stream_get_contents($process);
